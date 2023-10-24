@@ -1,0 +1,225 @@
+/* Général */
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: url("polices/open-sans-600.woff2") format("woff2"),
+		url("polices/open-sans-600.woff") format("woff");
+}
+html {
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+}
+* {
+	scrollbar-color: #cdcdcd #f0f0f0;
+	scroll-behavior: smooth;
+	scrollbar-width: thin;
+}
+body{
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	color: #000000;
+	background-color: #f2f1f5;
+	font-family: "Open Sans", Arial, sans-serif;
+}
+p {
+	font-size: 18px;
+}
+
+/* Header */
+header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100vw;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0px 15px 20px -15px #cecece;
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+	/* Logo */
+header > img {
+	width: 144px;
+	height: 72px;
+}
+
+	/* Sous-sections (choix champs, choix utilisateur) */
+header > section {
+	display: flex;
+	justify-content: right;
+	width: calc(50% - 72px);
+}
+
+header > section > p {
+	width: 200px;
+	line-height: 40px;
+	margin-right: 10px;
+	text-align: end;
+	overflow-x: scroll;
+	white-space: nowrap;
+}
+
+	/* Boutons dropdown */
+.dropbtn {
+	background-color: #04AA6D;
+	color: white;
+	font-size: 16px;
+	width: 65px;
+	height: 72px;
+	padding: 0;
+	border: none;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	right: 0;
+	z-index: 1;
+	min-width: 160px;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0px 15px 20px -15px #cecece;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+.dropdown-content a {
+	display: block;
+	color: black;
+	padding: 12px 12px;
+	text-decoration: none;
+}
+
+.dropdown-content a:hover {
+	background-color: rgba(220, 220, 220, 0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+.dropdown-content a:active {
+	background-color: rgba(200, 200, 200, 0.5);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+
+/* Corps */
+#corps {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+div > section {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+	margin-top: 36px;
+}
+
+div > section:last-child {
+	margin-bottom: 18px;
+}
+
+h1 {
+	width: 80%;
+	margin-top: 0;
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: normal;
+	text-align: center;
+	border-style: solid;
+	border-width: 0 0 4px 0;
+	border-image: radial-gradient(#000000, #ffffff) 1;
+}
+
+	/* Section informations */
+#infos {
+	flex-direction: row;
+}
+
+#infos > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 33.33%;
+	margin: 15px 0;
+	text-align: center;
+}
+
+	/* Section météo/moyenne */
+#compose_met_moy {
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: unset;
+	box-shadow: unset;
+}
+
+		/* Météo */
+#meteo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(65% - 18px);
+	height: calc(140px * 3);
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+}
+
+		/* Moyenne */
+#moyennes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 35%;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+}
+
+#moyennes > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	height: 140px;
+
+}
+
+#moyennes > div > p {
+	margin-bottom: 0;
+}
+
+#moyennes > div:first-child > h1 {
+	border-image: radial-gradient(rgb(79, 113, 255), #ffffff) 1;
+}
+
+#moyennes > div:nth-child(2) > h1 {
+	border-image: radial-gradient(rgb(222, 131, 68), #ffffff) 1;
+}
+
+#moyennes > div:last-child > h1 {
+	border-image: radial-gradient(rgb(245, 194, 66), #ffffff) 1;
+}

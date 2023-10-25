@@ -53,8 +53,10 @@ header > section {
 	width: calc(50% - 72px);
 }
 
-header > section > p {
+header > section > p,
+#optGraph > div > p {
 	width: 200px;
+	font-size: 16px;
 	line-height: 40px;
 	margin-right: 10px;
 	text-align: end;
@@ -126,7 +128,7 @@ header > section > p {
 	align-items: center;
 }
 
-div > section {
+#corps > section {
 	display: flex;
 	align-items: center;
 	width: 80%;
@@ -136,7 +138,7 @@ div > section {
 	margin-top: 36px;
 }
 
-div > section:last-child {
+#corps > section:last-child {
 	margin-bottom: 18px;
 }
 
@@ -153,11 +155,11 @@ h1 {
 }
 
 	/* Section informations */
-#infos {
+#secInfos {
 	flex-direction: row;
 }
 
-#infos > div {
+#secInfos > div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -167,11 +169,11 @@ h1 {
 }
 
 	/* Section météo/moyenne */
-#compose_met_moy {
+#compMetMoy {
 	flex-direction: row;
 	justify-content: space-between;
-	background-color: unset;
-	box-shadow: unset;
+	background-color: unset !important;
+	box-shadow: unset !important;
 }
 
 		/* Météo */
@@ -187,7 +189,7 @@ h1 {
 }
 
 		/* Moyenne */
-#moyennes {
+#secMoyennes {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -198,7 +200,7 @@ h1 {
 	box-shadow: 0 15px 20px -15px #cecece;
 }
 
-#moyennes > div {
+#secMoyennes > div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -208,18 +210,89 @@ h1 {
 
 }
 
-#moyennes > div > p {
+#secMoyennes > div > p {
 	margin-bottom: 0;
 }
 
-#moyennes > div:first-child > h1 {
+#secMoyennes > div:first-child > h1 {
 	border-image: radial-gradient(rgb(79, 113, 255), #ffffff) 1;
 }
 
-#moyennes > div:nth-child(2) > h1 {
+#secMoyennes > div:nth-child(2) > h1 {
 	border-image: radial-gradient(rgb(222, 131, 68), #ffffff) 1;
 }
 
-#moyennes > div:last-child > h1 {
+#secMoyennes > div:last-child > h1 {
 	border-image: radial-gradient(rgb(245, 194, 66), #ffffff) 1;
+}
+
+	/* Section graphique */
+#secGraph {
+	display: flex;
+	flex-direction: column;
+}
+
+		/* Options du graphique */
+#optGraph {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	box-shadow: 0px 15px 20px -15px #cecece;
+}
+
+#optGraph > div {
+	display: flex;
+	width: fit-content;
+}
+
+#optGraph > div > p {
+	width: fit-content;
+	padding-left: 10px;
+}
+
+#optGraph > div > .dropbtn {
+	width: 50px;
+	height: 60px;
+}
+
+#optGraph > div:last-child > div > button {
+	border-radius: 0 10px 0 0 !important;
+}
+
+		/* Graphique */
+#graph {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-height: 120vh;
+	aspect-ratio: 2/1;
+}
+
+	/* Section tableau */
+#secTableau {
+	display: grid !important;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 2px 0;
+	width: calc(80% - 20px) !important;
+	padding: 10px;
+	min-height: 80px:
+	max-height: 40vh;
+	overflow-y: auto;
+}
+
+#secTableau > .colonne {
+	display: flex;
+	width: 100%;
+	height: 40px;
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	align-items: center;
+	justify-content: center;
+}
+
+#secTableau > .titre {
+	background-color: lightgray;
+	margin-bottom: 8px;
 }

@@ -66,8 +66,8 @@ header > section > p,
 
 	/* Boutons dropdown */
 .dropbtn {
-	background-color: #04AA6D;
-	color: white;
+	background-color: #04aa6d;
+	color: #ffffff;
 	font-size: 16px;
 	width: 65px;
 	height: 72px;
@@ -192,11 +192,12 @@ h1 {
 #secMoyennes {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	width: 35%;
-	background-color: #ffffff;
+	height: calc(140px * 3);
 	border-radius: 10px;
+	background-color: #ffffff;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
 
@@ -205,25 +206,37 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 80%;
-	height: 140px;
-
+	width: 90%;
+	height: 130px;
+	border-radius: 10px;
 }
 
 #secMoyennes > div > p {
-	margin-bottom: 0;
+	margin: 0;
+}
+
+#secMoyennes > div:first-child {
+	background-color: rgba(79, 113, 255, 0.6);
 }
 
 #secMoyennes > div:first-child > h1 {
-	border-image: radial-gradient(rgb(79, 113, 255), #ffffff) 1;
+	border-image: radial-gradient(#0033ff, #4f71ff00) 1;
+}
+
+#secMoyennes > div:nth-child(2) {
+	background-color: rgba(222, 131, 68, 0.6);
 }
 
 #secMoyennes > div:nth-child(2) > h1 {
-	border-image: radial-gradient(rgb(222, 131, 68), #ffffff) 1;
+	border-image: radial-gradient(#df5d00, #de834400) 1;
+}
+
+#secMoyennes > div:last-child {
+	background-color: rgba(245, 194, 66, 0.6);
 }
 
 #secMoyennes > div:last-child > h1 {
-	border-image: radial-gradient(rgb(245, 194, 66), #ffffff) 1;
+	border-image: radial-gradient(#f0ac00, #f5c24200) 1;
 }
 
 	/* Section graphique */
@@ -272,27 +285,56 @@ h1 {
 
 	/* Section tableau */
 #secTableau {
-	display: grid !important;
-	grid-template-columns: repeat(5, 1fr);
-	grid-gap: 2px 0;
-	width: calc(80% - 20px) !important;
-	padding: 10px;
-	min-height: 80px:
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 	max-height: 40vh;
 	overflow-y: auto;
 }
 
-#secTableau > .colonne {
+#secTableau > div {
+	display: grid !important;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 2px 0;
+	width: calc(100% - 20px) !important;
+	padding: 10px;
+}
+
+#secTableau > div > .colonne {
 	display: flex;
 	width: 100%;
 	height: 40px;
 	background-color: #ffffff;
-	border: 1px solid #000000;
 	align-items: center;
 	justify-content: center;
 }
 
-#secTableau > .titre {
-	background-color: lightgray;
+#secTableau > div > .colonne:nth-child(10n+1),
+#secTableau > div > .colonne:nth-child(10n+2),
+#secTableau > div > .colonne:nth-child(10n+3),
+#secTableau > div > .colonne:nth-child(10n+4),
+#secTableau > div > .colonne:nth-child(10n+5) {
+	background-color: #eeeeee;
+}
+
+#secTableau > div > .colonne:nth-child(10n+6),
+#secTableau > div > .colonne:nth-child(10n+7),
+#secTableau > div > .colonne:nth-child(10n+8),
+#secTableau > div > .colonne:nth-child(10n+9),
+#secTableau > div > .colonne:nth-child(10n+10) {
+	background-color: #fafafa;
+}
+
+#secTableau > div > .colonne:nth-child(5n+5) {
+	border-radius: 0 10px 10px 0;
+}
+
+#secTableau > div > .colonne:nth-child(5n+1) {
+	border-radius: 10px 0 0 10px;
+}
+
+#secTableau > div > .titre {
+	background-color: #04aa6d !important;
+	color: #ffffff;
 	margin-bottom: 8px;
 }

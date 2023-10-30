@@ -16,10 +16,10 @@
 		<p>Nom du champ</p>
 		<div class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div class="dropdown-content">
-			<a href="#">Champ 1</a>
-			<a href="#">Champ 2</a>
-			<a href="#">Champ 3</a>
+			<div id="selectChamp" class="dropdown-content">
+				<button value="1">Champ 1</button>
+				<button value="2">Champ 2</button>
+				<button value="3">Champ 3</button>
 			</div>
 		</div>
 	</section>
@@ -27,15 +27,14 @@
 		<p>Nom utilisateur</p>
 		<div class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div class="dropdown-content">
-			<a href="#">Paramètres</a>
-			<a href="#">Déconnexion</a>
+			<div id="selectCmpt" class="dropdown-content">
+				<button value="para">Paramètres</button>
+				<button value="deco">Déconnexion</button>
 			</div>
 		</div>
 	</section>
 </header>
 <div id="corps">
-
 	<section id="secInfos">
 		<div>
 			<h1>État général</h1>
@@ -77,10 +76,10 @@
 				<p>Type de données</p>
 				<div class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div class="dropdown-content">
-						<a href="#">Température</a>
-						<a href="#">Humidité du sol</a>
-						<a href="#">Luminosité</a>
+					<div id="selectType" class="dropdown-content">
+						<button value="temp">Température</button>
+						<button value="humi">Humidité du sol</button>
+						<button value="lumi">Luminosité</button>
 					</div>
 				</div>
 			</div>
@@ -88,10 +87,10 @@
 				<p>Ilot</p>
 				<div class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div class="dropdown-content">
-						<a href="#">Ilot 1</a>
-						<a href="#">Ilot 2</a>
-						<a href="#">Ilot 3</a>
+					<div id="selectIlot" class="dropdown-content">
+						<button value="1">Ilot 1</button>
+						<button value="2">Ilot 2</button>
+						<button value="3">Ilot 3</button>
 					</div>
 				</div>
 			</div>
@@ -104,32 +103,38 @@
 	<section id="secTableau">
 		<div>
 			<div class="colonne titre">ID</div>
+			<div class="colonne titre">Ilot</div>
 			<div class="colonne titre">Date</div>
 			<div class="colonne titre">Température</div>
 			<div class="colonne titre">Humidité du sol</div>
 			<div class="colonne titre">Luminosité</div>
 
 			<div class="colonne">1</div>
+			<div class="colonne">12</div>
 			<div class="colonne">25/10/2023 09:30</div>
 			<div class="colonne">23.7°C</div>
 			<div class="colonne">47.8%</div>
 			<div class="colonne">12 376 Lux</div>
 
 			<div class="colonne">2</div>
+			<div class="colonne">12</div>
 			<div class="colonne">25/10/2023 09:30</div>
 			<div class="colonne">23.7°C</div>
 			<div class="colonne">47.8%</div>
 			<div class="colonne">12 376 Lux</div>
 
 			<div class="colonne">3</div>
+			<div class="colonne">12</div>
 			<div class="colonne">25/10/2023 09:30</div>
 			<div class="colonne">23.7°C</div>
 			<div class="colonne">47.8%</div>
 			<div class="colonne">12 376 Lux</div>
 		</div>
-		
 	</section>
-
 </div>
+<script src="scripts/interactions.js"></script>
+<script src="scripts/recupDonnees.js"></script>
+<script src="scripts/afficherDonnees.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>

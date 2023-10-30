@@ -85,7 +85,7 @@ header > section > p,
 	position: absolute;
 	right: 0;
 	z-index: 1;
-	min-width: 160px;
+	min-width: fit-content;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0px 15px 20px -15px #cecece;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -94,23 +94,27 @@ header > section > p,
 	backdrop-filter: blur(10px);
 }
 
-.dropdown-content a {
+.dropdown-content button {
 	display: block;
-	color: black;
-	padding: 12px 12px;
+	width: 100%;
+	border: none;
+	padding: 12px 36px 12px 12px;
+	background-color: unset;
 	text-decoration: none;
+	text-align: start;
+	font-size: 15px;
+	white-space: nowrap;
+	font-family: "Open Sans", Arial, sans-serif;
+	cursor: pointer;
 }
 
-.dropdown-content a:hover {
+.dropdown-content button:hover {
 	background-color: rgba(220, 220, 220, 0.5);
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
 }
 
-.dropdown-content a:active {
+.dropdown-content button:active,
+.dropdown-content .selected {
 	background-color: rgba(200, 200, 200, 0.5);
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
 }
 
 .dropdown:hover .dropdown-content {
@@ -192,13 +196,11 @@ h1 {
 #secMoyennes {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 	width: 35%;
 	height: calc(140px * 3);
 	border-radius: 10px;
-	background-color: #ffffff;
-	box-shadow: 0 15px 20px -15px #cecece;
 }
 
 #secMoyennes > div {
@@ -206,37 +208,45 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 90%;
+	width: 100%;
 	height: 130px;
 	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
 }
 
 #secMoyennes > div > p {
 	margin: 0;
 }
 
+#secMoyennes > div > h1 {
+	font-size: 19px;
+}
+
+			/* Température */
 #secMoyennes > div:first-child {
-	background-color: rgba(79, 113, 255, 0.6);
+	background-color: rgba(160, 179, 255, 0.6);
 }
 
 #secMoyennes > div:first-child > h1 {
-	border-image: radial-gradient(#0033ff, #4f71ff00) 1;
+	border-image: radial-gradient(#0033ff, #c3ccf7) 1;
 }
 
+			/* Humidité */
 #secMoyennes > div:nth-child(2) {
-	background-color: rgba(222, 131, 68, 0.6);
+	background-color: rgba(255, 196, 133, 0.6);
 }
 
 #secMoyennes > div:nth-child(2) > h1 {
-	border-image: radial-gradient(#df5d00, #de834400) 1;
+	border-image: radial-gradient(#df5d00, #f4d8b7) 1;
 }
 
+			/* Luminosité */
 #secMoyennes > div:last-child {
-	background-color: rgba(245, 194, 66, 0.6);
+	background-color: rgba(255, 220, 130, 0.6);
 }
 
 #secMoyennes > div:last-child > h1 {
-	border-image: radial-gradient(#f0ac00, #f5c24200) 1;
+	border-image: radial-gradient(#c28b00, #f6e5b6) 1;
 }
 
 	/* Section graphique */
@@ -270,7 +280,7 @@ h1 {
 }
 
 #optGraph > div:last-child > div > button {
-	border-radius: 0 10px 0 0 !important;
+	border-radius: 0 10px 0 0;
 }
 
 		/* Graphique */
@@ -293,10 +303,10 @@ h1 {
 }
 
 #secTableau > div {
-	display: grid !important;
-	grid-template-columns: repeat(5, 1fr);
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
 	grid-gap: 2px 0;
-	width: calc(100% - 20px) !important;
+	width: calc(100% - 20px);
 	padding: 10px;
 }
 
@@ -307,34 +317,38 @@ h1 {
 	background-color: #ffffff;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 }
 
-#secTableau > div > .colonne:nth-child(10n+1),
-#secTableau > div > .colonne:nth-child(10n+2),
-#secTableau > div > .colonne:nth-child(10n+3),
-#secTableau > div > .colonne:nth-child(10n+4),
-#secTableau > div > .colonne:nth-child(10n+5) {
+#secTableau > div > .colonne:nth-child(12n+1),
+#secTableau > div > .colonne:nth-child(12n+2),
+#secTableau > div > .colonne:nth-child(12n+3),
+#secTableau > div > .colonne:nth-child(12n+4),
+#secTableau > div > .colonne:nth-child(12n+5),
+#secTableau > div > .colonne:nth-child(12n+6) {
 	background-color: #eeeeee;
 }
 
-#secTableau > div > .colonne:nth-child(10n+6),
-#secTableau > div > .colonne:nth-child(10n+7),
-#secTableau > div > .colonne:nth-child(10n+8),
-#secTableau > div > .colonne:nth-child(10n+9),
-#secTableau > div > .colonne:nth-child(10n+10) {
+#secTableau > div > .colonne:nth-child(12n+7),
+#secTableau > div > .colonne:nth-child(12n+8),
+#secTableau > div > .colonne:nth-child(12n+9),
+#secTableau > div > .colonne:nth-child(12n+10),
+#secTableau > div > .colonne:nth-child(12n+11),
+#secTableau > div > .colonne:nth-child(12n+12) {
 	background-color: #fafafa;
 }
 
-#secTableau > div > .colonne:nth-child(5n+5) {
+#secTableau > div > .colonne:nth-child(6n+6) {
 	border-radius: 0 10px 10px 0;
 }
 
-#secTableau > div > .colonne:nth-child(5n+1) {
+#secTableau > div > .colonne:nth-child(6n+1) {
 	border-radius: 10px 0 0 10px;
 }
 
 #secTableau > div > .titre {
+	position: sticky;
+	top: 10px;
 	background-color: #04aa6d !important;
 	color: #ffffff;
-	margin-bottom: 8px;
 }

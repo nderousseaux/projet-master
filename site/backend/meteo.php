@@ -20,7 +20,7 @@ else {
 
 // Renvoi l'erreur HTTP, si la requête a échoué
 if ($reponse === false) {
-	$erreur = array("Erreur", explode(" ", $http_response_header[0])[1]);
+	$erreur = array("Erreur", explode(' ', $http_response_header[0])[1]);
 	echo json_encode($erreur);
 	exit();
 }

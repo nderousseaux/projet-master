@@ -1,7 +1,7 @@
 
 /**
  * Récupère les données météo dans le back (pour masquer la clé API)
- * 
+ *
  * @returns {promise} - les données météo sous format json
  */
 function recupMeteo() {

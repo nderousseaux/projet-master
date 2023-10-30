@@ -5,15 +5,18 @@
 	src: url("polices/open-sans-600.woff2") format("woff2"),
 		url("polices/open-sans-600.woff") format("woff");
 }
+
 html {
 	-webkit-tap-highlight-color: transparent;
 	outline: none;
 }
+
 * {
 	scrollbar-color: #cdcdcd #f0f0f0;
 	scroll-behavior: smooth;
 	scrollbar-width: thin;
 }
+
 body{
 	display: flex;
 	flex-direction: column;
@@ -22,6 +25,7 @@ body{
 	background-color: #f2f1f5;
 	font-family: "Open Sans", Arial, sans-serif;
 }
+
 p {
 	font-size: 18px;
 }

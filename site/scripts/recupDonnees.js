@@ -1,7 +1,7 @@
 /**
  * Récupère les moyennes de température, humidité et luminosité pour le champ
  * indiqué
- * 
+ *
  * @param {int} numChamp - Numéro du champ
  **/
 function recupMoyTmpHumiLumiChamp(numChamp) {

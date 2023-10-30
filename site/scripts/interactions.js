@@ -1,7 +1,7 @@
 /**
  * Activer les boutons d'un dropdown. Si un bouton est sélectionné, il est
  * marqué d'un ID unique, permettant de récupérer sa valeur facilement.
- * 
+ *
  * @param {string} idContainer - ID du container du dropdown
  * @param {string} idAttr - ID à attribuer au bouton sélectionné
  * @param {bool} activerPreselect - Si true, sélectionne le premier bouton

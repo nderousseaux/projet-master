@@ -1,5 +1,7 @@
-// Tableau de tableau contenant les ID des containers des dropdowns et les ID
-// des boutons à ajouter quand ils sont sélectionnés
+/* 
+ * Tableau de tableau contenant les ID des containers des dropdowns et les ID
+ * des boutons à ajouter quand ils sont sélectionnés
+*/
 const contIdButtons = [
 	["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
 	["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true]

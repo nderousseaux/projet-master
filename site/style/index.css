@@ -383,17 +383,17 @@ header > section > p,
 		/* Boutons dropdown */
 	.dropdown-content {
 		box-shadow: 0px 8px 16px 0px rgba(107, 107, 107, 0.2);
-		background-color: rgba(26, 26, 26, 0.7);
+		background-color: rgba(57, 57, 57, 0.7);
 	}
 	.dropdown-content button {
 		color: white;
 	}
 	.dropdown-content button:hover {
-		background-color: rgba(64, 64, 64, 0.5);
+		background-color: rgba(80, 80, 80, 0.5);
 	}
 	.dropdown-content button:active,
 	.dropdown-content .selected {
-		background-color: rgba(99, 99, 99, 0.5);
+		background-color: rgba(111, 111, 111, 0.5);
 	}
 
 	/* Header */

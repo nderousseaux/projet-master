@@ -1,4 +1,3 @@
-
 /**
  * Récupère les données météo dans le back (pour masquer la clé API)
  *

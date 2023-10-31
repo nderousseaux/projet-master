@@ -74,12 +74,16 @@ function afficherMeteo() {
  * Traduit les valeurs de précipitations en français, et ajoute l'indication
  * visuelle dans la cellule
  *
- * @param {object} objPrecip objet contenant les valeurs de précipitations 
+ * @param {object} objPrecip objet contenant les valeurs de précipitations
  * @param {div} cellule où afficher les précipitations
  * @returns la cellule modifiée
  */
 function cellulePrecip(objPrecip, cellule) {
-	const precipEnFr = [["rain", "Pluie 🌧️"], ["snow", "Neige ❄️"], ["freezingrain", "Pluie verglaçante 🌧️❄️"], ["ice", "Givre ❄️"]];
+	const precipEnFr = [
+		["rain", "Pluie 🌧️"], ["snow", "Neige ❄️"],
+		["freezingrain", "Pluie verglaçante 🌧️❄️"], ["ice", "Givre ❄️"]
+	];
+
 	if (objPrecip === null) {
 		cellule.textContent += "-";
 		return cellule;

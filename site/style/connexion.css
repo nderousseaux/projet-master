@@ -1,0 +1,58 @@
+/* Section formulaire */
+#secForm {
+	flex-direction: column;
+}
+#secForm > h1 {
+	font-size: 22px;
+	margin: 20px 0;
+}
+#secForm > form {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	margin: 10px 0px;
+}
+#secForm > form > input {
+	font-family: "Open Sans", Arial, sans-serif;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	font-size: 14px;
+}
+#secForm > form > input[type="text"],
+#secForm > form > input[type="password"] {
+	background-color: #f2f2f2;
+}
+#secForm > form > input[type="submit"] {
+	background-color: #dfdfdf;
+	transition: background-color 0.2s ease-in-out;
+	margin-top: 40px;
+	font-size: 16px;
+}
+#secForm > form > input[type="submit"]:hover {
+	background-color: #d6d6d6;
+	transition: background-color 0.2s ease-in-out;
+}
+#secForm > form > input[type="submit"]:active {
+	background-color: #bcbcbc;
+	transition: background-color 0.2s ease-in-out;
+}
+
+/* Thème sombre */
+@media (prefers-color-scheme: dark) {
+	/* Section formulaire */
+	#secForm > form > input[type="text"],
+	#secForm > form > input[type="password"] {
+		background-color: #494949;
+	}
+	#secForm > form > input[type="submit"] {
+		background-color: #373737;
+	}
+	#secForm > form > input[type="submit"]:hover {
+		background-color: #272727;
+	}
+	#secForm > form > input[type="submit"]:active {
+		background-color: #1b1b1b;
+	}
+}

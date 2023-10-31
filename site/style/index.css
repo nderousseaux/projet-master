@@ -46,6 +46,7 @@ p {
 	height: 72px;
 	padding: 0;
 	border: none;
+	transition: background-color 0.2s ease-in-out;
 }
 .dropdown {
 	position: relative;
@@ -55,7 +56,6 @@ p {
 	display: none;
 	position: absolute;
 	right: 0;
-	z-index: 1;
 	min-width: fit-content;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -75,9 +75,11 @@ p {
 	white-space: nowrap;
 	font-family: "Open Sans", Arial, sans-serif;
 	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
 }
 .dropdown-content button:hover {
 	background-color: rgba(220, 220, 220, 0.5);
+	transition: background-color 0.2s ease-in-out;
 }
 .dropdown-content button:hover:last-child {
 	border-radius: 0 0 10px 10px;
@@ -85,12 +87,14 @@ p {
 .dropdown-content button:active,
 .dropdown-content .selected {
 	background-color: rgba(200, 200, 200, 0.5);
+	transition: background-color 0.2s ease-in-out;
 }
 .dropdown:hover .dropdown-content {
 	display: block;
 }
 .dropdown:hover .dropbtn {
 	background-color: #3e8e41;
+	transition: background-color 0.2s ease-in-out;
 }
 
 	/* Tableaux */

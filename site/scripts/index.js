@@ -1,4 +1,4 @@
-/* 
+/*
  * Tableau de tableau contenant les ID des containers des dropdowns et les ID
  * des boutons à ajouter quand ils sont sélectionnés
 */

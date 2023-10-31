@@ -18,6 +18,7 @@ function recupMoyTmpHumiLumiChamp(numChamp) {
 		.then(reponse => {
 			reponse.json()
 				.then(donnees => {
+					console.log(donnees); // [DEBUG] Pour Lucas
 					resolve(donnees);
 				})
 				.catch(err => {

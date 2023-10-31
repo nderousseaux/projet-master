@@ -39,6 +39,7 @@
 	transition: background-color 0.2s ease-in-out;
 }
 
+
 /* Thème sombre */
 @media (prefers-color-scheme: dark) {
 	/* Section formulaire */

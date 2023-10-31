@@ -1,18 +1,27 @@
 <?php
 
+// Rester en local pour le debug (API ayant une limite de requêtes)
 const API_LOCAL = true;
+
+// Coordonnées à récupérer dans la base de données
+const LATTITUDE = 48.52854;
+const LONTITUDE = 7.711011;
 
 if (API_LOCAL === false) {
 	$cleAPI = @file_get_contents("./cleAPI.txt");
 
-	// Si le fichier n'existe pas, renvoie une erreur
+	// Si le fichier n'existe pas, renvoi une erreur
 	if ($cleAPI === false) {
 		$erreur = array("Erreur", "récupération clé API");
 		echo json_encode($erreur);
 		exit();
 	}
 
-	$reponse = @file_get_contents("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/48.52854%2C7.711011?unitGroup=metric&elements=datetime%2Ctempmax%2Ctempmin%2Ctemp%2Chumidity%2Cprecip%2Cpreciptype%2Cwindspeedmean%2Cwinddir%2Ccloudcover%2Cuvindex&include=days&key=" . $cleAPI . "&contentType=json");
+	$reponse = @file_get_contents("https://weather.visualcrossing.com/" .
+	"VisualCrossingWebServices/rest/services/timeline/". LATTITUDE . "," .
+	LONTITUDE . "?unitGroup=metric&elements=datetime%2Ctempmax%2Ctempmin%2C" .
+	"temp%2Chumidity%2Cprecip%2C" ."preciptype%2Cwindspeedmean%2Cwinddir%2C" .
+	"cloudcover%2Cuvindex&include=days&key=" . $cleAPI . "&contentType=json");
 }
 else {
 	$reponse = @file_get_contents("./donneesMeteoDebug.json");

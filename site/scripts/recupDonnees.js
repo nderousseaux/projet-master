@@ -29,3 +29,26 @@ function recupMoyTmpHumiLumiChamp(numChamp) {
 		})
 	})
 }
+
+/**
+ * Récupère les données météo dans le back (pour masquer la clé API)
+ *
+ * @returns {promise} - les données météo sous format json
+ */
+function recupMeteo() {
+	return new Promise((resolve, reject) => {
+		fetch("../backend/meteo.php")
+		.then(reponse => {
+			reponse.json()
+				.then(donnees => {
+					resolve(donnees);
+				})
+				.catch(err => {
+					reject(err);
+				})
+		})
+		.catch(err => {
+			reject(err);
+		})
+	})
+}

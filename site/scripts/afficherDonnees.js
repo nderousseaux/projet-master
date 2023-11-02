@@ -91,7 +91,6 @@ function cellulePrecip(objPrecip, cellule) {
 	for (const [_, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnFr) {
 			if (valPrecip === valEn) {
-				console.log(valPrecip, valEn)
 				cellule.textContent += valFr;
 			}
 		}
@@ -152,7 +151,7 @@ function celluleTemp(temp, cellule) {
 		cellule.textContent += " ❄️";
 	}
 	else if (temp >= canicule) {
-		cellule.textContent += " 🔥";
+		cellule.textContent += " ☀️";
 	}
 
 	return cellule;

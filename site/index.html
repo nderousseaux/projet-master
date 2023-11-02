@@ -54,7 +54,7 @@
 	</section>
 
 	<section id="compMetMoy">
-		<div id="secMeteo">
+		<section id="secMeteo">
 			<div>
 				<div class="colonne titre">Date</div>
 				<div class="colonne titre">Temp. max (°C)</div>
@@ -68,7 +68,7 @@
 				<div class="colonne titre">UV</div>
 				<div class="colonne titre">Vit. vent (km/h)</div>
 			</div>
-		</div>
+		</section>
 		<section id="secMoyennes">
 			<div>
 				<h1>Température moyenne</h1>
@@ -154,6 +154,32 @@
 <script src="scripts/interactions.js"></script>
 <script src="scripts/recupDonnees.js"></script>
 <script src="scripts/afficherDonnees.js"></script>
-<script src="scripts/index.js"></script>
+<script>
+	/*
+	* Tableau de tableau contenant les ID des containers des dropdowns et les ID
+	* des boutons à ajouter quand ils sont sélectionnés
+	*/
+	const contIdButtons = [
+		["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
+		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true]
+	];
+
+	// Activer les boutons des dropdowns
+	contIdButtons.forEach(element => {
+		activerBouton(element[0], element[1], element[2]);
+	});
+
+	// Afficher les données météo
+	afficherMeteo();
+
+	// [DEBUG] Bouton pour obtenir la valeur du champ et de l'ilot sélectionnés
+	let logoHeader = document.querySelector("header > img");
+	logoHeader.addEventListener("click", _ => {
+		const valChamp = document.getElementById("champSlct").value;
+		const valIlot = document.getElementById("ilotSlct").value;
+
+		console.log("Champ :", valChamp, "\t| Ilot :", valIlot)
+	});
+</script>
 </body>
 </html>

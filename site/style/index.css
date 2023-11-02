@@ -130,6 +130,7 @@ p {
 	background-color: #04aa6d !important;
 	color: #ffffff;
 	margin-bottom: 10px;
+	min-height: unset;
 }
 #secMeteo > div > .colonne:nth-child(22n+1),
 #secMeteo > div > .colonne:nth-child(22n+2),

@@ -528,7 +528,7 @@ header > section > p,
 		background-color: rgba(57, 57, 57, 0.7);
 	}
 	.dropdown-content button {
-		color: white;
+		color: #ffffff;
 	}
 	.dropdown-content button:hover {
 		background-color: rgba(80, 80, 80, 0.5);

@@ -26,13 +26,9 @@ allow-hotplug nebula1
 auto nebula1
 iface nebula1 inet manual
     address 10.0.0.4/16
-    #up ip link set dev nebula1 up
-    #post-up ip route add 10.0.0./16 dev nebula1
-    #post-down ip link del dev nebula1
 
 auto vmbr10
 iface vmbr10 inet static
         address 10.1.0.4/16
-        bridge-ports nebula1
         bridge-stp off
         bridge-fd 0

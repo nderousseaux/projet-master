@@ -12,7 +12,7 @@
     - pve2 / 192.168.1.3/24
     - pve3 / 192.168.1.4/24
 
-## réseau d'overlay chiffré (nebula)
+## réseau d'overlay chiffré (nebula+BGP+EVPN+VXLAN)
 
 ### host / ip4
     - pve / 10.0.0.2/16

@@ -27,8 +27,16 @@ auto nebula1
 iface nebula1 inet manual
     address 10.0.0.4/16
 
+auto vxlan10
+iface vxlan10
+        vxlan-learning  nebula1
+        vxlan-id        10
+        vxlan-local-ip  10.0.0.4
+        vxlan-dstport   9001
+        vxlan-learning  off
+ 
 auto vmbr10
-iface vmbr10 inet static
-        address 10.1.0.4/16
+iface vmbr10 inet manual
+        bridge-ports vxlan10
         bridge-stp off
         bridge-fd 0

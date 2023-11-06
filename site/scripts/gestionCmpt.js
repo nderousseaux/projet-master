@@ -48,9 +48,9 @@ function verifFormatCourriel(email) {
  * mets en place les événements sur les boutons (envoi au backend si
  * confirmation)
  *
- * @param {string} nomChamp le nom du champ
- * @param {string} valAvant valeur du champ avant modification
- * @param {string} valApres valeur du champ après modification
+ * @param {string} nomChamp - le nom du champ
+ * @param {string} valAvant - valeur du champ avant modification
+ * @param {string} valApres - valeur du champ après modification
  */
 function confirmChangement(nomChamp, valAvant, valApres) {
 	let boite = document.getElementById("confirmChgmt");
@@ -77,8 +77,8 @@ function confirmChangement(nomChamp, valAvant, valApres) {
 
 /**
  * Envoi le nom du champ et la valeur à enregistrer, au backend
- * @param {string} nomChamp le nom du champ
- * @param {string} valeur à enregsitrer
+ * @param {string} nomChamp - le nom du champ
+ * @param {string} valeur - à enregsitrer
  */
 function envoiInfoCmptBack(nomChamp, valeur) {
 	const xhr = new XMLHttpRequest();

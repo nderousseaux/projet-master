@@ -63,7 +63,8 @@ p {
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 }
-.dropdown-content button {
+.dropdown-content button,
+.dropdown-content a {
 	display: block;
 	width: 100%;
 	border: none;
@@ -77,14 +78,18 @@ p {
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:hover {
+.dropdown-content button:hover,
+.dropdown-content a:hover {
+	color: #000000 !important;
 	background-color: rgba(220, 220, 220, 0.5);
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:hover:last-child {
+.dropdown-content button:hover:last-child,
+.dropdown-content a:hover:last-child {
 	border-radius: 0 0 10px 10px;
 }
 .dropdown-content button:active,
+.dropdown-content a:active,
 .dropdown-content .selected {
 	background-color: rgba(200, 200, 200, 0.5);
 	transition: background-color 0.2s ease-in-out;
@@ -260,6 +265,19 @@ header > section > p,
 #secMeteo > div {
 	grid-template-columns: 85px repeat(10, minmax(calc((100% - 85px)/10), 1fr));
 }
+#secMeteo > div > .titre:first-child {
+	display: flex;
+	flex-direction: column;
+	padding: 0 5px 0 0;
+	width: 80px;
+	height: 50px;
+}
+#secMeteo > div > .titre:first-child > p {
+	font-size: 14px;
+	margin: 0;
+	padding-top: 5px;
+	height: 50%;
+}
 #secMeteo > div > .colonne:nth-child(11n+11) {
 	border-radius: 0 10px 10px 0;
 }
@@ -268,6 +286,21 @@ header > section > p,
 }
 #secMeteo > div > .titre {
 	text-align: center;
+}
+
+			/* Dropdown */
+#secMeteo > div > .titre:first-child > .dropdown {
+	width: 100%;
+	height: 50%;
+}
+#secMeteo > div > .titre:first-child > .dropdown > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 0 0 0 10px;
+}
+#secMeteo > div > .titre:first-child > .dropdown > .dropdown-content {
+	background-color: rgb(255, 255, 255);
+	left: 0;
 }
 
 		/* Moyenne */
@@ -461,6 +494,12 @@ header > section > p,
 		grid-template-columns: repeat(11, 80px);
 	}
 
+				/* Dropdown */
+	#secMeteo > div > .titre:first-child > .dropdown > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
 			/* Moyenne */
 	#secMoyennes {
 		flex-direction: row;
@@ -527,13 +566,17 @@ header > section > p,
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2);
 		background-color: rgba(57, 57, 57, 0.7);
 	}
-	.dropdown-content button {
+	.dropdown-content button,
+	.dropdown-content a {
 		color: #ffffff;
 	}
-	.dropdown-content button:hover {
+	.dropdown-content button:hover,
+	.dropdown-content a:hover {
 		background-color: rgba(80, 80, 80, 0.5);
+		color: #ffffff !important;
 	}
 	.dropdown-content button:active,
+	.dropdown-content a:active,
 	.dropdown-content .selected {
 		background-color: rgba(111, 111, 111, 0.5);
 	}
@@ -594,7 +637,12 @@ header > section > p,
 		background-color: #1b1b1b;
 	}
 
-			/* Moyenne */
+			/* Dropdown */
+	#secMeteo > div > .titre:first-child > .dropdown > .dropdown-content {
+		background-color: rgb(57, 57, 57);
+	}
+
+		/* Moyenne */
 	#secMoyennes > div {
 		box-shadow: 0 15px 20px -15px #080808;
 	}

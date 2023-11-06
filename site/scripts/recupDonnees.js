@@ -3,6 +3,7 @@
  * indiqué
  *
  * @param {int} numChamp - Numéro du champ
+ * @returns {promise} - les données sous format json
  **/
 function recupMoyTmpHumiLumiChamp(numChamp) {
 	return new Promise((resolve, reject) => {
@@ -34,11 +35,19 @@ function recupMoyTmpHumiLumiChamp(numChamp) {
 /**
  * Récupère les données météo dans le back (pour masquer la clé API)
  *
+ * @param {string} duree - Durée d'affichage des données météo
  * @returns {promise} - les données météo sous format json
  */
-function recupMeteo() {
+function recupMeteo(duree) {
 	return new Promise((resolve, reject) => {
-		fetch("../backend/meteo.php")
+		// Champ à envoyer au back, pour indiquer la colonne à récupérer
+		let champPost = new FormData();
+		champPost.append("duree", duree);
+
+		fetch("../backend/meteo.php", {
+			method: "POST",
+			body: champPost
+		})
 		.then(reponse => {
 			reponse.json()
 				.then(donnees => {

@@ -17,7 +17,7 @@
 	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
 	<section>
 		<p>Nom du champ</p>
-		<div class="dropdown">
+		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
 				<button value="1">Champ 1</button>
@@ -28,10 +28,10 @@
 	</section>
 	<section>
 		<p>Nom utilisateur</p>
-		<div class="dropdown">
+		<div class="dropdown" id="ddCmpt">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdown-content">
-				<button value="para">Paramètres</button>
+				<a href="gestionCmpt.html">Paramètres</a>
 				<button value="deco">Déconnexion</button>
 			</div>
 		</div>
@@ -56,7 +56,18 @@
 	<section id="compMetMoy">
 		<section id="secMeteo">
 			<div>
-				<div class="colonne titre">Date</div>
+				<div class="colonne titre">
+					<p>
+						Date
+					</p>
+					<div class="dropdown" id="ddDuree">
+						<button class="dropbtn">⇩</button>
+						<div id="selectDuree" class="dropdown-content">
+							<button value="semaine">Semaine</button>
+							<button value="jour">Journée</button>
+						</div>
+					</div>
+				</div>
 				<div class="colonne titre">Temp. max (°C)</div>
 				<div class="colonne titre">Temp. min (°C)</div>
 				<div class="colonne titre">Temp. (°C)</div>
@@ -89,7 +100,7 @@
 		<div id="optGraph">
 			<div>
 				<p>Type de données</p>
-				<div class="dropdown">
+				<div class="dropdown" id="ddType">
 					<button class="dropbtn">⇩</button>
 					<div id="selectType" class="dropdown-content">
 						<button value="temp">Température</button>
@@ -100,7 +111,7 @@
 			</div>
 			<div>
 				<p>Ilot</p>
-				<div class="dropdown">
+				<div class="dropdown" id="ddIlot">
 					<button class="dropbtn">⇩</button>
 					<div id="selectIlot" class="dropdown-content">
 						<button value="1">Ilot 1</button>
@@ -161,7 +172,8 @@
 	*/
 	const contIdButtons = [
 		["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
-		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true]
+		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true],
+		["selectDuree", "dureeSlct", true]
 	];
 
 	// Activer les boutons des dropdowns
@@ -170,15 +182,14 @@
 	});
 
 	// Afficher les données météo
-	afficherMeteo();
+	afficherMeteo(document.getElementById("dureeSlct").value);
 
-	// [DEBUG] Bouton pour obtenir la valeur du champ et de l'ilot sélectionnés
-	let logoHeader = document.querySelector("header > img");
-	logoHeader.addEventListener("click", _ => {
-		const valChamp = document.getElementById("champSlct").value;
-		const valIlot = document.getElementById("ilotSlct").value;
-
-		console.log("Champ :", valChamp, "\t| Ilot :", valIlot)
+	// Bouton pour changer la durée de la météo
+	let dropdownDuree = document.getElementById("ddDuree");
+	dropdownDuree.addEventListener("click", _ => {
+		const valChamp = document.getElementById("dureeSlct").value;
+		supprimerMeteo();
+		afficherMeteo(valChamp);
 	});
 </script>
 </body>

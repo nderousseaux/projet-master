@@ -18,31 +18,90 @@ function afficherMoyTempHumiLumiChamp(numChamp) {
 }
 
 /**
- * Affiche les données météo, récupérées dans le back
+ * Supprime toutes les données sauf la colonne de titre
  */
-function afficherMeteo() {
+function supprimerMeteo() {
+	const meteoDiv = document.querySelector("#secMeteo > div");
+	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
+	colonnes.forEach(colonne => colonne.remove());
+}
+
+/**
+ * Affiche les données météo, récupérées dans le back
+ * @param {string} duree - Durée d'affichage des données météo
+ * @returns {bool} false si la durée est invalide
+ */
+function afficherMeteo(duree) {
+	if (duree != "jour" && duree != "semaine") {
+		console.error("Durée invalide");
+		return false;
+	}
+
 	const clesTemp = ["tempmin", "tempmax", "temp"];
+	const ordreCles = [
+		"datetime", "tempmax", "tempmin", "temp", "humidity", "precip",
+		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
+	]
 
 	const meteoDiv = document.querySelector("#secMeteo > div");
-	recupMeteo()
+	recupMeteo(duree)
 	.then(donnees => {
 		if (donnees[0] != "Erreur") {
-			const jours = donnees.days;
+			let dureeDonnees;
+			// Adapter l'affichage en fonction de la durée
+			// let dureeDonnees;
+			if (duree === "jour") {
+				dureeDonnees = donnees.days[0].hours;
+			}
 
-			jours.forEach(mesures => {
-				for (const [cle, valeur] of Object.entries(mesures)) {
+			// Affichage dureeDonnees
+			else if (duree === "semaine") {
+				dureeDonnees = donnees.days;
+			}
+
+			dureeDonnees.forEach(mesures => {
+				// Nombre de colonnes
+				let nbrColonnes = 11;
+				let index = 0;
+				for (let [cle, valeur] of Object.entries(mesures)) {
 					let cellule = document.createElement("div");
 
-					// Ajoute indication en fonction du type de précipitations
+					/*
+					 * Ajoute indication en fonction du type de précipitations
+					 * et traduit en français la valeur (ex: "rain" -> "Pluie")
+					 */
 					if (cle === "preciptype") {
 						cellule = cellulePrecip(valeur, cellule);
 					}
 					else {
-						if (valeur === null) {
+						// Si la clé n'est pas au bon index, décale les cellules
+						if (
+							ordreCles[index] != cle &&
+							ordreCles.includes(cle)
+						) {
+							const lenOrdreCles = Math.max(index,
+								ordreCles.length)
+
+							for (; index < lenOrdreCles; index++) {
+								// Si la clé est au bon index, afficge la valeur
+								if (ordreCles[index] === cle) {
+									cellule.textContent = valeur;
+									break;
+								}
+
+								// Sinon affiche "N/A"
+								else {
+									const cellule = ajourtCellule("N/A");
+									meteoDiv.appendChild(cellule);
+									nbrColonnes--;
+								}
+							}
+						}
+						else if (valeur === null) {
 							cellule.textContent = "N/A";
 						}
 						else {
-							cellule.textContent = valeur;
+							cellule.textContent = valeur ;
 						}
 					}
 
@@ -58,11 +117,20 @@ function afficherMeteo() {
 
 					cellule.classList.add("colonne");
 					meteoDiv.appendChild(cellule);
+					index++;
+					nbrColonnes--;
 				};
+
+				// S'il manque des données, affiche "N/A"
+				for (let i = 0; i < nbrColonnes; i++) {
+					const cellule = ajourtCellule("N/A");
+					meteoDiv.appendChild(cellule);
+				}
 			});
 		}
 		else {
-			console.error("HTTP", donnees[1], ": récupération données météo");
+			console.error("Récupération données météo : " + donnees[1] + " > " +
+				"\"" + duree + "\"");
 		}
 	})
 	.catch(err => {
@@ -71,12 +139,24 @@ function afficherMeteo() {
 }
 
 /**
+ * Créé une cellule et y ajoute le texte passé en paramètre
+ * @param {string} texte - à afficher dans la cellule
+ * @returns {div} la cellule créée
+ */
+function ajourtCellule(texte) {
+	const cellule = document.createElement("div");
+	cellule.classList.add("colonne");
+	cellule.textContent = texte;
+	return cellule;
+}
+
+/**
  * Traduit les valeurs de précipitations en français, et ajoute l'indication
  * visuelle dans la cellule
  *
- * @param {object} objPrecip objet contenant les valeurs de précipitations
- * @param {div} cellule où afficher les précipitations
- * @returns la cellule modifiée
+ * @param {object} objPrecip - objet contenant les valeurs de précipitations
+ * @param {div} cellule - où afficher les précipitations
+ * @returns {div} la cellule modifiée
  */
 function cellulePrecip(objPrecip, cellule) {
 	const precipEnFr = [
@@ -102,9 +182,9 @@ function cellulePrecip(objPrecip, cellule) {
 /**
  * Ajoute un indicateur visuel de la direction du vent
  *
- * @param {int} dirVent en degrés
- * @param {div} cellule où afficher les précipitations
- * @returns la cellule modifiée
+ * @param {int} dirVent - en degrés
+ * @param {div} cellule - où afficher les précipitations
+ * @returns {div} la cellule modifiée
  */
 function celluleDirVent(dirVent, cellule) {
 	if (dirVent >= 0 && dirVent <= 45) {
@@ -139,9 +219,9 @@ function celluleDirVent(dirVent, cellule) {
  * Ajoute un indicateur visuel en fonction de la température, en cas de risque
  * de gel ou de canicule
  *
- * @param {*} temp en °C
- * @param {div} cellule où afficher les précipitations
- * @returns la cellule modifiée
+ * @param {int} temp - en °C
+ * @param {div} cellule - où afficher les précipitations
+ * @returns {div} la cellule modifiée
  */
 function celluleTemp(temp, cellule) {
 	const gel = 0;

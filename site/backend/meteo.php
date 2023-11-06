@@ -1,13 +1,28 @@
 <?php
 
+// Récupère la durée et la granularité souhaitée
+if ($_POST["duree"] === "jour") {
+	$duree = "today";
+	$granularite = "hours";
+}
+else if ($_POST["duree"] === "semaine") {
+	$duree = "next7days";
+	$granularite = "days";
+}
+else {
+	$erreur = array("Erreur", "Durée non reconnue");
+	echo json_encode($erreur);
+	exit();
+}
+
 // Rester en local pour le debug (API ayant une limite de requêtes)
-const API_LOCAL = true;
+const MODE_LOCAL = true;
 
 // Coordonnées à récupérer dans la base de données
 const LATTITUDE = 48.52854;
 const LONTITUDE = 7.711011;
 
-if (API_LOCAL === false) {
+if (MODE_LOCAL === false) {
 	$cleAPI = @file_get_contents("./cleAPI.txt");
 
 	// Si le fichier n'existe pas, renvoi une erreur
@@ -19,12 +34,18 @@ if (API_LOCAL === false) {
 
 	$reponse = @file_get_contents("https://weather.visualcrossing.com/" .
 	"VisualCrossingWebServices/rest/services/timeline/". LATTITUDE . "," .
-	LONTITUDE . "?unitGroup=metric&elements=datetime%2Ctempmax%2Ctempmin%2C" .
-	"temp%2Chumidity%2Cprecip%2C" ."preciptype%2Cwindspeedmean%2Cwinddir%2C" .
-	"cloudcover%2Cuvindex&include=days&key=" . $cleAPI . "&contentType=json");
+	LONTITUDE . '/' . $duree . "?unitGroup=metric&elements=datetime%2Ctempmax" .
+	"%2Ctempmin%2Ctemp%2Chumidity%2Cprecip%2Cpreciptype%2Cwindspeedmean%2C" .
+	"winddir%2Ccloudcover%2Cuvindex&include=" . $granularite .
+	"&key=" . $cleAPI .	"&contentType=json");
 }
 else {
-	$reponse = @file_get_contents("./donneesMeteoDebug.json");
+	if ($_POST["duree"] === "jour") {
+		$reponse = @file_get_contents("./donneesMeteoJour.json");
+	}
+	else {
+		$reponse = @file_get_contents("./donneesMeteoSemaine.json");
+	}
 }
 
 // Renvoi l'erreur HTTP, si la requête a échoué

@@ -15,9 +15,6 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			// Récupérer la valeur du bouton sélectionné
 			const valeurSelectionnee = button.value;
 
-			console.log("Valeur :", valeurSelectionnee,
-				"\t| ID dropdown :", idAttr);
-
 			// Marquer le bouton comme sélectionné
 			buttons.forEach(btn => {
 				if (btn.value === valeurSelectionnee) {

@@ -74,6 +74,7 @@ p {
 	text-align: start;
 	font-size: 15px;
 	white-space: nowrap;
+	color: #000000;
 	font-family: "Open Sans", Arial, sans-serif;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;

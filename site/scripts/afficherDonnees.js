@@ -37,7 +37,10 @@ function afficherMeteo(duree) {
 		return false;
 	}
 
+	// Types de températures possibles
 	const clesTemp = ["tempmin", "tempmax", "temp"];
+
+	// Titres des colonnes (dans l'ordre affiché)
 	const ordreCles = [
 		"datetime", "tempmax", "tempmin", "temp", "humidity", "precip",
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
@@ -47,22 +50,22 @@ function afficherMeteo(duree) {
 	recupMeteo(duree)
 	.then(donnees => {
 		if (donnees[0] != "Erreur") {
-			let dureeDonnees;
+			// Supprimer les données déjà affichées
+			supprimerMeteo();
+
 			// Adapter l'affichage en fonction de la durée
-			// let dureeDonnees;
+			let dureeDonnees;
 			if (duree === "jour") {
 				dureeDonnees = donnees.days[0].hours;
 			}
-
-			// Affichage dureeDonnees
 			else if (duree === "semaine") {
 				dureeDonnees = donnees.days;
 			}
 
 			dureeDonnees.forEach(mesures => {
-				// Nombre de colonnes
 				let nbrColonnes = 11;
 				let index = 0;
+
 				for (let [cle, valeur] of Object.entries(mesures)) {
 					let cellule = document.createElement("div");
 
@@ -80,7 +83,7 @@ function afficherMeteo(duree) {
 							ordreCles.includes(cle)
 						) {
 							const lenOrdreCles = Math.max(index,
-								ordreCles.length)
+								ordreCles.length);
 
 							for (; index < lenOrdreCles; index++) {
 								// Si la clé est au bon index, afficge la valeur
@@ -101,7 +104,7 @@ function afficherMeteo(duree) {
 							cellule.textContent = "N/A";
 						}
 						else {
-							cellule.textContent = valeur ;
+							cellule.textContent = valeur;
 						}
 					}
 
@@ -159,7 +162,7 @@ function ajourtCellule(texte) {
  * @returns {div} la cellule modifiée
  */
 function cellulePrecip(objPrecip, cellule) {
-	const precipEnFr = [
+	const precipEnVersFr = [
 		["rain", "Pluie 🌧️"], ["snow", "Neige ❄️"],
 		["freezingrain", "Pluie verglaçante 🌧️❄️"], ["ice", "Givre ❄️"]
 	];
@@ -169,7 +172,7 @@ function cellulePrecip(objPrecip, cellule) {
 		return cellule;
 	}
 	for (const [_, valPrecip] of Object.entries(objPrecip)) {
-		for (const [valEn, valFr] of precipEnFr) {
+		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
 				cellule.textContent += valFr;
 			}

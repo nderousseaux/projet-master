@@ -1,0 +1,240 @@
+{
+	"latitude" : 48.52854,
+	"longitude" : 7.711011,
+	"resolvedAddress" : "48.52854,7.711011",
+	"address" : "48.52854,7.711011",
+	"timezone" : "Europe/Paris",
+	"tzoffset" : 1.0,
+	"name" : "48.52854,7.711011",
+	"days" : [ {
+	"datetime" : "2023-11-06",
+	"tempmax" : 12.1,
+	"tempmin" : 7.2,
+	"temp" : 9.8,
+	"humidity" : 86.3,
+	"precip" : 1.5,
+	"preciptype" : [ "rain" ],
+	"winddir" : 195.5,
+	"cloudcover" : 80.7,
+	"uvindex" : 3.0,
+	"windspeedmean" : 13.2,
+	"hours" : [ {
+		"datetime" : "00:00:00",
+		"temp" : 10.0,
+		"humidity" : 81.23,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 192.0,
+		"cloudcover" : 88.3,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "01:00:00",
+		"temp" : 10.8,
+		"humidity" : 77.08,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 200.0,
+		"cloudcover" : 95.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "02:00:00",
+		"temp" : 10.0,
+		"humidity" : 81.62,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 200.0,
+		"cloudcover" : 88.3,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "03:00:00",
+		"temp" : 9.1,
+		"humidity" : 91.97,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 181.0,
+		"cloudcover" : 89.4,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "04:00:00",
+		"temp" : 10.0,
+		"humidity" : 86.82,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 208.0,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "05:00:00",
+		"temp" : 8.2,
+		"humidity" : 92.07,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 192.0,
+		"cloudcover" : 88.3,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "06:00:00",
+		"temp" : 10.0,
+		"humidity" : 81.75,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 191.0,
+		"cloudcover" : 95.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "07:00:00",
+		"temp" : 9.1,
+		"humidity" : 86.59,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 180.0,
+		"cloudcover" : 88.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "08:00:00",
+		"temp" : 9.2,
+		"humidity" : 86.19,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 173.0,
+		"cloudcover" : 88.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "09:00:00",
+		"temp" : 10.1,
+		"humidity" : 86.0,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 182.0,
+		"cloudcover" : 32.4,
+		"uvindex" : 1.0
+	}, {
+		"datetime" : "10:00:00",
+		"temp" : 12.0,
+		"humidity" : 81.22,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 191.0,
+		"cloudcover" : 87.0,
+		"uvindex" : 2.0
+	}, {
+		"datetime" : "11:00:00",
+		"temp" : 12.1,
+		"humidity" : 75.44,
+		"precip" : 0.4,
+		"preciptype" : [ "rain" ],
+		"winddir" : 200.0,
+		"cloudcover" : 86.3,
+		"uvindex" : 3.0
+	}, {
+		"datetime" : "12:00:00",
+		"temp" : 11.1,
+		"humidity" : 85.97,
+		"precip" : 0.5,
+		"preciptype" : [ "rain" ],
+		"winddir" : 210.0,
+		"cloudcover" : 98.6,
+		"uvindex" : 1.0
+	}, {
+		"datetime" : "13:00:00",
+		"temp" : 12.0,
+		"humidity" : 75.68,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 201.0,
+		"cloudcover" : 99.7,
+		"uvindex" : 2.0
+	}, {
+		"datetime" : "14:00:00",
+		"temp" : 12.1,
+		"humidity" : 83.0,
+		"precip" : 0.2,
+		"preciptype" : [ "rain" ],
+		"winddir" : 204.3,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "15:00:00",
+		"temp" : 11.7,
+		"humidity" : 84.07,
+		"precip" : 0.4,
+		"preciptype" : [ "rain" ],
+		"winddir" : 207.0,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "16:00:00",
+		"temp" : 11.3,
+		"humidity" : 86.33,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 211.5,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "17:00:00",
+		"temp" : 10.2,
+		"humidity" : 89.19,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 206.3,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "18:00:00",
+		"temp" : 9.0,
+		"humidity" : 90.94,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 200.5,
+		"cloudcover" : 100.0,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "19:00:00",
+		"temp" : 8.2,
+		"humidity" : 92.77,
+		"precip" : 0.0,
+		"preciptype" : [ "rain" ],
+		"winddir" : 195.6,
+		"cloudcover" : 56.1,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "20:00:00",
+		"temp" : 7.8,
+		"humidity" : 93.39,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 192.4,
+		"cloudcover" : 17.8,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "21:00:00",
+		"temp" : 7.5,
+		"humidity" : 94.02,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 198.4,
+		"cloudcover" : 34.6,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "22:00:00",
+		"temp" : 7.3,
+		"humidity" : 94.01,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 196.6,
+		"cloudcover" : 69.4,
+		"uvindex" : 0.0
+	}, {
+		"datetime" : "23:00:00",
+		"temp" : 7.2,
+		"humidity" : 93.36,
+		"precip" : 0.0,
+		"preciptype" : null,
+		"winddir" : 195.9,
+		"cloudcover" : 35.0,
+		"uvindex" : 0.0
+	} ]
+	} ],
+	"queryCost" : 1
+}

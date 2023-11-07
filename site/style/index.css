@@ -62,6 +62,7 @@ p {
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
+	z-index: 10;
 }
 .dropdown-content button,
 .dropdown-content a {
@@ -289,7 +290,7 @@ header > section > p,
 	text-align: center;
 }
 
-			/* Dropdown */
+			/* Options de la météo */
 #secMeteo > div > .titre:first-child > .dropdown {
 	width: 100%;
 	height: 50%;
@@ -300,7 +301,6 @@ header > section > p,
 	border-radius: 0 0 0 10px;
 }
 #secMeteo > div > .titre:first-child > .dropdown > .dropdown-content {
-	background-color: rgb(255, 255, 255);
 	left: 0;
 }
 
@@ -385,12 +385,18 @@ header > section > p,
 
 		/* Graphique */
 #graph {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	max-height: 100vh;
-	aspect-ratio: 2/1;
+	aspect-ratio: 3/1;
+	margin-bottom: 10px;
+}
+div.plotly-notifier {
+	visibility: hidden;
+}
+.xtick > text,
+.ytick > text,
+.hovertext > text {
+	font-size: 14px !important;
 }
 
 	/* Section tableau */
@@ -495,7 +501,7 @@ header > section > p,
 		grid-template-columns: repeat(11, 80px);
 	}
 
-				/* Dropdown */
+				/* Options de la météo */
 	#secMeteo > div > .titre:first-child > .dropdown > .dropbtn {
 		width: 100% !important;
 		height: 100% !important;
@@ -533,9 +539,14 @@ header > section > p,
 
 			/* Graphique */
 	#graph {
-
 		min-height: 35vh;
-		aspect-ratio: 2/1;
+	}
+	.xtick > text,
+	.ytick > text {
+		font-size: 12.5px !important;
+	}
+	.hovertext > text {
+		font-size: 11.5px !important;
 	}
 
 	/* Section tableau */
@@ -636,11 +647,6 @@ header > section > p,
 	#secTableau > div > .colonne:nth-child(14n+13),
 	#secTableau > div > .colonne:nth-child(14n+14) {
 		background-color: #1b1b1b;
-	}
-
-			/* Dropdown */
-	#secMeteo > div > .titre:first-child > .dropdown > .dropdown-content {
-		background-color: rgb(57, 57, 57);
 	}
 
 		/* Moyenne */

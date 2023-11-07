@@ -122,7 +122,6 @@
 			</div>
 		</div>
 		<div id="graph">
-			Graph
 		</div>
 	</section>
 
@@ -162,9 +161,17 @@
 		</div>
 	</section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
+integrity="sha512-TiY/d3GpuSKgQYgnqegSfdqlXp6ebBvi6A47mFTMSpZM7BMbvfkkvU/SlDzZHs9lWqF+BteevHlqgauHhLLbIA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-locale-fr.min.js"
+integrity="sha512-nyAFXuhmcYPFCAawwaZOW22viMZW5Aw1jB7w84GbnbPqIz1SDHWGdQw17DB2BfU1jv4nnEdJgvolNINTjdSKMA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="scripts/interactions.js"></script>
 <script src="scripts/recupDonnees.js"></script>
 <script src="scripts/afficherDonnees.js"></script>
+<script src="scripts/classesCouleurs.js"></script>
+<script src="scripts/graphique.js"></script>
 <script>
 	/*
 	* Tableau de tableau contenant les ID des containers des dropdowns et les ID
@@ -184,12 +191,94 @@
 	// Afficher les données météo
 	afficherMeteo(document.getElementById("dureeSlct").value);
 
-	// Bouton pour changer la durée de la météo
+	// Bouton pour changer la temporalité de la météo
 	let dropdownDuree = document.getElementById("ddDuree");
 	dropdownDuree.addEventListener("click", _ => {
 		const valChamp = document.getElementById("dureeSlct").value;
 		afficherMeteo(valChamp);
 	});
+
+	// // Afficher les données du graphique
+	// console.log(afficherGraphique(1, 1, 1, "temp"));
+	// window.matchMedia("(prefers-color-scheme: light)").addEventListener("change",
+	// () => {
+	// 	// Récupère les couleurs en fonction du thème
+	// 	let couleursGraph =
+	// 		(window.matchMedia("(prefers-color-scheme: light)").matches) ?
+	// 		new CouleursClaires() : new CouleursSombres();
+	// 	let [bgColor, gridColor, fontColor, lineColor, fillColor] =
+	// 		couleursGraph.getCouleursTableau();
+
+	// 	// Configure le placement du graphique, les ticks et les labels
+	// 	let [top, right, bottom, left, nTicks, tickAngle, formatMois] =
+	// 		[10, 10, 40, 55, 8, 0, "%B"];
+
+	// 	// Adapate le graphique en fonction de la taille de l'écran
+	// 	if (window.matchMedia("(max-width: 769px)").matches) {
+	// 		rangeMin = abscisse[abscisse.length - (7 * 24) - 1];
+	// 		[top, right, bottom, left, nTicks, tickAngle, formatMois] =
+	// 			[0, 7, 70, 23, 6, -70, "%b"];
+	// 	}
+
+	// 	// Configure le style
+	// 	const layout = {
+	// 		showlegend: false,
+	// 		separators: ".,",
+	// 		plot_bgcolor: bgColor,
+	// 		paper_bgcolor: bgColor,
+	// 		margin: {
+	// 			t: top,
+	// 			r: right,
+	// 			b: bottom,
+	// 			l: left,
+	// 			pad: 4
+	// 		},
+	// 		font: {
+	// 			family: "Open Sans",
+	// 			color: fontColor
+	// 		},
+	// 		xaxis: {
+	// 			showgrid: false,
+	// 			nticks: nTicks,
+	// 			tickangle: tickAngle,
+	// 			range: [rangeMin, rangeMax],
+	// 			tickformatstops: [
+	// 				{
+	// 					"dtickrange": [null, 60000],
+	// 					"value": "%-d " + formatMois + "<br>%Hh%M.%S"
+	// 				},
+	// 				{
+	// 					"dtickrange": [60000, 3600000],
+	// 					"value": "%-d " + formatMois + "<br>%Hh%M"
+	// 				},
+	// 				{
+	// 					"dtickrange": [3600000, 86400000],
+	// 					"value": "%-d " + formatMois + "<br>%Hh%M"
+	// 				},
+	// 				{
+	// 					"dtickrange": [86400000, null],
+	// 					"value": "%-d " + formatMois
+	// 				}
+	// 			]
+	// 		},
+	// 		yaxis: {
+	// 			gridcolor: gridColor,
+	// 			gridcolorwidth: 1,
+	// 			range: [minOrd, maxOrd],
+	// 			nticks: nTicks,
+	// 			tickangle: tickAngle,
+	// 			zeroline: false,
+	// 			fixedrange: true,
+	// 			tickformat: ".1f",
+	// 		}
+	// 	}
+
+	// 	Plotly.relayout("graph", layout);
+	// });
+	// window.matchMedia("(max-width: 769px)").addEventListener("change",
+	// () => {
+	// 	afficherGraphique(1, 1, 1, "temp");
+	// });
 </script>
 </body>
 </html>

@@ -419,8 +419,17 @@ div.plotly-notifier {
 }
 
 
-/* Version mobile */
-@media screen and (max-width: 799px) {
+/* Version élargie (petits écrans ordinateurs) */
+@media screen and (max-width: 1300px) {
+	/* Corps */
+	#corps > section {
+		width: 90%;
+	}
+}
+
+
+/* Version tablette */
+@media screen and (max-width: 950px) {
 	/* Général */
 	h1 {
 		font-size: 16px;
@@ -479,6 +488,7 @@ div.plotly-notifier {
 	#secInfos > div > p {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		height: 50%;
 	}
 	#secInfos > div > p {
@@ -511,9 +521,6 @@ div.plotly-notifier {
 		width: 100% !important;
 		height: 100% !important;
 	}
-	#ddDuree > .dropdown-content {
-		display: block;
-	}
 
 			/* Moyenne */
 	#secMoyennes {
@@ -530,12 +537,13 @@ div.plotly-notifier {
 	#secMoyennes > div > p {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 	#secMoyennes > div > h1 {
-		height: 70%;
+		height: 50%;
 	}
 	#secMoyennes > div > p {
-		height: 30%;
+		height: 50%;
 	}
 
 		/* Section graphique */
@@ -563,6 +571,19 @@ div.plotly-notifier {
 	}
 	#secTableau > div > .titre {
 		font-size: 14px;
+	}
+}
+
+
+/* Version mobile */
+@media screen and (max-width: 799px) {
+	/* Corps */
+			/* Moyenne */
+	#secMoyennes > div > h1 {
+		height: 70%;
+	}
+	#secMoyennes > div > p {
+		height: 30%;
 	}
 }
 

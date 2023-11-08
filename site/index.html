@@ -167,118 +167,80 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-locale-fr.min.js"
 integrity="sha512-nyAFXuhmcYPFCAawwaZOW22viMZW5Aw1jB7w84GbnbPqIz1SDHWGdQw17DB2BfU1jv4nnEdJgvolNINTjdSKMA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="scripts/interactions.js"></script>
+<script src="scripts/interactionsBtn.js"></script>
 <script src="scripts/recupDonnees.js"></script>
 <script src="scripts/afficherDonnees.js"></script>
 <script src="scripts/classesCouleurs.js"></script>
 <script src="scripts/graphique.js"></script>
 <script>
-	/*
-	* Tableau de tableau contenant les ID des containers des dropdowns et les ID
-	* des boutons à ajouter quand ils sont sélectionnés
-	*/
+	/*** Variables et constantes ***/
+		/*
+		 * Tableau de tableau contenant les ID des containers des dropdowns et
+		 * les ID des boutons à ajouter quand ils sont sélectionnés
+		*/
 	const contIdButtons = [
 		["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
 		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true],
 		["selectDuree", "dureeSlct", true]
 	];
 
-	// Activer les boutons des dropdowns
+		// Préselectionne les boutons des dropdowns
 	contIdButtons.forEach(element => {
 		activerBouton(element[0], element[1], element[2]);
 	});
 
-	// Afficher les données météo
+		// Retours des paramètres du graphique
+	let typeMesuresStr, unite;
+	let rangeMin, rangeMinMob, rangeMax, ordMin, ordMax;
+
+
+	/*** Affichage des données ***/
+		// Afficher les données météo
 	afficherMeteo(document.getElementById("dureeSlct").value);
 
-	// Bouton pour changer la temporalité de la météo
+		// Afficher les données du graphique
+	helperAfficherGraph();
+
+
+	/*** Interaction des boutons ***/
+		// Bouton pour changer la temporalité de la météo
 	let dropdownDuree = document.getElementById("ddDuree");
 	dropdownDuree.addEventListener("click", _ => {
 		const valChamp = document.getElementById("dureeSlct").value;
 		afficherMeteo(valChamp);
 	});
 
-	// // Afficher les données du graphique
-	// console.log(afficherGraphique(1, 1, 1, "temp"));
-	// window.matchMedia("(prefers-color-scheme: light)").addEventListener("change",
-	// () => {
-	// 	// Récupère les couleurs en fonction du thème
-	// 	let couleursGraph =
-	// 		(window.matchMedia("(prefers-color-scheme: light)").matches) ?
-	// 		new CouleursClaires() : new CouleursSombres();
-	// 	let [bgColor, gridColor, fontColor, lineColor, fillColor] =
-	// 		couleursGraph.getCouleursTableau();
+		// Bouton pour changer la sélection du graphique (type de données/ilot)
+	let dropdownTypeGraph = document.getElementById("ddType");
+	dropdownTypeGraph.addEventListener("click", _ => {
+		helperAfficherGraph();
+	});
+	let dropdownIlotGraph = document.getElementById("ddIlot");
+	dropdownIlotGraph.addEventListener("click", _ => {
+		helperAfficherGraph();
+	});
 
-	// 	// Configure le placement du graphique, les ticks et les labels
-	// 	let [top, right, bottom, left, nTicks, tickAngle, formatMois] =
-	// 		[10, 10, 40, 55, 8, 0, "%B"];
 
-	// 	// Adapate le graphique en fonction de la taille de l'écran
-	// 	if (window.matchMedia("(max-width: 769px)").matches) {
-	// 		rangeMin = abscisse[abscisse.length - (7 * 24) - 1];
-	// 		[top, right, bottom, left, nTicks, tickAngle, formatMois] =
-	// 			[0, 7, 70, 23, 6, -70, "%b"];
-	// 	}
+	/*** Changements du DOM ***/
+		// Gère les changements de thème pour le graphique
+	window.matchMedia("(prefers-color-scheme: light)")
+	.addEventListener("change",	() => {
+		const data = confData(typeMesuresStr, unite);
+		const layout = confLayout(rangeMin, rangeMinMob, rangeMax, ordMin,
+			ordMax, unite);
+		Plotly.restyle("graph", data);
+		Plotly.relayout("graph", layout);
+	});
 
-	// 	// Configure le style
-	// 	const layout = {
-	// 		showlegend: false,
-	// 		separators: ".,",
-	// 		plot_bgcolor: bgColor,
-	// 		paper_bgcolor: bgColor,
-	// 		margin: {
-	// 			t: top,
-	// 			r: right,
-	// 			b: bottom,
-	// 			l: left,
-	// 			pad: 4
-	// 		},
-	// 		font: {
-	// 			family: "Open Sans",
-	// 			color: fontColor
-	// 		},
-	// 		xaxis: {
-	// 			showgrid: false,
-	// 			nticks: nTicks,
-	// 			tickangle: tickAngle,
-	// 			range: [rangeMin, rangeMax],
-	// 			tickformatstops: [
-	// 				{
-	// 					"dtickrange": [null, 60000],
-	// 					"value": "%-d " + formatMois + "<br>%Hh%M.%S"
-	// 				},
-	// 				{
-	// 					"dtickrange": [60000, 3600000],
-	// 					"value": "%-d " + formatMois + "<br>%Hh%M"
-	// 				},
-	// 				{
-	// 					"dtickrange": [3600000, 86400000],
-	// 					"value": "%-d " + formatMois + "<br>%Hh%M"
-	// 				},
-	// 				{
-	// 					"dtickrange": [86400000, null],
-	// 					"value": "%-d " + formatMois
-	// 				}
-	// 			]
-	// 		},
-	// 		yaxis: {
-	// 			gridcolor: gridColor,
-	// 			gridcolorwidth: 1,
-	// 			range: [minOrd, maxOrd],
-	// 			nticks: nTicks,
-	// 			tickangle: tickAngle,
-	// 			zeroline: false,
-	// 			fixedrange: true,
-	// 			tickformat: ".1f",
-	// 		}
-	// 	}
-
-	// 	Plotly.relayout("graph", layout);
-	// });
-	// window.matchMedia("(max-width: 769px)").addEventListener("change",
-	// () => {
-	// 	afficherGraphique(1, 1, 1, "temp");
-	// });
+		// Gère les changements de taille d'écran pour le graphique
+	window.matchMedia("(max-width: 769px)").addEventListener("change",
+	() => {
+		const data = confData(typeMesuresStr, unite);
+		const layout = confLayout(rangeMin, rangeMinMob, rangeMax, ordMin,
+			ordMax, unite);
+		Plotly.restyle("graph", data);
+		Plotly.relayout("graph", layout);
+	});
 </script>
 </body>
 </html>

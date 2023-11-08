@@ -29,7 +29,7 @@ function supprimerMeteo() {
 /**
  * Affiche les données météo, récupérées dans le back
  * @param {string} duree - Durée d'affichage des données météo
- * @returns {bool} false si la durée est invalide
+ * @returns {bool} - false si la durée est invalide
  */
 function afficherMeteo(duree) {
 	if (duree != "jour" && duree != "semaine") {
@@ -144,7 +144,7 @@ function afficherMeteo(duree) {
 /**
  * Créé une cellule et y ajoute le texte passé en paramètre
  * @param {string} texte - à afficher dans la cellule
- * @returns {div} la cellule créée
+ * @returns {div} - la cellule créée
  */
 function ajourtCellule(texte) {
 	const cellule = document.createElement("div");
@@ -159,7 +159,7 @@ function ajourtCellule(texte) {
  *
  * @param {object} objPrecip - objet contenant les valeurs de précipitations
  * @param {div} cellule - où afficher les précipitations
- * @returns {div} la cellule modifiée
+ * @returns {div} - la cellule modifiée
  */
 function cellulePrecip(objPrecip, cellule) {
 	const precipEnVersFr = [
@@ -187,7 +187,7 @@ function cellulePrecip(objPrecip, cellule) {
  *
  * @param {int} dirVent - en degrés
  * @param {div} cellule - où afficher les précipitations
- * @returns {div} la cellule modifiée
+ * @returns {div} - la cellule modifiée
  */
 function celluleDirVent(dirVent, cellule) {
 	if (dirVent >= 0 && dirVent <= 45) {
@@ -224,7 +224,7 @@ function celluleDirVent(dirVent, cellule) {
  *
  * @param {int} temp - en °C
  * @param {div} cellule - où afficher les précipitations
- * @returns {div} la cellule modifiée
+ * @returns {div} - la cellule modifiée
  */
 function celluleTemp(temp, cellule) {
 	const gel = 0;

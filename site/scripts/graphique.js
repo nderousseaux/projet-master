@@ -3,32 +3,23 @@
  *
  * @param {int} numChamp - Numéro du champ
  * @param {int} numIlot - Numéro de l'ilot
- * @param {string} duree - Durée d'affichage des données météo
  * @param {string} typeMesures - Type de mesures à récupérer
- * @returns {Array} - Tableau contenant les valeurs minimales et maximales
+ * @returns {Promise} - Un tableau contenant les paramètres du graphique
+ * 						et le type de mesures
  */
-function afficherGraphique(numChamp, numIlot, duree, typeMesures) {
+function afficherGraphique(numChamp, numIlot, typeMesures) {
 	let typeMesuresStr, unite, degrade;
 	if (typeMesures === "humi") {
-		typeMesuresStr = "Humidité";
-		degrade = new CouleursDonneesHum();
-		unite = " %";
-		min = 25;
-		max = 75;
+		[typeMesuresStr, unite, degrade, min, max] =
+			["Humidité", " %", new CouleursDonneesHum(), 25, 75];
 	}
 	else if (typeMesures === "temp") {
-		typeMesuresStr = "Température";
-		degrade = new CouleursDonneesTemp();
-		unite = "°C";
-		min = 10;
-		max = 30;
+		[typeMesuresStr, unite, degrade, min, max] =
+			["Température", "°C", new CouleursDonneesTemp(), 10, 30];
 	}
 	else if (typeMesures === "lumi") {
-		typeMesuresStr = "Luminosité";
-		degrade = new CouleursDonneesLumi();
-		unite = " lux";
-		min = 0;
-		max = 100000;
+		[typeMesuresStr, unite, degrade, min, max] =
+			["Luminosité", " lux", new CouleursDonneesLumi(), 0, 100000];
 	}
 	else {
 		console.error("Type de mesures inconnu \"" + typeMesures + "\"");
@@ -43,128 +34,220 @@ function afficherGraphique(numChamp, numIlot, duree, typeMesures) {
 		showAxisDragHandles: false
 	}
 
+	// Récupère les données et affiche le graphique
+	return new Promise((resolve, reject) => {
+		recupAbsOrdGraph(numChamp, numIlot, typeMesures)
+		.then(retour => {
+			const abscisse = JSON.parse(retour[0]);
+			const ordonnee = JSON.parse(retour[1]);
+
+			// Détermine la valeur minimale de l'axe des ordonnées
+			const ordMin = Math.min.apply(Math, ordonnee) - 5;
+			const ordMax = Math.max.apply(Math, ordonnee) + 5;
+
+			// Détermine le zoom (range) minimum du graphique
+			const rangeMin = abscisse[0];
+			const rangeMinMob = abscisse[abscisse.length - (7 * 24) - 1];
+			const rangeMax = abscisse[abscisse.length - 1]
+
+			// Configure les données
+			const data = [{
+				x: abscisse,
+				y: ordonnee,
+				fill: "tozeroy",
+				mode: "lines+markers",
+				connectgaps: true,
+				marker: {
+					colorscale: degrade.getPairesPourcentCouleur(),
+					color: ordonnee,
+					size: 6,
+					cmin: min,
+					cmax: max
+				},
+				line: {
+					width: 2,
+					shape: "spline"
+				},
+				hoverlabel: {
+					align: "left",
+					bordercolor: "transparent",
+					font: {
+						family: "Open Sans",
+						color: "#000000"
+					}
+				}
+			}];
+
+			// Configure le style
+			const layout = confLayout(rangeMin, rangeMinMob, rangeMax,
+				ordMin, ordMax, unite);
+
+			// Complémente le style des données
+			const complementData = confData(typeMesuresStr, unite);
+
+			// Affiche le graphique
+			Plotly.newPlot("graph", data, layout, config);
+			Plotly.restyle("graph", complementData);
+
+			resolve(Array(
+				[typeMesuresStr, unite],
+				[rangeMin, rangeMinMob, rangeMax, ordMin, ordMax]
+			));
+		})
+		.catch(err => {
+			reject(err);
+		})
+	});
+}
+
+/**
+ * Génère la configuration du style des données pour le graphique
+ *
+ * @param {string} typeMesuresStr - Type de mesures à récupérer
+ * @param {string} unite - Unité de la mesure
+ * @returns {object} - Un objet contenant la configuration du style
+ */
+function confData(typeMesuresStr, unite) {
+	// Adapate le graphique en fonction de la taille de l'écran
+	const formatMois = (window.matchMedia("(max-width: 769px)").matches) ?
+		"%b" : "%B";
+
 	// Récupère les couleurs en fonction du thème
-	let couleursGraph =
+	const couleursGraph =
 		(window.matchMedia("(prefers-color-scheme: light)").matches) ?
 		new CouleursClaires() : new CouleursSombres();
-	let [bgColor, gridColor, fontColor, lineColor, fillColor] =
-		couleursGraph.getCouleursTableau();
+	const [lineColor, fillColor] = couleursGraph.getCouleursData();
 
-	let retourDonnees;
+	// Configure les données
+	const data = {
+		fillcolor: fillColor,
+		line: {color: lineColor},
+		hovertemplate: "<b>" + typeMesuresStr + " :</b> %{y:.1f}" + unite +
+						"<br><b>Date :</b> %{x|%a %-d " + formatMois +
+						" à %Hh%M}<extra></extra>"
+	}
 
-	// Récupère les données et affiche le graphique
-	recupAbsOrdGraph(numChamp, numIlot, duree, typeMesures)
-	.then(retour => {
-		let abscisse = JSON.parse(retour[0]);
-		let ordonnee = JSON.parse(retour[1]);
+	return data;
+}
 
-		// Détermine la valeur minimale de l'axe des ordonnées
-		let maxOrd = Math.max.apply(Math, ordonnee) + 5;
-		let minOrd = Math.min.apply(Math, ordonnee) - 5;
+/**
+ * Génère la configuration du layout pour le graphique
+ *
+ * @param {string} rangeMin - Date de début du graphique
+ * @param {string} rangeMinMob - Date de début du graphique pour mobile
+ * @param {string} rangeMax - Date de fin du graphique
+ * @param {int} ordMin - Valeur minimale de l'axe des ordonnées
+ * @param {int} ordMax - Valeur maximale de l'axe des ordonnées
+ * @param {string} unite - Unité de la mesure
+ * @returns {object} - Un objet contenant la configuration du layout
+ */
+function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
+	// Récupère les couleurs en fonction du thème
+	const couleursGraph =
+		(window.matchMedia("(prefers-color-scheme: light)").matches) ?
+		new CouleursClaires() : new CouleursSombres();
+	const [bgColor, gridColor, fontColor] = couleursGraph.getCouleursLayout();
 
-		// Détermine le zoom (range) minimum du graphique
-		let rangeMin = abscisse[0];
-		let rangeMax = abscisse[abscisse.length - 1]
-		retourDonnees = Array(rangeMin, rangeMax, minOrd, maxOrd);
+	// Configure le placement du graphique, les ticks et les labels
+	let [top, right, bottom, left, nTicks, tickAngle, formatMois] =
+		[10, 10, 40, 55, 8, 0, "%B"];
 
-		// Configure le placement du graphique, les ticks et les labels
-		let [top, right, bottom, left, nTicks, tickAngle, formatMois] =
-			[10, 10, 40, 55, 8, 0, "%B"];
+	// Adapate le graphique en fonction de la taille de l'écran
+	if (window.matchMedia("(max-width: 769px)").matches) {
+		rangeMin = rangeMinMob;
+		[top, right, bottom, left, nTicks, tickAngle, formatMois] =
+			[0, 7, 70, 23, 6, -70, "%b"];
+	}
 
-		// Adapate le graphique en fonction de la taille de l'écran
-		if (window.matchMedia("(max-width: 769px)").matches) {
-			rangeMin = abscisse[abscisse.length - (7 * 24) - 1];
-			[top, right, bottom, left, nTicks, tickAngle, formatMois] =
-				[0, 7, 70, 23, 6, -70, "%b"];
-		}
-
-		// Configure les données
-		const data = [{
-			x: abscisse,
-			y: ordonnee,
-			fill: "tozeroy",
-			fillcolor: fillColor,
-			mode: "lines+markers",
-			connectgaps: true,
-			marker: {
-				colorscale: degrade.getPairesPourcentCouleur(),
-				color: ordonnee,
-				size: 6,
-				cmin: min,
-				cmax: max
-			},
-			line: {
-				color: lineColor,
-				width: 2,
-				shape: "spline"
-			},
-			hovertemplate: "<b>" + typeMesuresStr + " :</b> %{y:.1f}" + unite +
-							"<br><b>Date :</b> %{x|%a %-d " + formatMois +
-							" à %Hh%M}<extra></extra>",
-			hoverlabel: {
-				align: "left",
-				bordercolor: "transparent",
-				font: {
-					family: "Open Sans",
-					color: "#000000"
+	// Configure le style
+	const layout = {
+		showlegend: false,
+		separators: ".,",
+		plot_bgcolor: bgColor,
+		paper_bgcolor: bgColor,
+		margin: {
+			t: top,
+			r: right,
+			b: bottom,
+			l: left,
+			pad: 4
+		},
+		font: {
+			family: "Open Sans",
+			color: fontColor
+		},
+		xaxis: {
+			showgrid: false,
+			nticks: nTicks,
+			tickangle: tickAngle,
+			range: [rangeMin, rangeMax],
+			tickformatstops: [
+				{
+					"dtickrange": [null, 60000],
+					"value": "%-d " + formatMois + "<br>%Hh%M.%S"
+				},
+				{
+					"dtickrange": [60000, 3600000],
+					"value": "%-d " + formatMois + "<br>%Hh%M"
+				},
+				{
+					"dtickrange": [3600000, 86400000],
+					"value": "%-d " + formatMois + "<br>%Hh%M"
+				},
+				{
+					"dtickrange": [86400000, null],
+					"value": "%-d " + formatMois
 				}
-			}
-		}];
-
-		// Configure le style
-		const layout = {
-			showlegend: false,
-			separators: ".,",
-			plot_bgcolor: bgColor,
-			paper_bgcolor: bgColor,
-			margin: {
-				t: top,
-				r: right,
-				b: bottom,
-				l: left,
-				pad: 4
-			},
-			font: {
-				family: "Open Sans",
-				color: fontColor
-			},
-			xaxis: {
-				showgrid: false,
-				nticks: nTicks,
-				tickangle: tickAngle,
-				range: [rangeMin, rangeMax],
-				tickformatstops: [
-					{
-						"dtickrange": [null, 60000],
-						"value": "%-d " + formatMois + "<br>%Hh%M.%S"
-					},
-					{
-						"dtickrange": [60000, 3600000],
-						"value": "%-d " + formatMois + "<br>%Hh%M"
-					},
-					{
-						"dtickrange": [3600000, 86400000],
-						"value": "%-d " + formatMois + "<br>%Hh%M"
-					},
-					{
-						"dtickrange": [86400000, null],
-						"value": "%-d " + formatMois
-					}
-				]
-			},
-			yaxis: {
-				gridcolor: gridColor,
-				gridcolorwidth: 1,
-				range: [minOrd, maxOrd],
-				nticks: nTicks,
-				tickangle: tickAngle,
-				zeroline: false,
-				fixedrange: true,
-				tickformat: ".1f",
-			}
+			]
+		},
+		yaxis: {
+			gridcolor: gridColor,
+			gridcolorwidth: 1,
+			range: [ordMin, ordMax],
+			nticks: nTicks,
+			tickangle: tickAngle,
+			zeroline: false,
+			fixedrange: true,
+			tickformat: ".1f",
+			ticksuffix: unite
 		}
+	}
 
-		// Affiche le graphique
-		Plotly.newPlot("graph", data, layout, config);
+	return layout;
+}
+
+/**
+ * Affiche le graphique et renvoie les données nécessaires à son actualisation
+ *
+ * @returns {promise} - Les paramètres du graphique
+ */
+function helperRecupParamGraph() {
+	const valChamp = document.getElementById("champSlct").value;
+	const valIlot = document.getElementById("ilotSlct").value;
+	const valType = document.getElementById("typeSlct").value;
+
+	return new Promise((resolve, reject) => {
+		afficherGraphique(valChamp, valIlot, valType)
+		.then(retour => {
+			resolve(retour);
+		})
+		.catch(err => {
+			reject(err);
+		})
+	})
+}
+
+/**
+ * Lance l'affichage du graphique et enregistre les données nécessaires à son
+ * actualisation, lorsque le graphique a été affiché
+ */
+function helperAfficherGraph() {
+	helperRecupParamGraph()
+	.then(retour => {
+		[typeMesuresStr, unite] = retour[0];
+		[rangeMin, rangeMinMob, rangeMax, ordMin, ordMax] = retour[1];
+	})
+	.catch(err => {
+		console.error(err);
 	})
 }

@@ -38,17 +38,15 @@ function recupMoyTmpHumiLumiChamp(numChamp) {
  *
  * @param {int} numChamp - Numéro du champ
  * @param {int} numIlot - Numéro de l'ilot
- * @param {string} duree - Durée d'affichage des données météo
  * @param {string} typeMesures - Type de mesures à récupérer
- * @returns {promise} les données sous format json
+ * @returns {promise} - les données sous format json
  **/
-function recupMesuresIlot(numChamp, numIlot, duree, typeMesures) {
+function recupMesuresIlot(numChamp, numIlot, typeMesures) {
 	return new Promise((resolve, reject) => {
 		// Champ à envoyer au back, pour indiquer la colonne à récupérer
 		let champPost = new FormData();
 		champPost.append("numChamp", numChamp);
 		champPost.append("numIlot", numIlot);
-		champPost.append("duree", duree);
 		champPost.append("typeMesures", typeMesures);
 
 		// Récupère les dates des mesures et les données de la colonne demandée
@@ -79,16 +77,16 @@ function recupMesuresIlot(numChamp, numIlot, duree, typeMesures) {
  * @param {int} numIlot - Numéro de l'ilot
  * @param {string} duree - Durée d'affichage des données météo
  * @param {string} typeMesures - Type de mesures à récupérer
- * @returns {promise} les données sous format json
+ * @returns {promise} - les données sous format json
  */
 function recupAbsOrdGraph(numChamp, numIlot, duree, typeMesures) {
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		recupMesuresIlot(numChamp, numIlot, duree, typeMesures)
 		.then(retour => {
 			resolve(retour);
 		})
 		.catch(err => {
-			console.log("recupAbsOrd - Erreur récupération données :", err);
+			reject(err);
 		})
 	})
 }

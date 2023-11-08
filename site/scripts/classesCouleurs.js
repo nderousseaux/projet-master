@@ -17,6 +17,18 @@ class CouleursGraph {
 			this.fillColor
 		);
 	}
+
+	getCouleursData() {
+		return Array(
+			this.lineColor, this.fillColor
+		);
+	}
+
+	getCouleursLayout() {
+		return Array(
+			this.bgColor, this.gridColor, this.color
+		);
+	}
 }
 
 class CouleursClaires extends CouleursGraph {

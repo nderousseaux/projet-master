@@ -46,7 +46,7 @@ function afficherMeteo(duree) {
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
 	]
 
-	const meteoDiv = document.querySelector("#secMeteo > div");
+	const meteoDiv = document.querySelector("#donneesMeteo");
 	recupMeteo(duree)
 	.then(donnees => {
 		if (donnees[0] != "Erreur") {

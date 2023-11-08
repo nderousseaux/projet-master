@@ -79,6 +79,8 @@
 				<div class="colonne titre">UV</div>
 				<div class="colonne titre">Vit. vent (km/h)</div>
 			</div>
+			<div id="donneesMeteo">
+			</div>
 		</section>
 		<section id="secMoyennes">
 			<div>
@@ -225,21 +227,13 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Gère les changements de thème pour le graphique
 	window.matchMedia("(prefers-color-scheme: light)")
 	.addEventListener("change",	() => {
-		const data = confData(typeMesuresStr, unite);
-		const layout = confLayout(rangeMin, rangeMinMob, rangeMax, ordMin,
-			ordMax, unite);
-		Plotly.restyle("graph", data);
-		Plotly.relayout("graph", layout);
+		helperActualisationStyleGraph();
 	});
 
 		// Gère les changements de taille d'écran pour le graphique
 	window.matchMedia("(max-width: 769px)").addEventListener("change",
 	() => {
-		const data = confData(typeMesuresStr, unite);
-		const layout = confLayout(rangeMin, rangeMinMob, rangeMax, ordMin,
-			ordMax, unite);
-		Plotly.restyle("graph", data);
-		Plotly.relayout("graph", layout);
+		helperActualisationStyleGraph();
 	});
 </script>
 </body>

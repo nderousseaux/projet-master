@@ -251,3 +251,14 @@ function helperAfficherGraph() {
 		console.error(err);
 	})
 }
+
+/**
+ * Actualise le graphique avec les paramètres adaptés (thème, taille de l'écran)
+ */
+function helperActualisationStyleGraph() {
+	const data = confData(typeMesuresStr, unite);
+	const layout = confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax,
+		unite);
+	Plotly.restyle("graph", data);
+	Plotly.relayout("graph", layout);
+}

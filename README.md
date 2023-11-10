@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.unistra.fr/fseel/projet-master-23-24.git
+git remote add origin https://git.unistra.fr/pm-23-24/site.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.unistra.fr/fseel/projet-master-23-24/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.unistra.fr/pm-23-24/site/-/settings/integrations)
 
 ## Collaborate with your team
 

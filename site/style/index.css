@@ -1,0 +1,721 @@
+/* Général */
+@font-face {
+	font-family: "Open Sans";
+	font-display: swap;
+	src: url("polices/open-sans-600.woff2") format("woff2"),
+		url("polices/open-sans-600.woff") format("woff");
+}
+html {
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+}
+* {
+	scrollbar-color: #cdcdcd #f0f0f0;
+	scroll-behavior: smooth;
+	scrollbar-width: thin;
+}
+body {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	color: #000000;
+	background-color: #f2f1f5;
+	font-family: "Open Sans", Arial, sans-serif;
+}
+h1 {
+	width: 80%;
+	margin-top: 0;
+	padding-bottom: 10px;
+	font-size: 18px;
+	font-weight: normal;
+	text-align: center;
+	border-style: solid;
+	border-width: 0 0 4px 0;
+	border-image: radial-gradient(#000000, #ffffff) 1;
+}
+p {
+	font-size: 16px;
+}
+
+	/* Boutons dropdown */
+.dropbtn {
+	background-color: #04aa6d;
+	color: #ffffff;
+	font-size: 16px;
+	width: 65px;
+	height: 72px;
+	padding: 0;
+	border: none;
+	transition: background-color 0.2s ease-in-out;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	right: 0;
+	min-width: fit-content;
+	border-radius: 10px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	z-index: 1;
+}
+.dropdown-content button,
+.dropdown-content a {
+	display: block;
+	width: 100%;
+	border: none;
+	padding: 12px 36px 12px 12px;
+	border-radius: 10px;
+	background-color: unset;
+	text-decoration: none;
+	text-align: start;
+	font-size: 15px;
+	white-space: nowrap;
+	color: #000000;
+	font-family: "Open Sans", Arial, sans-serif;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+.dropdown-content button:hover,
+.dropdown-content a:hover {
+	color: #000000;
+	background-color: rgba(220, 220, 220, 0.5);
+	transition: background-color 0.2s ease-in-out;
+}
+.dropdown-content button:active,
+.dropdown-content a:active,
+.dropdown-content .selected {
+	background-color: rgba(200, 200, 200, 0.5);
+	transition: background-color 0.2s ease-in-out;
+}
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+	transition: background-color 0.2s ease-in-out;
+}
+
+	/* Tableaux */
+#secMeteo,
+#secTableau {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	padding-bottom: 10px;
+}
+#secMeteo > div,
+#secTableau > div {
+	display: grid;
+	grid-gap: 2px 0;
+	width: calc(100% - 20px);
+	padding: 10px;
+	overflow-x: auto;
+}
+.colonne {
+	display: flex;
+	font-size: 14px;
+	width: calc(100% - 10px);
+	padding: 5px;
+	height: 40px;
+	background-color: #ffffff;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.titre {
+	background-color: #04aa6d !important;
+	color: #ffffff;
+	margin-bottom: 10px;
+	min-height: unset;
+}
+#secMeteo > div > .colonne:nth-child(22n+1),
+#secMeteo > div > .colonne:nth-child(22n+2),
+#secMeteo > div > .colonne:nth-child(22n+3),
+#secMeteo > div > .colonne:nth-child(22n+4),
+#secMeteo > div > .colonne:nth-child(22n+5),
+#secMeteo > div > .colonne:nth-child(22n+6),
+#secMeteo > div > .colonne:nth-child(22n+7),
+#secMeteo > div > .colonne:nth-child(22n+8),
+#secMeteo > div > .colonne:nth-child(22n+9),
+#secMeteo > div > .colonne:nth-child(22n+10),
+#secMeteo > div > .colonne:nth-child(22n+11),
+#secTableau > div > .colonne:nth-child(14n+1),
+#secTableau > div > .colonne:nth-child(14n+2),
+#secTableau > div > .colonne:nth-child(14n+3),
+#secTableau > div > .colonne:nth-child(14n+4),
+#secTableau > div > .colonne:nth-child(14n+5),
+#secTableau > div > .colonne:nth-child(14n+6),
+#secTableau > div > .colonne:nth-child(14n+7) {
+	background-color: #eeeeee;
+}
+#secMeteo > div > .colonne:nth-child(22n+12),
+#secMeteo > div > .colonne:nth-child(22n+13),
+#secMeteo > div > .colonne:nth-child(22n+14),
+#secMeteo > div > .colonne:nth-child(22n+15),
+#secMeteo > div > .colonne:nth-child(22n+16),
+#secMeteo > div > .colonne:nth-child(22n+17),
+#secMeteo > div > .colonne:nth-child(22n+18),
+#secMeteo > div > .colonne:nth-child(22n+19),
+#secMeteo > div > .colonne:nth-child(22n+20),
+#secMeteo > div > .colonne:nth-child(22n+21),
+#secMeteo > div > .colonne:nth-child(22n+22),
+#secTableau > div > .colonne:nth-child(14n+8),
+#secTableau > div > .colonne:nth-child(14n+9),
+#secTableau > div > .colonne:nth-child(14n+10),
+#secTableau > div > .colonne:nth-child(14n+11),
+#secTableau > div > .colonne:nth-child(14n+12),
+#secTableau > div > .colonne:nth-child(14n+13),
+#secTableau > div > .colonne:nth-child(14n+14) {
+	background-color: #fafafa;
+}
+
+/* Header */
+header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100vw;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+
+	/* Logo */
+header > img {
+	width: 144px;
+	height: 72px;
+}
+
+	/* Sous-sections (choix champs, choix utilisateur) */
+header > section {
+	display: flex;
+	justify-content: right;
+	width: calc(50% - 72px);
+}
+header > section > p,
+#optGraph > div > p {
+	width: 200px;
+	font-size: 16px;
+	line-height: 72px;
+	margin: 0 10px 0 0;
+	text-align: end;
+	overflow-x: scroll;
+	white-space: nowrap;
+}
+
+/* Corps */
+#corps {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#corps > section,
+#secMeteo {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+	margin-top: 36px;
+}
+#corps > section:last-child {
+	margin-bottom: 18px;
+}
+
+	/* Section informations */
+#secInfos {
+	flex-direction: row;
+}
+#secInfos > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 33.33%;
+	margin: 15px 0;
+	text-align: center;
+}
+
+	/* Section météo/moyenne */
+#compMetMoy {
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: unset !important;
+	box-shadow: unset !important;
+}
+
+		/* Météo */
+#secMeteo {
+	width: calc(75% - 18px);
+	height: calc(140px * 3 - 10px);
+	margin-top: 0;
+}
+#secMeteo > div {
+	grid-template-columns: 85px repeat(10, minmax(calc((100% - 85px)/10), 1fr));
+	overflow: unset;
+	padding-bottom: 0;
+}
+#secMeteo > div:last-child {
+	overflow: auto;
+}
+#secMeteo > div > .titre:first-child {
+	display: flex;
+	flex-direction: column;
+	padding: 0 5px 0 0;
+	width: 80px;
+	height: 50px;
+}
+#secMeteo > div > .titre:first-child > p {
+	font-size: 14px;
+	margin: 0;
+	padding-top: 5px;
+	height: 50%;
+}
+#secMeteo > div > .colonne:nth-child(11n+11) {
+	border-radius: 0 10px 10px 0;
+}
+#secMeteo > div > .colonne:nth-child(11n+1) {
+	border-radius: 10px 0 0 10px;
+}
+#secMeteo > div > .titre {
+	margin-bottom: 0;
+}
+
+			/* Options de la météo */
+#ddDuree {
+	width: 100%;
+	height: 50%;
+}
+#ddDuree > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+#ddDuree > .dropdown-content {
+	left: 0;
+}
+
+		/* Moyenne */
+#secMoyennes {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 25%;
+	height: calc(140px * 3);
+	border-radius: 10px;
+}
+#secMoyennes > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 130px;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+}
+#secMoyennes > div > p {
+	margin: 0;
+}
+
+			/* Température */
+#secMoyennes > div:first-child {
+	background-color: rgba(160, 179, 255, 0.6);
+}
+#secMoyennes > div:first-child > h1 {
+	border-image: radial-gradient(#0033ff, #c3ccf7) 1;
+}
+
+			/* Humidité */
+#secMoyennes > div:nth-child(2) {
+	background-color: rgba(255, 196, 133, 0.6);
+}
+#secMoyennes > div:nth-child(2) > h1 {
+	border-image: radial-gradient(#df5d00, #f4d8b7) 1;
+}
+
+			/* Luminosité */
+#secMoyennes > div:last-child {
+	background-color: rgba(255, 220, 130, 0.6);
+}
+#secMoyennes > div:last-child > h1 {
+	border-image: radial-gradient(#c28b00, #f6e5b6) 1;
+}
+
+	/* Section graphique */
+#secGraph {
+	display: flex;
+	flex-direction: column;
+}
+
+		/* Options du graphique */
+#optGraph {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	box-shadow: 0 15px 20px -15px #cecece;
+}
+#optGraph > div {
+	display: flex;
+	width: fit-content;
+}
+#optGraph > div > p {
+	width: fit-content;
+	line-height: 60px;
+	padding-left: 10px;
+}
+#optGraph > div .dropbtn {
+	width: 50px;
+	height: 60px;
+}
+
+		/* Graphique */
+#graph {
+	width: 100%;
+	max-height: 100vh;
+	aspect-ratio: 3/1;
+	margin-bottom: 10px;
+}
+div.plotly-notifier {
+	visibility: hidden;
+}
+.xtick > text,
+.ytick > text,
+.hovertext > text {
+	font-size: 14px !important;
+}
+
+	/* Section tableau */
+#secTableau {
+	width: 100%;
+	max-height: 40vh;
+}
+#secTableau > div {
+	grid-template-columns: repeat(7, 1fr);
+}
+#secTableau > div > .titre {
+	position: sticky;
+	top: 0;
+}
+#secTableau > div > .colonne {
+	font-size: 15px;
+}
+#secTableau > div > .colonne:nth-child(7n+7) {
+	border-radius: 0 10px 10px 0;
+}
+#secTableau > div > .colonne:nth-child(7n+1) {
+	border-radius: 10px 0 0 10px;
+}
+
+
+/* Version élargie (petits écrans ordinateurs) */
+@media screen and (max-width: 1300px) {
+	/* Corps */
+	#corps > section {
+		width: 90%;
+	}
+}
+
+
+/* Version tablette */
+@media screen and (max-width: 950px) {
+	/* Général */
+	h1 {
+		font-size: 16px;
+	}
+
+		/* Boutons dropdown */
+	.dropbtn {
+		width: 40px !important;
+		height: 40px !important;
+	}
+	.dropdown-content button {
+		padding: 10px 30px 10px 10px;
+	}
+
+	/* Header */
+		/* Logo */
+	header > img {
+		width: 144px;
+		height: 72px;
+		margin: 10px calc((100% - 144px)/2);
+	}
+		/* Sous-sections (choix champs, choix utilisateur) */
+	header > section {
+		margin-top: 10px;
+		width: calc(50% - 5px);
+	}
+	header > section > p,
+	#optGraph > div > p {
+		width: fit-content;
+		line-height: 40px;
+		margin-right: 10px;
+	}
+	header > section:nth-child(2) {
+		padding-left: 5px;
+		justify-content: left;
+	}
+
+	/* Corps */
+	#corps > section {
+		width: 95%;
+		margin-top: 20px;
+	}
+
+		/* Section informations */
+	#secInfos {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	#secInfos > div {
+		justify-content: space-between;
+		height: 130px;
+		margin: 0;
+		padding: 10px 0;
+	}
+	#secInfos > div > h1,
+	#secInfos > div > p {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 50%;
+	}
+	#secInfos > div > p {
+		margin: 0;
+	}
+
+		/* Section météo/moyenne */
+	#compMetMoy {
+		flex-direction: column-reverse;
+	}
+
+			/* Météo */
+	#secMeteo {
+		width: 100%;
+		margin-top: 20px;
+		overflow-x: auto;
+		overflow-y: unset !important;
+	}
+	#secMeteo > div {
+		grid-template-columns: repeat(11, 80px);
+		overflow: unset !important;
+	}
+	#secMeteo > div:first-child {
+		position: sticky;
+		top: 0;
+	}
+
+				/* Options de la météo */
+	#ddDuree > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+			/* Moyenne */
+	#secMoyennes {
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		height: fit-content;
+	}
+	#secMoyennes > div {
+		width: calc(33.33% - 3px);
+		padding: 10px 0;
+	}
+	#secMoyennes > div > h1,
+	#secMoyennes > div > p {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	#secMoyennes > div > h1 {
+		height: 50%;
+	}
+	#secMoyennes > div > p {
+		height: 50%;
+	}
+
+		/* Section graphique */
+			/* Options du graphique */
+	#optGraph > div > p {
+		font-size: 15px;
+		line-height: 40px;
+	}
+
+			/* Graphique */
+	#graph {
+		min-height: 35vh;
+	}
+	.xtick > text,
+	.ytick > text {
+		font-size: 12.5px !important;
+	}
+	.hovertext > text {
+		font-size: 11.5px !important;
+	}
+
+	/* Section tableau */
+	#secTableau > div {
+		grid-template-columns: repeat(5, 1fr) 80px  1fr;
+	}
+	#secTableau > div > .titre {
+		font-size: 14px;
+	}
+}
+
+
+/* Version mobile */
+@media screen and (max-width: 799px) {
+	/* Corps */
+			/* Moyenne */
+	#secMoyennes > div > h1 {
+		height: 70%;
+	}
+	#secMoyennes > div > p {
+		height: 30%;
+	}
+}
+
+
+/* Thème sombre */
+@media (prefers-color-scheme: dark) {
+	/* Général */
+	* {
+		scrollbar-color: #1a1a1a #333333;
+	}
+	body {
+		background-color: #1c1c1e;
+		color: #bebebe;
+	}
+	h1 {
+		border-image: radial-gradient(#ececec, #000000) 1;
+	}
+
+		/* Boutons dropdown */
+	.dropdown-content {
+		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2);
+		background-color: rgba(57, 57, 57, 0.7);
+	}
+	.dropdown-content button,
+	.dropdown-content a {
+		color: #ffffff;
+	}
+	.dropdown-content button:hover,
+	.dropdown-content a:hover {
+		background-color: rgba(80, 80, 80, 0.5);
+		color: #ffffff !important;
+	}
+	.dropdown-content button:active,
+	.dropdown-content a:active,
+	.dropdown-content .selected {
+		background-color: rgba(111, 111, 111, 0.5);
+	}
+
+	/* Header */
+	header {
+		background-color: rgba(0, 0, 0, 0.7);
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+
+	/* Corps */
+	#corps > section,
+	#secMeteo {
+		background-color: #000000;
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+
+	/* Section météo/moyenne */
+		/* Météo */
+	#secMeteo > div > .colonne:nth-child(22n+1),
+	#secMeteo > div > .colonne:nth-child(22n+2),
+	#secMeteo > div > .colonne:nth-child(22n+3),
+	#secMeteo > div > .colonne:nth-child(22n+4),
+	#secMeteo > div > .colonne:nth-child(22n+5),
+	#secMeteo > div > .colonne:nth-child(22n+6),
+	#secMeteo > div > .colonne:nth-child(22n+7),
+	#secMeteo > div > .colonne:nth-child(22n+8),
+	#secMeteo > div > .colonne:nth-child(22n+9),
+	#secMeteo > div > .colonne:nth-child(22n+10),
+	#secMeteo > div > .colonne:nth-child(22n+11),
+	#secTableau > div > .colonne:nth-child(14n+1),
+	#secTableau > div > .colonne:nth-child(14n+2),
+	#secTableau > div > .colonne:nth-child(14n+3),
+	#secTableau > div > .colonne:nth-child(14n+4),
+	#secTableau > div > .colonne:nth-child(14n+5),
+	#secTableau > div > .colonne:nth-child(14n+6),
+	#secTableau > div > .colonne:nth-child(14n+7) {
+		background-color: #3c3c3c;
+	}
+	#secMeteo > div > .colonne:nth-child(22n+12),
+	#secMeteo > div > .colonne:nth-child(22n+13),
+	#secMeteo > div > .colonne:nth-child(22n+14),
+	#secMeteo > div > .colonne:nth-child(22n+15),
+	#secMeteo > div > .colonne:nth-child(22n+16),
+	#secMeteo > div > .colonne:nth-child(22n+17),
+	#secMeteo > div > .colonne:nth-child(22n+18),
+	#secMeteo > div > .colonne:nth-child(22n+19),
+	#secMeteo > div > .colonne:nth-child(22n+20),
+	#secMeteo > div > .colonne:nth-child(22n+21),
+	#secMeteo > div > .colonne:nth-child(22n+22),
+	#secTableau > div > .colonne:nth-child(14n+8),
+	#secTableau > div > .colonne:nth-child(14n+9),
+	#secTableau > div > .colonne:nth-child(14n+10),
+	#secTableau > div > .colonne:nth-child(14n+11),
+	#secTableau > div > .colonne:nth-child(14n+12),
+	#secTableau > div > .colonne:nth-child(14n+13),
+	#secTableau > div > .colonne:nth-child(14n+14) {
+		background-color: #1b1b1b;
+	}
+
+		/* Moyenne */
+	#secMoyennes > div {
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+	#secMoyennes > div > p {
+		color: white;
+	}
+	#secMoyennes > div > h1 {
+		color: white;
+	}
+
+				/* Température */
+	#secMoyennes > div:first-child {
+		background-color: rgba(102, 133, 255, 0.6);
+	}
+	#secMoyennes > div:first-child > h1 {
+		border-image: radial-gradient(#00073c, #4c5ba0) 1;
+	}
+
+				/* Humidité */
+	#secMoyennes > div:nth-child(2) {
+		background-color: rgba(255, 167, 73, 0.6);
+	}
+	#secMoyennes > div:nth-child(2) > h1 {
+		border-image: radial-gradient(#512200, #936b3e) 1;
+	}
+
+				/* Luminosité */
+	#secMoyennes > div:last-child {
+		background-color: rgba(255, 200, 61, 0.6);
+	}
+	#secMoyennes > div:last-child > h1 {
+		border-image: radial-gradient(#523b00, #9d823f) 1;
+	}
+
+	/* Section graphique */
+			/* Options du graphique */
+	#optGraph {
+		box-shadow: 0 15px 20px -15px #353535;
+	}
+}

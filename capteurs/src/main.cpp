@@ -12,6 +12,7 @@ int main(int argc, char** argv) {
 			argv[0] <<
 			" <id champ> <id ilot> <id capteur>" <<
 			std::endl;
+
 		return EXIT_FAILURE;
 	}
 	else {
@@ -32,14 +33,30 @@ int main(int argc, char** argv) {
 			return EXIT_FAILURE;
 		}
 	}
+	// Stocke les informations du champ
 	InfosChamp infosChamp;
 	infosChamp.setInfosChamp(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
 
-	// Génère des valeurs factices
+	// Génère ou récupère des mesures
 	Mesures mesures;
-	mesures.setTemperature(Mesures::genValeursFloat(-20.0, 40.0));
-	mesures.setHumidite(Mesures::genValeursFloat(0.0, 100.0));
-	mesures.setLuminosite(Mesures::genValeursInt(0, 120000));
+	float temp = 0, humi = 0;
+	int lumi = 0;
+
+		// Génère des valeurs factices
+	if (SIMULATEUR) {
+		temp = Mesures::genValeursFloat(-20.0, 40.0);
+		humi = Mesures::genValeursFloat(0.0, 100.0);
+		lumi = Mesures::genValeursInt(0, 120000);
+	}
+		// Récupère les valeurs des capteurs
+	else {
+		// Récupère ici les valeurs des capteurs
+	}
+
+	// Stocke les valeurs générées
+	mesures.setTemperature(temp);
+	mesures.setHumidite(humi);
+	mesures.setLuminosite(lumi);
 
 	// Affiche les valeurs générées
 	if (DEBUG) {
@@ -49,9 +66,8 @@ int main(int argc, char** argv) {
 			<< std::endl;
 	}
 
-	// Ouvrir la base de données
+	// Ouvre la base de données
 	int retour = 0;
-
 	BaseDeDonnees baseDeDonnees;
 	retour = baseDeDonnees.ouvrirBaseDeDonnees();
 	testErreur(retour, "Impossible d'ouvrir la base de données");

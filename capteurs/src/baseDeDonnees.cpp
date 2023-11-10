@@ -104,7 +104,7 @@ int BaseDeDonnees::insererMesures(InfosChamp infosChamp, Mesures mesures) {
 
 	// Récupère la date et l'heure
 	time_t t = time(NULL);
-	struct tm tm = *localtime(&t);
+	struct tm tm = *gmtime(&t);
 	std::ostringstream oss;
 	oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
 	std::string date = oss.str();

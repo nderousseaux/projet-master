@@ -1,25 +1,39 @@
 # Ajoute tous les fichiers .cpp dans le dossier src
-file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
+file(GLOB SOURCES_COMMMUNES "${PROJECT_SOURCE_DIR}/src/commun/*.cpp")
+file(GLOB SOURCES_1 "${PROJECT_SOURCE_DIR}/src/mesures/*.cpp")
+file(GLOB SOURCES_2 "${PROJECT_SOURCE_DIR}/src/agregateur/*.cpp")
+
+# Combine les fichiers communs et les fichiers spécifiques à chaque programme
+set(PROGRAMME1_SOURCES ${SOURCES_COMMMUNES} ${SOURCES_1})
+set(PROGRAMME2_SOURCES ${SOURCES_COMMMUNES} ${SOURCES_2})
+
+# Défini le nom des exécutables
+set(PROGRAMME1_NOM "mesures")
+set(PROGRAMME2_NOM "agregateur")
 
 # Défini le standard à appliquer
 set(CMAKE_CXX_STANDARD 17)
 
-# Ajoute le dossier des headers
-include_directories(${PROJECT_SOURCE_DIR}/inc)
+# Ajoute les dossiers des headers
+include_directories(${PROJECT_SOURCE_DIR}/inc/commun)
+include_directories(${PROJECT_SOURCE_DIR}/inc/mesures)
+include_directories(${PROJECT_SOURCE_DIR}/inc/agregateur)
 
 # Défini le nom de l'exécutable et son emplacement
-add_executable(${PROJECT_NAME} ${SOURCES})
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
+add_executable(${PROGRAMME1_NOM} ${PROGRAMME1_SOURCES})
+add_executable(${PROGRAMME2_NOM} ${PROGRAMME2_SOURCES})
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # Ajoute les fichiers source
-target_sources(${PROJECT_NAME}
+target_include_directories(${PROGRAMME1_NOM}
 	PRIVATE
-	# ${PROJECT_SOURCE_DIR}/src/*.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/main1
 )
-target_include_directories(${PROJECT_NAME}
+target_include_directories(${PROGRAMME2_NOM}
 	PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/src/main2
 )
 
 # Ajoute le flag -lsqlite3
-target_link_libraries(${PROJECT_NAME} sqlite3)
+target_link_libraries(${PROGRAMME1_NOM} sqlite3)
+target_link_libraries(${PROGRAMME2_NOM} sqlite3)

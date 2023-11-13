@@ -1,6 +1,4 @@
 # Dossiers contenant les fichiers de build, et les fichiers temporaires
-build
 bdd
-
-# Fichiers de base du programme
-recupMesures
+bin
+build

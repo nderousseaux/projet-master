@@ -21,7 +21,7 @@ fi
 
 if [ "$1" = "clean" ];
 then
-	rm -rf build recupMesures
+	rm -rf build bin
 	echo "Projet nettoyé"
 else
 	cmake -S . -B build

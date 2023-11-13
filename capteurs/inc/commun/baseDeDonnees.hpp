@@ -4,8 +4,10 @@
 #include "infosChamp.hpp"
 #include "mesures.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <sqlite3.h>
 #include <sstream>
 #include <sys/stat.h>
@@ -13,13 +15,10 @@
 class BaseDeDonnees {
 	/* Variables */
 	private:
+		sqlite3* db_{nullptr};
 		inline static std::string DOSSIER_BDD{
 			"./bdd/"
 		};
-		inline static std::string FICHIER_BDD{
-			"mesures.sqlite3"
-		};
-		sqlite3* db_{nullptr};
 
 
 	/* Constructeur et destructeur */
@@ -48,9 +47,10 @@ class BaseDeDonnees {
 		 * @brief Ouvre la base de données, ou la créé si elle n'existe pas et
 		 * 		  enregistre le handler de la base de données dans la classe
 		 *
+		 * @param nomBaseDeDonnees le nom du fichier de la base de données
 		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
 		 */
-		int ouvrirBaseDeDonnees(void);
+		int ouvrirBaseDeDonnees(std::string nomBaseDeDonnees);
 
 		/**
 		 * @brief Vide le contenu de la base de données
@@ -69,6 +69,21 @@ class BaseDeDonnees {
 		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
 		 */
 		int insererMesures(InfosChamp infosChamp, Mesures mesures);
+
+		/**
+		 * @brief Agrége les mesures stockées dans les bases de données en une
+		 * 		  seule
+		 * 
+		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
+		 */
+		int agregerMesures(void);
+
+		/**
+		 * @brief Ferme la base de données
+		 *
+		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
+		 */
+		int fermerBaseDeDonnees(void);
 };
 
 #endif

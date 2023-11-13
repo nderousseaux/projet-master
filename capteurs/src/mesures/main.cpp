@@ -1,9 +1,4 @@
-#include "main.h"
-
-void testErreur(int retour, std::string message) {
-	if (retour != EXIT_SUCCESS)
-		std::cerr << message << std::endl;
-}
+#include "recupMesures.h"
 
 int main(int argc, char** argv) {
 	// Vérifie le nombre d'arguments
@@ -69,13 +64,20 @@ int main(int argc, char** argv) {
 	// Ouvre la base de données
 	int retour = 0;
 	BaseDeDonnees baseDeDonnees;
-	retour = baseDeDonnees.ouvrirBaseDeDonnees();
+
+	const std::string nomBdd = "capteurs.db";
+
+	retour = baseDeDonnees.ouvrirBaseDeDonnees(nomBdd);
 	testErreur(retour, "Impossible d'ouvrir la base de données");
 
 	// Insère les données
 	retour = baseDeDonnees.insererMesures(infosChamp, mesures);
 	testErreur(retour, "Impossible d'insérer les mesures dans la base de"
 		"données");
+
+	// Ferme la base de données
+	retour = baseDeDonnees.fermerBaseDeDonnees();
+	testErreur(retour, "Impossible de fermer la base de données");
 
 	return EXIT_SUCCESS;
 }

@@ -62,7 +62,6 @@ function confirmChangement(nomChamp, valAvant, valApres) {
 	}
 	else {
 		msg.innerHTML = valAvant + " ➡️ " + valApres;
-	
 	}
 
 	document.getElementById("confirmer").addEventListener("click", () => {
@@ -93,8 +92,8 @@ function envoiInfoCmptBack(nomChamp, valeur) {
 function creationCmpt() {
 	document.querySelector("form > input[type='submit']")
 	.addEventListener("click", event => {
-		event.preventDefault()
-	
+		event.preventDefault();
+
 		// Vérifie que les champs sont remplis
 		let prenom = document
 			.querySelector("form > input[type='text'][name='prenom']");
@@ -132,5 +131,5 @@ function creationCmpt() {
 		if (document.querySelectorAll(".erreur").length === 0) {
 			document.querySelector("form").submit()
 		}
-	})
+	});
 }

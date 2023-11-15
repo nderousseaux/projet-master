@@ -193,6 +193,7 @@ header {
 header > img {
 	width: 144px;
 	height: 72px;
+	border-radius: 0 0 0 10px;
 }
 
 	/* Sous-sections (choix champs, choix utilisateur) */
@@ -210,6 +211,12 @@ header > section > p,
 	text-align: end;
 	overflow-x: scroll;
 	white-space: nowrap;
+}
+#ddCmpt > .dropbtn {
+	border-radius: 0 0 10px 0;
+}
+#selectCmpt > a {
+	width: calc(100% - 48px);
 }
 
 /* Corps */
@@ -365,6 +372,7 @@ header > section > p,
 	justify-content: space-between;
 	width: 100%;
 	box-shadow: 0 15px 20px -15px #cecece;
+	border-radius: 10px;
 }
 #optGraph > div {
 	display: flex;
@@ -378,6 +386,12 @@ header > section > p,
 #optGraph > div .dropbtn {
 	width: 50px;
 	height: 60px;
+}
+#optGraph > div:first-child > p {
+	border-radius: 10px 0 0 10px;
+}
+#optGraph > div:last-child .dropbtn {
+	border-radius: 0 10px 10px 0;
 }
 
 		/* Graphique */
@@ -450,6 +464,7 @@ div.plotly-notifier {
 		width: 144px;
 		height: 72px;
 		margin: 10px calc((100% - 144px)/2);
+		border-radius: 0;
 	}
 		/* Sous-sections (choix champs, choix utilisateur) */
 	header > section {

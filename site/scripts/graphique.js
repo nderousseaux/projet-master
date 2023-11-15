@@ -36,7 +36,12 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 
 	// Récupère les données et affiche le graphique
 	return new Promise((resolve, reject) => {
-		recupAbsOrdGraph(numChamp, numIlot, typeMesures)
+		let champPost = new FormData();
+		champPost.append("numChamp", numChamp);
+		champPost.append("numIlot", numIlot);
+		champPost.append("typeMesures", typeMesures);
+
+		recupAbsOrdGraph(champPost, "recupMesuresIlot.php")
 		.then(retour => {
 			const abscisse = JSON.parse(retour[0]);
 			const ordonnee = JSON.parse(retour[1]);
@@ -96,7 +101,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 		})
 		.catch(err => {
 			reject(err);
-		})
+		});
 	});
 }
 
@@ -233,8 +238,8 @@ function helperRecupParamGraph() {
 		})
 		.catch(err => {
 			reject(err);
-		})
-	})
+		});
+	});
 }
 
 /**
@@ -249,7 +254,7 @@ function helperAfficherGraph() {
 	})
 	.catch(err => {
 		console.error(err);
-	})
+	});
 }
 
 /**

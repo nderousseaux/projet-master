@@ -1,19 +1,148 @@
 /**
- * Supprime toutes les données sauf la colonne de titre
+ * Affiche le nom de l'utilisateur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function supprimerMeteo() {
-	const meteoDiv = document.getElementById("donneesMeteo");
-	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
-	colonnes.forEach(colonne => colonne.remove());
+function afficherNomUtilisateur(idUtilisateur) {
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+
+	recupDonnees(champPost, "recupNomUtilisateur.php")
+	.then(donnees => {
+		const nomUtilisateur = document.querySelector("header > " +
+			"section:last-child > p")
+		nomUtilisateur.textContent = donnees;
+	});
+}
+
+/**
+ * Affiche les champs de l'utilisateur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ */
+function afficherChamps(idUtilisateur) {
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+
+	recupDonnees(champPost, "recupNumChamps.php")
+	.then(donnees => {
+		const container = document.getElementById("selectChamp");
+
+		let index = 0;
+		donnees.forEach(numChamp => {
+			const champ = document.createElement("button");
+			champ.setAttribute("value", numChamp);
+			champ.textContent = "Champ " + numChamp;
+
+			if (index === 0) {
+				champ.classList.add("selected");
+				index++;
+			}
+
+			container.appendChild(champ);
+		});
+	});
+}
+
+/**
+ * Affiche les ilots du champ sélectionné
+ */
+function afficherIlots() {
+	const numChamp = document.getElementById("champSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("numChamp", numChamp);
+
+	recupDonnees(champPost, "recupNumIlots.php")
+	.then(donnees => {
+		const container = document.getElementById("selectIlot");
+
+		let index = 0;
+		donnees.forEach(numIlot => {
+			const ilot = document.createElement("button");
+			ilot.setAttribute("value", numIlot);
+			ilot.textContent = "Ilot " + numIlot;
+
+			if (index === 0) {
+				ilot.classList.add("selected");
+				index++;
+			}
+
+			container.appendChild(ilot);
+		});
+	});
+}
+
+/**
+ * Affiche les infos du champ sélectionné
+ */
+function afficherInfosChamp() {
+	const numChamp = document.getElementById("champSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("numChamp", numChamp);
+
+	/*
+	 * Récupère :
+	 * - Date la plus récente de mesure d'un capteur (récente)
+	 * - Date la plus récente de mesure d'un capteur (ancienne)
+	 *   -> Permet de faire la différence entre les deux et d'afficher l'état
+	 * - Nombre de capteurs
+	 */
+	recupDonnees(champPost, "recupInfosChamp.php")
+	.then(donnees => {
+		// État général du champ
+		if (donnees[0] - donnees[1] < 1) {
+			document.querySelector("#secInfos > div:first-child > p")
+				.textContent = "OK";
+		}
+		else {
+			document.querySelector("#secInfos > div:first-child > p")
+				.textContent = "Err";
+		}
+
+		// Nombre de capteurs
+		document.querySelector("#secInfos > div:nth-child(2) > p")
+			.textContent = donnees[2];
+
+		// Dernière mise à jour
+		document.querySelector("#secInfos > div:last-child > p")
+			.textContent = donnees[0];
+	});
+}
+
+/**
+ * Affiche les moyennes de température, d'humidité et de luminosité pour le
+ * champ indiqué
+ */
+function afficherMoyennes() {
+	const numChamp = document.getElementById("champSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("numChamp", numChamp);
+
+	recupDonnees(champPost, "recupMoyennes.php")
+	.then(donnees => {
+		const cellTemp = document.querySelector("#secMoyennes > div > " +
+			"p:first-child");
+		const cellHumi = document.querySelector("#secMoyennes > div > " +
+			"p:nth-child(2)");
+		const cellLumi = document.querySelector("#secMoyennes > div > " +
+			"p:last-child");
+
+		cellTemp.textContent = donnees[0] + "°C";
+		cellHumi.textContent = donnees[1] + "%";
+		cellLumi.textContent = donnees[2] + " lux";
+	});
 }
 
 /**
  * Affiche les données météo, récupérées dans le back
  *
- * @param {string} duree - Durée d'affichage des données météo
  * @returns {bool} - false si la durée est invalide
  */
-function afficherMeteo(duree) {
+function afficherMeteo() {
+	const duree = document.getElementById("dureeSlct").value;
 	if (duree != "jour" && duree != "semaine") {
 		console.error("Durée invalide");
 		return false;
@@ -127,6 +256,37 @@ function afficherMeteo(duree) {
 }
 
 /**
+ * Affiche toutes les mesures pour un champ indiqué
+ */
+function afficherTableauToutesMesures() {
+	const numChamp = document.getElementById("champSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("numChamp", numChamp);
+
+	recupDonnees(champPost, "recupMesuresChamp.php")
+	.then(donnees => {
+		const container = document.querySelector("#secTableau > div");
+
+		donnees.forEach(mesure => {
+			const cellule = document.createElement("div");
+			cellule.classList.add("colonne");
+			cellule.textContent = mesure;
+			container.appendChild(cellule);
+		});
+	});
+}
+
+/**
+ * Supprime toutes les données sauf la colonne de titre
+ */
+function supprimerMeteo() {
+	const meteoDiv = document.getElementById("donneesMeteo");
+	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
+	colonnes.forEach(colonne => colonne.remove());
+}
+
+/**
  * Créé une cellule et y ajoute le texte passé en paramètre
  *
  * @param {string} texte - à afficher dans la cellule
@@ -224,164 +384,4 @@ function celluleTemp(temp, cellule) {
 	}
 
 	return cellule;
-}
-
-/**
- * Affiche les champs de l'utilisateur
- *
- * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- */
-function afficherChamps(idUtilisateur) {
-	let champPost = new FormData();
-	champPost.append("idUtilisateur", idUtilisateur);
-
-	recupDonnees(champPost, "recupNumChamps.php")
-	.then(donnees => {
-		const container = document.getElementById("selectChamp");
-
-		let index = 0;
-		donnees.forEach(numChamp => {
-			const champ = document.createElement("button");
-			champ.setAttribute("value", numChamp);
-			champ.textContent = "Champ " + numChamp;
-
-			if (index === 0) {
-				champ.classList.add("selected");
-				index++;
-			}
-
-			container.appendChild(champ);
-		});
-	});
-}
-
-/**
- * Affiche les ilots du champ sélectionné
- *
- * @param {int} numChamp - Numéro du champ
- */
-function afficherIlots(numChamp) {
-	let champPost = new FormData();
-	champPost.append("numChamp", numChamp);
-
-	recupDonnees(champPost, "recupNumIlots.php")
-	.then(donnees => {
-		const container = document.getElementById("selectIlot");
-
-		let index = 0;
-		donnees.forEach(numIlot => {
-			const ilot = document.createElement("button");
-			ilot.setAttribute("value", numIlot);
-			ilot.textContent = "Ilot " + numIlot;
-
-			if (index === 0) {
-				ilot.classList.add("selected");
-				index++;
-			}
-
-			container.appendChild(ilot);
-		});
-	});
-}
-
-/**
- * Affiche toutes les mesures pour un champ indiqué
- *
- * @param {int} numChamp - Numéro du champ
- */
-function afficherTableauToutesMesures(numChamp) {
-	let champPost = new FormData();
-	champPost.append("numChamp", numChamp);
-
-	recupDonnees(champPost, "recupMesuresChamp.php")
-	.then(donnees => {
-		const container = document.querySelector("#secTableau > div");
-
-		donnees.forEach(mesure => {
-			const cellule = document.createElement("div");
-			cellule.classList.add("colonne");
-			cellule.textContent = mesure;
-			container.appendChild(cellule);
-		});
-	});
-}
-
-/**
- * Affiche les moyennes de température, d'humidité et de luminosité pour le
- * champ indiqué
- *
- * @param {int} numChamp - Numéro du champ
- */
-function afficherMoyennes(numChamp) {
-	let champPost = new FormData();
-	champPost.append("numChamp", numChamp);
-
-	recupDonnees(champPost, "recupMoyennes.php")
-	.then(donnees => {
-		const cellTemp = document.querySelector("#secMoyennes > div > " +
-			"p:first-child");
-		const cellHumi = document.querySelector("#secMoyennes > div > " +
-			"p:nth-child(2)");
-		const cellLumi = document.querySelector("#secMoyennes > div > " +
-			"p:last-child");
-
-		cellTemp.textContent = donnees[0] + "°C";
-		cellHumi.textContent = donnees[1] + "%";
-		cellLumi.textContent = donnees[2] + " lux";
-	});
-}
-
-/**
- * Affiche le nom de l'utilisateur
- *
- * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- */
-function afficherNomUtilisateur(idUtilisateur) {
-	let champPost = new FormData();
-	champPost.append("idUtilisateur", idUtilisateur);
-
-	recupDonnees(champPost, "recupNomUtilisateur.php")
-	.then(donnees => {
-		const nomUtilisateur = document.querySelector("header > " +
-			"section:last-child > p")
-		nomUtilisateur.textContent = donnees;
-	});
-}
-
-/**
- * Affiche les infos du champ sélectionné
- *
- * @param {int} numChamp - Numéro du champ
- */
-function afficherInfosChamp(numChamp) {
-	let champPost = new FormData();
-	champPost.append("numChamp", numChamp);
-
-	/*
-	 * Récupère :
-	 * - Date la plus récente de mesure d'un capteur (récente)
-	 * - Date la plus récente de mesure d'un capteur (ancienne)
-	 *   -> Permet de faire la différence entre les deux et d'afficher l'état
-	 * - Nombre de capteurs
-	 */
-	recupDonnees(champPost, "recupInfosChamp.php")
-	.then(donnees => {
-		// État général du champ
-		if (donnees[0] - donnees[1] < 1) {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "OK";
-		}
-		else {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "Err";
-		}
-
-		// Nombre de capteurs
-		document.querySelector("#secInfos > div:nth-child(2) > p")
-			.textContent = donnees[2];
-
-		// Dernière mise à jour
-		document.querySelector("#secInfos > div:last-child > p")
-			.textContent = donnees[0];
-	});
 }

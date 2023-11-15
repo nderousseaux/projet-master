@@ -331,7 +331,7 @@ function cellulePrecip(objPrecip, cellule) {
 /**
  * Ajoute un indicateur visuel de la direction du vent
  *
- * @param {int} dirVent - en degrés
+ * @param {float} dirVent - en degrés
  * @param {div} cellule - où afficher les précipitations
  * @returns {div} - la cellule modifiée
  */
@@ -368,13 +368,13 @@ function celluleDirVent(dirVent, cellule) {
  * Ajoute un indicateur visuel en fonction de la température, en cas de risque
  * de gel ou de canicule
  *
- * @param {int} temp - en °C
+ * @param {float} temp - en °C
  * @param {div} cellule - où afficher les précipitations
  * @returns {div} - la cellule modifiée
  */
 function celluleTemp(temp, cellule) {
-	const gel = 0;
-	const canicule = 30;
+	const gel = 0.0;
+	const canicule = 30.0;
 
 	if (temp <= gel) {
 		cellule.textContent += " ❄️";

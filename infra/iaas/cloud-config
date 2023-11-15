@@ -5,5 +5,5 @@ users:
     groups: users,wheel
     sudo: ALL=(ALL) NOPASSWD:ALL
     lock_passwd: false
-runcmd:
+bootcmd:
   - loadkeys fr

@@ -1,0 +1,9 @@
+#cloud-config
+users:
+  - name: matth
+    passwd: $1$mM48WZHt$nCaFoxTmnWN.fgX1eJ.8I.
+    groups: users,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+runcmd:
+  - loadkeys fr

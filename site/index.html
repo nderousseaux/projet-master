@@ -20,9 +20,6 @@
 		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
-				<button value="1">Champ 1</button>
-				<button value="2">Champ 2</button>
-				<button value="3">Champ 3</button>
 			</div>
 		</div>
 	</section>
@@ -41,15 +38,15 @@
 	<section id="secInfos">
 		<div>
 			<h1>État général</h1>
-			<p>OK</p>
+			<p></p>
 		</div>
 		<div>
 			<h1>Nombre de capteurs</h1>
-			<p>42</p>
+			<p></p>
 		</div>
 		<div>
 			<h1>Dernière màj</h1>
-			<p>24/10/2023 16:30</p>
+			<p></p>
 		</div>
 	</section>
 
@@ -85,15 +82,15 @@
 		<section id="secMoyennes">
 			<div>
 				<h1>Température moyenne</h1>
-				<p>21.3°C</p>
+				<p></p>
 			</div>
 			<div>
 				<h1>Humidité moyenne du sol</h1>
-				<p>60%</p>
+				<p></p>
 			</div>
 			<div>
 				<h1>Luminosité moyenne</h1>
-				<p>13 000 lux</p>
+				<p></p>
 			</div>
 		</section>
 	</section>
@@ -116,9 +113,6 @@
 				<div class="dropdown" id="ddIlot">
 					<button class="dropbtn">⇩</button>
 					<div id="selectIlot" class="dropdown-content">
-						<button value="1">Ilot 1</button>
-						<button value="2">Ilot 2</button>
-						<button value="3">Ilot 3</button>
 					</div>
 				</div>
 			</div>
@@ -136,30 +130,6 @@
 			<div class="colonne titre">Température (°C)</div>
 			<div class="colonne titre">Humidité du sol (%)</div>
 			<div class="colonne titre">Luminosité (lux)</div>
-
-			<div class="colonne">1</div>
-			<div class="colonne">12</div>
-			<div class="colonne">2023-10-25</div>
-			<div class="colonne">09:30</div>
-			<div class="colonne">23.7</div>
-			<div class="colonne">47.8</div>
-			<div class="colonne">12 376</div>
-
-			<div class="colonne">2</div>
-			<div class="colonne">12</div>
-			<div class="colonne">2023-10-25</div>
-			<div class="colonne">09:30</div>
-			<div class="colonne">23.7</div>
-			<div class="colonne">47.8</div>
-			<div class="colonne">12 376</div>
-
-			<div class="colonne">3</div>
-			<div class="colonne">12</div>
-			<div class="colonne">2023-10-25</div>
-			<div class="colonne">09:30</div>
-			<div class="colonne">23.7</div>
-			<div class="colonne">47.8</div>
-			<div class="colonne">12 376</div>
 		</div>
 	</section>
 </div>
@@ -186,6 +156,13 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		["selectDuree", "dureeSlct", true]
 	];
 
+	// A utiliser quand le backend sera prêt
+	// const contIdButtons = [
+	// 	["selectChamp", "champSlct", false], ["selectCmpt", "cmptSlct", false],
+	// 	["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", false],
+	// 	["selectDuree", "dureeSlct", true]
+	// ];
+
 		// Préselectionne les boutons des dropdowns
 	contIdButtons.forEach(element => {
 		activerBouton(element[0], element[1], element[2]);
@@ -197,7 +174,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Affichage des données ***/
-		// Récupérer l'ID utilisateur (à définir)
+		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	let idUtilisateur = 1;
 
 	// afficherNomUtilisateur(idUtilisateur);

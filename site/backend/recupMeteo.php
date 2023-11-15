@@ -41,10 +41,10 @@ if (MODE_LOCAL === false) {
 }
 else {
 	if ($_POST["duree"] === "jour") {
-		$reponse = @file_get_contents("./donneesMeteoJour.json");
+		$reponse = @file_get_contents("./json/donneesMeteoJour.json");
 	}
 	else {
-		$reponse = @file_get_contents("./donneesMeteoSemaine.json");
+		$reponse = @file_get_contents("./json/donneesMeteoSemaine.json");
 	}
 }
 

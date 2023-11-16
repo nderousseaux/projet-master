@@ -20,11 +20,14 @@
 		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
+				<button value="1">Champ 1</button>
+				<button value="2">Champ 2</button>
+				<button value="3">Champ 3</button>
 			</div>
 		</div>
 	</section>
 	<section>
-		<p>Nom utilisateur</p>
+		<p>John Doe</p>
 		<div class="dropdown" id="ddCmpt">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdown-content">
@@ -38,15 +41,15 @@
 	<section id="secInfos">
 		<div>
 			<h1>État général</h1>
-			<p></p>
+			<p>OK</p>
 		</div>
 		<div>
 			<h1>Nombre de capteurs</h1>
-			<p></p>
+			<p>42</p>
 		</div>
 		<div>
 			<h1>Dernière màj</h1>
-			<p></p>
+			<p>2023-11-16 18:10:13</p>
 		</div>
 	</section>
 
@@ -82,15 +85,15 @@
 		<section id="secMoyennes">
 			<div>
 				<h1>Température moyenne</h1>
-				<p></p>
+				<p>12.3°C</p>
 			</div>
 			<div>
 				<h1>Humidité moyenne du sol</h1>
-				<p></p>
+				<p>58.4%</p>
 			</div>
 			<div>
 				<h1>Luminosité moyenne</h1>
-				<p></p>
+				<p>12300 lux</p>
 			</div>
 		</section>
 	</section>
@@ -113,6 +116,10 @@
 				<div class="dropdown" id="ddIlot">
 					<button class="dropbtn">⇩</button>
 					<div id="selectIlot" class="dropdown-content">
+						<button value="1">Ilot 1</button>
+						<button value="2">Ilot 2</button>
+						<button value="3">Ilot 3</button>
+						<button value="4">Ilot 4</button>
 					</div>
 				</div>
 			</div>
@@ -130,6 +137,54 @@
 			<div class="colonne titre">Température (°C)</div>
 			<div class="colonne titre">Humidité du sol (%)</div>
 			<div class="colonne titre">Luminosité (lux)</div>
+
+			<div class="colonne">1</div>
+			<div class="colonne">1</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
+
+			<div class="colonne">2</div>
+			<div class="colonne">2, 3</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
+
+			<div class="colonne">3</div>
+			<div class="colonne">4</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
+
+			<div class="colonne">4</div>
+			<div class="colonne">5</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
+
+			<div class="colonne">5</div>
+			<div class="colonne">6</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
+
+			<div class="colonne">6</div>
+			<div class="colonne">7</div>
+			<div class="colonne">2023-11-16</div>
+			<div class="colonne">18:10:13</div>
+			<div class="colonne">8.2</div>
+			<div class="colonne">68.9</div>
+			<div class="colonne">1032</div>
 		</div>
 	</section>
 </div>
@@ -183,7 +238,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	// afficherInfosChamp();
 	// afficherMoyennes();
 	afficherMeteo();
-	// helperAfficherGraph();
+	helperAfficherGraph(1, 1, "temp");
 	// afficherTableauToutesMesures();
 
 	/*** Interaction des boutons ***/

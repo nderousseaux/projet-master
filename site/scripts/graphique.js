@@ -8,6 +8,7 @@
  * 						et le type de mesures
  */
 function afficherGraphique(numChamp, numIlot, typeMesures) {
+	console.log(numChamp, numIlot, typeMesures);
 	let typeMesuresStr, unite, degrade;
 	if (typeMesures === "humi") {
 		[typeMesuresStr, unite, degrade, min, max] =
@@ -36,6 +37,8 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 
 	// Récupère les données et affiche le graphique
 	return new Promise((resolve, reject) => {
+		console.log(numChamp, numIlot, typeMesures)
+		console.log(typeof numChamp, typeof numIlot, typeof typeMesures)
 		let champPost = new FormData();
 		champPost.append("numChamp", numChamp);
 		champPost.append("numIlot", numIlot);
@@ -232,7 +235,7 @@ function helperRecupParamGraph() {
 	const valType = document.getElementById("typeSlct").value;
 
 	return new Promise((resolve, reject) => {
-		afficherGraphique(valChamp, valIlot, valType)
+		afficherGraphique(parseFloat(valChamp), valIlot, valType)
 		.then(retour => {
 			resolve(retour);
 		})

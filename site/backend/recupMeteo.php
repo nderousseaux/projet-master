@@ -1,6 +1,9 @@
 <?php
 
-// Récupère la durée et la granularité souhaitée
+// Rester en local pour le debug (API ayant une limite de requêtes)
+const MODE_LOCAL = true;
+
+// Récupère les champs envoyés dans la requête
 if ($_POST["duree"] === "jour") {
 	$duree = "today";
 	$granularite = "hours";
@@ -14,9 +17,6 @@ else {
 	echo json_encode($erreur);
 	exit();
 }
-
-// Rester en local pour le debug (API ayant une limite de requêtes)
-const MODE_LOCAL = true;
 
 // Coordonnées à récupérer dans la base de données
 const LATTITUDE = 48.52854;

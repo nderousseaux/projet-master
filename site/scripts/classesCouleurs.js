@@ -84,7 +84,7 @@ class CouleursDonnees {
 class CouleursDonneesTemp extends CouleursDonnees {
 	constructor() {
 		super(
-			"#0074ff", "#00e600", "#d1e600", "#fb4d0f",
+			"#0089ff", "#00e600", "#d1e600", "#fb4d0f",
 			0.00, 0.40, 0.65 , 1.00
 		);
 	}
@@ -93,17 +93,17 @@ class CouleursDonneesTemp extends CouleursDonnees {
 class CouleursDonneesHum extends CouleursDonnees {
 	constructor() {
 		super(
-			"#fb4d0f", "#d1e600", "#00e600", "#0074ff",
+			"#fb4d0f", "#d1e600", "#00e600", "#0089ff",
 			0.00, 0.25, 0.50, 1.00
 		);
 	}
 }
 
-class CouleursDonneesLux extends CouleursDonnees {
+class CouleursDonneesLumi extends CouleursDonnees {
 	constructor() {
 		super(
-			"#0074ff", "#00e600", "#d1e600", "#fb4d0f",
-			0.00, 0.40, 0.65 , 1.00
+			"#0089ff", "#abff00", "#ffde00", "#fb4d0f",
+			0.00, 0.40, 0.80 , 1.00
 		);
 	}
 }

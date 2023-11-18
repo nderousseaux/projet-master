@@ -8,19 +8,18 @@
  * 						et le type de mesures
  */
 function afficherGraphique(numChamp, numIlot, typeMesures) {
-	console.log(numChamp, numIlot, typeMesures);
-	let typeMesuresStr, unite, degrade;
+	let typeMesuresStr, unite, degrade, margeMesure;
 	if (typeMesures === "humi") {
-		[typeMesuresStr, unite, degrade, min, max] =
-			["Humidité", " %", new CouleursDonneesHum(), 25, 75];
+		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
+			["Humidité", " %", new CouleursDonneesHum(), 25, 75, 5];
 	}
 	else if (typeMesures === "temp") {
-		[typeMesuresStr, unite, degrade, min, max] =
-			["Température", "°C", new CouleursDonneesTemp(), 10, 30];
+		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
+			["Température", "°C", new CouleursDonneesTemp(), 10, 30, 5];
 	}
 	else if (typeMesures === "lumi") {
-		[typeMesuresStr, unite, degrade, min, max] =
-			["Luminosité", " lux", new CouleursDonneesLumi(), 0, 100000];
+		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
+			["Luminosité", " lux", new CouleursDonneesLumi(), 0, 100000, 5000];
 	}
 	else {
 		console.error("Type de mesures inconnu \"" + typeMesures + "\"");
@@ -37,8 +36,6 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 
 	// Récupère les données et affiche le graphique
 	return new Promise((resolve, reject) => {
-		console.log(numChamp, numIlot, typeMesures)
-		console.log(typeof numChamp, typeof numIlot, typeof typeMesures)
 		let champPost = new FormData();
 		champPost.append("numChamp", numChamp);
 		champPost.append("numIlot", numIlot);
@@ -50,8 +47,8 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 			const ordonnee = JSON.parse(retour[1]);
 
 			// Détermine la valeur minimale de l'axe des ordonnées
-			const ordMin = Math.min.apply(Math, ordonnee) - 5;
-			const ordMax = Math.max.apply(Math, ordonnee) + 5;
+			const ordMin = Math.min.apply(Math, ordonnee) - margeMesure;
+			const ordMax = Math.max.apply(Math, ordonnee) + margeMesure;
 
 			// Détermine le zoom (range) minimum du graphique
 			const rangeMin = abscisse[0];
@@ -126,13 +123,19 @@ function confData(typeMesuresStr, unite) {
 		new CouleursClaires() : new CouleursSombres();
 	const [lineColor, fillColor] = couleursGraph.getCouleursData();
 
+	// Adapte la précision des données en fonction de l'unité
+	let formatDonnees = ".1f";
+	if (unite === " lux") {
+		formatDonnees = ".0f";
+	}
+
 	// Configure les données
 	const data = {
 		fillcolor: fillColor,
 		line: {color: lineColor},
-		hovertemplate: "<b>" + typeMesuresStr + " :</b> %{y:.1f}" + unite +
-						"<br><b>Date :</b> %{x|%a %-d " + formatMois +
-						" à %Hh%M}<extra></extra>"
+		hovertemplate: "<b>" + typeMesuresStr + " :</b> %{y:" + formatDonnees +
+						"}" + unite + "<br><b>Date :</b> %{x|%a %-d " +
+						formatMois + " à %Hh%M}<extra></extra>"
 	}
 
 	return data;
@@ -160,11 +163,25 @@ function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
 	let [top, right, bottom, left, nTicks, tickAngle, formatMois] =
 		[10, 10, 40, 55, 8, 0, "%B"];
 
+	// Adapte la précision des données en fonction de l'unité
+	let formatDonnees = ".1f";
+	let tickAngleY = tickAngle;
+	if (unite === " lux") {
+		formatDonnees = ".0f";
+		tickAngleY = -35;
+	}
+
 	// Adapate le graphique en fonction de la taille de l'écran
 	if (window.matchMedia("(max-width: 769px)").matches) {
-		rangeMin = rangeMinMob;
 		[top, right, bottom, left, nTicks, tickAngle, formatMois] =
 			[0, 7, 70, 23, 6, -70, "%b"];
+
+		rangeMin = rangeMinMob;
+		tickAngleY = tickAngle;
+
+		if (unite === " lux") {
+			tickAngleY = -75;
+		}
 	}
 
 	// Configure le style
@@ -213,11 +230,16 @@ function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
 			gridcolorwidth: 1,
 			range: [ordMin, ordMax],
 			nticks: nTicks,
-			tickangle: tickAngle,
+			tickangle: tickAngleY,
 			zeroline: false,
 			fixedrange: true,
-			tickformat: ".1f",
-			ticksuffix: unite
+			tickformat: formatDonnees,
+			ticksuffix: unite,
+			tickformat: (value) => {
+				if (value >= 1000) {
+					return (value / 1000) + 'k';
+				}
+			}
 		}
 	}
 

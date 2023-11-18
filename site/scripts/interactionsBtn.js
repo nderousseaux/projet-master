@@ -28,9 +28,10 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			});
 		});
 
-		// Ajouter la classe "selected" et l'id avec comme valeur idAttr au
-		// premier button, si aucun autre ne possède déjà la classe
-		// Ne le fait pas pour le menu des actions sur le compte
+		/*
+		 * Ajouter la classe "selected" et l'id avec comme valeur idAttr au
+		 * premier button, si aucun autre ne possède déjà la classe
+		 */
 		if (
 			activerPreselect === true &&
 			index === 0 &&

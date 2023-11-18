@@ -24,6 +24,7 @@ var config = {
 };
 rs.initiate(config, { force: true });
 rs.status();
+exit;
 EOF
 
 #db.createUser({user: 'admin', pwd: 'admin', roles: [ { role: 'root', db: 'admin' } ]});

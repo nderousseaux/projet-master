@@ -242,14 +242,20 @@ header > section:last-child .dropbtn {
 	/* Section informations */
 #secInfos {
 	flex-direction: row;
+	justify-content: space-between;
+	background-color: unset !important;
+	box-shadow: unset !important;
 }
 #secInfos > div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 33.33%;
-	margin: 15px 0;
+	width: calc(33.33% - 10px);
+	padding: 15px 0;
 	text-align: center;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
 }
 
 	/* Section météo/moyenne */
@@ -373,6 +379,7 @@ header > section:last-child .dropbtn {
 	width: 100%;
 	box-shadow: 0 15px 20px -15px #cecece;
 	border-radius: 10px;
+	z-index: 1;
 }
 #optGraph > div {
 	display: flex;
@@ -509,10 +516,10 @@ header > section:last-child .dropbtn {
 		/* Section informations */
 	#secInfos {
 		flex-wrap: wrap;
-		justify-content: center;
 	}
 	#secInfos > div {
 		justify-content: space-between;
+		width: calc(33.33% - 3px);
 		height: 130px;
 		margin: 0;
 		padding: 10px 0;
@@ -663,13 +670,14 @@ header > section:last-child .dropbtn {
 
 	/* Corps */
 	#corps > section,
+	#secInfos > div,
 	#secMeteo {
 		background-color: #000000;
 		box-shadow: 0 15px 20px -15px #080808;
 	}
 
-	/* Section météo/moyenne */
-		/* Météo */
+		/* Section météo/moyenne */
+			/* Météo */
 	#secMeteo > div > .colonne:nth-child(22n+1),
 	#secMeteo > div > .colonne:nth-child(22n+2),
 	#secMeteo > div > .colonne:nth-child(22n+3),
@@ -711,7 +719,7 @@ header > section:last-child .dropbtn {
 		background-color: #1b1b1b;
 	}
 
-		/* Moyenne */
+			/* Moyenne */
 	#secMoyennes > div {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
@@ -746,13 +754,13 @@ header > section:last-child .dropbtn {
 		border-image: radial-gradient(#523b00, #9d823f) 1;
 	}
 
-	/* Section graphique */
-			/* Options du graphique */
+		/* Section graphique */
+				/* Options du graphique */
 	#optGraph {
 		box-shadow: 0 15px 20px -15px #353535;
 	}
 
-			/* Graphique */
+				/* Graphique */
 	.notifier-note {
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2) !important;
 		background-color: rgba(57, 57, 57, 0.7) !important;

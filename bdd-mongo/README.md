@@ -18,43 +18,44 @@
 
 ```
 {
-    "utilisateur": {
-        "ID": "id utilisateur",
-        "Nom": "nom",
-        "Prénom": "prénom",
-        "email": "email@bidon.eu",
-        "mot de passe": "mdp"
+    "compte": {
+        "idUser": "id utilisateur",
+        "idAgri": "IDa",
+        "nom": "nom",
+        "prenom": "prénom",
+        "mail": "email@bidon.eu",
+        "mdp": "mdp"
     },
 
     "agriculteur": {
-        "ID_agriculteur": "IDa",
-        "Nom_agriculteur": "NOMa",
+        "idAgri": "IDa",
+        "nomAgri": "NOMa",
         "champs": {
-            "coordonnées" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
+            "coords" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
             "ilots": ["nb ilots champs 0", "nb ilots champs 1", "..."]
         }
 
     },
 
-    "humidité": {
-        "ID_agriculteur": "IDa",
-        "ID_champs": "IDc",
-        "horodatage": "date+heure",
-        "valeurs": ["humidité ilot 0", "humidité ilot 1", "..."]
+    "humi": {
+        "idAgri": "IDa",
+        "idChamps": "IDc",
+        "horo": "date+heure",
+        "valMesures": ["humidité ilot 0", "humidité ilot 1", "..."]
     },
 
-    "température": {
-        "ID_agriculteur": "IDa",
-        "ID_champs": "IDc",
-        "horodatage": "date+heure",
-        "valeurs": ["température ilot 0", "température ilot 1", "..."]
+    "temp": {
+        "idAgri": "IDa",
+        "idChamps": "IDc",
+        "horo": "date+heure",
+        "valMesures": ["température ilot 0", "température ilot 1", "..."]
     },
 
-    "luminosité": {
-        "ID_agriculteur": "IDa",
-        "ID_champs": "IDc",
-        "horodatage": "date+heure",
-        "valeurs": ["luminosité ilot 0", "luminosité ilot 1", "..."]
+    "lumi": {
+        "idAgri": "IDa",
+        "idChamps": "IDc",
+        "horo": "date+heure",
+        "valMesures": ["luminosité ilot 0", "luminosité ilot 1", "..."]
     }
 }
 ```

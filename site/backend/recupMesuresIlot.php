@@ -15,21 +15,19 @@ if (!(is_numeric($_POST["numChamp"]))) {
 	exit();
 }
 if (!(is_numeric($_POST["numIlot"]))) {
-	$erreur = array("Erreur", "Type du numéro d'îlot non reconnu");
+	$erreur = array("Erreur", "Type du numéro d'ilot non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
 if (!(
 	$_POST["typeMesures"] === "temp" ||
 	$_POST["typeMesures"] === "humi" ||
-	$_POST["typeMesures"] === "lumi")
-) {
+	$_POST["typeMesures"] === "lumi"
+)) {
 	$erreur = array("Erreur", "Type de mesure non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
-
-
 
 if (MODE_LOCAL) {
 	if ($_POST["typeMesures"] === "temp") {
@@ -37,6 +35,9 @@ if (MODE_LOCAL) {
 	}
 	else if ($_POST["typeMesures"] === "humi") {
 		$fichierDonneesGraph = "./json/donneesGraphHumi.json";
+	}
+	else if ($_POST["typeMesures"] === "lumi") {
+		$fichierDonneesGraph = "./json/donneesGraphLumi.json";
 	}
 
 	// Vérifie que le fichier existe

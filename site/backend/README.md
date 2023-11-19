@@ -1,8 +1,14 @@
 # Backend
 
 ## Appels des fonctions PHP
-*Les fonctions JS appelé dans index.html sont résumé à la fin du document index.html. Le code des fonctions JS se trouve dans site > backend > scipt > afficherDonnes.js.*
-*La fonction qui envoie les requêtes se trouve dans recupDonnees.js. Elle permet de généraliser les requêtes en un simple appel de fonction ayant pour paramètre le nom du script php qui sera exécuté.*
+Les fonctions JavaScript appelées dans `index.html` sont résumées à la fin du
+document `index.html`.  
+Le fonctions JavaScript, réalisant des requêtes au backend, se trouvent
+dans le fichier `site/script/afficherDonnes.js`.  
+La fonction, qui se charge de l'envoie des requêtes au backend, se trouve dans
+`recupDonnees.js`. Elle permet de généraliser les requêtes en une unique
+fonction, ayant pour paramètres : le nom du script PHP qui sera exécuté et
+les champs envoyés en POST.
 
 ```
 afficherNomUtilisateur          -->         recupNumUtilisateur.php

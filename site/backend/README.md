@@ -3,9 +3,9 @@
 ## Appels des fonctions PHP
 Les fonctions JavaScript appelées dans `index.html` sont résumées à la fin du
 document `index.html`.  
-Le fonctions JavaScript, réalisant des requêtes au backend, se trouvent
+Les fonctions JavaScript, réalisant des requêtes au backend, se trouvent
 dans le fichier `site/script/afficherDonnes.js`.  
-La fonction, qui se charge de l'envoie des requêtes au backend, se trouve dans
+La fonction, qui se charge de l'envoi des requêtes au backend, se trouve dans
 `recupDonnees.js`. Elle permet de généraliser les requêtes en une unique
 fonction, ayant pour paramètres : le nom du script PHP qui sera exécuté et
 les champs envoyés en POST.

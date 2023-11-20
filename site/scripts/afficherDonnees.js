@@ -266,7 +266,7 @@ function afficherTableauToutesMesures() {
 
 	recupDonnees(champPost, "recupMesuresChamp.php")
 	.then(donnees => {
-		const container = document.querySelector("#secTableau > div");
+		const container = document.getElementById("donneesTableau");
 
 		donnees.forEach(mesure => {
 			const cellule = document.createElement("div");

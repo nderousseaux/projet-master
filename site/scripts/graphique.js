@@ -11,7 +11,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 	let typeMesuresStr, unite, degrade, margeMesure;
 	if (typeMesures === "humi") {
 		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
-			["Humidité", " %", new CouleursDonneesHum(), 25, 75, 5];
+			["Humidité", "%", new CouleursDonneesHum(), 25, 75, 5];
 	}
 	else if (typeMesures === "temp") {
 		[typeMesuresStr, unite, degrade, min, max, margeMesure] =

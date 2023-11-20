@@ -84,6 +84,8 @@ class BaseDeDonnees {
 		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
 		 */
 		int fermerBaseDeDonnees(void);
+
+        int sendDB(int ip_address);
 };
 
 #endif

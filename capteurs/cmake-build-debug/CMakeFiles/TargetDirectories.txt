@@ -1,0 +1,6 @@
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/src/CMakeFiles/mesures.dir
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/src/CMakeFiles/agregateur.dir
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/bijexion/M2/projet-master-23-24/capteurs/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir

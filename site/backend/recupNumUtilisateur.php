@@ -26,5 +26,46 @@ if (!(
     exit();
 }
 
+echo json_encode("ok before manager");
 // Requête à MongoDB
-// TODO
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:30001/?replicaSet=rs0");
+var_dump($manager);
+echo json_encode("ok after manager");
+$command = new MongoDB\Driver\Command(['ping' => 1]);
+echo json_encode("OK après manager/command");
+
+
+try {
+    $cursor = $manager->executeCommand('admin', $command);
+} catch(MongoDB\Driver\Exception $e) {
+    echo $e->getMessage(), "\n";
+    exit;
+}
+
+/* The ping command returns a single result document, so we need to access the
+ * first result in the cursor. */
+$response = $cursor->toArray()[0];
+
+var_dump($response);
+
+
+
+// ===========================
+
+// appelle fct
+// - connection à la bdd
+// - faire la requête etc..
+
+// retour donnée avec JSON encode avec echo
+// vérifiable inspecteur d'éléments rsx
+
+
+
+//========== FCT A APPELER ===========
+
+//Orienter objet
+
+//requet SQL à MongoDB
+//donnée sous forme de tableau
+//utilisation de pdo (wrapper)
+?>

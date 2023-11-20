@@ -1,8 +1,6 @@
 <?php
 /* === recupNumIlots.php === */
 
-// Ordre 3
-
 // Récupère les champs envoyés dans la requête
 // Vérification de leur existence
 if (!($_POST["numChamp"])){

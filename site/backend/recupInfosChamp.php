@@ -1,12 +1,11 @@
 <?php
 /* === recupInfosChamp.php === */
 // Ordre 4
-const MODE_LOCAL = true;
 
 // Récupère les infos du champ envoyés dans la requête
 // Vérification de leur existence
 if (!($_POST["numChamp"])) {
-	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
+	$erreur = array("Erreur", "Numéro de champ manquant dans la requête");
 	echo json_encode($erreur);
 	exit();
 }

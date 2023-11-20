@@ -19,8 +19,8 @@ else {
 }
 
 // Coordonnées à récupérer dans la base de données
-const LATTITUDE = 48.52854;
-const LONTITUDE = 7.711011;
+const LATITUDE = 48.52854;
+const LONGITUDE = 7.711011;
 
 if (MODE_LOCAL === false) {
 	$cleAPI = @file_get_contents("./cleAPI.txt");
@@ -33,8 +33,8 @@ if (MODE_LOCAL === false) {
 	}
 
 	$reponse = @file_get_contents("https://weather.visualcrossing.com/" .
-	"VisualCrossingWebServices/rest/services/timeline/". LATTITUDE . "," .
-	LONTITUDE . '/' . $duree . "?unitGroup=metric&elements=datetime%2Ctempmax" .
+	"VisualCrossingWebServices/rest/services/timeline/". LATITUDE . "," .
+	LONGITUDE . '/' . $duree . "?unitGroup=metric&elements=datetime%2Ctempmax" .
 	"%2Ctempmin%2Ctemp%2Chumidity%2Cprecip%2Cpreciptype%2Cwindspeedmean%2C" .
 	"winddir%2Ccloudcover%2Cuvindex&include=" . $granularite .
 	"&key=" . $cleAPI .	"&contentType=json");

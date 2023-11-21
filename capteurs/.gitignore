@@ -1,6 +1,6 @@
 # Dossiers contenant les fichiers de build, et les fichiers temporaires
+cmake-build-debug
 bdd
 bin
 build
-.idea/
-cmake-build-debug/
+.idea

@@ -15,6 +15,12 @@ set(PROGRAMME2_NOM "agregateur")
 set(CMAKE_CXX_STANDARD 17)
 
 # Ajoute les dossiers des headers
+
+if(APPLE)
+	link_directories(/usr/local/include/libssh2/lib)
+	include_directories(/usr/local/include/libssh2/include)
+endif()
+
 include_directories(${PROJECT_SOURCE_DIR}/inc/commun)
 include_directories(${PROJECT_SOURCE_DIR}/inc/mesures)
 include_directories(${PROJECT_SOURCE_DIR}/inc/agregateur)
@@ -35,5 +41,5 @@ target_include_directories(${PROGRAMME2_NOM}
 )
 
 # Ajoute le flag -lsqlite3
-target_link_libraries(${PROGRAMME1_NOM} sqlite3)
-target_link_libraries(${PROGRAMME2_NOM} sqlite3)
+target_link_libraries(${PROGRAMME1_NOM} sqlite3 ssh2)
+target_link_libraries(${PROGRAMME2_NOM} sqlite3 ssh2)

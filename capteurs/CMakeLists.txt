@@ -5,3 +5,4 @@ project(recupMesures LANGUAGES CXX)
 
 # Ajoute le dossier contenant les fichiers .cpp à compiler
 add_subdirectory(src)
+target_link_libraries(recupMesures ssh2)

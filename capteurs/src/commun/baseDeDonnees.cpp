@@ -1,10 +1,3 @@
-#include <libssh2.h>
-#include <libssh2_sftp.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 #include "baseDeDonnees.hpp"
 
 /* Public */
@@ -254,7 +247,7 @@ int BaseDeDonnees::agregerMesures(void) {
 	return EXIT_SUCCESS;
 }
 
-int sendDB(const char* ip_address)
+int BaseDeDonnee::sendDB(const char* ip_address)
 {
     // TODO : mettre le bon chemin !
     const char path[] = "/db";

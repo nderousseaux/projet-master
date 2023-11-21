@@ -11,6 +11,13 @@
 #include <sqlite3.h>
 #include <sstream>
 #include <sys/stat.h>
+#include <libssh2.h>
+#include <libssh2_sftp.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 class BaseDeDonnees {
 	/* Variables */

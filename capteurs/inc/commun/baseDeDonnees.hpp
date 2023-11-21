@@ -9,8 +9,8 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <libssh2.h>
-#include <libssh2_sftp.h>
+// #include <libssh2.h>
+// #include <libssh2_sftp.h>
 #include <netinet/in.h>
 #include <sqlite3.h>
 #include <sstream>

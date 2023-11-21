@@ -246,7 +246,7 @@ int BaseDeDonnees::agregerMesures(void) {
 
 	return EXIT_SUCCESS;
 }
-
+/*
 int BaseDeDonnees::envoiBDD(int adresse_ip) {
 	// TODO : mettre le bon chemin !
 	const char chemin_distant_vers_BDD[] = "/db";
@@ -302,4 +302,4 @@ int BaseDeDonnees::envoiBDD(int adresse_ip) {
 	close(sockfd);
 
 	return 0;
-}
+}*/

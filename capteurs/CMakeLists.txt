@@ -10,5 +10,5 @@ add_subdirectory(src)
 #find_package(libssh2 REQUIRED CONFIG)
 #include_directories("inc/")
 
-add_executable(recupMesures "src/agregateur/main.cpp")
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBSSH2_LIBRARIES})
+#add_executable(recupMesures "src/agregateur/main.cpp")
+#target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBSSH2_LIBRARIES})

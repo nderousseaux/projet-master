@@ -247,65 +247,59 @@ int BaseDeDonnees::agregerMesures(void) {
 	return EXIT_SUCCESS;
 }
 
-int BaseDeDonnee::sendDB(const char* ip_address)
-{
-    // TODO : mettre le bon chemin !
-    const char path[] = "/db";
+int BaseDeDonnees::envoiBDD(int adresse_ip) {
+	// TODO : mettre le bon chemin !
+	const char chemin_distant_vers_BDD[] = "/db";
 
-    int err = libssh2_init(0);
-    if (err < 0)
-    {
-        std::cerr << "Failed to initialize libssh2." << std::endl;
-        return err;
-    }
+	int err = libssh2_init(0);
+	if (err < 0) {
+		std::cerr << "Echec lors de l'initialisation de libssh2." << std::endl;
+		return err;
+	}
 
-    LIBSSH2_SESSION *session = libssh2_session_init();
-    if (!session) {
-        std::cerr << "Failed to create session." << std::endl;
-        return -1;
-    }
+	LIBSSH2_SESSION *session = libssh2_session_init();
+	if (!session) {
+		std::cerr << "Echec lors de la création de la session." << std::endl;
+		return -1;
+	}
 
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    struct sockaddr_in addr;
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(22);
-    addr.sin_addr.s_addr = inet_addr(ip_address);
+	struct sockaddr_in adresse;
+	adresse.sin_family = AF_INET;
+	adresse.sin_port = htons(22);
+	adresse.sin_addr.s_addr = adresse_ip;
 
-    if (connect(sockfd, (struct sockaddr*)&addr, sizeof(addr)) < 0)
-    {
-        std::cerr << "Failed to connect socket." << std::endl;
-        return err;
-    }
+	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
+		std::cerr << "Echec lors de la connection de la socket." << std::endl;
+		return err;
+	}
 
-    err = libssh2_session_startup(session, sockfd);
-    if (err)
-    {
-        std::cerr << "Failed to start session up." << std::endl;
-        return err;
-    }
+	err = libssh2_session_startup(session, sockfd);
+	if (err) {
+		std::cerr << "Echec lors du démarage de la session." << std::endl;
+		return err;
+	}
 
-    LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
-    if (!sftp)
-    {
-        std::cerr << "Failed to initialize SFTP session." << std::endl;
-        return -1;
-    }
+	LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
+	if (!sftp) {
+		std::cerr << "Echec lors de l'initialisation de la session SFTP." << std::endl;
+		return -1;
+	}
 
-    LIBSSH2_SFTP_HANDLE *handle = libssh2_sftp_open(sftp, path, LIBSSH2_FXF_WRITE, 0);
-    if (!handle)
-    {
-        std::cerr << "Failed to open remote file." << std::endl;
-        return -1;
-    }
+	LIBSSH2_SFTP_HANDLE *agent = libssh2_sftp_open(sftp, chemin_distant_vers_BDD, LIBSSH2_FXF_WRITE, 0);
+	if (!agent) {
+		std::cerr << "Echec lors de l'ouverture du fichier distant." << std::endl;
+		return -1;
+	}
 
-//    libssh2_sftp_write(handle, );
+//    libssh2_sftp_write(agent, );
 
-    libssh2_sftp_shutdown(sftp);
-    libssh2_session_disconnect(session, "Normal Shutdown");
-    libssh2_session_free(session);
-    libssh2_exit();
-    close(sockfd);
+	libssh2_sftp_shutdown(sftp);
+	libssh2_session_disconnect(session, "Exctinction normale");
+	libssh2_session_free(session);
+	libssh2_exit();
+	close(sockfd);
 
-    return 0;
+	return 0;
 }

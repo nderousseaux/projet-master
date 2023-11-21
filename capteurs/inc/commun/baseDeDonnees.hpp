@@ -4,19 +4,19 @@
 #include "infosChamp.hpp"
 #include "mesures.hpp"
 
+#include <arpa/inet.h>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <libssh2.h>
+#include <libssh2_sftp.h>
+#include <netinet/in.h>
 #include <sqlite3.h>
 #include <sstream>
 #include <sys/stat.h>
-#include <libssh2.h>
-#include <libssh2_sftp.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <unistd.h>
 
 class BaseDeDonnees {
@@ -92,7 +92,7 @@ class BaseDeDonnees {
 		 */
 		int fermerBaseDeDonnees(void);
 
-        int sendDB(int ip_address);
+        int envoieBDD(int ip_address);
 };
 
 #endif

@@ -3,6 +3,8 @@
 
 // Ordre 1
 
+echo json_encode("recup Util OK");
+
 // Récupère les champs envoyés dans la requête
 // Vérification de leur existence
 if (!($_POST["idUtilisateur"])) {

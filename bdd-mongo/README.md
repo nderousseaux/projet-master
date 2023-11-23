@@ -4,6 +4,11 @@
 ./start.sh      # lance conteneurs et initie replica set avec conf de rs-init.sh
 ```
 
+## Stoper les containers
+```
+./stop.sh
+```
+
 ## Infos utiles:
 * se connecter à l'instance mongo primaire par défaut:  
     ```

@@ -1,4 +1,7 @@
 # Capteurs
+
+[conf.md](Conf.md) : Pour decrire comment son configurer les RPI
+
 ## Compilation
 Pour simplifier la compilation, il suffit de lancer le script `./build.sh`.
 

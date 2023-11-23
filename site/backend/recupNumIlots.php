@@ -29,7 +29,7 @@ if (!(
 
 // Requête à MongoDB
 // site: https://www.php.net/manual/fr/class.mongodb-driver-query.php 
-$connection = new MongoDB\Driver\Manager("mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0");
+$manager = new MongoDB\Driver\Manager("mongodb://mongo1:30001,mongo2:30002,mongo3:30003/data/?replicaSet=rs0");
 
 
 // ===========================

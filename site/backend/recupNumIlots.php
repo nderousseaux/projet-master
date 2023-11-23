@@ -16,37 +16,34 @@ if (!is_numeric($_POST["numChamp"])) {
     echo json_encode($erreur);
     exit();
 }
-// Vérification du type de donnée des boutons
-if (!(
-    $_POST["typeMesures"] === "numChamp" // A MODIF (voir BDD)
-    )
-) {
-    $erreur = array("Erreur", "Type d'utilisateur non reconnu");
-    echo json_encode($erreur);
-    exit();
-}
 
+// Debug contenu du param d'entré
+echo "debug1\n";
+$var = $_POST["numChamp"];
+echo "numchamps $var";
 
 // Requête à MongoDB
 // site: https://www.php.net/manual/fr/class.mongodb-driver-query.php 
-$manager = new MongoDB\Driver\Manager("mongodb://mongo1:30001,mongo2:30002,mongo3:30003/data/?replicaSet=rs0");
+
+$mongoClient = new MongoDB\Client("mongodb://localhost:3001");
+echo "debug2\n";
+//$database = $mongoClient->selectDatabase("votre_base_de_donnees");
+$database = $mongoClient->selectDatabase($mongoClient);
+$collection = $database->selectCollection("agriculteur");
 
 
-// ===========================
+// Exécution de la requête
+$cursor = $collection->find([], ['projection' => ['champs.ilots' => 1]]);
 
-// appelle fct
-// - connection à la bdd
-// - faire la requête etc..
+echo "debug3\n";
 
-// retour donnée avec JSON encode avec echo
-// vérifiable inspecteur d'éléments rsx
+// Parcours des résultats
+foreach ($cursor as $document) {
+    // Traitement des résultats
+    var_dump($document);
+}
 
+echo "debug4\n";
 
-
-//========== FCT A APPELER ===========
-
-//Orienter objet
-
-//requet SQL à MongoDB
-//donnée sous forme de tableau
-//utilisation de pdo (wrapper)
+echo $tbl;
+echo json_encode($tbl);

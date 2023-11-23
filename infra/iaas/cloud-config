@@ -7,3 +7,30 @@ users:
     lock_passwd: false
 bootcmd:
   - loadkeys fr
+
+repo_update: true
+repo_upgrade: all
+yum_repos:
+  epel:
+    name: Extra Packages for Enterprise Linux 9 - $basearch
+    baseurl: http://download.fedoraproject.org/pub/epel/9/$basearch
+    mirrorlist: https://mirrors.fedoraproject.org/metalink?repo=epel-9&arch=$basearch
+    failovermethod: priority
+    enabled: true
+    gpgcheck: true
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
+  mongodb:
+    name: MongoDB Repository
+    baseurl: https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/$basearch/
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://www.mongodb.org/static/pgp/server-7.0.asc
+
+package_upgrade: true
+packages:
+  - httpd
+  - mongodb-org-server
+
+runcmd:
+  - systemctl enable httpd
+  - systemctl start httpd

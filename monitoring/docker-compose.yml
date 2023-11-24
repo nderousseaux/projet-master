@@ -12,3 +12,10 @@ services:
     ports:
       - 3306:3306
   
+  web:
+    image: grafana/grafana-enterprise
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
+    volumes:
+      - ./web/files:/var/lib/grafana

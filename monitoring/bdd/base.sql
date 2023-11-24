@@ -1,10 +1,10 @@
 -- -------------------------------------------------------------
--- TablePlus 5.6.0(514)
+-- TablePlus 5.6.2(516)
 --
 -- https://tableplus.com/
 --
 -- Database: monitoring
--- Generation Time: 2023-11-23 20:46:02.0100
+-- Generation Time: 2023-11-24 14:46:23.0270
 -- -------------------------------------------------------------
 
 
@@ -35,29 +35,23 @@ CREATE TABLE `log` (
   KEY `metrique_id` (`metrique_id`),
   CONSTRAINT `log_ibfk_1` FOREIGN KEY (`composant_id`) REFERENCES `composant` (`id`),
   CONSTRAINT `log_ibfk_2` FOREIGN KEY (`metrique_id`) REFERENCES `metrique` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
+) ENGINE=InnoDB AUTO_INCREMENT=6126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 
 CREATE TABLE `metrique` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
   `unite` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 
 INSERT INTO `composant` (`id`, `nom`) VALUES
-(1, 'Serveur 1'),
-(2, 'Serveur 2'),
-(3, 'Serveur 3'),
-(4, 'Serveur 4');
+(1, 'Machine n°1'),
+(2, 'Machine n°2'),
+(3, 'Machine n°3'),
+(4, 'Machine n°4');
 
 INSERT INTO `metrique` (`id`, `nom`, `unite`) VALUES
-(1, 'Temps de réponse', 'ms'),
-(2, 'Utilisation du processeur', '%'),
-(3, 'Utilisation de la mémoire', '%'),
-(4, 'Usage du disque', 'Mbit/s'),
-(5, 'Température', '°C'),
-(6, 'Traffic', 'Mbits/s'),
-(7, 'Débit', 'Mbit/s');
+(1, 'Up', 'bool');
 
 
 

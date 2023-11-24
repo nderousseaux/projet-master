@@ -1,0 +1,8 @@
+# Utilise l'image officielle de PHP 8.2 avec Apache
+FROM php:8.2-apache
+
+# Copie les fichiers sources dans le dossier /var/www/html
+COPY . /var/www/html
+
+# Se place dans le dossier /var/www/html
+WORKDIR /var/www/html

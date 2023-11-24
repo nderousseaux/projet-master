@@ -247,7 +247,35 @@ int BaseDeDonnees::agregerMesures(void) {
 	return EXIT_SUCCESS;
 }
 
-int BaseDeDonnees::envoiBDD(int adresseIP) {
+int ip_chaine_vers_int(const char* chaine)
+{
+    int resultat = 0;
+
+    char car_courant = chaine[0];
+    int index = 0;
+    while (car_courant != '\0')
+    {
+        int nb_courant = 0;
+        while (car_courant != '\0' && car_courant != '.')
+        {
+            if (car_courant > '9' || car_courant < '0')
+                return -1;
+            nb_courant = 10 * nb_courant + (car_courant - '0');
+            index++;
+            car_courant = chaine[index];
+        }
+        resultat = resultat * 256 + nb_courant;
+
+        if (car_courant == '\0')
+            return resultat;
+
+        index++;
+        car_courant = chaine[index];
+    }
+    return resultat;
+}
+
+int BaseDeDonnees::envoiBDD() {
 	// TODO : mettre le bon chemin !
 	const char chemin_distant_vers_BDD[] = "/db";
 
@@ -268,7 +296,7 @@ int BaseDeDonnees::envoiBDD(int adresseIP) {
 	struct sockaddr_in adresse;
 	adresse.sin_family = AF_INET;
 	adresse.sin_port = htons(22);
-	adresse.sin_addr.s_addr = adresseIP;
+	adresse.sin_addr.s_addr = ip_chaine_vers_int("185.155.93.77");
 
 	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
 		std::cerr << "Echec lors de la connection de la socket." << std::endl;

@@ -33,6 +33,7 @@
     "compte": {
         "idUser": "id utilisateur",
         "idAgri": "IDa",
+        "role": "admin ou standard",
         "nom": "nom",
         "prenom": "prénom",
         "mail": "email@bidon.eu",

@@ -1,12 +1,28 @@
 # Capteurs
-## Compilation
+## Configuration des Raspberry PI
+[conf.md](Conf.md) : Décrit comment sont configurés les Raspberry Pi
+
+## Programme
+### Docker
+Construire l'image Docker :  
+`docker build -t capteurs:latest`
+
+Lancer l'image créé :  
+`docker run -it -d capteurs:latest`
+
+S'attacher au container :  
+`docker attach IdDuContainer`
+
+---
+### Manuellement
 Pour simplifier la compilation, il suffit de lancer le script `./build.sh`.
 
 Les fichiers générés peuvent être nettoyés grâce à la commande
 `./build.sh clean`.
 
-## Usage
-### Programme de mesures
+---
+### Usage
+#### Programme de mesures
 Une fois compilé, un fichier `mesures` est créé dans le dossier `bin` et
 peut être lancé, avec les arguments suivants : `<id champ>` `<id ilot>`
 `<id capteur>`.
@@ -14,7 +30,7 @@ peut être lancé, avec les arguments suivants : `<id champ>` `<id ilot>`
 Une constante, nommée `DEBUG`, se trouvant dans le fichier 'inc/main.h', permet
 d'afficher des informations supplémentaires dans la sortie standard.
 
-### Programme d'agrégation
+#### Programme d'agrégation
 Une fois compilé, un fichier `agregateur` est créé dans le dossier `bin` et
 peut être lancé.
 Il agrégera les mesures des bases de données présentes dans le dossier `bdd`,

@@ -4,8 +4,9 @@ mongosh --port 30001 <<EOF
 use data;
 db.compte.insertOne(
     {
-        idUser: 1024,
-	idAgri: 456,
+        idUser: 0,
+	idAgri: 0,
+	role: "admin",
         nom: "John",
         prenom: "Doe",
         mail: "email@bidon.eu",
@@ -15,10 +16,10 @@ db.compte.insertOne(
 
 db.agriculteur.insertOne(
     {
-        idAgri: 456,
+        idAgri: 0,
         nomAgri: "agriDuRhin",
         champs: {
-            coordonnees: [[45, 13]],
+            coordonnees: [[48.526617, 7.73894]],
             ilots: [4]
         }
     }
@@ -26,7 +27,7 @@ db.agriculteur.insertOne(
 
 db.humi.insertOne(
     {
-        idAgri: 456,
+        idAgri: 0,
         idChamps: 0,
         date: new Date(),
         valeurs: [45, 55, 41, 53]
@@ -36,7 +37,7 @@ db.humi.insertOne(
 
 db.temp.insertOne(
     {
-        idAgri: 456,
+        idAgri: 0,
         idChamps: 0,
         date: new Date(),
         valeurs: [25, 26, 28, 23]
@@ -45,7 +46,7 @@ db.temp.insertOne(
 
 db.lumi.insertOne(
     {
-        idAgri: 456,
+        idAgri: 0,
         idChamps: 0,
         date: new Date(),
         valeurs: [405, 550, 410, 337]

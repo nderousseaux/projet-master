@@ -15,7 +15,6 @@ function recupDonnees(champPost, fichierBackend) {
 		.then(reponse => {
 			reponse.json()
 				.then(donnees => {
-					console.log(donnees); // [DEBUG] Pour l'équipe backend
 					resolve(donnees);
 				})
 				.catch(err => {

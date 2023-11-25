@@ -4,13 +4,20 @@
 #include "infosChamp.hpp"
 #include "mesures.hpp"
 
+#include <arpa/inet.h>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <libssh2.h>
+#include <libssh2_sftp.h>
+#include <netinet/in.h>
 #include <sqlite3.h>
 #include <sstream>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
 
 class BaseDeDonnees {
 	/* Variables */
@@ -84,6 +91,8 @@ class BaseDeDonnees {
 		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
 		 */
 		int fermerBaseDeDonnees(void);
+
+		int envoiBDD();
 };
 
 #endif

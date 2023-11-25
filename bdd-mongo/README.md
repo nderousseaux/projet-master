@@ -4,6 +4,11 @@
 ./start.sh      # lance conteneurs et initie replica set avec conf de rs-init.sh
 ```
 
+## Stoper les containers
+```
+./stop.sh
+```
+
 ## Infos utiles:
 * se connecter à l'instance mongo primaire par défaut:  
     ```
@@ -28,6 +33,7 @@
     "compte": {
         "idUser": "id utilisateur",
         "idAgri": "IDa",
+        "role": "admin ou standard",
         "nom": "nom",
         "prenom": "prénom",
         "mail": "email@bidon.eu",

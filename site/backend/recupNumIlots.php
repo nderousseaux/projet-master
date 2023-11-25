@@ -1,50 +1,36 @@
 <?php
 /* === recupNumIlots.php === */
-
 // Récupère les champs envoyés dans la requête
-// Vérification de leur existence
 if (!($_POST["numChamp"])){
-    $erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
-    echo json_encode($erreur);
-    exit();
+	$erreur = array("Erreur", "Champ manquant dans la requête");
+	echo json_encode($erreur);
+	exit();
 }
-// Vérification du type de donnée entré
 if (!is_numeric($_POST["numChamp"])) {
-    $erreur = array("Erreur", "numChamp, n'est pas numérique");
-    echo json_encode($erreur);
-    exit();
-}
-// Vérification du type de donnée des boutons
-if (!(
-    $_POST["typeMesures"] === "numChamp" // A MODIF (voir BDD)
-    )
-) {
-    $erreur = array("Erreur", "Type d'utilisateur non reconnu");
-    echo json_encode($erreur);
-    exit();
+	$erreur = array("Erreur", "numChamp n'est pas un nombre");
+	echo json_encode($erreur);
+	exit();
 }
 
+// Connexion à MongoDB
+use MongoDB\Driver\Manager;
+$uri = "mongodb://localhost:30001";
 
-// Requête à MongoDB
-// site: https://www.php.net/manual/fr/class.mongodb-driver-query.php 
-$connection = new MongoDB\Driver\Manager("mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0");
+// Créé le client
+$client = new MongoDB\Driver\Manager($uri);
 
+// Défini la requête pour récupérer "ilots" dans "champs"
+$requete = new MongoDB\Driver\Query([],
+	["projection" => ["champs.ilots" => 1]]);
 
-// ===========================
+// Exécute la requête
+$resultat = $client->executeQuery("data.agriculteur", $requete);
 
-// appelle fct
-// - connection à la bdd
-// - faire la requête etc..
+// Converti le résultat en tableau
+$donnees = iterator_to_array($resultat);
 
-// retour donnée avec JSON encode avec echo
-// vérifiable inspecteur d'éléments rsx
+// Récupère uniquement le nombre d'ilots, du champ demandé
+$donnees = $donnees[0]->champs->ilots;
 
-
-
-//========== FCT A APPELER ===========
-
-//Orienter objet
-
-//requet SQL à MongoDB
-//donnée sous forme de tableau
-//utilisation de pdo (wrapper)
+// Renvoi le résultat
+echo json_encode($donnees);

@@ -162,7 +162,10 @@ function afficherMeteo() {
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
 	]
 
+	const numChamp = document.getElementById("champSlct").value;
+
 	let champPost = new FormData();
+	champPost.append("numChamp", numChamp);
 	champPost.append("duree", duree);
 
 	recupDonnees(champPost, "recupMeteo.php")

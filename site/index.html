@@ -24,7 +24,7 @@
 		</div>
 	</section>
 	<section>
-		<p>John Doe</p>
+		<p></p>
 		<div class="dropdown" id="ddCmpt">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdown-content">
@@ -193,16 +193,20 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 * les ID des boutons à ajouter quand ils sont sélectionnés
 		*/
 	const contIdButtons = [
-		["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
-		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true],
+		["selectChamp", "champSlct", true],
+		["selectCmpt", "cmptSlct", false],
+		["selectType", "typeSlct", true],
+		["selectIlot", "ilotSlct", true],
 		["selectDuree", "dureeSlct", true]
 	];
 
 	// A utiliser quand le backend sera prêt
 	// const contIdButtons = [
-	// 	["selectChamp", "champSlct", false], ["selectCmpt", "cmptSlct", false],
-	// 	["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", false],
-	// 	["selectDuree", "dureeSlct", true]
+	//	["selectChamp", "champSlct", false],
+	//	["selectCmpt", "cmptSlct", false],
+	//	["selectType", "typeSlct", true],
+	//	["selectIlot", "ilotSlct", false],
+	//	["selectDuree", "dureeSlct", true]
 	// ];
 
 		// Préselectionne les boutons des dropdowns
@@ -219,9 +223,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	let idUtilisateur = 0;
 
-	// afficherNomUtilisateur(idUtilisateur);
+		// Affiche le nom de l'utilisateur dans le header
+	afficherNomUtilisateur(idUtilisateur);
 
-	// Affiche les champs de l'utilisateur
+		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)
 	.then(_ => {
 		// Active les boutons des champs
@@ -229,8 +234,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			contIdButtons[0][2]);
 		
 		/*
-		 * Active la fonction de changement de champ pour charger les nouveux
-		 * ilots
+		 * Active la fonction de changement de champ pour charger les nouveaux
+		 * ilots dans le dropdown
 		 */
 		activerBoutonChgmtChamp(idUtilisateur);
 
@@ -248,10 +253,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			helperAfficherGraph();
 		});
 	});
-	
+
 	// afficherInfosChamp();
 	// afficherMoyennes();
 	// afficherTableauToutesMesures();
+
 
 	/*** Interaction des boutons ***/
 		// Bouton pour changer la temporalité de la météo

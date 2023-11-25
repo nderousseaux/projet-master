@@ -14,4 +14,27 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 	exit();
 }
 
-/* Requête MongoDB à faire */
+// Connexion à MongoDB
+use MongoDB\Driver\Manager;
+$uri = "mongodb://localhost:30001";
+
+// Créé le client
+$client = new MongoDB\Driver\Manager($uri);
+
+// Défini le filtre
+$filtre = ["idAgri" => intval($_POST["idUtilisateur"])];
+
+// Créé la requête
+$requete = new MongoDB\Driver\Query($filtre);
+
+// Exécute la requête et récupère le résultat
+$resultat = $client->executeQuery("data.agriculteur", $requete);
+
+// Traite les données
+foreach ($resultat as $element) {
+	// Accède à la propriété "nomAgri"
+	$resultat = $element->nomAgri;
+}
+
+// Renvoi le nom d'utilisateur
+echo json_encode($resultat);

@@ -264,6 +264,21 @@ header > section:last-child .dropbtn {
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
+#secInfos > div:nth-child(2) > div {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+}
+#secInfos > div > div > p {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#secInfos > div:nth-child(2) > div > p:first-child,
+#secInfos > div:nth-child(2) > div > p:last-child {
+	width: 40%
+}
 
 	/* Section météo/moyenne */
 #compMetMoy {
@@ -448,9 +463,11 @@ header > section:last-child .dropbtn {
 /* Version tablette */
 @media screen and (max-width: 950px) {
 	/* Général */
-	h1 {
-		font-size: 16px;
+	h1,
+	p {
+		font-size: 15px;
 	}
+
 
 		/* Boutons dropdown */
 	.dropbtn {
@@ -511,18 +528,21 @@ header > section:last-child .dropbtn {
 	#secInfos > div {
 		justify-content: space-between;
 		width: calc(33.33% - 3px);
-		height: 130px;
+		height: 160px;
 		margin: 0;
 		padding: 10px 0;
 	}
 	#secInfos > div > h1,
-	#secInfos > div > p {
+	#secInfos > div > p,
+	#secInfos > div > div {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 50%;
 	}
-	#secInfos > div > p {
+	#secInfos > div > p,
+	#secInfos > div > div,
+	#secInfos > div > div > p {
 		margin: 0;
 	}
 
@@ -555,6 +575,7 @@ header > section:last-child .dropbtn {
 	}
 	#secMoyennes > div {
 		width: calc(33.33% - 3px);
+		height: 150px;
 		padding: 10px 0;
 	}
 	#secMoyennes > div > h1,
@@ -562,11 +583,6 @@ header > section:last-child .dropbtn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-	#secMoyennes > div > h1 {
-		height: 50%;
-	}
-	#secMoyennes > div > p {
 		height: 50%;
 	}
 
@@ -593,19 +609,6 @@ header > section:last-child .dropbtn {
 	#secTableau > div {
 		grid-template-columns: repeat(2, minmax(80px, 1fr)) 150px
 			repeat(3, minmax(90px, 1fr));
-	}
-}
-
-
-/* Version mobile */
-@media screen and (max-width: 799px) {
-	/* Corps */
-			/* Moyenne */
-	#secMoyennes > div > h1 {
-		height: 70%;
-	}
-	#secMoyennes > div > p {
-		height: 30%;
 	}
 }
 

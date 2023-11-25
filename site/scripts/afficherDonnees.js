@@ -47,12 +47,14 @@ function afficherChamps(idUtilisateur) {
 /**
  * Affiche les ilots du champ sélectionné
  * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {promise} - résolue quand les ilots sont affichés
  */
-function afficherIlots() {
+function afficherIlots(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value;
 
 	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("numChamp", numChamp);
 
 	return new Promise((resolve, reject) => {

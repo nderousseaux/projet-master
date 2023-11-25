@@ -1,13 +1,19 @@
 <?php
-/* === recupNumIlots.php === */
-// Récupère les champs envoyés dans la requête
-if (!($_POST["numChamp"])){
-	$erreur = array("Erreur", "Champ manquant dans la requête");
+// Vérifie que les champs sont présents
+if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
+	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
+	echo json_encode($erreur);
+	exit();
+}
+
+// Vérifie que les champs sont numériques
+if (!is_numeric($_POST["idUtilisateur"])) {
+	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
 if (!is_numeric($_POST["numChamp"])) {
-	$erreur = array("Erreur", "numChamp n'est pas un nombre");
+	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
@@ -19,18 +25,31 @@ $uri = "mongodb://localhost:30001";
 // Créé le client
 $client = new MongoDB\Driver\Manager($uri);
 
-// Défini la requête pour récupérer "ilots" dans "champs"
-$requete = new MongoDB\Driver\Query([],
-	["projection" => ["champs.ilots" => 1]]);
+// Défini le filtre
+$filtre = ["idAgri" => intval($_POST["idUtilisateur"])];
 
-// Exécute la requête
+// Défini la projection
+$options = ["projection" => ["champs.ilots" => 1]];
+
+// Créé la requête
+$requete = new MongoDB\Driver\Query($filtre, $options);
+
+// Exécute la requête et récupère le résultat
 $resultat = $client->executeQuery("data.agriculteur", $requete);
 
-// Converti le résultat en tableau
-$donnees = iterator_to_array($resultat);
+// Traite les données
+$ilots = array();
+foreach ($resultat as $element) {
+	// Accède à la propriété "ilots" dans le champ "champs"
+	$ilots = $element->champs->ilots;
+}
 
-// Récupère uniquement le nombre d'ilots, du champ demandé
-$donnees = $donnees[0]->champs->ilots;
-
-// Renvoi le résultat
-echo json_encode($donnees);
+// Renvoi le nombre d'ilots
+$numChamp = $_POST["numChamp"];
+if (isset($ilots[$numChamp])) {
+	echo json_encode($ilots[$numChamp]);
+}
+else {
+	$erreur = array("Erreur", "Index invalide");
+	echo json_encode($erreur);
+}

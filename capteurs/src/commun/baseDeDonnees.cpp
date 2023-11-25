@@ -275,9 +275,33 @@ int ip_chaine_vers_int(const char* chaine)
     return resultat;
 }
 
+int BaseDeDonnees::conversionDBversChar(char *buffer) {
+
+    const char* requete_totale = "SELECT * FROM db;";
+
+    sqlite3_stmt* stmt;
+    if (sqlite3_prepare_v2(db_, requete_totale, -1, &stmt, NULL) != SQLITE_OK) {
+        return -1;
+    }
+    // Loop through the results
+    int num_colonne = 0, index_buffer = 0;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        const char* donnees_colonne = (const char*)sqlite3_column_text(stmt, num_colonne);
+        int longueur = strlen(donnees_colonne);
+        snprintf(buffer + index_buffer, longueur, "%s\n", donnees_colonne);
+        index_buffer += longueur;
+
+        num_colonne++;
+    }
+
+    sqlite3_finalize(stmt);
+
+    return 0;
+}
+
 int BaseDeDonnees::envoiBDD() {
 	// TODO : mettre le bon chemin !
-	const char chemin_distant_vers_BDD[] = "/db";
+	const char chemin_distant_vers_BDD[] = "./bdd";
 
 	int err = libssh2_init(0);
 	if (err < 0) {
@@ -322,6 +346,12 @@ int BaseDeDonnees::envoiBDD() {
 	}
 
 //    libssh2_sftp_write(agent, );
+    char base_donnees[1024*1024];
+    if (conversionDBversChar(base_donnees) < 0)
+    {
+        // TODO handle error
+    }
+    libssh2_sftp_write(agent, base_donnees, strlen(base_donnees));
 
 	libssh2_sftp_shutdown(sftp);
 	libssh2_session_disconnect(session, "Exctinction normale");

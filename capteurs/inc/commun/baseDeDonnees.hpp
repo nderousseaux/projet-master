@@ -93,6 +93,8 @@ class BaseDeDonnees {
 		int fermerBaseDeDonnees(void);
 
 		int envoiBDD();
+
+        int conversionDBversChar(char* buffer);
 };
 
 #endif

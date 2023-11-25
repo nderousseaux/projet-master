@@ -56,9 +56,19 @@
 		</form>
 </div>
 </dialog>
+<script type="text/javascript" src="scripts/recupDonnees.js"></script>
+<script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script>
 	gestionInputCmpt();
+
+
+	/*** Affichage des données ***/
+		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
+	let idUtilisateur = 0;
+
+		// Affiche le nom de l'utilisateur dans le header
+	afficherNomUtilisateur(idUtilisateur);
 </script>
 </body>
 </html>

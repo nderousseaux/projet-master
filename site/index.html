@@ -16,13 +16,10 @@
 <header>
 	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
 	<section>
-		<p>Nom du champ</p>
+		<p>Champ 1</p>
 		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
-				<button value="1">Champ 1</button>
-				<button value="2">Champ 2</button>
-				<button value="3">Champ 3</button>
 			</div>
 		</div>
 	</section>
@@ -223,17 +220,37 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	let idUtilisateur = 0;
 
 	// afficherNomUtilisateur(idUtilisateur);
-	// afficherChamps(idUtilisateur);
-	afficherIlots(idUtilisateur)
+
+	// Affiche les champs de l'utilisateur
+	afficherChamps(idUtilisateur)
 	.then(_ => {
-		activerBouton(contIdButtons[3][0], contIdButtons[3][1],
-			contIdButtons[3][2]);
-		helperAfficherGraph();
-	})
+		// Active les boutons des champs
+		activerBouton(contIdButtons[0][0], contIdButtons[0][1],
+			contIdButtons[0][2]);
+		
+		/*
+		 * Active la fonction de changement de champ pour charger les nouveux
+		 * ilots
+		 */
+		activerBoutonChgmtChamp(idUtilisateur);
+
+		// Affiche la météo (nécessite de connaitre le champ sélectionné)
+		afficherMeteo();
+
+		// Affiche les ilots du champ sélectionné
+		afficherIlots(idUtilisateur)
+		.then(_ => {
+			// Active les boutons des ilots
+			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
+				contIdButtons[3][2]);
+
+			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
+			helperAfficherGraph();
+		});
+	});
+	
 	// afficherInfosChamp();
 	// afficherMoyennes();
-	afficherMeteo();
-	
 	// afficherTableauToutesMesures();
 
 	/*** Interaction des boutons ***/

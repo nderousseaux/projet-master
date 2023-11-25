@@ -19,27 +19,28 @@ function afficherNomUtilisateur(idUtilisateur) {
  * Affiche les champs de l'utilisateur
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ * @returns {promise} - résolue quand les champs sont affichés
  */
 function afficherChamps(idUtilisateur) {
 	let champPost = new FormData();
 	champPost.append("idUtilisateur", idUtilisateur);
 
-	recupDonnees(champPost, "recupNumChamps.php")
-	.then(donnees => {
-		const container = document.getElementById("selectChamp");
+	return new Promise((resolve, reject) => {
+		recupDonnees(champPost, "recupNumChamps.php")
+		.then(donnees => {
+			const container = document.getElementById("selectChamp");
 
-		let index = 0;
-		donnees.forEach(numChamp => {
-			const champ = document.createElement("button");
-			champ.setAttribute("value", numChamp);
-			champ.textContent = "Champ " + numChamp;
+			for (let i = 1; i <= donnees; i++) {
+				const champ = document.createElement("button");
+				champ.setAttribute("value", i);
+				champ.textContent = "Champ " + i;
 
-			if (index === 0) {
-				champ.classList.add("selected");
-				index++;
-			}
-
-			container.appendChild(champ);
+				container.appendChild(champ);
+			};
+			resolve();
+		})
+		.catch(err => {
+			reject(err);
 		});
 	});
 }
@@ -51,18 +52,23 @@ function afficherChamps(idUtilisateur) {
  * @returns {promise} - résolue quand les ilots sont affichés
  */
 function afficherIlots(idUtilisateur) {
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("numChamp", numChamp);
 
 	return new Promise((resolve, reject) => {
+
 		recupDonnees(champPost, "recupNumIlots.php")
 		.then(donnees => {
 			const container = document.getElementById("selectIlot");
 
-			let index = 0;
+			// Supprimer les ilots déjà affichés (en cas de changement de champ)
+			while (container.firstChild) {
+				container.removeChild(container.firstChild);
+			}
+
 			for (let i = 1; i <= donnees; i++) {
 				const ilot = document.createElement("button");
 				ilot.setAttribute("value", i);
@@ -82,7 +88,7 @@ function afficherIlots(idUtilisateur) {
  * Affiche les infos du champ sélectionné
  */
 function afficherInfosChamp() {
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
@@ -121,7 +127,7 @@ function afficherInfosChamp() {
  * champ indiqué
  */
 function afficherMoyennes() {
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
@@ -162,7 +168,7 @@ function afficherMeteo() {
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
 	]
 
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
@@ -267,7 +273,7 @@ function afficherMeteo() {
  * Affiche toutes les mesures pour un champ indiqué
  */
 function afficherTableauToutesMesures() {
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
@@ -392,4 +398,13 @@ function celluleTemp(temp, cellule) {
 	}
 
 	return cellule;
+}
+
+/**
+ * Affiche le nom du champ sélectionné dans le header
+ */
+function afficherNomChamp() {
+	const container = document.querySelector("header > section:nth-child(2) > p");
+	container.innerHTML = "Champ " +
+		document.getElementById("champSlct").value;
 }

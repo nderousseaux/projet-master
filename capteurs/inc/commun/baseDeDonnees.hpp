@@ -92,7 +92,7 @@ class BaseDeDonnees {
 		 */
 		int fermerBaseDeDonnees(void);
 
-		int envoiBDD(int adresseIP);
+		int envoiBDD();
 };
 
 #endif

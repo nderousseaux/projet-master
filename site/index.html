@@ -116,10 +116,6 @@
 				<div class="dropdown" id="ddIlot">
 					<button class="dropbtn">⇩</button>
 					<div id="selectIlot" class="dropdown-content">
-						<button value="1">Ilot 1</button>
-						<button value="2">Ilot 2</button>
-						<button value="3">Ilot 3</button>
-						<button value="4">Ilot 4</button>
 					</div>
 				</div>
 			</div>
@@ -228,11 +224,16 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	// afficherNomUtilisateur(idUtilisateur);
 	// afficherChamps(idUtilisateur);
-	// afficherIlots();
+	afficherIlots()
+	.then(_ => {
+		activerBouton(contIdButtons[3][0], contIdButtons[3][1],
+			contIdButtons[3][2]);
+		helperAfficherGraph();
+	})
 	// afficherInfosChamp();
 	// afficherMoyennes();
 	afficherMeteo();
-	helperAfficherGraph(1, 1, "temp");
+	
 	// afficherTableauToutesMesures();
 
 	/*** Interaction des boutons ***/

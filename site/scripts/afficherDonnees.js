@@ -46,6 +46,8 @@ function afficherChamps(idUtilisateur) {
 
 /**
  * Affiche les ilots du champ sélectionné
+ * 
+ * @returns {promise} - résolue quand les ilots sont affichés
  */
 function afficherIlots() {
 	const numChamp = document.getElementById("champSlct").value;
@@ -53,22 +55,23 @@ function afficherIlots() {
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
 
-	recupDonnees(champPost, "recupNumIlots.php")
-	.then(donnees => {
-		const container = document.getElementById("selectIlot");
+	return new Promise((resolve, reject) => {
+		recupDonnees(champPost, "recupNumIlots.php")
+		.then(donnees => {
+			const container = document.getElementById("selectIlot");
 
-		let index = 0;
-		donnees.forEach(numIlot => {
-			const ilot = document.createElement("button");
-			ilot.setAttribute("value", numIlot);
-			ilot.textContent = "Ilot " + numIlot;
+			let index = 0;
+			for (let i = 1; i <= donnees; i++) {
+				const ilot = document.createElement("button");
+				ilot.setAttribute("value", i);
+				ilot.textContent = "Ilot " + i;
 
-			if (index === 0) {
-				ilot.classList.add("selected");
-				index++;
-			}
-
-			container.appendChild(ilot);
+				container.appendChild(ilot);
+			};
+			resolve();
+		})
+		.catch(err => {
+			reject(err);
 		});
 	});
 }

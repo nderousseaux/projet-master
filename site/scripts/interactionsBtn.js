@@ -20,6 +20,15 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 				if (btn.value === valeurSelectionnee) {
 					btn.classList.add("selected");
 					btn.setAttribute("id", idAttr);
+					
+
+					/*
+					 * Si le bouton sélectionné est celui du champ, afficher
+					 * son nom dans le header
+					 */
+					if (idContainer === "selectChamp") {
+						afficherNomChamp();
+					}
 				}
 				else {
 					btn.classList.remove("selected");
@@ -40,5 +49,32 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			button.classList.add("selected");
 			button.setAttribute("id", idAttr);
 		}
+	});
+}
+
+/**
+ * Active la gestion de la mise à jour des ilots disponibles en fonction du
+ * champ sélectionné.
+ * Lance également la mise à jour du graphique pour le nouvel ilot sélectionné
+ * par défaut.
+ *
+ * @param {int} idUtilisateur - ID de l'utilisateur
+ */
+function activerBoutonChgmtChamp(idUtilisateur) {
+	const dropdownContent = document.getElementById(contIdButtons[0][0]);
+	const buttons = dropdownContent.querySelectorAll("button");
+
+	buttons.forEach(button => {
+		button.addEventListener("click", _ => {
+			afficherIlots(idUtilisateur)
+			.then(_ => {
+				// Active les boutons des ilots
+				activerBouton(contIdButtons[3][0], contIdButtons[3][1],
+					contIdButtons[3][2]);
+
+				// Mets à jour le graphique
+				helperAfficherGraph();
+			});
+		});
 	});
 }

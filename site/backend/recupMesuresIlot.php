@@ -4,7 +4,11 @@
 const MODE_LOCAL = true;
 
 // Récupère les champs envoyés dans la requête
-if (!($_POST["numChamp"] && $_POST["numIlot"] && $_POST["typeMesures"])) {
+if (!(
+	isset($_POST["numChamp"]) &&
+	isset($_POST["numIlot"]) &&
+	isset($_POST["typeMesures"])
+)) {
 	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
 	echo json_encode($erreur);
 	exit();

@@ -220,11 +220,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	let idUtilisateur = 1;
+	let idUtilisateur = 0;
 
 	// afficherNomUtilisateur(idUtilisateur);
 	// afficherChamps(idUtilisateur);
-	afficherIlots()
+	afficherIlots(idUtilisateur)
 	.then(_ => {
 		activerBouton(contIdButtons[3][0], contIdButtons[3][1],
 			contIdButtons[3][2]);

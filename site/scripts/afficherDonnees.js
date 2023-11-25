@@ -95,30 +95,31 @@ function afficherInfosChamp() {
 
 	/*
 	 * Récupère :
-	 * - Date la plus récente de mesure d'un capteur (récente)
-	 * - Date la plus récente de mesure d'un capteur (ancienne)
-	 *   -> Permet de faire la différence entre les deux et d'afficher l'état
-	 * - Nombre de capteurs
+	 * - OK ou ERR, en fonction de si un capteur répond plus depuis plus de
+	 *   30 minutes, par rapport à la mesure la plus récente de tous les
+	 *   capteurs
+	 * - Nombre de capteurs actifs
+	 * - Nombre de capteurs total
+	 * - Date de la requête dans le back (UTC ou heure locale FR, en fonction
+	 *   des autres dates)
 	 */
 	recupDonnees(champPost, "recupInfosChamp.php")
 	.then(donnees => {
 		// État général du champ
-		if (donnees[0] - donnees[1] < 1) {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "OK";
-		}
-		else {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "Err";
-		}
+		document.querySelector("#secInfos > div:first-child > p")
+			.textContent = donnees[0];
 
-		// Nombre de capteurs
-		document.querySelector("#secInfos > div:nth-child(2) > p")
+		// Nombre de capteurs actifs
+		document.querySelector("#nbrCapteurs > p:first-child")
+			.textContent = donnees[1];
+		
+		// Nombre de capteurs total
+		document.querySelector("#nbrCapteurs > p:last-child")
 			.textContent = donnees[2];
 
 		// Dernière mise à jour
 		document.querySelector("#secInfos > div:last-child > p")
-			.textContent = donnees[0];
+			.textContent = donnees[3];
 	});
 }
 

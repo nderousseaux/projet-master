@@ -16,18 +16,15 @@
 <header>
 	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
 	<section>
-		<p>Nom du champ</p>
+		<p></p>
 		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
-				<button value="1">Champ 1</button>
-				<button value="2">Champ 2</button>
-				<button value="3">Champ 3</button>
 			</div>
 		</div>
 	</section>
 	<section>
-		<p>John Doe</p>
+		<p></p>
 		<div class="dropdown" id="ddCmpt">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdown-content">
@@ -44,8 +41,12 @@
 			<p>OK</p>
 		</div>
 		<div>
-			<h1>Nombre de capteurs</h1>
-			<p>42</p>
+			<h1>Nombre de capteurs (actifs/total)</h1>
+			<div id="nbrCapteurs">
+				<p>40</p>
+				<p>/</p>
+				<p>42</p>
+			</div>
 		</div>
 		<div>
 			<h1>Dernière màj</h1>
@@ -196,16 +197,20 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 * les ID des boutons à ajouter quand ils sont sélectionnés
 		*/
 	const contIdButtons = [
-		["selectChamp", "champSlct", true], ["selectCmpt", "cmptSlct", false],
-		["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", true],
+		["selectChamp", "champSlct", true],
+		["selectCmpt", "cmptSlct", false],
+		["selectType", "typeSlct", true],
+		["selectIlot", "ilotSlct", true],
 		["selectDuree", "dureeSlct", true]
 	];
 
 	// A utiliser quand le backend sera prêt
 	// const contIdButtons = [
-	// 	["selectChamp", "champSlct", false], ["selectCmpt", "cmptSlct", false],
-	// 	["selectType", "typeSlct", true], ["selectIlot", "ilotSlct", false],
-	// 	["selectDuree", "dureeSlct", true]
+	//	["selectChamp", "champSlct", false],
+	//	["selectCmpt", "cmptSlct", false],
+	//	["selectType", "typeSlct", true],
+	//	["selectIlot", "ilotSlct", false],
+	//	["selectDuree", "dureeSlct", true]
 	// ];
 
 		// Préselectionne les boutons des dropdowns
@@ -222,19 +227,41 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	let idUtilisateur = 0;
 
-	// afficherNomUtilisateur(idUtilisateur);
-	// afficherChamps(idUtilisateur);
-	afficherIlots(idUtilisateur)
+		// Affiche le nom de l'utilisateur dans le header
+	afficherNomUtilisateur(idUtilisateur);
+
+		// Affiche les champs de l'utilisateur
+	afficherChamps(idUtilisateur)
 	.then(_ => {
-		activerBouton(contIdButtons[3][0], contIdButtons[3][1],
-			contIdButtons[3][2]);
-		helperAfficherGraph();
-	})
+		// Active les boutons des champs
+		activerBouton(contIdButtons[0][0], contIdButtons[0][1],
+			contIdButtons[0][2]);
+		
+		/*
+		 * Active la fonction de changement de champ pour charger les nouveaux
+		 * ilots dans le dropdown
+		 */
+		activerBoutonChgmtChamp(idUtilisateur);
+
+		// Affiche la météo (nécessite de connaitre le champ sélectionné)
+		afficherMeteo();
+
+		// Affiche les ilots du champ sélectionné
+		afficherIlots(idUtilisateur)
+		.then(_ => {
+			// Active les boutons des ilots
+			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
+				contIdButtons[3][2]);
+
+			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
+			helperAfficherGraph();
+		});
+	});
+
 	// afficherInfosChamp();
 	// afficherMoyennes();
-	afficherMeteo();
-	
 	// afficherTableauToutesMesures();
+
 
 	/*** Interaction des boutons ***/
 		// Bouton pour changer la temporalité de la météo

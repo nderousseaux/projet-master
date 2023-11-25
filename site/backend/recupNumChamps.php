@@ -1,30 +1,17 @@
-<?
-/* === recupNumChamps.php === */
+<?php
 
-// Ordre 2
-
-// Récupère les champs envoyés dans la requête
-// Vérification de leur existence
-if (!($_POST["idUtilisateur"])) {
-	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
+// Vérifie que le champ est présent
+if (!(isset($_POST["idUtilisateur"]))) {
+	$erreur = array("Erreur", "Champ manquant dans la requête");
 	echo json_encode($erreur);
 	exit();
 }
-// Vérification du type de donnée entré
+
+// Vérifie que le champ est numérique
 if (!(is_numeric($_POST["idUtilisateur"]))) {
-    $erreur = array("Erreur", "Type du champ ID Utilisateur, non reconnu");
+	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
-// Vérification du type de donnée des boutons
-if (!(
-    $_POST["typeMesures"] === "idUser"  // A MODIF (voir BDD)
-    )
-) {
-    $erreur = array("Erreur", "Type d'utilisateur non reconnu");
-    echo json_encode($erreur);
-    exit();
-}
 
-// Requête à MongoDB
-// TODO
+/* Requête MongoDB à faire */

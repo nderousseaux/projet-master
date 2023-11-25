@@ -54,3 +54,6 @@ if (MODE_LOCAL) {
 		exit();
 	}
 }
+else {
+	/* Requête MongoDB */
+}

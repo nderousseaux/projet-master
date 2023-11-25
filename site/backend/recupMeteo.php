@@ -3,6 +3,23 @@
 // Rester en local pour le debug (API ayant une limite de requêtes)
 const MODE_LOCAL = true;
 
+// Vérifie que les champs sont présents
+if (!(
+	isset($_POST["numChamp"]) &&
+	isset($_POST["duree"])
+)) {
+	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
+	echo json_encode($erreur);
+	exit();
+}
+
+// Vérifie que le champ est numérique
+if (!(is_numeric($_POST["numChamp"]))) {
+	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
+	echo json_encode($erreur);
+	exit();
+}
+
 // Récupère les champs envoyés dans la requête
 if ($_POST["duree"] === "jour") {
 	$duree = "today";
@@ -21,6 +38,11 @@ else {
 // Coordonnées à récupérer dans la base de données
 const LATITUDE = 48.52854;
 const LONGITUDE = 7.711011;
+
+/*
+	Requête MongoDB à faire
+	Il faut récupérer la latitude et la longitude du champ
+*/
 
 if (MODE_LOCAL === false) {
 	$cleAPI = @file_get_contents("./cleAPI.txt");

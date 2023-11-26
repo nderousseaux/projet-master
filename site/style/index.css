@@ -302,9 +302,10 @@ header > section:last-child .dropbtn {
 	flex-direction: column;
 	padding: 0 5px 0 0;
 	width: 80px;
-	height: 50px;
 }
 #secMeteo > div > .titre:first-child > p {
+	display: flex;
+	align-items: center;
 	font-size: 14px;
 	margin: 0;
 	padding-top: 5px;
@@ -453,9 +454,24 @@ header > section:last-child .dropbtn {
 
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
+	/* Général */
+		/* Tableaux */
+	.tableau > div {
+		grid-auto-rows: unset;
+	}
+
 	/* Corps */
 	#corps > section {
 		width: 95%;
+	}
+
+		/* Section météo/moyenne */
+			/* Météo */
+				/* Météo */
+	#secMeteo > div {
+		grid-template-columns: 85px repeat(4, minmax(calc((100% - 85px * 3)/10),
+			1fr)) 85px 85px repeat(4, minmax(calc((100% - 85px * 3)/10),
+			1fr));
 	}
 }
 

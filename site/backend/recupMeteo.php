@@ -3,7 +3,7 @@
 use MongoDB\Driver\Manager;
 
 // Rester en local pour le debug (API ayant une limite de requêtes)
-const MODE_LOCAL = false;
+const MODE_LOCAL = true;
 
 // Vérifie que les champs sont présents
 if (!(

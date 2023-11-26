@@ -334,11 +334,18 @@ function cellulePrecip(objPrecip, cellule) {
 		cellule.textContent += "-";
 		return cellule;
 	}
-	for (const [_, valPrecip] of Object.entries(objPrecip)) {
+
+	const tailleObj = Object.keys(objPrecip).length;
+	for (const [index, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
 				cellule.textContent += valFr + " ";
 			}
+		}
+
+		// Ajoute un retour à la ligne, si ce n'est pas la dernière valeur
+		if (index < tailleObj - 1) {
+			cellule.textContent += "\n";
 		}
 	};
 

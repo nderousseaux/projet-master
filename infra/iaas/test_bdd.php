@@ -1,6 +1,10 @@
 <?php
-$mongo = new MongoDB\Client('mongodb://mongo1:30001');
-//Si pas de connexion, erreur
-$dbs = $mongo->listDatabases();
-echo json_encode("connection ok");
+try {
+    $client = new MongoDB\Client("mongodb://localhost:30001");
+
+    echo "Connexion à MongoDB réussie !";
+
+} catch (MongoDB\Driver\Exception\Exception $e) {
+    echo "Erreur MongoDB : " . $e->getMessage();
+}
 ?>

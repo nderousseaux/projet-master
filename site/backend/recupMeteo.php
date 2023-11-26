@@ -44,10 +44,21 @@ else {
 }
 
 // Coordonnées à récupérer dans la base de données
-
-$latitude;
-$longitude;
+$latitude = 0;
+$longitude = 0;
 if (MODE_LOCAL === false) {
+	// Si le fichier n'existe pas, renvoi une erreur
+	$fichierCleAPI = "./cleAPI.txt";
+	$cleAPI = "";
+	if (file_exists($fichierCleAPI)) {
+		$cleAPI = @file_get_contents($fichierCleAPI);
+	}
+	else {
+		$erreur = array("Erreur", "Fichier non trouvé");
+		echo json_encode($erreur);
+		exit();
+	}
+
 	// Connexion à MongoDB
 	$uri = "mongodb://localhost:30001";
 
@@ -73,7 +84,7 @@ if (MODE_LOCAL === false) {
 		$coordonnees = $element->champs->coordonnees;
 	}
 
-	// Renvoi le nombre d'ilots
+	// Récupère les coordonnées du champ
 	$numChamp = $_POST["numChamp"];
 	if (isset($coordonnees[$numChamp])) {
 		$latitude = $coordonnees[$numChamp][0];
@@ -81,26 +92,6 @@ if (MODE_LOCAL === false) {
 	}
 	else {
 		$erreur = array("Erreur", "Index invalide");
-		echo json_encode($erreur);
-		exit();
-	}
-}
-
-if (MODE_LOCAL === true) {
-	if ($_POST["duree"] === "jour") {
-		$reponse = @file_get_contents("./json/donneesMeteoJour.json");
-	}
-	else {
-		$reponse = @file_get_contents("./json/donneesMeteoSemaine.json");
-	}
-	
-}
-else {
-	$cleAPI = @file_get_contents("./cleAPI.txt");
-
-	// Si le fichier n'existe pas, renvoi une erreur
-	if ($cleAPI === false) {
-		$erreur = array("Erreur", "Récupération de la clé API");
 		echo json_encode($erreur);
 		exit();
 	}
@@ -112,6 +103,30 @@ else {
 	"%2Ctempmin%2Ctemp%2Chumidity%2Cprecip%2Cpreciptype%2Cwindspeedmean%2C" .
 	"winddir%2Ccloudcover%2Cuvindex&include=" . $granularite .
 	"&key=" . $cleAPI .	"&contentType=json");
+}
+else {
+	if ($_POST["duree"] === "jour") {
+		$fichierDonnees = "./json/donneesMeteoJour.json";
+		if (file_exists($fichierDonnees)) {
+			$reponse = @file_get_contents($fichierDonnees);
+		}
+		else {
+			$erreur = array("Erreur", "Fichier non trouvé");
+			echo json_encode($erreur);
+			exit();
+		}
+	}
+	else {
+		$fichierDonnees = "./json/donneesMeteoSemaine.json";
+		if (file_exists($fichierDonnees)) {
+			$reponse = @file_get_contents($fichierDonnees);
+		}
+		else {
+			$erreur = array("Erreur", "Fichier non trouvé");
+			echo json_encode($erreur);
+			exit();
+		}
+	}
 }
 
 // Renvoi l'erreur HTTP, si la requête a échoué

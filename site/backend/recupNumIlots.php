@@ -57,4 +57,5 @@ if (isset($ilots[$numChamp])) {
 else {
 	$erreur = array("Erreur", "Index invalide");
 	echo json_encode($erreur);
+	exit();
 }

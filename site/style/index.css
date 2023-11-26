@@ -108,11 +108,12 @@ p {
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
-	padding-bottom: 10px;;
+	padding-bottom: 10px;
 }
 .tableau > div {
 	display: grid;
 	grid-gap: 2px 0;
+	grid-auto-rows: minmax(50px, auto);
 	width: calc(100% - 20px);
 	padding: 10px 10px 0 10px;
 	overflow: unset;
@@ -120,12 +121,11 @@ p {
 .tableau > div:last-child {
 	overflow: auto;
 }
-.colonne {
+.cellule {
 	display: flex;
 	font-size: 14px;
 	width: calc(100% - 10px);
 	padding: 5px;
-	height: 40px;
 	background-color: #ffffff;
 	align-items: center;
 	justify-content: center;
@@ -135,50 +135,50 @@ p {
 	background-color: #04aa6d !important;
 	color: #ffffff;
 }
-#secMeteo > div > .colonne:nth-child(22n+1),
-#secMeteo > div > .colonne:nth-child(22n+2),
-#secMeteo > div > .colonne:nth-child(22n+3),
-#secMeteo > div > .colonne:nth-child(22n+4),
-#secMeteo > div > .colonne:nth-child(22n+5),
-#secMeteo > div > .colonne:nth-child(22n+6),
-#secMeteo > div > .colonne:nth-child(22n+7),
-#secMeteo > div > .colonne:nth-child(22n+8),
-#secMeteo > div > .colonne:nth-child(22n+9),
-#secMeteo > div > .colonne:nth-child(22n+10),
-#secMeteo > div > .colonne:nth-child(22n+11),
-#secTableau > div > .colonne:nth-child(12n+1),
-#secTableau > div > .colonne:nth-child(12n+2),
-#secTableau > div > .colonne:nth-child(12n+3),
-#secTableau > div > .colonne:nth-child(12n+4),
-#secTableau > div > .colonne:nth-child(12n+5),
-#secTableau > div > .colonne:nth-child(12n+6) {
+#secMeteo > div > .cellule:nth-child(22n+1),
+#secMeteo > div > .cellule:nth-child(22n+2),
+#secMeteo > div > .cellule:nth-child(22n+3),
+#secMeteo > div > .cellule:nth-child(22n+4),
+#secMeteo > div > .cellule:nth-child(22n+5),
+#secMeteo > div > .cellule:nth-child(22n+6),
+#secMeteo > div > .cellule:nth-child(22n+7),
+#secMeteo > div > .cellule:nth-child(22n+8),
+#secMeteo > div > .cellule:nth-child(22n+9),
+#secMeteo > div > .cellule:nth-child(22n+10),
+#secMeteo > div > .cellule:nth-child(22n+11),
+#secTableau > div > .cellule:nth-child(12n+1),
+#secTableau > div > .cellule:nth-child(12n+2),
+#secTableau > div > .cellule:nth-child(12n+3),
+#secTableau > div > .cellule:nth-child(12n+4),
+#secTableau > div > .cellule:nth-child(12n+5),
+#secTableau > div > .cellule:nth-child(12n+6) {
 	background-color: #eeeeee;
 }
-#secMeteo > div > .colonne:nth-child(22n+12),
-#secMeteo > div > .colonne:nth-child(22n+13),
-#secMeteo > div > .colonne:nth-child(22n+14),
-#secMeteo > div > .colonne:nth-child(22n+15),
-#secMeteo > div > .colonne:nth-child(22n+16),
-#secMeteo > div > .colonne:nth-child(22n+17),
-#secMeteo > div > .colonne:nth-child(22n+18),
-#secMeteo > div > .colonne:nth-child(22n+19),
-#secMeteo > div > .colonne:nth-child(22n+20),
-#secMeteo > div > .colonne:nth-child(22n+21),
-#secMeteo > div > .colonne:nth-child(22n+22),
-#secTableau > div > .colonne:nth-child(12n+7),
-#secTableau > div > .colonne:nth-child(12n+8),
-#secTableau > div > .colonne:nth-child(12n+9),
-#secTableau > div > .colonne:nth-child(12n+10),
-#secTableau > div > .colonne:nth-child(12n+11),
-#secTableau > div > .colonne:nth-child(12n+12) {
+#secMeteo > div > .cellule:nth-child(22n+12),
+#secMeteo > div > .cellule:nth-child(22n+13),
+#secMeteo > div > .cellule:nth-child(22n+14),
+#secMeteo > div > .cellule:nth-child(22n+15),
+#secMeteo > div > .cellule:nth-child(22n+16),
+#secMeteo > div > .cellule:nth-child(22n+17),
+#secMeteo > div > .cellule:nth-child(22n+18),
+#secMeteo > div > .cellule:nth-child(22n+19),
+#secMeteo > div > .cellule:nth-child(22n+20),
+#secMeteo > div > .cellule:nth-child(22n+21),
+#secMeteo > div > .cellule:nth-child(22n+22),
+#secTableau > div > .cellule:nth-child(12n+7),
+#secTableau > div > .cellule:nth-child(12n+8),
+#secTableau > div > .cellule:nth-child(12n+9),
+#secTableau > div > .cellule:nth-child(12n+10),
+#secTableau > div > .cellule:nth-child(12n+11),
+#secTableau > div > .cellule:nth-child(12n+12) {
 	background-color: #fafafa;
 }
-#secMeteo > div > .colonne:nth-child(11n+11),
-#secTableau > div > .colonne:nth-child(6n+6) {
+#secMeteo > div > .cellule:nth-child(11n+11),
+#secTableau > div > .cellule:nth-child(6n+6) {
 	border-radius: 0 10px 10px 0;
 }
-#secMeteo > div > .colonne:nth-child(11n+1),
-#secTableau > div > .colonne:nth-child(6n+1) {
+#secMeteo > div > .cellule:nth-child(11n+1),
+#secTableau > div > .cellule:nth-child(6n+1) {
 	border-radius: 10px 0 0 10px;
 }
 
@@ -663,42 +663,42 @@ header > section:last-child .dropbtn {
 
 		/* Section météo/moyenne */
 			/* Météo */
-	#secMeteo > div > .colonne:nth-child(22n+1),
-	#secMeteo > div > .colonne:nth-child(22n+2),
-	#secMeteo > div > .colonne:nth-child(22n+3),
-	#secMeteo > div > .colonne:nth-child(22n+4),
-	#secMeteo > div > .colonne:nth-child(22n+5),
-	#secMeteo > div > .colonne:nth-child(22n+6),
-	#secMeteo > div > .colonne:nth-child(22n+7),
-	#secMeteo > div > .colonne:nth-child(22n+8),
-	#secMeteo > div > .colonne:nth-child(22n+9),
-	#secMeteo > div > .colonne:nth-child(22n+10),
-	#secMeteo > div > .colonne:nth-child(22n+11),
-	#secTableau > div > .colonne:nth-child(12n+1),
-	#secTableau > div > .colonne:nth-child(12n+2),
-	#secTableau > div > .colonne:nth-child(12n+3),
-	#secTableau > div > .colonne:nth-child(12n+4),
-	#secTableau > div > .colonne:nth-child(12n+5),
-	#secTableau > div > .colonne:nth-child(12n+6) {
+	#secMeteo > div > .cellule:nth-child(22n+1),
+	#secMeteo > div > .cellule:nth-child(22n+2),
+	#secMeteo > div > .cellule:nth-child(22n+3),
+	#secMeteo > div > .cellule:nth-child(22n+4),
+	#secMeteo > div > .cellule:nth-child(22n+5),
+	#secMeteo > div > .cellule:nth-child(22n+6),
+	#secMeteo > div > .cellule:nth-child(22n+7),
+	#secMeteo > div > .cellule:nth-child(22n+8),
+	#secMeteo > div > .cellule:nth-child(22n+9),
+	#secMeteo > div > .cellule:nth-child(22n+10),
+	#secMeteo > div > .cellule:nth-child(22n+11),
+	#secTableau > div > .cellule:nth-child(12n+1),
+	#secTableau > div > .cellule:nth-child(12n+2),
+	#secTableau > div > .cellule:nth-child(12n+3),
+	#secTableau > div > .cellule:nth-child(12n+4),
+	#secTableau > div > .cellule:nth-child(12n+5),
+	#secTableau > div > .cellule:nth-child(12n+6) {
 		background-color: #3c3c3c;
 	}
-	#secMeteo > div > .colonne:nth-child(22n+12),
-	#secMeteo > div > .colonne:nth-child(22n+13),
-	#secMeteo > div > .colonne:nth-child(22n+14),
-	#secMeteo > div > .colonne:nth-child(22n+15),
-	#secMeteo > div > .colonne:nth-child(22n+16),
-	#secMeteo > div > .colonne:nth-child(22n+17),
-	#secMeteo > div > .colonne:nth-child(22n+18),
-	#secMeteo > div > .colonne:nth-child(22n+19),
-	#secMeteo > div > .colonne:nth-child(22n+20),
-	#secMeteo > div > .colonne:nth-child(22n+21),
-	#secMeteo > div > .colonne:nth-child(22n+22),
-	#secTableau > div > .colonne:nth-child(12n+7),
-	#secTableau > div > .colonne:nth-child(12n+8),
-	#secTableau > div > .colonne:nth-child(12n+9),
-	#secTableau > div > .colonne:nth-child(12n+10),
-	#secTableau > div > .colonne:nth-child(12n+11),
-	#secTableau > div > .colonne:nth-child(12n+12) {
+	#secMeteo > div > .cellule:nth-child(22n+12),
+	#secMeteo > div > .cellule:nth-child(22n+13),
+	#secMeteo > div > .cellule:nth-child(22n+14),
+	#secMeteo > div > .cellule:nth-child(22n+15),
+	#secMeteo > div > .cellule:nth-child(22n+16),
+	#secMeteo > div > .cellule:nth-child(22n+17),
+	#secMeteo > div > .cellule:nth-child(22n+18),
+	#secMeteo > div > .cellule:nth-child(22n+19),
+	#secMeteo > div > .cellule:nth-child(22n+20),
+	#secMeteo > div > .cellule:nth-child(22n+21),
+	#secMeteo > div > .cellule:nth-child(22n+22),
+	#secTableau > div > .cellule:nth-child(12n+7),
+	#secTableau > div > .cellule:nth-child(12n+8),
+	#secTableau > div > .cellule:nth-child(12n+9),
+	#secTableau > div > .cellule:nth-child(12n+10),
+	#secTableau > div > .cellule:nth-child(12n+11),
+	#secTableau > div > .cellule:nth-child(12n+12) {
 		background-color: #1b1b1b;
 	}
 

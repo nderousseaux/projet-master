@@ -37,7 +37,7 @@ db.agriculteur.insertMany( [
         idAgri: 0,
         nomAgri: "agriDuRhin",
         champs: {
-            coordonnees: [[48.526617, 7.73894], [48.527, 7.739], [48.525, 7.737]],
+            coordonnees: [[48.526617, 7.73894], [51.034, 2.376], [48.525, 7.737]],
             ilots: [4, 3, 2]
         }
     },

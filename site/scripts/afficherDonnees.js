@@ -151,9 +151,10 @@ function afficherMoyennes() {
 /**
  * Affiche les données météo, récupérées dans le back
  *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {bool} - false si la durée est invalide
  */
-function afficherMeteo() {
+function afficherMeteo(idUtilisateur) {
 	const duree = document.getElementById("dureeSlct").value;
 	if (duree != "jour" && duree != "semaine") {
 		console.error("Durée invalide");
@@ -163,7 +164,7 @@ function afficherMeteo() {
 	// Types de températures possibles
 	const clesTemp = ["tempmin", "tempmax", "temp"];
 
-	// Titres des colonnes (dans l'ordre affiché)
+	// Titres des cellules (dans l'ordre affiché)
 	const ordreCles = [
 		"datetime", "tempmax", "tempmin", "temp", "humidity", "precip",
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
@@ -172,6 +173,7 @@ function afficherMeteo() {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("numChamp", numChamp);
 	champPost.append("duree", duree);
 
@@ -247,7 +249,7 @@ function afficherMeteo() {
 						celluleDirVent(valeur, cellule);
 					}
 
-					cellule.classList.add("colonne");
+					cellule.classList.add("cellule");
 					meteoDiv.appendChild(cellule);
 					index++;
 					nbrColonnes--;
@@ -285,7 +287,7 @@ function afficherTableauToutesMesures() {
 
 		donnees.forEach(mesure => {
 			const cellule = document.createElement("div");
-			cellule.classList.add("colonne");
+			cellule.classList.add("cellule");
 			cellule.textContent = mesure;
 			container.appendChild(cellule);
 		});
@@ -293,12 +295,12 @@ function afficherTableauToutesMesures() {
 }
 
 /**
- * Supprime toutes les données sauf la colonne de titre
+ * Supprime toutes les données sauf la ligne de titre
  */
 function supprimerMeteo() {
 	const meteoDiv = document.getElementById("donneesMeteo");
-	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
-	colonnes.forEach(colonne => colonne.remove());
+	const cellules = meteoDiv.querySelectorAll(".cellule:not(.titre)");
+	cellules.forEach(cellule => cellule.remove());
 }
 
 /**
@@ -309,7 +311,7 @@ function supprimerMeteo() {
  */
 function ajoutCellule(texte) {
 	const cellule = document.createElement("div");
-	cellule.classList.add("colonne");
+	cellule.classList.add("cellule");
 	cellule.textContent = texte;
 	return cellule;
 }
@@ -335,7 +337,7 @@ function cellulePrecip(objPrecip, cellule) {
 	for (const [_, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
-				cellule.textContent += valFr;
+				cellule.textContent += valFr + " ";
 			}
 		}
 	};

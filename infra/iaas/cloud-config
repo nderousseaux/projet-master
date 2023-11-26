@@ -11,14 +11,6 @@ bootcmd:
 repo_update: true
 repo_upgrade: all
 yum_repos:
-  epel:
-    name: Extra Packages for Enterprise Linux 9 - $basearch
-    baseurl: http://download.fedoraproject.org/pub/epel/9/$basearch
-    mirrorlist: https://mirrors.fedoraproject.org/metalink?repo=epel-9&arch=$basearch
-    failovermethod: priority
-    enabled: true
-    gpgcheck: true
-    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
   mongodb:
     name: MongoDB Repository
     baseurl: https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/$basearch/
@@ -28,9 +20,24 @@ yum_repos:
 
 package_upgrade: true
 packages:
+  - vim
+  - git
   - httpd
+  - php
+  - php-pear
+  - php-devel
   - mongodb-org-server
+  - mongodb-mongosh
 
 runcmd:
+  - pecl install mongodb
+  - echo "extension=mongodb.so" >> /etc/php.ini
   - systemctl enable httpd
   - systemctl start httpd
+  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - cp -r projet-master-23-24/site/* /var/www/html/
+  - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php 
+  - mkdir -p /data/mongo1 /data/mongo2 /data/mongo3
+  - cd projet-master-23-24 && git checkout infra && cd ..
+  - projet-master-23-24/infra/iaas/script_services_mongod.sh
+  - cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/

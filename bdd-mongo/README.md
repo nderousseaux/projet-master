@@ -54,21 +54,21 @@
         "idAgri": "IDa",
         "idChamps": "IDc",
         "horo": "date+heure",
-        "valMesures": ["humidité ilot 0", "humidité ilot 1", "..."]
+        "valeurs": ["humidité ilot 0", "humidité ilot 1", "..."]
     },
 
     "temp": {
         "idAgri": "IDa",
         "idChamps": "IDc",
         "horo": "date+heure",
-        "valMesures": ["température ilot 0", "température ilot 1", "..."]
+        "valeurs": ["température ilot 0", "température ilot 1", "..."]
     },
 
     "lumi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
         "horo": "date+heure",
-        "valMesures": ["luminosité ilot 0", "luminosité ilot 1", "..."]
+        "valeurs": ["luminosité ilot 0", "luminosité ilot 1", "..."]
     }
 }
 ```

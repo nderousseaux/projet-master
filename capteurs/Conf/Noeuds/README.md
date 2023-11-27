@@ -1,5 +1,5 @@
 # Configuration d'un noeud 
-[Tuto](https://en.wikipedia.org/wiki/IEEE_802.11s)
+[Tuto](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/PIMESH.md#setup-batman-adv)
 
 ## Batman-adv
 [Batman-adc wiki](https://www.open-mesh.org/projects/open-mesh/wiki)

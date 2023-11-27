@@ -27,13 +27,12 @@ Ici nous sommes sur le channel 1 (Europe)
 
 ## Mise en place du noeud
 
-[Documentation](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/PIMESH.md#setup-batman-adv)
+- [Documentation](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/PIMESH.md#setup-batman-adv)
+- [Description](Noeuds/README.md)
 
 ## Mise en place du gateway
 
-Faire le tuto du dessus, puis faire celui [là](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/ROUTE.md#creating-the-gateway)
-
-[Pour lancer le gateway](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/ROUTE.md#boot-the-mesh-network)
+[Tuto](Gateway/README.md)
 
 ## Pour que build.sh fonctionne
 
@@ -55,3 +54,4 @@ sudo apt update
 sudo apt upgrade
 # Sinon la RPI une fois éteinte, ne s'allume plus.
 ```
+

@@ -66,7 +66,7 @@ foreach ($resultattemp as $element) {
 	}
 	// Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}
@@ -85,7 +85,7 @@ foreach ($resultathumi as $element) {
 	}
 	// Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}
@@ -104,7 +104,7 @@ foreach ($resultatlumi as $element) {
 	}
 	//Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}

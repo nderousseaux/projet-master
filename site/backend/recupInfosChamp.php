@@ -39,9 +39,7 @@ $filtre = [
 ];
 
 // Défini la projection
-//vesion pour le main avec plusieurs dates:
-//$options = ["projections" => ["dates" => 1]];
-$options = ["projection" => ["date" => 1]];
+$options = ["projections" => ["dates" => 1]];
 
 // Créé la requête
 $requete = new MongoDB\Driver\Query($filtre, $options);
@@ -58,22 +56,19 @@ $countko = 0;
 
 foreach ($resultattemp as $element) {
 	if (isset($element)) {
-		// version pour le main avec plusieurs dates : 
-		// foreach($element->dates as $date)
-		foreach ($element->date as $date) {
-			$dbdate = new MongoDB\BSON\UTCDateTime($date);
+		foreach($element->dates as $dbdate) {
 			// Date sous format millisecondes depuis l'epoch
 			$gap = $curdate->diff($dbdate->toDateTime());
 
 			// Si dernier valeur du capteur date de plus de 30 minutes, ko
-			if ($gap->format('%i') > 30)
+			if ($gap->format("%i") > 30)
 				$countko = $countko + 1;
 			$count = $count + 1;
 		}
 	}
 	//Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}
@@ -81,22 +76,19 @@ foreach ($resultattemp as $element) {
 
 foreach ($resultathumi as $element) {
 	if (isset($element)) {
-		// version pour le main avec plusieurs dates : 
-		// foreach($element->dates as $date)
-		foreach ($element->date as $date) {
-			$dbdate = new MongoDB\BSON\UTCDateTime($date);
+		foreach($element->dates as $dbdate) {
 			// Date sous format millisecondes depuis l'epoch
 			$gap = $curdate->diff($dbdate->toDateTime());
 
 			// Si dernier valeur du capteur date de plus de 30 minutes, ko
-			if ($gap->format('%i') > 30)
+			if ($gap->format("%i") > 30)
 				$countko = $countko + 1;
 			$count = $count + 1;
 		}
 	}
 	//Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}
@@ -104,22 +96,19 @@ foreach ($resultathumi as $element) {
 
 foreach ($resultatlumi as $element) {
 	if (isset($element)) {
-		// version pour le main avec plusieurs dates : 
-		// foreach($element->dates as $date)
-		foreach ($element->date as $date) {
-			$dbdate = new MongoDB\BSON\UTCDateTime($date);
+		foreach($element->dates as $dbdate) {
 			// Date sous format millisecondes depuis l'epoch
 			$gap = $curdate->diff($dbdate->toDateTime());
 
 			// Si dernier valeur du capteur date de plus de 30 minutes, ko
-			if ($gap->format('%i') > 30)
+			if ($gap->format("%i") > 30)
 				$countko = $countko + 1;
 			$count = $count + 1;
 		}
 	}
 	//Si pas de retour de la bdd, erreur
 	else {
-		$erreur = array("Erreur", "Retour vide de la bdd.");
+		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);
 		exit();
 	}

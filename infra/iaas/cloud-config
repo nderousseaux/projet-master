@@ -34,6 +34,13 @@ runcmd:
   - echo "extension=mongodb.so" >> /etc/php.ini
   - systemctl enable httpd
   - systemctl start httpd
+  - cd /var/www/html/
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php');"
+  - mv composer.phar /bin/composer
+  - composer require mongodb/mongodb
+  - cd
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
   - cp -r projet-master-23-24/site/* /var/www/html/
   - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php 

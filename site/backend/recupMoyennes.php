@@ -1,5 +1,4 @@
 <?php
-/* === recupMoyennes.php === */
 
 // Récupère les moyennes des mesures du champ envoyés dans la requête
 // Vérification de leur existence
@@ -40,19 +39,19 @@ $options = ["projection" => ["valeurs" => 1]];
 // Créé la requête
 $requete = new MongoDB\Driver\Query($filtre, $options);
 
-// Exécute la requête et récupère le résultat
+// Exécute la requête pour chaque type de capteur et récupère le résultat
 $resultattemp = $client->executeQuery("data.temp", $requete);
 $resultathumi = $client->executeQuery("data.humi", $requete);
 $resultatlumi = $client->executeQuery("data.lumi", $requete);
-// Traite les données
+
+// Traitement des données
 $count = 0;
 $temps = float;
 $humis = float;
 $lumis = float;
 
-//Calcul moyenne températures
+// Calcul moyenne températures
 foreach ($resultattemp as $element) {
-	// Accède à la propriété "valeurs" dans le champ "champs"
 	//S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
@@ -60,33 +59,49 @@ foreach ($resultattemp as $element) {
 			$count += 1;
 		}
 	}
+	// Si pas de retour de la bdd, erreur
+	else {
+		$erreur = array("Erreur", "Retour vide de la bdd.");
+		echo json_encode($erreur);
+		exit();
+	}
 }
 $moytemp = $temps / $count;
-$count = 0;
 
-//Calcul moyenne humidite
+$count = 0;
+// Calcul moyenne humidite
 foreach ($resultathumi as $element) {
-	//S'il y a des valeurs on les additionne pour la moyenne
+	// S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
     		$humis = $humis + floatval($mesure);
 			$count += 1;
 		}
 	}
+	// Si pas de retour de la bdd, erreur
+	else {
+		$erreur = array("Erreur", "Retour vide de la bdd.");
+		echo json_encode($erreur);
+		exit();
+	}
 }
 $moyhumi = $humis / $count;
-$count = 0;
 
-//Calcul moyenne luminosite
+$count = 0;
+// Calcul moyenne luminosite
 foreach ($resultatlumi as $element) {
-	// Accède à la propriété "valeurs" dans le champ "champs"
-    //[25.1234,26.3415,28.2684,23.1679]
-	//S'il y a des valeurs on les additionne pour la moyenne
+	// S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
     		$lumis = $lumis + floatval($mesure);
 			$count += 1;
 		}
+	}
+	//Si pas de retour de la bdd, erreur
+	else {
+		$erreur = array("Erreur", "Retour vide de la bdd.");
+		echo json_encode($erreur);
+		exit();
 	}
 }
 $moylumi = $lumis / $count;

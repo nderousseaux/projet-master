@@ -87,11 +87,12 @@ function afficherIlots(idUtilisateur) {
 /**
  * Affiche les infos du champ sélectionné
  */
-function afficherInfosChamp() {
+function afficherInfosChamp(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
 	/*
 	 * Récupère :
@@ -127,11 +128,12 @@ function afficherInfosChamp() {
  * Affiche les moyennes de température, d'humidité et de luminosité pour le
  * champ indiqué
  */
-function afficherMoyennes() {
+function afficherMoyennes(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
 	recupDonnees(champPost, "recupMoyennes.php")
 	.then(donnees => {

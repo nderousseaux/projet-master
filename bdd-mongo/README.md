@@ -44,7 +44,7 @@
         "idAgri": "IDa",
         "nomAgri": "NOMa",
         "champs": {
-            "coords" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
+            "coordonnees" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
             "ilots": ["nb ilots champs 0", "nb ilots champs 1", "..."]
         }
 
@@ -53,21 +53,21 @@
     "humi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
+        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
         "valeurs": ["humidité ilot 0", "humidité ilot 1", "..."]
     },
 
     "temp": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
+        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
         "valeurs": ["température ilot 0", "température ilot 1", "..."]
     },
 
     "lumi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
+        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
         "valeurs": ["luminosité ilot 0", "luminosité ilot 1", "..."]
     }
 }

@@ -44,26 +44,52 @@ $requete = new MongoDB\Driver\Query($filtre, $options);
 $resultattemp = $client->executeQuery("data.temp", $requete);
 $resultathumi = $client->executeQuery("data.humi", $requete);
 $resultatlumi = $client->executeQuery("data.lumi", $requete);
-
 // Traite les données
 $count = 0;
 $temps = float;
 $humis = float;
-$lumis = float();
+$lumis = float;
+
+//Calcul moyenne températures
 foreach ($resultattemp as $element) {
 	// Accède à la propriété "valeurs" dans le champ "champs"
-    //les champs sont sous formes d'un tableau
-	$element->valeurs;
-    $count += 1;
-    echo json_encode($element->valeurs);
+	//S'il y a des valeurs on les additionne pour la moyenne
+	if (isset($element)) {
+		foreach ($element->valeurs as $mesure) {
+    		$temps = $temps + floatval($mesure);
+			$count += 1;
+		}
+	}
 }
+$moytemp = $temps / $count;
+$count = 0;
 
-// Renvoi le nombre d'ilots
-$numChamp = $_POST["numChamp"];
-if (isset($ilots[$numChamp])) {
-	echo json_encode($ilots[$numChamp]);
+//Calcul moyenne humidite
+foreach ($resultathumi as $element) {
+	//S'il y a des valeurs on les additionne pour la moyenne
+	if (isset($element)) {
+		foreach ($element->valeurs as $mesure) {
+    		$humis = $humis + floatval($mesure);
+			$count += 1;
+		}
+	}
 }
-else {
-	$erreur = array("Erreur", "Index invalide");
-	echo json_encode($erreur);
+$moyhumi = $humis / $count;
+$count = 0;
+
+//Calcul moyenne luminosite
+foreach ($resultatlumi as $element) {
+	// Accède à la propriété "valeurs" dans le champ "champs"
+    //[25.1234,26.3415,28.2684,23.1679]
+	//S'il y a des valeurs on les additionne pour la moyenne
+	if (isset($element)) {
+		foreach ($element->valeurs as $mesure) {
+    		$lumis = $lumis + floatval($mesure);
+			$count += 1;
+		}
+	}
 }
+$moylumi = $lumis / $count;
+
+// Renvoi les moyennes de temperature, humidite et luminosite
+echo json_encode(array($moytemp, $moyhumi, $moylumi));

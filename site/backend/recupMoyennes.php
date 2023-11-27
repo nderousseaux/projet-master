@@ -10,12 +10,12 @@ if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
 
 // Vérifie que les entrées sont de type numérique
 if (!(is_numeric($_POST["numChamp"]))) {
-    $erreur = array("Erreur", "Type du numéro de champ non reconnu");
+	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
 if (!(is_numeric($_POST["idUtilisateur"]))) {
-    $erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
+	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
@@ -29,8 +29,8 @@ $client = new MongoDB\Driver\Manager($uri);
 
 // Défini le filtre
 $filtre = [
-    "idAgri" => intval($_POST["idUtilisateur"]),
-    "idChamps" => intval($_POST["numChamp"]),
+	"idAgri" => intval($_POST["idUtilisateur"]),
+	"idChamps" => intval($_POST["numChamp"]),
 ];
 
 // Défini les projections
@@ -46,16 +46,16 @@ $resultatlumi = $client->executeQuery("data.lumi", $requete);
 
 // Traitement des données
 $count = 0;
-$temps = float;
-$humis = float;
-$lumis = float;
+$temps = 0.0;
+$humis = 0.0;
+$lumis = 0;
 
 // Calcul moyenne températures
 foreach ($resultattemp as $element) {
 	//S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
-    		$temps = $temps + floatval($mesure);
+			$temps = $temps + floatval($mesure);
 			$count += 1;
 		}
 	}
@@ -74,7 +74,7 @@ foreach ($resultathumi as $element) {
 	// S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
-    		$humis = $humis + floatval($mesure);
+			$humis = $humis + floatval($mesure);
 			$count += 1;
 		}
 	}
@@ -93,7 +93,7 @@ foreach ($resultatlumi as $element) {
 	// S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
 		foreach ($element->valeurs as $mesure) {
-    		$lumis = $lumis + floatval($mesure);
+			$lumis = $lumis + floatval($mesure);
 			$count += 1;
 		}
 	}
@@ -107,4 +107,8 @@ foreach ($resultatlumi as $element) {
 $moylumi = $lumis / $count;
 
 // Renvoi les moyennes de temperature, humidite et luminosite
+$moytemp = round($moytemp, 1);
+$moyhumi = round($moyhumi, 1);
+$moylumi = round($moylumi, 1);
+
 echo json_encode(array($moytemp, $moyhumi, $moylumi));

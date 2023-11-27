@@ -70,6 +70,8 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 	buttons.forEach(button => {
 		button.addEventListener("click", _ => {
 			afficherMeteo(idUtilisateur);
+			afficherMoyennes(idUtilisateur);
+			afficherInfosChamp(idUtilisateur);
 
 			afficherIlots(idUtilisateur)
 			.then(_ => {

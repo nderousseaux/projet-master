@@ -16,7 +16,7 @@
 <header>
 	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
 	<section>
-		<p></p>
+		<p>-</p>
 		<div class="dropdown" id="ddChamp">
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdown-content">
@@ -24,7 +24,7 @@
 		</div>
 	</section>
 	<section>
-		<p></p>
+		<p>-</p>
 		<div class="dropdown" id="ddCmpt">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdown-content">
@@ -38,19 +38,19 @@
 	<section id="secInfos">
 		<div>
 			<h1>État général</h1>
-			<p>OK</p>
+			<p>-</p>
 		</div>
 		<div>
 			<h1>Nombre de capteurs (actifs/total)</h1>
 			<div id="nbrCapteurs">
-				<p>40</p>
+				<p>-</p>
 				<p>/</p>
-				<p>42</p>
+				<p>-</p>
 			</div>
 		</div>
 		<div>
 			<h1>Dernière màj</h1>
-			<p>2023-11-16 18:10:13</p>
+			<p>-</p>
 		</div>
 	</section>
 
@@ -86,15 +86,15 @@
 		<section id="secMoyennes">
 			<div>
 				<h1>Température moyenne</h1>
-				<p>12.3°C</p>
+				<p>-</p>
 			</div>
 			<div>
 				<h1>Humidité moyenne du sol</h1>
-				<p>58.4%</p>
+				<p>-</p>
 			</div>
 			<div>
 				<h1>Luminosité moyenne</h1>
-				<p>12300 lux</p>
+				<p>-</p>
 			</div>
 		</section>
 	</section>
@@ -246,6 +246,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Affiche la météo (nécessite de connaitre le champ sélectionné)
 		afficherMeteo(idUtilisateur);
 
+		// Affiche les moyennes des valeurs des capteurs
+		afficherMoyennes(idUtilisateur);
+		afficherInfosChamp(idUtilisateur);
+
 		// Affiche les ilots du champ sélectionné
 		afficherIlots(idUtilisateur)
 		.then(_ => {
@@ -256,9 +260,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
 			helperAfficherGraph();
 		});
-		// Affiche les moyennes des valeurs des capteurs
-		afficherMoyennes(idUtilisateur);
-		afficherInfosChamp(idUtilisateur);
 	});
 
 	// afficherTableauToutesMesures();

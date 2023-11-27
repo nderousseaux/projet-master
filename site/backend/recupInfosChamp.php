@@ -10,12 +10,12 @@ if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
 
 // Vérifie que les entrées sont de type numérique
 if (!(is_numeric($_POST["numChamp"]))) {
-    $erreur = array("Erreur", "Type du numéro de champ non reconnu");
+	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
 if (!(is_numeric($_POST["idUtilisateur"]))) {
-    $erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
+	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
@@ -29,8 +29,8 @@ $client = new MongoDB\Driver\Manager($uri);
 
 // Défini le filtre
 $filtre = [
-    "idAgri" => intval($_POST["idUtilisateur"]),
-    "idChamps" => intval($_POST["numChamp"]),
+	"idAgri" => intval($_POST["idUtilisateur"]),
+	"idChamps" => intval($_POST["numChamp"]),
 ];
 
 // Défini la projection
@@ -119,6 +119,10 @@ foreach ($resultatlumi as $element) {
 		exit();
 	}
 }
+
 $status = ($countko == $count ? "KO" :"OK");
+
 // Renvoi le statut des capteurs du champ
-echo json_encode(array($status, $count-$countko , $count, $curdate->format('c')));
+$localDate = $curdate->setTimezone(new DateTimeZone("Europe/Paris"))->
+	format("Y-m-d H:i:s");
+echo json_encode(array($status, $count-$countko , $count, $localDate));

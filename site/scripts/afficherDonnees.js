@@ -86,6 +86,8 @@ function afficherIlots(idUtilisateur) {
 
 /**
  * Affiche les infos du champ sélectionné
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
 function afficherInfosChamp(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
@@ -127,6 +129,8 @@ function afficherInfosChamp(idUtilisateur) {
 /**
  * Affiche les moyennes de température, d'humidité et de luminosité pour le
  * champ indiqué
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
 function afficherMoyennes(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
@@ -137,12 +141,12 @@ function afficherMoyennes(idUtilisateur) {
 
 	recupDonnees(champPost, "recupMoyennes.php")
 	.then(donnees => {
-		const cellTemp = document.querySelector("#secMoyennes > div > " +
-			"p:first-child");
-		const cellHumi = document.querySelector("#secMoyennes > div > " +
-			"p:nth-child(2)");
-		const cellLumi = document.querySelector("#secMoyennes > div > " +
-			"p:last-child");
+		const cellTemp = document.querySelector("#secMoyennes > " +
+			"div:first-child > p");
+		const cellHumi = document.querySelector("#secMoyennes > " +
+			"div:nth-child(2) > p");
+		const cellLumi = document.querySelector("#secMoyennes > " +
+			"div:last-child > p");
 
 		cellTemp.textContent = donnees[0] + "°C";
 		cellHumi.textContent = donnees[1] + "%";

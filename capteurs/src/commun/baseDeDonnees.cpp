@@ -273,7 +273,7 @@ int BaseDeDonnees::conversionDBversChar(char *buffer) {
 
 int BaseDeDonnees::envoiBDD() {
 	// TODO : mettre le bon chemin !
-	const char chemin_distant_vers_BDD[] = "./bdd";
+	const char chemin_distant_vers_BDD[] = "/.bdd";
 
 	int err = libssh2_init(0);
 	if (err < 0) {

@@ -20,7 +20,6 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 				if (btn.value === valeurSelectionnee) {
 					btn.classList.add("selected");
 					btn.setAttribute("id", idAttr);
-					
 
 					/*
 					 * Si le bouton sélectionné est celui du champ, afficher
@@ -48,6 +47,10 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 		) {
 			button.classList.add("selected");
 			button.setAttribute("id", idAttr);
+
+			if (idContainer === "selectChamp") {
+				afficherNomChamp();
+			}
 		}
 	});
 }
@@ -66,6 +69,8 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 
 	buttons.forEach(button => {
 		button.addEventListener("click", _ => {
+			afficherMeteo(idUtilisateur);
+
 			afficherIlots(idUtilisateur)
 			.then(_ => {
 				// Active les boutons des ilots

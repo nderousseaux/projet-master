@@ -95,30 +95,31 @@ function afficherInfosChamp() {
 
 	/*
 	 * Récupère :
-	 * - Date la plus récente de mesure d'un capteur (récente)
-	 * - Date la plus récente de mesure d'un capteur (ancienne)
-	 *   -> Permet de faire la différence entre les deux et d'afficher l'état
-	 * - Nombre de capteurs
+	 * - OK ou ERR, en fonction de si un capteur répond plus depuis plus de
+	 *   30 minutes, par rapport à la mesure la plus récente de tous les
+	 *   capteurs
+	 * - Nombre de capteurs actifs
+	 * - Nombre de capteurs total
+	 * - Date de la requête dans le back (UTC ou heure locale FR, en fonction
+	 *   des autres dates)
 	 */
 	recupDonnees(champPost, "recupInfosChamp.php")
 	.then(donnees => {
 		// État général du champ
-		if (donnees[0] - donnees[1] < 1) {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "OK";
-		}
-		else {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "Err";
-		}
+		document.querySelector("#secInfos > div:first-child > p")
+			.textContent = donnees[0];
 
-		// Nombre de capteurs
-		document.querySelector("#secInfos > div:nth-child(2) > p")
+		// Nombre de capteurs actifs
+		document.querySelector("#nbrCapteurs > p:first-child")
+			.textContent = donnees[1];
+		
+		// Nombre de capteurs total
+		document.querySelector("#nbrCapteurs > p:last-child")
 			.textContent = donnees[2];
 
 		// Dernière mise à jour
 		document.querySelector("#secInfos > div:last-child > p")
-			.textContent = donnees[0];
+			.textContent = donnees[3];
 	});
 }
 
@@ -150,9 +151,10 @@ function afficherMoyennes() {
 /**
  * Affiche les données météo, récupérées dans le back
  *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {bool} - false si la durée est invalide
  */
-function afficherMeteo() {
+function afficherMeteo(idUtilisateur) {
 	const duree = document.getElementById("dureeSlct").value;
 	if (duree != "jour" && duree != "semaine") {
 		console.error("Durée invalide");
@@ -162,7 +164,7 @@ function afficherMeteo() {
 	// Types de températures possibles
 	const clesTemp = ["tempmin", "tempmax", "temp"];
 
-	// Titres des colonnes (dans l'ordre affiché)
+	// Titres des cellules (dans l'ordre affiché)
 	const ordreCles = [
 		"datetime", "tempmax", "tempmin", "temp", "humidity", "precip",
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
@@ -171,6 +173,7 @@ function afficherMeteo() {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("numChamp", numChamp);
 	champPost.append("duree", duree);
 
@@ -246,7 +249,7 @@ function afficherMeteo() {
 						celluleDirVent(valeur, cellule);
 					}
 
-					cellule.classList.add("colonne");
+					cellule.classList.add("cellule");
 					meteoDiv.appendChild(cellule);
 					index++;
 					nbrColonnes--;
@@ -284,7 +287,7 @@ function afficherTableauToutesMesures() {
 
 		donnees.forEach(mesure => {
 			const cellule = document.createElement("div");
-			cellule.classList.add("colonne");
+			cellule.classList.add("cellule");
 			cellule.textContent = mesure;
 			container.appendChild(cellule);
 		});
@@ -292,12 +295,12 @@ function afficherTableauToutesMesures() {
 }
 
 /**
- * Supprime toutes les données sauf la colonne de titre
+ * Supprime toutes les données sauf la ligne de titre
  */
 function supprimerMeteo() {
 	const meteoDiv = document.getElementById("donneesMeteo");
-	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
-	colonnes.forEach(colonne => colonne.remove());
+	const cellules = meteoDiv.querySelectorAll(".cellule:not(.titre)");
+	cellules.forEach(cellule => cellule.remove());
 }
 
 /**
@@ -308,7 +311,7 @@ function supprimerMeteo() {
  */
 function ajoutCellule(texte) {
 	const cellule = document.createElement("div");
-	cellule.classList.add("colonne");
+	cellule.classList.add("cellule");
 	cellule.textContent = texte;
 	return cellule;
 }
@@ -331,11 +334,18 @@ function cellulePrecip(objPrecip, cellule) {
 		cellule.textContent += "-";
 		return cellule;
 	}
-	for (const [_, valPrecip] of Object.entries(objPrecip)) {
+
+	const tailleObj = Object.keys(objPrecip).length;
+	for (const [index, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
-				cellule.textContent += valFr;
+				cellule.textContent += valFr + " ";
 			}
+		}
+
+		// Ajoute un retour à la ligne, si ce n'est pas la dernière valeur
+		if (index < tailleObj - 1) {
+			cellule.textContent += "\n";
 		}
 	};
 

@@ -1,5 +1,7 @@
 <?php
 
+use MongoDB\Driver\Manager;
+
 // Vérifie que les champs sont présents
 if (!(
 	isset($_POST["idUtilisateur"]) &&
@@ -23,7 +25,6 @@ if (!is_numeric($_POST["numChamp"])) {
 }
 
 // Connexion à MongoDB
-use MongoDB\Driver\Manager;
 $uri = "mongodb://localhost:30001";
 
 // Créé le client
@@ -56,4 +57,5 @@ if (isset($ilots[$numChamp])) {
 else {
 	$erreur = array("Erreur", "Index invalide");
 	echo json_encode($erreur);
+	exit();
 }

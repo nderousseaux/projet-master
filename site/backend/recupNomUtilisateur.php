@@ -1,5 +1,7 @@
 <?php
 
+use MongoDB\Driver\Manager;
+
 // Vérifie que le champ est présent
 if (!(isset($_POST["idUtilisateur"]))) {
 	$erreur = array("Erreur", "Champ manquant dans la requête");
@@ -15,7 +17,6 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 }
 
 // Connexion à MongoDB
-use MongoDB\Driver\Manager;
 $uri = "mongodb://localhost:30001";
 
 // Créé le client

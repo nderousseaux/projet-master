@@ -53,7 +53,9 @@ runcmd:
   - cd /
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
   - chmod 777 projet-master-23-24/
-  - git config --global --add safe.directory '*'
+  - git config --system --add safe.directory '*'
+  - chown -R apache projet-master-23-24/
+  - chown -R apache projet-master-23-24/.git/
   - cp -r projet-master-23-24/site/* /var/www/html/
   - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php
   - cd projet-master-23-24/bdd-mongo/

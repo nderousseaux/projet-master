@@ -96,16 +96,6 @@ function afficherInfosChamp(idUtilisateur) {
 	champPost.append("numChamp", numChamp);
 	champPost.append("idUtilisateur", idUtilisateur);
 
-	/*
-	 * Récupère :
-	 * - OK ou ERR, en fonction de si un capteur répond plus depuis plus de
-	 *   30 minutes, par rapport à la mesure la plus récente de tous les
-	 *   capteurs
-	 * - Nombre de capteurs actifs
-	 * - Nombre de capteurs total
-	 * - Date de la requête dans le back (UTC ou heure locale FR, en fonction
-	 *   des autres dates)
-	 */
 	recupDonnees(champPost, "recupInfosChamp.php")
 	.then(donnees => {
 		// État général du champ
@@ -294,7 +284,14 @@ function afficherTableauToutesMesures() {
 		donnees.forEach(mesure => {
 			const cellule = document.createElement("div");
 			cellule.classList.add("cellule");
-			cellule.textContent = mesure;
+
+			if (mesure === "KO") {
+				cellule.classList.add("errMesure");
+				cellule.textContent = "⚠️ ";
+			}
+
+			cellule.textContent += mesure;
+
 			container.appendChild(cellule);
 		});
 	});

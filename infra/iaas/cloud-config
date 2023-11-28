@@ -44,20 +44,24 @@ runcmd:
   - systemctl start docker
   - pecl install mongodb
   - echo "extension=mongodb.so" >> /etc/php.ini
-  - systemctl enable httpd
-  - systemctl start httpd
   - cd /var/www/html/
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
   - mv composer.phar /bin/composer
   - composer require mongodb/mongodb
-  - cd
+  - cd /
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - chmod 777 projet-master-23-24/
   - cp -r projet-master-23-24/site/* /var/www/html/
-  - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php 
+  - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php
   - cd projet-master-23-24/bdd-mongo/
   - ./setup.sh && ./start.sh
-  - cd
+  - cd /
   - cd projet-master-23-24 && git checkout infra && cd ..
+  - mkdir /var/www/html/webhook && echo -e "#!/bin/bash\ngit -C /projet-master-23-24 pull" > /var/www/html/webhook/webhook.sh
+  - cat porjet-master-23-24/infra/iaas/add_hook.txt >> /etc/httpd/conf/httpd.conf
+  - systemctl enable httpd
+  - systemctl start httpd
   - cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/
+  - cd projet-master-23-24 && git checkout main && cd ..

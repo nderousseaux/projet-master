@@ -8,6 +8,6 @@
 
 /* Constante */
 
-#define NOM_BDD_AGR "mesuresAgregees"	// Le nom de la base de données agrégée
+#define NOM_BDD_AGR "mesuresAgregees.db"	// Nom de la base de données agrégée
 
 #endif

@@ -19,9 +19,10 @@ yum_repos:
     gpgkey: https://www.mongodb.org/static/pgp/server-7.0.asc
   docker:
     name: docker
-    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+    baseurl: https://download.docker.com/linux/centos/9/$basearch/stable
     enabled: true
-    gpgcheck: false
+    gpgcheck: true
+    gpgkey: https://download.docker.com/linux/centos/gpg
 
 package_upgrade: true
 packages:

@@ -38,6 +38,8 @@ packages:
 
 runcmd:
   - export HOME="/root"
+  - echo -e "SELINUX=disabled\nSELINUXTYPE=targeted" > /etc/selinux/config
+  - setenforce 0
   - systemctl enable docker
   - systemctl start docker
   - pecl install mongodb

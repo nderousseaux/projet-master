@@ -17,6 +17,11 @@ yum_repos:
     enabled: true
     gpgcheck: true
     gpgkey: https://www.mongodb.org/static/pgp/server-7.0.asc
+  docker:
+    name: docker
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+    enabled: true
+    gpgcheck: false
 
 package_upgrade: true
 packages:
@@ -28,8 +33,10 @@ packages:
   - php-devel
   - mongodb-org-server
   - mongodb-mongosh
+  - docker-ce
 
 runcmd:
+  - export HOME="/root"
   - pecl install mongodb
   - echo "extension=mongodb.so" >> /etc/php.ini
   - systemctl enable httpd
@@ -44,7 +51,8 @@ runcmd:
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
   - cp -r projet-master-23-24/site/* /var/www/html/
   - echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php 
-  - mkdir -p /data/mongo1 /data/mongo2 /data/mongo3
+  - cd projet-master-23-24/bdd-mongo/
+  - ./setup.sh && ./start.sh
+  - cd
   - cd projet-master-23-24 && git checkout infra && cd ..
-  - projet-master-23-24/infra/iaas/script_services_mongod.sh
   - cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/

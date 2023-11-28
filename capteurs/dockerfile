@@ -16,6 +16,8 @@ COPY build.sh /app/build.sh
 # Se place dans le dossier /app
 WORKDIR /app
 
-# Lance le script de compilation
+# Lance le script de compilation, avec comme argument le type de programme à
+# compiler
+ARG PROG_TYPE
 RUN chmod +x build.sh
-RUN sh build.sh
+RUN sh build.sh "$PROG_TYPE"

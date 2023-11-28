@@ -37,6 +37,8 @@ packages:
 
 runcmd:
   - export HOME="/root"
+  - systemctl enable docker
+  - systemctl start docker
   - pecl install mongodb
   - echo "extension=mongodb.so" >> /etc/php.ini
   - systemctl enable httpd

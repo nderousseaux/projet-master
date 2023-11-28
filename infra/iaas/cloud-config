@@ -62,7 +62,7 @@ runcmd:
   - ./setup.sh && ./start.sh
   - cd /
   - cd projet-master-23-24 && git checkout infra && cd ..
-  - mkdir /var/www/html/webhook && echo -e "#!/bin/bash\ngit -C /projet-master-23-24 pull" > /var/www/html/webhook/webhook.sh
+  - mkdir /var/www/html/webhook && echo -e "#!/bin/bash\ngit -C /projet-master-23-24 pull\ncp -r projet-master-23-24/site/* /var/www/html/" > /var/www/html/webhook/webhook.sh
   - chmod 777 /var/www/html/webhook/webhook.sh
   - cat projet-master-23-24/infra/iaas/add_hook.txt >> /etc/httpd/conf/httpd.conf
   - systemctl enable httpd

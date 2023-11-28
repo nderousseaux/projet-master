@@ -15,7 +15,6 @@ set(PROGRAMME2_NOM "agregateur")
 set(CMAKE_CXX_STANDARD 17)
 
 # Ajoute les dossiers des headers
-
 if(APPLE)
 	link_directories(/usr/local/include/libssh2/lib)
 	include_directories(/usr/local/include/libssh2/include)
@@ -25,21 +24,26 @@ include_directories(${PROJECT_SOURCE_DIR}/inc/commun)
 include_directories(${PROJECT_SOURCE_DIR}/inc/mesures)
 include_directories(${PROJECT_SOURCE_DIR}/inc/agregateur)
 
+# Récupère la variable PROG_TYPE depuis la commande cmake build
+option(PROG_TYPE "Type de programme" mesures)
+
 # Défini le nom de l'exécutable et son emplacement
-add_executable(${PROGRAMME1_NOM} ${PROGRAMME1_SOURCES})
-add_executable(${PROGRAMME2_NOM} ${PROGRAMME2_SOURCES})
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-
-# Ajoute les fichiers source
-target_include_directories(${PROGRAMME1_NOM}
-	PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}/src/main1
-)
-target_include_directories(${PROGRAMME2_NOM}
-	PRIVATE
-	${CMAKE_CURRENT_SOURCE_DIR}/src/main2
-)
-
-# Ajoute le flag -lsqlite3
-target_link_libraries(${PROGRAMME1_NOM} sqlite3 ssh2)
-target_link_libraries(${PROGRAMME2_NOM} sqlite3 ssh2)
+if(PROG_TYPE STREQUAL "mesures")
+	add_executable(${PROGRAMME1_NOM} ${PROGRAMME1_SOURCES})
+	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+	target_include_directories(${PROGRAMME1_NOM}
+		PRIVATE
+		${CMAKE_CURRENT_SOURCE_DIR}/src/main1
+	)
+	target_link_libraries(${PROGRAMME1_NOM} sqlite3 ssh2)
+elseif(PROG_TYPE STREQUAL "agregateur")
+	add_executable(${PROGRAMME2_NOM} ${PROGRAMME2_SOURCES})
+	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+	target_include_directories(${PROGRAMME2_NOM}
+		PRIVATE
+		${CMAKE_CURRENT_SOURCE_DIR}/src/main2
+	)
+	target_link_libraries(${PROGRAMME2_NOM} sqlite3 ssh2)
+else()
+	message(FATAL_ERROR "Type de programme inconnu")
+endif()

@@ -19,13 +19,33 @@ function activerHeaderReduit() {
  */
 function retracterScroll() {
 	if (document.documentElement.scrollTop > distanceScroll) {
+		// Header
+		document.querySelector("header").classList
+			.add("miseEchelleHeader");
+
 		// Box centrale
 		document.querySelector("header > img").classList
-			.add("retractLogo");
+			.add("masqueLogo");
+
+		// Sections
+		document.querySelectorAll("header > section")
+			.forEach(function(section) {
+				section.classList.add("miseEchelleSection");
+			});
 	}
 	else {
+		// Header
+		document.querySelector("header").classList
+			.remove("miseEchelleHeader");
+
 		// Box centrale
 		document.querySelector("header > img").classList
-			.remove("retractLogo");
+			.remove("masqueLogo");
+
+		// Sections
+		document.querySelectorAll("header > section")
+			.forEach(function(section) {
+				section.classList.remove("miseEchelleSection");
+			});
 	}
 }

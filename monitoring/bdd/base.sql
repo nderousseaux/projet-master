@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: monitoring
--- Generation Time: 2023-11-24 14:46:23.0270
+-- Generation Time: 2023-11-28 15:58:52.5730
 -- -------------------------------------------------------------
 
 
@@ -35,14 +35,14 @@ CREATE TABLE `log` (
   KEY `metrique_id` (`metrique_id`),
   CONSTRAINT `log_ibfk_1` FOREIGN KEY (`composant_id`) REFERENCES `composant` (`id`),
   CONSTRAINT `log_ibfk_2` FOREIGN KEY (`metrique_id`) REFERENCES `metrique` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
+) ENGINE=InnoDB AUTO_INCREMENT=6206 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 
 CREATE TABLE `metrique` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(128) NOT NULL,
   `unite` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;;
 
 INSERT INTO `composant` (`id`, `nom`) VALUES
 (1, 'Machine n°1'),
@@ -51,7 +51,8 @@ INSERT INTO `composant` (`id`, `nom`) VALUES
 (4, 'Machine n°4');
 
 INSERT INTO `metrique` (`id`, `nom`, `unite`) VALUES
-(1, 'Up', 'bool');
+(1, 'Up', 'bool'),
+(11, 'CPU Usage', 'int');
 
 
 

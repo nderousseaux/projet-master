@@ -11,7 +11,7 @@ $ docker compose up
 ## Notes
 
 Pour chaque machine, virtuelle ou non, on a les données suivantes :
-- [ ] Si elle est allumée ou non
+- [x] Si elle est allumée ou non
 - [ ] % de CPU utilisé
 - [ ] % de RAM utilisé
 - [ ] % de disque utilisé

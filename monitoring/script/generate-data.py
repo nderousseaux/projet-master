@@ -33,6 +33,8 @@ while True:
 					if metric[1] == "Up":
 						# Random value between 0 and 1 (boolean)
 						value = random.randint(0, 1)
+					elif metric[1] == "CPU Usage":
+						value = random.randint(0, 100)
 					else:
 						# Random value between 0 and 100 (decimal)
 						value = random.randint(0, 100) + random.random()

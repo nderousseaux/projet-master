@@ -149,6 +149,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="scripts/afficherDonnees.js"></script>
 <script src="scripts/classesCouleurs.js"></script>
 <script src="scripts/graphique.js"></script>
+<script src="scripts/entete.js"></script>
 <script>
 	/*** Variables et constantes ***/
 		/*
@@ -236,6 +237,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Changements du DOM ***/
+		// Gère la taille du header en fonction du défilement
+	activerHeaderReduit();
+
 		// Gère les changements de thème pour le graphique
 	window.matchMedia("(prefers-color-scheme: light)")
 	.addEventListener("change",	() => {

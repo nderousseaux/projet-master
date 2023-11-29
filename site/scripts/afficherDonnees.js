@@ -177,7 +177,7 @@ function afficherMeteo(idUtilisateur) {
 	.then(donnees => {
 		if (donnees[0] != "Erreur") {
 			// Supprimer les données déjà affichées
-			supprimerMeteo();
+			viderTableau("donneesMeteo");
 
 			// Adapter l'affichage en fonction de la durée
 			let dureeDonnees;
@@ -282,6 +282,7 @@ function afficherTableauToutesMesures(idUtilisateur) {
 
 	recupDonnees(champPost, "recupMesuresChamp.php")
 	.then(retour => {
+		viderTableau("donneesTableau");
 		const container = document.getElementById("donneesTableau");
 
 		retour.forEach(donnees => {
@@ -303,11 +304,13 @@ function afficherTableauToutesMesures(idUtilisateur) {
 }
 
 /**
- * Supprime toutes les données sauf la ligne de titre
+ * Supprime toutes les données d'un tableau, sauf la ligne de titre
+ * 
+ * @param {string} id - id du tableau
  */
-function supprimerMeteo() {
-	const meteoDiv = document.getElementById("donneesMeteo");
-	const cellules = meteoDiv.querySelectorAll(".cellule:not(.titre)");
+function viderTableau(id) {
+	const container = document.getElementById(id);
+	const cellules = container.querySelectorAll(".cellule:not(.titre)");
 	cellules.forEach(cellule => cellule.remove());
 }
 
@@ -422,7 +425,8 @@ function celluleTemp(temp, cellule) {
  * Affiche le nom du champ sélectionné dans le header
  */
 function afficherNomChamp() {
-	const container = document.querySelector("header > section:nth-child(2) > p");
+	const container = document.querySelector("header > " +
+		"section:nth-child(2) > p");
 	container.innerHTML = "Champ " +
 		document.getElementById("champSlct").value;
 }

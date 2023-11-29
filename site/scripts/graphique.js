@@ -43,8 +43,8 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 
 		recupAbsOrdGraph(champPost, "recupMesuresIlot.php")
 		.then(retour => {
-			const abscisse = JSON.parse(retour[0]);
-			const ordonnee = JSON.parse(retour[1]);
+			const abscisse = retour[0];
+			const ordonnee = retour[1];
 
 			// Détermine la valeur minimale de l'axe des ordonnées
 			const ordMin = Math.min.apply(Math, ordonnee) - margeMesure;

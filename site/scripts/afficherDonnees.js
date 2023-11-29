@@ -270,29 +270,34 @@ function afficherMeteo(idUtilisateur) {
 
 /**
  * Affiche toutes les mesures pour un champ indiqué
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherTableauToutesMesures() {
+function afficherTableauToutesMesures(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
 	recupDonnees(champPost, "recupMesuresChamp.php")
-	.then(donnees => {
+	.then(retour => {
 		const container = document.getElementById("donneesTableau");
 
-		donnees.forEach(mesure => {
-			const cellule = document.createElement("div");
-			cellule.classList.add("cellule");
+		retour.forEach(donnees => {
+			donnees.forEach(element => {
+				const cellule = document.createElement("div");
+				cellule.classList.add("cellule");
 
-			if (mesure === "KO") {
-				cellule.classList.add("errMesure");
-				cellule.textContent = "⚠️ ";
-			}
+				if (element === "KO") {
+					cellule.classList.add("errMesure");
+					cellule.textContent = "⚠️ ";
+				}
 
-			cellule.textContent += mesure;
+				cellule.textContent += element;
 
-			container.appendChild(cellule);
+				container.appendChild(cellule);
+			});
 		});
 	});
 }

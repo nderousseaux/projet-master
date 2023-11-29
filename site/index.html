@@ -127,7 +127,6 @@
 
 	<section id="secTableau" class="tableau">
 		<div>
-			<div class="cellule titre">Champ</div>
 			<div class="cellule titre">Ilot</div>
 			<div class="cellule titre">Date et heure</div>
 			<div class="cellule titre">État</div>
@@ -136,53 +135,6 @@
 			<div class="cellule titre">Luminosité (lux)</div>
 		</div>
 		<div id="donneesTableau">
-			<div class="cellule">1</div>
-			<div class="cellule">1</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule errMesure">⚠️ KO</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">120032</div>
-
-			<div class="cellule">2</div>
-			<div class="cellule">2, 3</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">OK</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">3</div>
-			<div class="cellule">4</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">OK</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">4</div>
-			<div class="cellule">5</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">OK</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">5</div>
-			<div class="cellule">6</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">OK</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">6</div>
-			<div class="cellule">7</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">OK</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">120032</div>
 		</div>
 	</section>
 </div>
@@ -210,15 +162,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		["selectIlot", "ilotSlct", true],
 		["selectDuree", "dureeSlct", true]
 	];
-
-	// A utiliser quand le backend sera prêt
-	// const contIdButtons = [
-	//	["selectChamp", "champSlct", false],
-	//	["selectCmpt", "cmptSlct", false],
-	//	["selectType", "typeSlct", true],
-	//	["selectIlot", "ilotSlct", false],
-	//	["selectDuree", "dureeSlct", true]
-	// ];
 
 		// Préselectionne les boutons des dropdowns
 	contIdButtons.forEach(element => {
@@ -257,6 +200,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		afficherMoyennes(idUtilisateur);
 		afficherInfosChamp(idUtilisateur);
 
+		// Affiche toutes les mesures du champ sélectionné
+		afficherTableauToutesMesures(idUtilisateur);
+
 		// Affiche les ilots du champ sélectionné
 		afficherIlots(idUtilisateur)
 		.then(_ => {
@@ -268,8 +214,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			helperAfficherGraph();
 		});
 	});
-
-	// afficherTableauToutesMesures();
 
 
 	/*** Interaction des boutons ***/

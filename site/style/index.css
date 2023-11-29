@@ -146,13 +146,12 @@ p {
 #secMeteo > div > .cellule:nth-child(22n+9),
 #secMeteo > div > .cellule:nth-child(22n+10),
 #secMeteo > div > .cellule:nth-child(22n+11),
-#secTableau > div > .cellule:nth-child(14n+1),
-#secTableau > div > .cellule:nth-child(14n+2),
-#secTableau > div > .cellule:nth-child(14n+3),
-#secTableau > div > .cellule:nth-child(14n+4),
-#secTableau > div > .cellule:nth-child(14n+5),
-#secTableau > div > .cellule:nth-child(14n+6),
-#secTableau > div > .cellule:nth-child(14n+7) {
+#secTableau > div > .cellule:nth-child(12n+1),
+#secTableau > div > .cellule:nth-child(12n+2),
+#secTableau > div > .cellule:nth-child(12n+3),
+#secTableau > div > .cellule:nth-child(12n+4),
+#secTableau > div > .cellule:nth-child(12n+5),
+#secTableau > div > .cellule:nth-child(12n+6) {
 	background-color: #eeeeee;
 }
 #secMeteo > div > .cellule:nth-child(22n+12),
@@ -166,22 +165,21 @@ p {
 #secMeteo > div > .cellule:nth-child(22n+20),
 #secMeteo > div > .cellule:nth-child(22n+21),
 #secMeteo > div > .cellule:nth-child(22n+22),
-#secTableau > div > .cellule:nth-child(14n+8),
-#secTableau > div > .cellule:nth-child(14n+9),
-#secTableau > div > .cellule:nth-child(14n+10),
-#secTableau > div > .cellule:nth-child(14n+11),
-#secTableau > div > .cellule:nth-child(14n+12),
-#secTableau > div > .cellule:nth-child(14n+13),
-#secTableau > div > .cellule:nth-child(14n+14) {
+#secTableau > div > .cellule:nth-child(12n+7),
+#secTableau > div > .cellule:nth-child(12n+8),
+#secTableau > div > .cellule:nth-child(12n+9),
+#secTableau > div > .cellule:nth-child(12n+10),
+#secTableau > div > .cellule:nth-child(12n+11),
+#secTableau > div > .cellule:nth-child(12n+12) {
 	background-color: #fafafa;
 }
-#secMeteo > div > .cellule:nth-child(11n+11),
-#secTableau > div > .cellule:nth-child(7n+7) {
-	border-radius: 0 10px 10px 0;
-}
 #secMeteo > div > .cellule:nth-child(11n+1),
-#secTableau > div > .cellule:nth-child(7n+1) {
+#secTableau > div > .cellule:nth-child(6n+1) {
 	border-radius: 10px 0 0 10px;
+}
+#secMeteo > div > .cellule:nth-child(11n+11),
+#secTableau > div > .cellule:nth-child(6n+6) {
+	border-radius: 0 10px 10px 0;
 }
 
 /* Header */
@@ -451,7 +449,7 @@ header > section:last-child .dropbtn {
 	max-height: 40vh;
 }
 #secTableau > div {
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 }
 .errMesure {
 	color: #d30000;
@@ -622,7 +620,7 @@ header > section:last-child .dropbtn {
 
 	/* Section tableau */
 	#secTableau > div {
-		grid-template-columns: repeat(2, minmax(80px, 1fr)) 150px 80px
+		grid-template-columns: minmax(80px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
 	}
 }
@@ -689,13 +687,12 @@ header > section:last-child .dropbtn {
 	#secMeteo > div > .cellule:nth-child(22n+9),
 	#secMeteo > div > .cellule:nth-child(22n+10),
 	#secMeteo > div > .cellule:nth-child(22n+11),
-	#secTableau > div > .cellule:nth-child(14n+1),
-	#secTableau > div > .cellule:nth-child(14n+2),
-	#secTableau > div > .cellule:nth-child(14n+3),
-	#secTableau > div > .cellule:nth-child(14n+4),
-	#secTableau > div > .cellule:nth-child(14n+5),
-	#secTableau > div > .cellule:nth-child(14n+6),
-	#secTableau > div > .cellule:nth-child(14n+7) {
+	#secTableau > div > .cellule:nth-child(12n+1),
+	#secTableau > div > .cellule:nth-child(12n+2),
+	#secTableau > div > .cellule:nth-child(12n+3),
+	#secTableau > div > .cellule:nth-child(12n+4),
+	#secTableau > div > .cellule:nth-child(12n+5),
+	#secTableau > div > .cellule:nth-child(12n+6) {
 		background-color: #3c3c3c;
 	}
 	#secMeteo > div > .cellule:nth-child(22n+12),
@@ -709,13 +706,12 @@ header > section:last-child .dropbtn {
 	#secMeteo > div > .cellule:nth-child(22n+20),
 	#secMeteo > div > .cellule:nth-child(22n+21),
 	#secMeteo > div > .cellule:nth-child(22n+22),
-	#secTableau > div > .cellule:nth-child(14n+8),
-	#secTableau > div > .cellule:nth-child(14n+9),
-	#secTableau > div > .cellule:nth-child(14n+10),
-	#secTableau > div > .cellule:nth-child(14n+11),
-	#secTableau > div > .cellule:nth-child(14n+12),
-	#secTableau > div > .cellule:nth-child(14n+13),
-	#secTableau > div > .cellule:nth-child(14n+14) {
+	#secTableau > div > .cellule:nth-child(12n+7),
+	#secTableau > div > .cellule:nth-child(12n+8),
+	#secTableau > div > .cellule:nth-child(12n+9),
+	#secTableau > div > .cellule:nth-child(12n+10),
+	#secTableau > div > .cellule:nth-child(12n+11),
+	#secTableau > div > .cellule:nth-child(12n+12) {
 		background-color: #1b1b1b;
 	}
 

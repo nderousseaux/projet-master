@@ -1,7 +1,4 @@
 # Capteurs
-## Configuration des Raspberry PI
-[conf.md](Conf.md) : Décrit comment sont configurés les Raspberry Pi
-
 ## Programme
 ### Docker
 #### Programme de mesures

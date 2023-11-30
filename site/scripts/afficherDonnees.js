@@ -37,6 +37,8 @@ function afficherChamps(idUtilisateur) {
 
 				container.appendChild(champ);
 			};
+			container.classList.remove("ddHeader");
+
 			resolve();
 		})
 		.catch(err => {

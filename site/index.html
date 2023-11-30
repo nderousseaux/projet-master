@@ -12,22 +12,22 @@
 	<meta name="description" content="Gestion de champs"/>
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 </head>
-<body>
+<body tabindex="0">
 <header>
 	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
 	<section>
 		<p>-</p>
-		<div class="dropdown" id="ddChamp">
+		<div id="ddChamp" class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div id="selectChamp" class="dropdown-content">
+			<div id="selectChamp" class="dropdownContent ddHeader">
 			</div>
 		</div>
 	</section>
 	<section>
 		<p>-</p>
-		<div class="dropdown" id="ddCmpt">
+		<div id="ddCmpt" class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div id="selectCmpt" class="dropdown-content">
+			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.html">Paramètres</a>
 				<button value="deco">Déconnexion</button>
 			</div>
@@ -61,9 +61,9 @@
 					<p>
 						Date
 					</p>
-					<div class="dropdown" id="ddDuree">
+					<div id="ddDuree" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectDuree" class="dropdown-content">
+						<div id="selectDuree" class="dropdownContent">
 							<button value="semaine">Semaine</button>
 							<button value="jour">Journée</button>
 						</div>
@@ -103,9 +103,9 @@
 		<div id="optGraph">
 			<div>
 				<p>Type de données</p>
-				<div class="dropdown" id="ddType">
+				<div id="ddType" class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div id="selectType" class="dropdown-content">
+					<div id="selectType" class="dropdownContent">
 						<button value="temp">Température</button>
 						<button value="humi">Humidité du sol</button>
 						<button value="lumi">Luminosité</button>
@@ -114,9 +114,9 @@
 			</div>
 			<div>
 				<p>Ilot</p>
-				<div class="dropdown" id="ddIlot">
+				<div id="ddIlot" class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div id="selectIlot" class="dropdown-content">
+					<div id="selectIlot" class="dropdownContent">
 					</div>
 				</div>
 			</div>

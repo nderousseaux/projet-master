@@ -52,7 +52,7 @@ p {
 	position: relative;
 	display: inline-block;
 }
-.dropdown-content {
+.dropdownContent {
 	display: none;
 	position: absolute;
 	right: 0;
@@ -66,8 +66,8 @@ p {
 	max-height: calc(45px * 3);
 	overflow-y: auto;
 }
-.dropdown-content button,
-.dropdown-content a {
+.dropdownContent button,
+.dropdownContent a {
 	display: block;
 	width: 100%;
 	border: none;
@@ -83,19 +83,19 @@ p {
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:hover,
-.dropdown-content a:hover {
+.dropdownContent button:hover,
+.dropdownContent a:hover {
 	color: #000000;
 	background-color: rgba(220, 220, 220, 0.5);
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:active,
-.dropdown-content a:active,
-.dropdown-content .selected {
+.dropdownContent button:active,
+.dropdownContent a:active,
+.dropdownContent .selected {
 	background-color: rgba(200, 200, 200, 0.5);
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdownContent {
 	display: block;
 }
 .dropdown:hover .dropbtn {
@@ -194,9 +194,18 @@ header {
 	width: 100vw;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
+}
+header::before,
+.ddHeader::before {
+	display: block;
+	position: absolute;
+	content: "\00A0";
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
+	z-index: -1;
 }
 
 	/* Logo */
@@ -228,6 +237,11 @@ header > section:last-child .dropbtn {
 #selectCmpt > a {
 	width: calc(100% - 48px);
 }
+.ddHeader {
+	background-color: unset;
+	-webkit-backdrop-filter: unset;
+	backdrop-filter: unset;
+}
 
 /* Corps */
 #corps {
@@ -248,7 +262,7 @@ header > section:last-child .dropbtn {
 	margin-top: 36px;
 }
 #corps > section:last-child {
-	margin-bottom: 18px;
+	margin-bottom: 40px;
 }
 
 	/* Section informations */
@@ -326,7 +340,7 @@ header > section:last-child .dropbtn {
 	height: 100%;
 	border-radius: 10px;
 }
-#ddDuree > .dropdown-content {
+#ddDuree > .dropdownContent {
 	left: 0;
 }
 
@@ -490,7 +504,7 @@ header > section:last-child .dropbtn {
 		width: 60px !important;
 		height: 40px !important;
 	}
-	.dropdown-content button {
+	.dropdownContent button {
 		padding: 10px 30px 10px 10px;
 	}
 
@@ -557,6 +571,9 @@ header > section:last-child .dropbtn {
 	#corps > section {
 		width: 95%;
 		margin-top: 20px;
+	}
+	#corps > section:last-child {
+		margin-bottom: 20px;
 	}
 
 		/* Section informations */
@@ -666,22 +683,22 @@ header > section:last-child .dropbtn {
 	}
 
 		/* Boutons dropdown */
-	.dropdown-content {
+	.dropdownContent {
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2);
 		background-color: rgba(57, 57, 57, 0.7);
 	}
-	.dropdown-content button,
-	.dropdown-content a {
+	.dropdownContent button,
+	.dropdownContent a {
 		color: #ffffff;
 	}
-	.dropdown-content button:hover,
-	.dropdown-content a:hover {
+	.dropdownContent button:hover,
+	.dropdownContent a:hover {
 		background-color: rgba(80, 80, 80, 0.5);
 		color: #ffffff !important;
 	}
-	.dropdown-content button:active,
-	.dropdown-content a:active,
-	.dropdown-content .selected {
+	.dropdownContent button:active,
+	.dropdownContent a:active,
+	.dropdownContent .selected {
 		background-color: rgba(111, 111, 111, 0.5);
 	}
 
@@ -689,6 +706,14 @@ header > section:last-child .dropbtn {
 	header {
 		background-color: rgba(0, 0, 0, 0.7);
 		box-shadow: 0 15px 20px -15px #080808;
+	}
+	header::before {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+		/* Sous-sections (choix champs, choix utilisateur) */
+	.ddHeader::before {
+		background-color: rgba(57, 57, 57, 0.7);
 	}
 
 	/* Corps */

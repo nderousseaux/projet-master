@@ -49,6 +49,9 @@ std::string StockageDonnees::dateUTCActuelle() {
 }
 
 void StockageDonnees::agregeFichiersDonnees() {
+	// Créé le dossier s'il n'existe pas
+	std::filesystem::create_directory(DOSSIER_STOCKAGE);
+
 	// Ouvre le fichier de destination
 	std::string cheminFichier = StockageDonnees::CHEMIN_FICHIER_AGREGE;
 

@@ -51,9 +51,17 @@ nomUtilisateur
 motDePasse
 ```
 
+Les données sont enregistrées dans le dossier `stockage`, dans un fichier sous
+la forme :  
+```
+date;idChamp;idIlot;idCapteur;temp;humi;lumi
+```
+
 #### Programme d'agrégation
 Une fois compilé, un fichier `agregateur` est créé dans le dossier `bin` et
 peut être lancé.
 Il agrégera les mesures des bases de données présentes dans le dossier `bdd`,
 dans une nouvelle base de données, dont le nom est défini dans la constante
 `NOM_BDD_AGR`, dans le fichier `inc/agregateur/agregateurBdd.h`.
+
+Les données sont agrégées dans un fichier `agrege.txt`.

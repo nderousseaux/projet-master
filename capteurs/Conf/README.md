@@ -1,8 +1,6 @@
 # Config
 
-## Préambule
-
-Vérifier les connectiques des différents composants. En effet une connection d'un câble ou micro carte SD peut amener à un arrêt de boot pas complet. *Ex: début de boot puis arrêt vers la fin*.
+[IEEE 802.11s](https://en.wikipedia.org/wiki/IEEE_802.11s)
 
 ## Flasher l'image
 
@@ -19,8 +17,9 @@ sudo apt install rpi-imager
 hostname : pi  
 Mot de passe : tprli
 
-## /etc/network/interfaces.d/wlan0
+## Interface wifi ad hoc
 
+"/etc/network/interfaces.d/wlan0"  
 On peut remplacer le channel par un numéro de channel [ici](https://en.wikipedia.org/wiki/List_of_WLAN_channels)
 Ici nous sommes sur le channel 1 (Europe)
 
@@ -36,7 +35,7 @@ Faire le tuto du dessus, puis faire celui [là](https://github.com/binnes/WiFiMe
 
 [Pour lancer le gateway](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/ROUTE.md#boot-the-mesh-network)
 
-## à l'allumage
+## Pour que build.sh fonctionne
 
 ```bash
 sudo apt update

@@ -92,7 +92,8 @@ int EnvoiDonnees::envoiBDD() {
 	struct sockaddr_in adresse;
 	adresse.sin_family = AF_INET;
 	adresse.sin_port = htons(22);
-	adresse.sin_addr.s_addr = inet_addr("185.155.93.77");
+//	adresse.sin_addr.s_addr = inet_addr("185.155.93.77");
+    adresse.sin_addr.s_addr = inet_addr(ip.c_str());
 
 	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
 		std::cerr << "Echec lors de la connection de la socket." << std::endl;
@@ -109,6 +110,19 @@ int EnvoiDonnees::envoiBDD() {
 			tampon_msg_erreur << std::endl;
 		return err;
 	}
+
+    err = libssh2_userauth_password(session, identifiant.c_str(), mdp.c_str());
+    if (err) {
+        char *tampon_msg_erreur;
+        int longeur_erreur;
+        libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur, 0);
+        std::cerr << "Echec lors de l'authenification." << std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+
+        libssh2_session_disconnect(session, "Normal Shutdown");
+        libssh2_session_free(session);
+        libssh2_exit();
+        return err;
+    }
 
 	LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
 	if (!sftp) {

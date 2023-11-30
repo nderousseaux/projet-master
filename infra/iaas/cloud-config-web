@@ -66,4 +66,5 @@ runcmd:
   - systemctl enable httpd
   - systemctl start httpd
   - cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/
+  - cp projet-master-23-24/infra/iaas/hostname.php /var/www/html/
   - cd projet-master-23-24 && git checkout main && cd ..

@@ -277,12 +277,27 @@ int BaseDeDonnees::conversionDBversChar(char *buffer) {
 }
 
 int BaseDeDonnees::envoiBDD() {
+	// Récupère les identifiants
+	std::vector<std::string> contenu = recupereIdentifiants(BaseDeDonnees::CHEMIN_FICHIER_IDENTIFIANTS);
+
+	/*
+	 * Vérifie que le fichier est mal formé (3 lignes : IP, identifiant, mot de
+	 * passe)
+	 */
+	if (contenu.size() != 3) {
+		std::cerr << "Le fichier d'identifiants est mal formé" << std::endl;
+		return -1;
+	}
+
+	std::string ip = contenu[0];
+	std::string identifiant = contenu[1];
+	std::string mdp = contenu[2];
+
 	// TODO : mettre le bon chemin !
 	const char chemin_distant_vers_BDD[] = "/.bdd";
 
 	int err = libssh2_init(0);
 	if (err < 0) {
-
 		std::cerr << "Echec lors de l'initialisation de libssh2." << std::endl;
 		return err;
 	}
@@ -325,7 +340,8 @@ int BaseDeDonnees::envoiBDD() {
 	if (!sftp) {
 		char *tampon_msg_erreur;
 		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur, 0);
+		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
+			0);
 		std::cerr << "Echec lors de l'initialisation de la session SFTP." <<
 			std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
 		return -1;
@@ -358,4 +374,25 @@ int BaseDeDonnees::envoiBDD() {
 	close(sockfd);
 
 	return 0;
+}
+
+std::vector<std::string> BaseDeDonnees::recupereIdentifiants(
+	const std::string cheminFichier
+) {
+	std::vector<std::string> retour;
+	std::ifstream fichier(cheminFichier);
+
+	if (!fichier) {
+		throw std::runtime_error("Le fichier n'existe pas");
+	}
+
+	if (fichier.is_open()) {
+		std::string ligne;
+		while (std::getline(fichier, ligne)) {
+			retour.push_back(ligne);
+		}
+		fichier.close();
+	}
+
+	return retour;
 }

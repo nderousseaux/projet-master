@@ -41,6 +41,16 @@ peut être lancé, avec les arguments suivants : `<id champ>` `<id ilot>`
 Une constante, nommée `DEBUG`, se trouvant dans le fichier 'inc/main.h', permet
 d'afficher des informations supplémentaires dans la sortie standard.
 
+
+Un fichier pour stocker les identifiants SFTP est nécessaire. Il doit se trouver
+dans le dossier `capteurs` et se nommer `identifiantsSFTP.txt`.  
+Il doit comporter les champs suivants, dans l'ordre :  
+```
+IPServeur
+nomUtilisateur
+motDePasse
+```
+
 #### Programme d'agrégation
 Une fois compilé, un fichier `agregateur` est créé dans le dossier `bin` et
 peut être lancé.

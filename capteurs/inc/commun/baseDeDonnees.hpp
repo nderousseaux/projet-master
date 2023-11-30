@@ -26,6 +26,9 @@ class BaseDeDonnees {
 		inline static std::string DOSSIER_BDD{
 			"./bdd/"
 		};
+		inline static std::string CHEMIN_FICHIER_IDENTIFIANTS{
+			"./identifiantsSFTP.txt"
+		};
 
 
 	/* Constructeur et destructeur */
@@ -94,7 +97,18 @@ class BaseDeDonnees {
 
 		int envoiBDD(void);
 
-        int conversionDBversChar(char* buffer);
+		int conversionDBversChar(char* buffer);
+
+		/**
+		 * @brief Récupère l'identifiant, le mot de passe et l'adresse IP du
+		 * 		  serveur SFTP
+		 * 
+		 * @param cheminFichier du fichier contenant les informations
+		 * @return std::vector<std::string> tableau contenant les informations
+		 */
+		static std::vector<std::string> recupereIdentifiants(
+			const std::string cheminFichier
+		);
 };
 
 #endif

@@ -23,7 +23,7 @@ class InfosChamp {
 		inline int getIdIlot(void) const {
 			return idIlot_;
 		}
-		inline int getIdCapt(void) const {
+		inline int getIdCapteur(void) const {
 			return idCapt_;
 		}
 

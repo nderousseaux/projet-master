@@ -4,10 +4,6 @@
 
 ## Flasher l'image
 
-Si un ancien système est déjà installer ou qu'il reste des données. Veuillez faire une sauvegarde des données sur un autre disque. Ensuite faite un formatage avec ré-écriture pour être sûr qu'il ne reste aucune données parasite.
-
-OS utilisé: `RASPBERRY PI OS Lite (64-BITS)`
-
 ```bash
 sudo apt install rpi-imager
 ```

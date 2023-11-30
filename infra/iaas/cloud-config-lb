@@ -28,5 +28,7 @@ runcmd:
   - systemctl enable docker
   - systemctl start docker
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git /pm
-  - cd /pm/infra/iaas/
+  - cd /pm
+  - git checkout infra
+  - cd infra/iaas/
   - docker compose up -d

@@ -14,7 +14,17 @@
 </head>
 <body tabindex="0">
 <header>
-	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
+	<picture>
+		<source srcset="img/logo/logoAlsagricultureMobileClair.png"
+			media="(max-width: 950px) and (prefers-color-scheme: light)"/>
+			<source srcset="img/logo/logoAlsagricultureMobileSombre.png"
+			media="(max-width: 950px) and (prefers-color-scheme: dark)"/>
+		<source srcset="img/logo/logoAlsagricultureClair.png"
+			media="(prefers-color-scheme: light)"/>
+		<source srcset="img/logo/logoAlsagricultureSombre.png"
+			media="(prefers-color-scheme: dark)"/>
+		<img src="img/logoAlsagricultureClair.png" alt="Logo Als'agriculture"/>
+	</picture>
 	<section>
 		<p>-</p>
 		<div id="ddChamp" class="dropdown">

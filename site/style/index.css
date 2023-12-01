@@ -113,7 +113,6 @@ p {
 .tableau > div {
 	display: grid;
 	grid-gap: 2px 0;
-	grid-auto-rows: minmax(50px, auto);
 	width: calc(100% - 20px);
 	padding: 10px 10px 0 10px;
 	overflow: unset;
@@ -123,9 +122,10 @@ p {
 }
 .cellule {
 	display: flex;
+	flex-direction: column;
 	font-size: 14px;
 	width: calc(100% - 10px);
-	padding: 5px;
+	padding: 15px 5px;
 	background-color: #ffffff;
 	align-items: center;
 	justify-content: center;
@@ -195,6 +195,9 @@ header {
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
+header::before {
+	border-radius: 0 0 10px 10px;
+}
 header::before,
 .ddHeader::before {
 	display: block;
@@ -209,7 +212,8 @@ header::before,
 }
 
 	/* Logo */
-header > img {
+header > picture,
+header > picture > img {
 	width: 144px;
 	height: 72px;
 	border-radius: 0 0 0 10px;
@@ -314,7 +318,13 @@ header > section:last-child .dropbtn {
 	margin-top: 0;
 }
 #secMeteo > div {
-	grid-template-columns: 85px repeat(10, minmax(calc((100% - 85px)/10), 1fr));
+	grid-template-columns: 85px
+		repeat(4, minmax(calc((100% - (120px + 85px * 2))/10), 1fr)) 85px 120px
+		repeat(4, minmax(calc((100% - (120px + 85px * 2))/10), 1fr));
+}
+.cellule > p {
+	font-size: 14px;
+	margin: 0;
 }
 #secMeteo > div > .titre:first-child {
 	display: flex;
@@ -464,7 +474,7 @@ header > section:last-child .dropbtn {
 
 	/* Section tableau */
 #secTableau {
-	max-height: 40vh;
+	max-height: 60vh;
 }
 #secTableau > div {
 	grid-template-columns: repeat(6, 1fr);
@@ -531,13 +541,15 @@ header > section:last-child .dropbtn {
 	.miseEchelleHeader {
 		transform: scaleY(0.3);
 	}
-	header > img {
-		width: 144px;
-		height: 72px;
-		margin: 10px calc((100% - 144px)/2);
+	header > picture {
+		display: flex;
+		width: 100%;
+		margin: 10px;
+	}
+	header > picture > img {
+		width: 288px;
+		margin: auto;
 		border-radius: 10px;
-		opacity: 1;
-		transition: opacity 0.2s ease-in-out;
 	}
 	.masqueLogo {
 		opacity: 0;
@@ -612,7 +624,7 @@ header > section:last-child .dropbtn {
 		margin-top: 20px;
 	}
 	#secMeteo > div {
-		grid-template-columns: 100px repeat(10, 80px);
+		grid-template-columns: 100px repeat(5, 80px) 120px repeat(4, 80px);
 	}
 
 				/* Options de la météo */

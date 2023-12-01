@@ -339,12 +339,12 @@ function ajoutCellule(texte) {
  */
 function cellulePrecip(objPrecip, cellule) {
 	const precipEnVersFr = [
-		["rain", "Pluie 🌧️"], ["snow", "Neige ❄️"],
-		["freezingrain", "Pluie verglaçante 🌧️❄️"], ["ice", "Givre ❄️"]
+		["rain", "Pluie 🌧️\r\n"], ["snow", "Neige ❄️\r\n"],
+		["freezingrain", "Pl. vergla. 🌧️❄️\r\n"], ["ice", "Givre ❄️\r\n"]
 	];
 
 	if (objPrecip === null) {
-		cellule.textContent += "-";
+		cellule.textContent = "-";
 		return cellule;
 	}
 
@@ -352,14 +352,16 @@ function cellulePrecip(objPrecip, cellule) {
 	for (const [index, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
-				cellule.textContent += valFr + " ";
+				const intraCellule = document.createElement("p");
+				intraCellule.textContent = valFr;
+				cellule.appendChild(intraCellule);
 			}
 		}
 
 		// Ajoute un retour à la ligne, si ce n'est pas la dernière valeur
-		if (index < tailleObj - 1) {
-			cellule.textContent += "\n";
-		}
+		// if (index < tailleObj - 1) {
+		// 	cellule.textContent += "Z";
+		// }
 	};
 
 	return cellule;
@@ -429,6 +431,6 @@ function celluleTemp(temp, cellule) {
 function afficherNomChamp() {
 	const container = document.querySelector("header > " +
 		"section:nth-child(2) > p");
-	container.innerHTML = "Champ " +
+	container.textContent = "Champ " +
 		document.getElementById("champSlct").value;
 }

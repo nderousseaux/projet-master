@@ -24,7 +24,7 @@ function retracterScroll() {
 			.add("miseEchelleHeader");
 
 		// Box centrale
-		document.querySelector("header > img").classList
+		document.querySelector("header > picture > img").classList
 			.add("masqueLogo");
 
 		// Sections
@@ -39,7 +39,7 @@ function retracterScroll() {
 			.remove("miseEchelleHeader");
 
 		// Box centrale
-		document.querySelector("header > img").classList
+		document.querySelector("header > picture > img").classList
 			.remove("masqueLogo");
 
 		// Sections

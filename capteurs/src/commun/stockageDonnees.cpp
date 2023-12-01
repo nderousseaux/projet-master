@@ -15,9 +15,9 @@ int StockageDonnees::ecrireDonneesFichier(
 	if (file.is_open()) {
 		file <<
 			mesures.getDate() << ';' <<
+			infosChamp.getIdAgri() << ';' <<
 			infosChamp.getIdChamp() << ';' <<
 			infosChamp.getIdIlot() << ';' <<
-			infosChamp.getIdCapteur() << ';' <<
 			mesures.getTemperature() << ';' <<
 			mesures.getHumidite() << ';' <<
 			mesures.getLuminosite() <<

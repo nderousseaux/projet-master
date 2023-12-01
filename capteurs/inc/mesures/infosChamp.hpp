@@ -4,9 +4,9 @@
 class InfosChamp {
 	/* Variables */
 	private:
+		int idAgri_;
 		int idChamp_;
 		int idIlot_;
-		int idCapt_;
 
 
 	/* Constructeur et destructeur */
@@ -17,23 +17,23 @@ class InfosChamp {
 
 	/* Getters */
 	public:
+		inline int getIdAgri(void) const {
+			return idAgri_;
+		}
 		inline int getIdChamp(void) const {
 			return idChamp_;
 		}
 		inline int getIdIlot(void) const {
 			return idIlot_;
 		}
-		inline int getIdCapteur(void) const {
-			return idCapt_;
-		}
 
 
 	/* Setters */
 	public:
-		inline void setInfosChamp(int idChamp, int idIlot, int idCapt) {
+		inline void setInfosChamp(int idAgri, int idChamp, int idIlot) {
+			this->idAgri_ = idAgri;
 			this->idChamp_ = idChamp;
 			this->idIlot_ = idIlot;
-			this->idCapt_ = idCapt;
 		}
 };
 

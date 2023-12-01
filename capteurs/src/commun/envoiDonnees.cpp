@@ -164,7 +164,7 @@ int EnvoiDonnees::envoiBDD() {
 	libssh2_sftp_write(agent, base_donnees, strlen(base_donnees));
 
 	libssh2_sftp_shutdown(sftp);
-	libssh2_session_disconnect(session, "Exctinction normale");
+	libssh2_session_disconnect(session, "Extinction normale");
 	libssh2_session_free(session);
 	libssh2_exit();
 	close(sockfd);

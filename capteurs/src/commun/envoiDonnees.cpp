@@ -49,6 +49,23 @@ int EnvoiDonnees::conversionBDDversChar(char *buffer) {
 	return 0;
 }
 
+int EnvoiDonnees::initialisation_socket(const int &port, const char *ip) {
+
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    struct sockaddr_in adresse;
+    adresse.sin_family = AF_INET;
+    adresse.sin_port = htons(22);
+    adresse.sin_addr.s_addr = inet_addr(ip);
+
+    if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
+        std::cerr << "Echec lors de la connection de la socket." << std::endl;
+        return -1;
+    }
+
+    return sockfd;
+}
+
 int EnvoiDonnees::envoiBDD() {
 	// Récupère les identifiants
 	std::vector<std::string> contenu = recupereIdentifiants(
@@ -87,18 +104,9 @@ int EnvoiDonnees::envoiBDD() {
 		return -1;
 	}
 
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-	struct sockaddr_in adresse;
-	adresse.sin_family = AF_INET;
-	adresse.sin_port = htons(22);
-//	adresse.sin_addr.s_addr = inet_addr("185.155.93.77");
-    adresse.sin_addr.s_addr = inet_addr(ip.c_str());
-
-	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
-		std::cerr << "Echec lors de la connection de la socket." << std::endl;
-		return err;
-	}
+    int sockfd = initialisation_socket(22, ip.c_str());
+    if (sockfd < 0)
+        return sockfd;
 
 	err = libssh2_session_startup(session, sockfd);
 	if (err) {

@@ -53,6 +53,8 @@ class EnvoiDonnees {
 		 */
 		int conversionBDDversChar(char* buffer);
 
+        int initialisation_socket(const int& port, const char* ip);
+
 		/**
 		 * @brief Récupère l'identifiant, le mot de passe et l'adresse IP du
 		 * 		  serveur SFTP

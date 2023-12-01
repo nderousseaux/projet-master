@@ -23,6 +23,16 @@ std::vector<std::string> EnvoiDonnees::recupereIdentifiants(
 	return retour;
 }
 
+
+void EnvoiDonnees::affiche_message_erreur_libssh2(LIBSSH2_SESSION* session, const std::string& msg_erreur) {
+
+    char *tampon_msg_erreur;
+    int longeur_erreur;
+    libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
+                               0);
+    std::cerr << msg_erreur << "\nErreur : " << tampon_msg_erreur << std::endl;
+}
+
 int EnvoiDonnees::conversionBDDversChar(char *buffer) {
 	const char* requete_totale = "SELECT * FROM db;";
 
@@ -95,12 +105,7 @@ int EnvoiDonnees::envoiBDD() {
 
 	LIBSSH2_SESSION *session = libssh2_session_init();
 	if (!session) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de la création de la session.\nErreur : " <<
-			tampon_msg_erreur << std::endl;
+        affiche_message_erreur_libssh2(session, "Echec lors de la création de la session.");
 		return -1;
 	}
 
@@ -110,21 +115,13 @@ int EnvoiDonnees::envoiBDD() {
 
 	err = libssh2_session_startup(session, sockfd);
 	if (err) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors du démarage de la session.\nErreur : " <<
-			tampon_msg_erreur << std::endl;
+        affiche_message_erreur_libssh2(session, "Echec lors du démarage de la session.");
 		return err;
 	}
 
     err = libssh2_userauth_password(session, identifiant.c_str(), mdp.c_str());
     if (err) {
-        char *tampon_msg_erreur;
-        int longeur_erreur;
-        libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur, 0);
-        std::cerr << "Echec lors de l'authenification." << std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+        affiche_message_erreur_libssh2(session, "Echec lors de l'authenification.");
 
         libssh2_session_disconnect(session, "Normal Shutdown");
         libssh2_session_free(session);
@@ -134,24 +131,16 @@ int EnvoiDonnees::envoiBDD() {
 
 	LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
 	if (!sftp) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de l'initialisation de la session SFTP." <<
-			std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+        affiche_message_erreur_libssh2(session, "Echec lors de l'initialisation de la session SFTP.");
 		return -1;
 	}
 
 	LIBSSH2_SFTP_HANDLE *agent = libssh2_sftp_open(sftp,
 		chemin_distant_vers_BDD, LIBSSH2_FXF_WRITE, 0);
 	if (!agent) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de l'ouverture du fichier distant." <<
-			std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+
+        affiche_message_erreur_libssh2(session, "Echec lors de l'ouverture du fichier distant.");
+
 		return -1;
 	}
 

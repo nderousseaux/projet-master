@@ -55,6 +55,8 @@ class EnvoiDonnees {
 
         int initialisation_socket(const int& port, const char* ip);
 
+        void affiche_message_erreur_libssh2(LIBSSH2_SESSION* session, const std::string& msg_erreur);
+
 		/**
 		 * @brief Récupère l'identifiant, le mot de passe et l'adresse IP du
 		 * 		  serveur SFTP

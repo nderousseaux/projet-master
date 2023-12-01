@@ -319,8 +319,8 @@ header > section:last-child .dropbtn {
 }
 #secMeteo > div {
 	grid-template-columns: 85px
-		repeat(4, minmax(calc((100% - (120px + 85px * 2))/10), 1fr)) 85px 120px
-		repeat(4, minmax(calc((100% - (120px + 85px * 2))/10), 1fr));
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr)) 70px 120px
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr));
 }
 .cellule > p {
 	font-size: 14px;

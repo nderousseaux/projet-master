@@ -8,16 +8,23 @@ Vérifier les connectiques des différents composants. En effet une connection d
 
 Si un ancien système est déjà installer ou qu'il reste des données. Veuillez faire une sauvegarde des données sur un autre disque. Ensuite faite un formatage avec ré-écriture pour être sûr qu'il ne reste aucune données parasite.
 
-OS utilisé: `RASPBERRY PI OS Lite (64-BITS)`
+OS utilisé: `RASPBERRY PI OS (LEGAGY, 64-BITS) LITE`
 
 ```bash
 sudo apt install rpi-imager
 ```
 
+Une fois le rpi-imager ouvert vous devez sélectionner l'OS (ci-dessus), sélectionner la carte SD puis vous pouvez ajouter les options.
+Dans les options vous pouvez configurer le mot de passe, la connection WIFI, ssh, clavier etc... Nous vous recommandons de préfdéfinir les paramètres pour simplifier l'installation. (*Attention tout les OS ne permettent par l'enregistrement de la configuration*)
+Même si la wifi sera modifier par la suite. Il est préférable d'avoir une connection wifi fonctionnel pour mettre à jour les fichiers.
+
 ## Logs
 
+Exemple de nommage
 hostname : pi  
 Mot de passe : tprli
+
+*TODO définir un nommage pour le réseau*
 
 ## /etc/network/interfaces.d/wlan0
 

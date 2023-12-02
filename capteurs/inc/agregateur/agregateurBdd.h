@@ -1,7 +1,7 @@
 #ifndef AGREGATEURBDD_H
 #define AGREGATEURBDD_H
 
-#include "baseDeDonnees.hpp"
+#include "envoiDonnees.hpp"
 #include "erreur.hpp"
 
 #include <iostream>

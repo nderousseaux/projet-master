@@ -28,7 +28,7 @@ include_directories(${PROJECT_SOURCE_DIR}/inc/agregateur)
 option(PROG_TYPE "Type de programme" mesures)
 
 # Défini le nom de l'exécutable et son emplacement
-if(PROG_TYPE STREQUAL "mesures")
+if(PROG_TYPE STREQUAL "mesures" OR PROG_TYPE STREQUAL "all")
 	add_executable(${PROGRAMME1_NOM} ${PROGRAMME1_SOURCES})
 	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 	target_include_directories(${PROGRAMME1_NOM}
@@ -36,7 +36,9 @@ if(PROG_TYPE STREQUAL "mesures")
 		${CMAKE_CURRENT_SOURCE_DIR}/src/main1
 	)
 	target_link_libraries(${PROGRAMME1_NOM} sqlite3 ssh2)
-elseif(PROG_TYPE STREQUAL "agregateur")
+endif()
+
+if(PROG_TYPE STREQUAL "agregateur" OR PROG_TYPE STREQUAL "all")
 	add_executable(${PROGRAMME2_NOM} ${PROGRAMME2_SOURCES})
 	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 	target_include_directories(${PROGRAMME2_NOM}
@@ -44,6 +46,11 @@ elseif(PROG_TYPE STREQUAL "agregateur")
 		${CMAKE_CURRENT_SOURCE_DIR}/src/main2
 	)
 	target_link_libraries(${PROGRAMME2_NOM} sqlite3 ssh2)
-else()
+endif()
+
+if(
+	NOT (PROG_TYPE STREQUAL "mesures" OR PROG_TYPE STREQUAL "agregateur" OR
+	PROG_TYPE STREQUAL "all")
+)
 	message(FATAL_ERROR "Type de programme inconnu")
 endif()

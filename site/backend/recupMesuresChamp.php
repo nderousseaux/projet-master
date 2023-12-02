@@ -15,3 +15,15 @@ if (!(is_numeric($_POST["numChamp"]))) {
 }
 
 /* Requête MongoDB à faire */
+
+// >> Code bouchon à supprimer
+$fichierDonnees = "./json/donneesTableauTtesDonnees.json";
+if (file_exists($fichierDonnees)) {
+	$reponse = @file_get_contents($fichierDonnees);
+	echo $reponse;
+}
+else {
+	$erreur = array("Erreur", "Fichier non trouvé");
+	echo json_encode($erreur);
+	exit();
+}

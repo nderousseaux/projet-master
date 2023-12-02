@@ -8,12 +8,13 @@
 if [ $# -ne 1 ];
 then
 	echo "Erreur : Nombre d'argument incorrect"
-	echo "Usage : sh $0 [clean|mesures|agregateur]"
+	echo "Usage : sh $0 [clean|all|mesures|agregateur]"
 	exit 1
-elif [ "$1" != "clean" ] && [ "$1" != "mesures" ] && [ "$1" != "agregateur" ];
+elif [ "$1" != "clean" ] && [ "$1" != "all" ] && [ "$1" != "mesures" ] &&
+	[ "$1" != "agregateur" ];
 then
 	echo "Erreur : Mauvais argument"
-	echo "Usage : sh $0 [clean|mesures|agregateur]"
+	echo "Usage : sh $0 [clean|all|mesures|agregateur]"
 	exit 1
 fi
 

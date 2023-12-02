@@ -10,12 +10,12 @@ if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
 
 // Vérifie que les entrées sont de type numérique
 if (!(is_numeric($_POST["numChamp"]))) {
-    $erreur = array("Erreur", "Type du numéro de champ non reconnu");
+	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
 	echo json_encode($erreur);
 	exit();
 }
 if (!(is_numeric($_POST["idUtilisateur"]))) {
-    $erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
+	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
 	echo json_encode($erreur);
 	exit();
 }

@@ -52,7 +52,7 @@ p {
 	position: relative;
 	display: inline-block;
 }
-.dropdown-content {
+.dropdownContent {
 	display: none;
 	position: absolute;
 	right: 0;
@@ -66,8 +66,8 @@ p {
 	max-height: calc(45px * 3);
 	overflow-y: auto;
 }
-.dropdown-content button,
-.dropdown-content a {
+.dropdownContent button,
+.dropdownContent a {
 	display: block;
 	width: 100%;
 	border: none;
@@ -83,19 +83,19 @@ p {
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:hover,
-.dropdown-content a:hover {
+.dropdownContent button:hover,
+.dropdownContent a:hover {
 	color: #000000;
 	background-color: rgba(220, 220, 220, 0.5);
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown-content button:active,
-.dropdown-content a:active,
-.dropdown-content .selected {
+.dropdownContent button:active,
+.dropdownContent a:active,
+.dropdownContent .selected {
 	background-color: rgba(200, 200, 200, 0.5);
 	transition: background-color 0.2s ease-in-out;
 }
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdownContent {
 	display: block;
 }
 .dropdown:hover .dropbtn {
@@ -113,7 +113,6 @@ p {
 .tableau > div {
 	display: grid;
 	grid-gap: 2px 0;
-	grid-auto-rows: minmax(50px, auto);
 	width: calc(100% - 20px);
 	padding: 10px 10px 0 10px;
 	overflow: unset;
@@ -123,9 +122,10 @@ p {
 }
 .cellule {
 	display: flex;
+	flex-direction: column;
 	font-size: 14px;
 	width: calc(100% - 10px);
-	padding: 5px;
+	padding: 15px 5px;
 	background-color: #ffffff;
 	align-items: center;
 	justify-content: center;
@@ -173,13 +173,13 @@ p {
 #secTableau > div > .cellule:nth-child(12n+12) {
 	background-color: #fafafa;
 }
-#secMeteo > div > .cellule:nth-child(11n+11),
-#secTableau > div > .cellule:nth-child(6n+6) {
-	border-radius: 0 10px 10px 0;
-}
 #secMeteo > div > .cellule:nth-child(11n+1),
 #secTableau > div > .cellule:nth-child(6n+1) {
 	border-radius: 10px 0 0 10px;
+}
+#secMeteo > div > .cellule:nth-child(11n+11),
+#secTableau > div > .cellule:nth-child(6n+6) {
+	border-radius: 0 10px 10px 0;
 }
 
 /* Header */
@@ -187,17 +187,33 @@ header {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	position: fixed;
+	top: 0;
+	z-index: 999;
 	justify-content: space-between;
 	width: 100vw;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
+}
+header::before {
+	border-radius: 0 0 10px 10px;
+}
+header::before,
+.ddHeader::before {
+	display: block;
+	position: absolute;
+	content: "\00A0";
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
+	z-index: -1;
 }
 
 	/* Logo */
-header > img {
+header > picture,
+header > picture > img {
 	width: 144px;
 	height: 72px;
 	border-radius: 0 0 0 10px;
@@ -225,12 +241,19 @@ header > section:last-child .dropbtn {
 #selectCmpt > a {
 	width: calc(100% - 48px);
 }
+.ddHeader {
+	background-color: unset;
+	-webkit-backdrop-filter: unset;
+	backdrop-filter: unset;
+}
 
 /* Corps */
 #corps {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	position: relative;
+	top: 72px;
 }
 #corps > section,
 #secMeteo {
@@ -243,7 +266,7 @@ header > section:last-child .dropbtn {
 	margin-top: 36px;
 }
 #corps > section:last-child {
-	margin-bottom: 18px;
+	margin-bottom: 40px;
 }
 
 	/* Section informations */
@@ -295,13 +318,18 @@ header > section:last-child .dropbtn {
 	margin-top: 0;
 }
 #secMeteo > div {
-	grid-template-columns: 85px repeat(10, minmax(calc((100% - 85px)/10), 1fr));
+	grid-template-columns: 85px
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr)) 70px 120px
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr));
+}
+.cellule > p {
+	font-size: 14px;
+	margin: 0;
 }
 #secMeteo > div > .titre:first-child {
 	display: flex;
 	flex-direction: column;
-	padding: 0 5px 0 0;
-	width: 80px;
+	padding: 0 10px 0 0;
 }
 #secMeteo > div > .titre:first-child > p {
 	display: flex;
@@ -322,7 +350,7 @@ header > section:last-child .dropbtn {
 	height: 100%;
 	border-radius: 10px;
 }
-#ddDuree > .dropdown-content {
+#ddDuree > .dropdownContent {
 	left: 0;
 }
 
@@ -446,20 +474,17 @@ header > section:last-child .dropbtn {
 
 	/* Section tableau */
 #secTableau {
-	max-height: 40vh;
+	max-height: 60vh;
 }
 #secTableau > div {
 	grid-template-columns: repeat(6, 1fr);
 }
+.errMesure {
+	color: #d30000;
+}
 
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
-	/* Général */
-		/* Tableaux */
-	.tableau > div {
-		grid-auto-rows: unset;
-	}
-
 	/* Corps */
 	#corps > section {
 		width: 95%;
@@ -484,13 +509,12 @@ header > section:last-child .dropbtn {
 		font-size: 15px;
 	}
 
-
 		/* Boutons dropdown */
 	.dropbtn {
-		width: 40px !important;
+		width: 60px !important;
 		height: 40px !important;
 	}
-	.dropdown-content button {
+	.dropdownContent button {
 		padding: 10px 30px 10px 10px;
 	}
 
@@ -509,16 +533,37 @@ header > section:last-child .dropbtn {
 
 	/* Header */
 		/* Logo */
-	header > img {
-		width: 144px;
-		height: 72px;
-		margin: 10px calc((100% - 144px)/2);
-		border-radius: 0;
+	header {
+		transform-origin: top;
+		transform: scaleY(1);
+		transition: transform 0.2s ease-in-out;
 	}
+	.miseEchelleHeader {
+		transform: scaleY(0.3);
+	}
+	header > picture {
+		display: flex;
+		width: 100%;
+		margin: 10px;
+	}
+	header > picture > img {
+		width: 288px;
+		margin: auto;
+		border-radius: 10px;
+	}
+	.masqueLogo {
+		opacity: 0;
+	}
+
 		/* Sous-sections (choix champs, choix utilisateur) */
 	header > section {
-		margin-top: 10px;
 		width: calc(50% - 5px);
+		transform-origin: bottom;
+		transform: scaleY(1);
+		transition: transform 0.2s ease-in-out;
+	}
+	.miseEchelleSection {
+		transform: scaleY(3.3);
 	}
 	header > section > p,
 	#optGraph > div > p {
@@ -532,9 +577,15 @@ header > section:last-child .dropbtn {
 	}
 
 	/* Corps */
+	#corps {
+		top: calc(72px + 40px + 20px);
+	}
 	#corps > section {
 		width: 95%;
 		margin-top: 20px;
+	}
+	#corps > section:last-child {
+		margin-bottom: 20px;
 	}
 
 		/* Section informations */
@@ -573,7 +624,7 @@ header > section:last-child .dropbtn {
 		margin-top: 20px;
 	}
 	#secMeteo > div {
-		grid-template-columns: repeat(11, 80px);
+		grid-template-columns: 100px repeat(5, 80px) 120px repeat(4, 80px);
 	}
 
 				/* Options de la météo */
@@ -623,7 +674,7 @@ header > section:last-child .dropbtn {
 
 	/* Section tableau */
 	#secTableau > div {
-		grid-template-columns: repeat(2, minmax(80px, 1fr)) 150px
+		grid-template-columns: minmax(80px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
 	}
 }
@@ -644,22 +695,22 @@ header > section:last-child .dropbtn {
 	}
 
 		/* Boutons dropdown */
-	.dropdown-content {
+	.dropdownContent {
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2);
 		background-color: rgba(57, 57, 57, 0.7);
 	}
-	.dropdown-content button,
-	.dropdown-content a {
+	.dropdownContent button,
+	.dropdownContent a {
 		color: #ffffff;
 	}
-	.dropdown-content button:hover,
-	.dropdown-content a:hover {
+	.dropdownContent button:hover,
+	.dropdownContent a:hover {
 		background-color: rgba(80, 80, 80, 0.5);
 		color: #ffffff !important;
 	}
-	.dropdown-content button:active,
-	.dropdown-content a:active,
-	.dropdown-content .selected {
+	.dropdownContent button:active,
+	.dropdownContent a:active,
+	.dropdownContent .selected {
 		background-color: rgba(111, 111, 111, 0.5);
 	}
 
@@ -667,6 +718,14 @@ header > section:last-child .dropbtn {
 	header {
 		background-color: rgba(0, 0, 0, 0.7);
 		box-shadow: 0 15px 20px -15px #080808;
+	}
+	header::before {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+		/* Sous-sections (choix champs, choix utilisateur) */
+	.ddHeader::before {
+		background-color: rgba(57, 57, 57, 0.7);
 	}
 
 	/* Corps */
@@ -773,5 +832,10 @@ header > section:last-child .dropbtn {
 	}
 	.notifier-close:active {
 		color: #a8a8a8 !important
+	}
+
+		/* Section tableau */
+	.errMesure {
+		color: #ff3535;
 	}
 }

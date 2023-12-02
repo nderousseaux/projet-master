@@ -5,16 +5,16 @@ int main(int argc, char** argv) {
 	if (argc != 4) {
 		std::cerr << "Usage: " <<
 			argv[0] <<
-			" <id champ> <id ilot> <id capteur>" <<
+			" <id agri> <id champ> <id ilot>" <<
 			std::endl;
 
 		return EXIT_FAILURE;
 	}
 	else {
 		if (DEBUG) {
-			std::cout << "Id champ : " << argv[1] << std::endl;
-			std::cout << "Id ilot : " << argv[2] << std::endl;
-			std::cout << "Id capteur : " << argv[3] << std::endl << std::endl;
+			std::cout << "Id agri : " << argv[1] << std::endl;
+			std::cout << "Id champ : " << argv[2] << std::endl;
+			std::cout << "Id ilot : " << argv[3] << std::endl << std::endl;
 		}
 
 		// Vérifie que les arguments sont des entiers positifs
@@ -45,10 +45,11 @@ int main(int argc, char** argv) {
 	}
 		// Récupère les valeurs des capteurs
 	else {
-		// Récupère ici les valeurs des capteurs
+		// >> Récupère ici les valeurs des capteurs
 	}
 
 	// Stocke les valeurs générées
+	mesures.setDate(StockageDonnees::dateUTCActuelle());
 	mesures.setTemperature(temp);
 	mesures.setHumidite(humi);
 	mesures.setLuminosite(lumi);
@@ -61,23 +62,10 @@ int main(int argc, char** argv) {
 			<< std::endl;
 	}
 
-	// Ouvre la base de données
-	int retour = 0;
-	BaseDeDonnees baseDeDonnees;
+	// Ecrit les données dans un fichier
+	StockageDonnees::ecrireDonneesFichier("mesures.txt", infosChamp, mesures);
 
-	const std::string nomBdd = "capteurs.db";
-
-	retour = baseDeDonnees.ouvrirBaseDeDonnees(nomBdd);
-	testErreur(retour, "Impossible d'ouvrir la base de données");
-
-	// Insère les données
-	retour = baseDeDonnees.insererMesures(infosChamp, mesures);
-	testErreur(retour, "Impossible d'insérer les mesures dans la base de"
-		"données");
-
-	// Ferme la base de données
-	retour = baseDeDonnees.fermerBaseDeDonnees();
-	testErreur(retour, "Impossible de fermer la base de données");
+	// >> Envoie les données vers le serveur SFTP
 
 	return EXIT_SUCCESS;
 }

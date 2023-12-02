@@ -9,3 +9,8 @@ sudo batctl gw_mode client
 # Activates batman-adv interfaces
 sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
+
+# Forcer le mode "ad-hoc" aussi nommé "ibss"
+sudo iw dev wlan0 set type ibss
+# Forcer le ESSID
+sudo iw dev wlan0 ibss join call-code-mesh 2462

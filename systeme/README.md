@@ -83,4 +83,6 @@ iwconfig
 
 # Forcer le mode "ad-hoc" aussi nommé "ibss"
 sudo iw dev wlan0 set type ibss
+# Forcer le ESSID
+sudo iw dev wlan0 ibss join call-code-mesh 2462
 ```

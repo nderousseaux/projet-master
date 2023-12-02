@@ -63,3 +63,7 @@ Notice that:
 - iwconfig to show the wireless interfaces on the device.
 - sudo batctl if to show the interfaces participating in the mesh.
 - sudo batctl n to show the neighbouring mesh nodes your gateway node can see. 
+
+# Problème
+
+La commande `dmesg | grep wlan0` met en avant un MTU trop petit pouvant diminuer les performances.

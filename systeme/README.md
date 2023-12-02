@@ -64,3 +64,23 @@ sudo apt upgrade
 # Sinon la RPI une fois éteinte, ne s'allume plus.
 ```
 
+## Commande utile
+
+```bash
+# Vérifie l'état de l'interface bat0
+# devrait retourné le nom de l'interface et active
+sudo batctl if
+# Vérifier les noeuds voisins au gateway
+sudo batctl n
+
+# Affiche les modes accepter pour le Wifi (notamment ad-hoc)
+iw list | grep -A 10 "Supported interface modes"
+
+# Vérifier les interfaces
+ifconfig
+# Vérfifier l'interface wifi
+iwconfig
+
+# Forcer le mode "ad-hoc" aussi nommé "ibss"
+sudo iw dev wlan0 set type ibss
+```

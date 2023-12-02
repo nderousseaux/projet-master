@@ -34,6 +34,7 @@ runcmd:
   - git checkout infra
   - cd infra/iaas/
   - docker compose up -d
+  - chmod 777 pull.sh
   - cp webhook.service /etc/systemd/system/
   - systemctl enable webhook
   - systemctl start webhook

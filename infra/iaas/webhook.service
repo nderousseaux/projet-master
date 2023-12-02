@@ -3,7 +3,7 @@ Description=Webhook pull all webs
 After=network.target
 
 [Service]
-ExecStart=/pm/infra/iaas/pull.sh
+ExecStart=/bin/bash /pm/infra/iaas/pull.sh
 
 [Install]
 WantedBy=multi-user.target

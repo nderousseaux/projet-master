@@ -1,6 +1,6 @@
 ## Démarrer le replica set:
 ```
-./setup.sh      # créé les dossiers des dbs(data/*)
+./setup.sh      # créé les dossiers des dbs (data/*)
 ./start.sh      # lance conteneurs et initie replica set avec conf de rs-init.sh
 ```
 
@@ -16,12 +16,12 @@
     ```
 * url de connection au replica set:
     ```
-    mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0i
+    mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0
     # ou pour se connecter directement à la bonne db (data):
     mongodb://mongo1:30001,mongo2:30002,mongo3:30003/data/?replicaSet=rs0
     ```
 * script de remplissage de la bdd:
-    lancé automatiquement dans start.sh (délai de 20 secs) pour les test (à désactiver pour version finale)
+    lancé automatiquement dans start.sh (délai de 20 secs) pour les tests (à désactiver pour version finale)
     ```
     ./add-data.sh   # ajoute des données dans la base "data"
     ```

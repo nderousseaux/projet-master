@@ -17,7 +17,10 @@ bootcmd:
 ssh_pwauth: true
 
 runcmd:
+  - mkdir -p /data/sftp_user/upload
+  - chown -R root.sftp /data
+  - chown -R sftp_user.sftp /data/sftp_user/upload
   - echo "Match Group sftp" >> /etc/ssh/sshd_config
-  - echo "ChrootDirectory /home" >> /etc/ssh/sshd_config
+  - echo "ChrootDirectory /data/%u" >> /etc/ssh/sshd_config
   - echo "ForceCommand internal-sftp" >> /etc/ssh/sshd_config
   - systemctl restart sshd

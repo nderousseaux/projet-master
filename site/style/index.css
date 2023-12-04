@@ -534,6 +534,14 @@ header > section:last-child .dropbtn {
 		top: 0;
 	}
 
+		/* Vignettes */
+	#secInfos > div,
+	#secMoyennes > div {
+		width: calc(33.33% - 3px);
+		height: 160px;
+		padding: 10px 0;
+	}
+
 	/* Header */
 		/* Logo */
 	header {
@@ -597,10 +605,7 @@ header > section:last-child .dropbtn {
 	}
 	#secInfos > div {
 		justify-content: space-between;
-		width: calc(33.33% - 3px);
-		height: 160px;
 		margin: 0;
-		padding: 10px 0;
 	}
 	#secInfos > div > h1,
 	#secInfos > div > p,
@@ -642,11 +647,6 @@ header > section:last-child .dropbtn {
 		justify-content: space-between;
 		width: 100%;
 		height: fit-content;
-	}
-	#secMoyennes > div {
-		width: calc(33.33% - 3px);
-		height: 150px;
-		padding: 10px 0;
 	}
 	#secMoyennes > div > h1,
 	#secMoyennes > div > p {

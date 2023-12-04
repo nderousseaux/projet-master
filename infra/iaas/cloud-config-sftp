@@ -1,0 +1,23 @@
+#cloud-config
+groups:
+  - sftp
+
+users:
+  - name: matth
+    passwd: $1$mM48WZHt$nCaFoxTmnWN.fgX1eJ.8I.
+    groups: users,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+  - name: sftp_user
+    passwd: $6$YxETL/jewBSdawmZ$z3KpFD46Tdl0uif2w52TrL4DofgZM0UVp3gsjNej/iHz92worFlGCfMiCmTfHeGfAuB.APXb9IZWKt3N8a3Dx.
+    groups: users,sftp
+    lock_passwd: false
+bootcmd:
+  - loadkeys fr
+ssh_pwauth: true
+
+runcmd:
+  - echo "Match Group sftp" >> /etc/ssh/sshd_config
+  - echo "ChrootDirectory /home" >> /etc/ssh/sshd_config
+  - echo "ForceCommand internal-sftp" >> /etc/ssh/sshd_config
+  - systemctl restart sshd

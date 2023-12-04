@@ -6,6 +6,7 @@
 class Mesures {
 	/* Variables */
 	private:
+		std::string date_;
 		float temperature_;
 		float humidite_;
 		int luminosite_;
@@ -19,14 +20,15 @@ class Mesures {
 
 	/* Getters */
 	public:
+		inline std::string getDate(void) const {
+			return date_;
+		}
 		inline float getTemperature(void) const {
 			return temperature_;
 		}
-
 		inline float getHumidite(void) const {
 			return humidite_;
 		}
-
 		inline int getLuminosite(void) const {
 			return luminosite_;
 		}
@@ -34,14 +36,15 @@ class Mesures {
 
 	/* Setters */
 	public:
+		inline void setDate(std::string date) {
+			this->date_ = date;
+		}
 		inline void setTemperature(float temperature) {
 			this->temperature_ = temperature;
 		}
-
 		inline void setHumidite(float humidite) {
 			this->humidite_ = humidite;
 		}
-
 		inline void setLuminosite(int luminosite) {
 			this->luminosite_ = luminosite;
 		}

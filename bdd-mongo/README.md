@@ -53,22 +53,25 @@
     "humi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
-        "valeurs": ["humidité ilot 0", "humidité ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "humi": "humidité ilot Idi"
     },
 
     "temp": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
-        "valeurs": ["température ilot 0", "température ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "temp": "température ilot Idi"
     },
 
     "lumi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "dates": ["date mesure ilot 0", "date mesure ilot 1", "..."],
-        "valeurs": ["luminosité ilot 0", "luminosité ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "lumi": "luminosité ilot Idi"
     }
 }
 ```

@@ -12,22 +12,35 @@
 	<meta name="description" content="Gestion de champs"/>
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 </head>
-<body>
+<body tabindex="0">
 <header>
-	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
+	<picture>
+		<source srcset="img/logo/logoAlsagricultureMobileClair.webp"
+			media="(max-width: 950px) and (prefers-color-scheme: light)"/>
+			<source srcset="img/logo/logoAlsagricultureMobileSombre.webp"
+			media="(max-width: 950px) and (prefers-color-scheme: dark)"/>
+
+		<source srcset="img/logo/logoAlsagricultureClair.webp"
+			media="(prefers-color-scheme: light)"/>
+		<source srcset="img/logo/logoAlsagricultureSombre.webp"
+			media="(prefers-color-scheme: dark)"/>
+
+		<img src="img/logo/logoAlsagricultureClair.webp"
+			alt="Logo Als'agriculture"/>
+	</picture>
 	<section>
-		<p></p>
-		<div class="dropdown" id="ddChamp">
+		<p>-</p>
+		<div id="ddChamp" class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div id="selectChamp" class="dropdown-content">
+			<div id="selectChamp" class="dropdownContent ddHeader">
 			</div>
 		</div>
 	</section>
 	<section>
-		<p></p>
-		<div class="dropdown" id="ddCmpt">
+		<p>-</p>
+		<div id="ddCmpt" class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div id="selectCmpt" class="dropdown-content">
+			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.html">Paramètres</a>
 				<button value="deco">Déconnexion</button>
 			</div>
@@ -38,19 +51,19 @@
 	<section id="secInfos">
 		<div>
 			<h1>État général</h1>
-			<p>OK</p>
+			<p>-</p>
 		</div>
 		<div>
-			<h1>Nombre de capteurs (actifs/total)</h1>
+			<h1>Nombre de capteurs</h1>
 			<div id="nbrCapteurs">
-				<p>40</p>
+				<p>-</p>
 				<p>/</p>
-				<p>42</p>
+				<p>-</p>
 			</div>
 		</div>
 		<div>
 			<h1>Dernière màj</h1>
-			<p>2023-11-16 18:10:13</p>
+			<p>-</p>
 		</div>
 	</section>
 
@@ -61,9 +74,9 @@
 					<p>
 						Date
 					</p>
-					<div class="dropdown" id="ddDuree">
+					<div id="ddDuree" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectDuree" class="dropdown-content">
+						<div id="selectDuree" class="dropdownContent">
 							<button value="semaine">Semaine</button>
 							<button value="jour">Journée</button>
 						</div>
@@ -86,15 +99,15 @@
 		<section id="secMoyennes">
 			<div>
 				<h1>Température moyenne</h1>
-				<p>12.3°C</p>
+				<p>-</p>
 			</div>
 			<div>
 				<h1>Humidité moyenne du sol</h1>
-				<p>58.4%</p>
+				<p>-</p>
 			</div>
 			<div>
 				<h1>Luminosité moyenne</h1>
-				<p>12300 lux</p>
+				<p>-</p>
 			</div>
 		</section>
 	</section>
@@ -103,9 +116,9 @@
 		<div id="optGraph">
 			<div>
 				<p>Type de données</p>
-				<div class="dropdown" id="ddType">
+				<div id="ddType" class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div id="selectType" class="dropdown-content">
+					<div id="selectType" class="dropdownContent">
 						<button value="temp">Température</button>
 						<button value="humi">Humidité du sol</button>
 						<button value="lumi">Luminosité</button>
@@ -114,9 +127,9 @@
 			</div>
 			<div>
 				<p>Ilot</p>
-				<div class="dropdown" id="ddIlot">
+				<div id="ddIlot" class="dropdown">
 					<button class="dropbtn">⇩</button>
-					<div id="selectIlot" class="dropdown-content">
+					<div id="selectIlot" class="dropdownContent">
 					</div>
 				</div>
 			</div>
@@ -127,55 +140,14 @@
 
 	<section id="secTableau" class="tableau">
 		<div>
-			<div class="cellule titre">Champ</div>
 			<div class="cellule titre">Ilot</div>
 			<div class="cellule titre">Date et heure</div>
+			<div class="cellule titre">État</div>
 			<div class="cellule titre">Température (°C)</div>
 			<div class="cellule titre">Humidité du sol (%)</div>
 			<div class="cellule titre">Luminosité (lux)</div>
 		</div>
 		<div id="donneesTableau">
-			<div class="cellule">1</div>
-			<div class="cellule">1</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">120032</div>
-
-			<div class="cellule">2</div>
-			<div class="cellule">2, 3</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">3</div>
-			<div class="cellule">4</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">4</div>
-			<div class="cellule">5</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">5</div>
-			<div class="cellule">6</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">1032</div>
-
-			<div class="cellule">6</div>
-			<div class="cellule">7</div>
-			<div class="cellule">2023-11-16 18:10:13</div>
-			<div class="cellule">8.2</div>
-			<div class="cellule">68.9</div>
-			<div class="cellule">120032</div>
 		</div>
 	</section>
 </div>
@@ -190,6 +162,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="scripts/afficherDonnees.js"></script>
 <script src="scripts/classesCouleurs.js"></script>
 <script src="scripts/graphique.js"></script>
+<script src="scripts/entete.js"></script>
 <script>
 	/*** Variables et constantes ***/
 		/*
@@ -203,15 +176,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		["selectIlot", "ilotSlct", true],
 		["selectDuree", "dureeSlct", true]
 	];
-
-	// A utiliser quand le backend sera prêt
-	// const contIdButtons = [
-	//	["selectChamp", "champSlct", false],
-	//	["selectCmpt", "cmptSlct", false],
-	//	["selectType", "typeSlct", true],
-	//	["selectIlot", "ilotSlct", false],
-	//	["selectDuree", "dureeSlct", true]
-	// ];
 
 		// Préselectionne les boutons des dropdowns
 	contIdButtons.forEach(element => {
@@ -246,6 +210,13 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Affiche la météo (nécessite de connaitre le champ sélectionné)
 		afficherMeteo(idUtilisateur);
 
+		// Affiche les moyennes des valeurs des capteurs
+		afficherMoyennes(idUtilisateur);
+		afficherInfosChamp(idUtilisateur);
+
+		// Affiche toutes les mesures du champ sélectionné
+		afficherTableauToutesMesures(idUtilisateur);
+
 		// Affiche les ilots du champ sélectionné
 		afficherIlots(idUtilisateur)
 		.then(_ => {
@@ -257,10 +228,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			helperAfficherGraph();
 		});
 	});
-
-	// afficherInfosChamp();
-	// afficherMoyennes();
-	// afficherTableauToutesMesures();
 
 
 	/*** Interaction des boutons ***/
@@ -283,6 +250,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Changements du DOM ***/
+		// Gère la taille du header en fonction du défilement
+	activerHeaderReduit();
+
 		// Gère les changements de thème pour le graphique
 	window.matchMedia("(prefers-color-scheme: light)")
 	.addEventListener("change",	() => {

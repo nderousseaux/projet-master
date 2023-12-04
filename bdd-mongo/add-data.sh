@@ -55,26 +55,103 @@ db.humi.insertMany( [
     {
         idAgri: 0,
         idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date()],
-        valeurs: [45.1234, 55.1234, 41.1324, 53.4845]
+        idIlot: 0,
+        date: new Date(),
+        humi: 29.4545
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        humi: 23.4674
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        humi: 29.4545
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        humi: 23.4674
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 0,
+        date: new Date(),
+        humi: 47.4687
     },
     {
         idAgri: 0,
         idChamps: 1,
-        dates: [new Date(), new Date(), new Date()],
-        valeurs: [47.4687, 43.1374, 55.6819]
+        idIlot: 1,
+        date: new Date(),
+        humi: 43.1374
     },
     {
-        idAgri: 1,
-        idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date(), new Date()],
-        valeurs: [23, 29, 46, 44, 67]
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 2,
+        date: new Date(),
+        humi: 55.6819
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 2,
+        idIlot: 0,
+        date: new Date(),
+        humi: 29.4545
     },
     {
         idAgri: 0,
         idChamps: 2,
-        dates: [new Date(), new Date()],
-        valeurs: [23.4674, 29.4545]
+        idIlot: 1,
+        date: new Date(),
+        humi: 23.4674
+    },
+
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 0,
+        date: new Date(),
+        humi: 23.4545
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        humi: 29.4674
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        humi: 46.4545
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        humi: 44.4674
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 4,
+        date: new Date(),
+        humi: 67.4687
     }
 ] );
 
@@ -83,26 +160,103 @@ db.temp.insertMany( [
     {
         idAgri: 0,
         idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date()],
-        valeurs: [25.1234, 26.3415, 28.2684, 23.1679]
+        idIlot: 0,
+        date: new Date(),
+        temp: 21.4545
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        temp: 23.4674
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        temp: 22.4545
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        temp: 23.4674
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 0,
+        date: new Date(),
+        temp: 21.4687
     },
     {
         idAgri: 0,
         idChamps: 1,
-        dates: [new Date(), new Date(), new Date()],
-        valeurs: [27.4687, 23.1374, 25.6819]
+        idIlot: 1,
+        date: new Date(),
+        temp: 23.1374
     },
     {
-        idAgri: 1,
-        idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date(), new Date()],
-        valeurs: [23.4568, 29.1597, 46.6479, 44.1159, 67.2345]
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 2,
+        date: new Date(),
+        temp: 22.6819
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 2,
+        idIlot: 0,
+        date: new Date(),
+        temp: 29.4545
     },
     {
         idAgri: 0,
         idChamps: 2,
-        dates: [new Date(), new Date()],
-        valeurs: [23.9674, 24.3545]
+        idIlot: 1,
+        date: new Date(),
+        temp: 28.4674
+    },
+
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 0,
+        date: new Date(),
+        temp: 25.4545
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        temp: 26.4674
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        temp: 26.4545
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        temp: 24.4674
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 4,
+        date: new Date(),
+        temp: 25.4687
     }
 ] );
 
@@ -110,26 +264,103 @@ db.lumi.insertMany( [
     {
         idAgri: 0,
         idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date()],
-        valeurs: [405, 550, 410, 337]
+        idIlot: 0,
+        date: new Date(),
+        lumi: 789
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        lumi: 780
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        lumi: 785
+    },
+    {
+        idAgri: 0,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        lumi: 778
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 0,
+        date: new Date(),
+        lumi: 654
     },
     {
         idAgri: 0,
         idChamps: 1,
-        dates: [new Date(), new Date(), new Date()],
-        valeurs: [945, 1000, 887]
+        idIlot: 1,
+        date: new Date(),
+        lumi: 681
     },
     {
-        idAgri: 1,
-        idChamps: 0,
-        dates: [new Date(), new Date(), new Date(), new Date(), new Date()],
-        valeurs: [568, 597, 479, 159, 345]
+        idAgri: 0,
+        idChamps: 1,
+        idIlot: 2,
+        date: new Date(),
+        lumi: 678
+    },
+
+    {
+        idAgri: 0,
+        idChamps: 2,
+        idIlot: 0,
+        date: new Date(),
+        lumi: 960
     },
     {
         idAgri: 0,
         idChamps: 2,
-        dates: [new Date(), new Date()],
-        valeurs: [501, 808]
+        idIlot: 1,
+        date: new Date(),
+        lumi: 970
+    },
+
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 0,
+        date: new Date(),
+        lumi: 856
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 1,
+        date: new Date(),
+        lumi: 873
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 2,
+        date: new Date(),
+        lumi: 847
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 3,
+        date: new Date(),
+        lumi: 869
+    },
+    {
+        idAgri: 1,
+        idChamps: 0,
+        idIlot: 4,
+        date: new Date(),
+        lumi: 888
     }
 ] );
 

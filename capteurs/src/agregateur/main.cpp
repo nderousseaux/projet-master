@@ -7,19 +7,8 @@ int main(int argc, char** argv) {
 		return EXIT_FAILURE;
 	}
 
-	// Ouvre la base de données
-	int retour = 0;
-	BaseDeDonnees baseDeDonnees;
-
-	retour = baseDeDonnees.ouvrirBaseDeDonnees(NOM_BDD_AGR);
-	testErreur(retour, "Impossible d'ouvrir la base de données");
-
-	// agrége les données
-	retour = baseDeDonnees.agregerMesures();
-
-	// Ferme la base de données
-	retour = baseDeDonnees.fermerBaseDeDonnees();
-	testErreur(retour, "Impossible de fermer la base de données");
+	// Agrège les fichiers de données
+	StockageDonnees::agregeFichiersDonnees();
 
 	return EXIT_SUCCESS;
 }

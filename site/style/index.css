@@ -224,10 +224,13 @@ header > section {
 	display: flex;
 	justify-content: right;
 	width: calc(50% - 72px);
+	cursor: pointer;
+}
+header > section > * {
+	cursor: auto;
 }
 header > section > p,
 #optGraph > div > p {
-	width: 200px;
 	font-size: 16px;
 	line-height: 72px;
 	margin: 0 10px 0 0;

@@ -9,3 +9,8 @@ sudo batctl gw_mode client
 # Activates batman-adv interfaces
 sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 channel 1
+sudo iwconfig wlan0 call-code-mesh
+
+sudo dhclient wlan0

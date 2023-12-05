@@ -1,12 +1,17 @@
 #!/bin/bash
 # Pas fonctionnel
 
-#yes | ../Installation.sh
+if [ "$EUID" -ne 0 ]; then
+    echo "Ce script doit être exécuté en tant que superutilisateur (root)."
+    exit 1
+fi
+
+yes | ../Installation.sh
 
 #Configuration noeud
 mv start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
-sudo mv ../Noeud/wlan0 /etc/network/interfaces.d/wlan0
+mv ../Noeud/wlan0 /etc/network/interfaces.d/wlan0
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 

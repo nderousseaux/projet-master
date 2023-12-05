@@ -20,3 +20,5 @@ sudo apt install npm
 sudo npm install -g --unsafe-perm node-red
 sudo npm -g install node-pre-gyp
 sudo npm -g install node-gyp
+
+sudo apt-get install sshpass

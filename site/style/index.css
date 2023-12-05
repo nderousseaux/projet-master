@@ -554,12 +554,12 @@ header > section:last-child .dropbtn {
 	}
 	header > picture {
 		display: flex;
+		justify-content: center;
 		width: 100%;
-		margin: 10px;
+		margin: 10px 0;
 	}
 	header > picture > img {
 		width: 288px;
-		margin: auto;
 		border-radius: 10px;
 	}
 	.masqueLogo {

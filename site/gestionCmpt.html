@@ -15,12 +15,25 @@
 </head>
 <body>
 <header>
-	<img draggable=false src="img/logoAlsagriculture.png" alt="Logo Als'agriculture"/>
+	<picture>
+		<source srcset="img/logo/logoAlsagricultureMobileClair.webp"
+			media="(max-width: 950px) and (prefers-color-scheme: light)"/>
+			<source srcset="img/logo/logoAlsagricultureMobileSombre.webp"
+			media="(max-width: 950px) and (prefers-color-scheme: dark)"/>
+
+		<source srcset="img/logo/logoAlsagricultureClair.webp"
+			media="(prefers-color-scheme: light)"/>
+		<source srcset="img/logo/logoAlsagricultureSombre.webp"
+			media="(prefers-color-scheme: dark)"/>
+
+		<img src="img/logo/logoAlsagricultureClair.webp"
+			alt="Logo Als'agriculture"/>
+	</picture>
 	<section>
-		<p>John Doe</p>
-		<div class="dropdown">
+		<p>-</p>
+		<div id="ddCmpt" class="dropdown">
 			<button class="dropbtn">⇩</button>
-			<div id="selectCmpt" class="dropdown-content">
+			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<button value="deco">Déconnexion</button>
 			</div>
 		</div>
@@ -59,9 +72,10 @@
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
+<script src="scripts/entete.js"></script>
 <script>
+	// Gère les vérifications des champs du formulaire
 	gestionInputCmpt();
-
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
@@ -69,6 +83,13 @@
 
 		// Affiche le nom de l'utilisateur dans le header
 	afficherNomUtilisateur(idUtilisateur);
+
+	/** Changements du DOM **/
+		// Gère le défilement vers le haut de la page
+	activerDefilementHautPage();
+
+		// Gère la taille du header en fonction du défilement
+	activerHeaderReduit();
 </script>
 </body>
 </html>

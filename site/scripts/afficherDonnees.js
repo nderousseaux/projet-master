@@ -275,7 +275,7 @@ function afficherMeteo(idUtilisateur) {
  * 
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherTableauToutesMesures(idUtilisateur) {
+function afficherMesuresChamp(idUtilisateur) {
 	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
@@ -348,8 +348,7 @@ function cellulePrecip(objPrecip, cellule) {
 		return cellule;
 	}
 
-	const tailleObj = Object.keys(objPrecip).length;
-	for (const [index, valPrecip] of Object.entries(objPrecip)) {
+	for (const [_, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
 				const intraCellule = document.createElement("p");
@@ -357,11 +356,6 @@ function cellulePrecip(objPrecip, cellule) {
 				cellule.appendChild(intraCellule);
 			}
 		}
-
-		// Ajoute un retour à la ligne, si ce n'est pas la dernière valeur
-		// if (index < tailleObj - 1) {
-		// 	cellule.textContent += "Z";
-		// }
 	};
 
 	return cellule;

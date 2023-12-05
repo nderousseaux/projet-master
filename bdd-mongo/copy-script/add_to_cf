@@ -1,0 +1,5 @@
+  python:
+    image: ubuntu_mine
+    container_name: python
+    volumes:
+      - ./copy-script/donnees:/data

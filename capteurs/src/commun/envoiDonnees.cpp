@@ -33,30 +33,46 @@ void EnvoiDonnees::affiche_message_erreur_libssh2(LIBSSH2_SESSION* session, cons
     std::cerr << msg_erreur << "\nErreur : " << tampon_msg_erreur << std::endl;
 }
 
-int EnvoiDonnees::conversionBDDversChar(char *buffer) {
-	const char* requete_totale = "SELECT * FROM db;";
+//int EnvoiDonnees::conversionBDDversChar(char *buffer) {
+//	const char* requete_totale = "SELECT * FROM db;";
+//
+//	sqlite3_stmt* stmt;
+//	if (sqlite3_prepare_v2(db_, requete_totale, -1, &stmt, NULL) != SQLITE_OK) {
+//		return -1;
+//	}
+//
+//	int num_colonne = 0, index_buffer = 0;
+//	while (sqlite3_step(stmt) == SQLITE_ROW) {
+//		const char* donnees_colonne = (const char*)sqlite3_column_text(stmt,
+//			num_colonne);
+//
+//		int longueur = strlen(donnees_colonne);
+//		snprintf(buffer + index_buffer, longueur, "%s\n", donnees_colonne);
+//		index_buffer += longueur;
+//
+//		num_colonne++;
+//	}
+//
+//	sqlite3_finalize(stmt);
+//
+//	return 0;
+//}
 
-	sqlite3_stmt* stmt;
-	if (sqlite3_prepare_v2(db_, requete_totale, -1, &stmt, NULL) != SQLITE_OK) {
-		return -1;
-	}
+int EnvoiDonnees::ecrireBDD(LIBSSH2_SFTP_HANDLE *agent)
+{
+    char b[1];
+    int descripteur_de_fichier = open("db.db", O_RDONLY);
+    int lu;
 
-	// Loop through the results
-	int num_colonne = 0, index_buffer = 0;
-	while (sqlite3_step(stmt) == SQLITE_ROW) {
-		const char* donnees_colonne = (const char*)sqlite3_column_text(stmt,
-			num_colonne);
+    do {
+        lu = read(descripteur_de_fichier, b, 1);
+        if (lu == 1)
+            libssh2_sftp_write(agent, b, 1);
+        std::cout << b << std::flush;
+    } while (lu == 1);
 
-		int longueur = strlen(donnees_colonne);
-		snprintf(buffer + index_buffer, longueur, "%s\n", donnees_colonne);
-		index_buffer += longueur;
-
-		num_colonne++;
-	}
-
-	sqlite3_finalize(stmt);
-
-	return 0;
+    std::cout << std::endl;
+    return lu;
 }
 
 int EnvoiDonnees::initialisation_socket(const int &port, const char *ip) {
@@ -65,7 +81,7 @@ int EnvoiDonnees::initialisation_socket(const int &port, const char *ip) {
 
     struct sockaddr_in adresse;
     adresse.sin_family = AF_INET;
-    adresse.sin_port = htons(22);
+    adresse.sin_port = htons(port);
     adresse.sin_addr.s_addr = inet_addr(ip);
 
     if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
@@ -144,11 +160,12 @@ int EnvoiDonnees::envoiBDD() {
 		return -1;
 	}
 
-	// libssh2_sftp_write(agent, );
 	char base_donnees[1024*1024];
-	if (conversionBDDversChar(base_donnees) < 0)
+	if (ecrireBDD(agent) < 0)
 	{
 		// TODO handle error
+        std::cout << "Erreur lors de la conversion du fichier BDD" << std::endl;
+        return -1;
 	}
 	libssh2_sftp_write(agent, base_donnees, strlen(base_donnees));
 

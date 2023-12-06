@@ -9,9 +9,9 @@
 <body>
 <header>
 	<?php include "snippets/logo.php"?>
-	<section>
-		<p>-</p>
-		<div id="ddCmpt" class="dropdown">
+	<section title="Retourner en haut de la page">
+		<p title=''>-</p>
+		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<button value="deco">Déconnexion</button>

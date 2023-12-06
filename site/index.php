@@ -8,17 +8,17 @@
 <body tabindex="0">
 <header>
 	<?php include "snippets/logo.php"?>
-	<section>
-		<p>-</p>
-		<div id="ddChamp" class="dropdown">
+	<section title="Retourner en haut de la page">
+		<p title=''>-</p>
+		<div id="ddChamp" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectChamp" class="dropdownContent ddHeader">
 			</div>
 		</div>
 	</section>
-	<section>
-		<p>-</p>
-		<div id="ddCmpt" class="dropdown">
+	<section title="Retourner en haut de la page">
+		<p title=''>-</p>
+		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.php">Paramètres</a>

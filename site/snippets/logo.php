@@ -9,6 +9,7 @@
 	<source srcset="img/logo/logoAlsagricultureSombre.webp"
 		media="(prefers-color-scheme: dark)"/>
 
-	<img src="img/logo/logoAlsagricultureClair.webp"
-		alt="Logo Als'agriculture"/>
+	<img onClick="window.scrollTo(0, 0);"
+		title="Retourner en haut de la page"
+		src="img/logo/logoAlsagricultureClair.webp" alt="Logo Als'agriculture"/>
 </picture>

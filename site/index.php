@@ -14,20 +14,7 @@
 </head>
 <body tabindex="0">
 <header>
-	<picture>
-		<source srcset="img/logo/logoAlsagricultureMobileClair.webp"
-			media="(max-width: 950px) and (prefers-color-scheme: light)"/>
-			<source srcset="img/logo/logoAlsagricultureMobileSombre.webp"
-			media="(max-width: 950px) and (prefers-color-scheme: dark)"/>
-
-		<source srcset="img/logo/logoAlsagricultureClair.webp"
-			media="(prefers-color-scheme: light)"/>
-		<source srcset="img/logo/logoAlsagricultureSombre.webp"
-			media="(prefers-color-scheme: dark)"/>
-
-		<img src="img/logo/logoAlsagricultureClair.webp"
-			alt="Logo Als'agriculture"/>
-	</picture>
+	<?php include "snippets/logo.php"?>
 	<section>
 		<p>-</p>
 		<div id="ddChamp" class="dropdown">
@@ -41,7 +28,7 @@
 		<div id="ddCmpt" class="dropdown">
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
-				<a href="gestionCmpt.html">Paramètres</a>
+				<a href="gestionCmpt.php">Paramètres</a>
 				<button value="deco">Déconnexion</button>
 			</div>
 		</div>
@@ -151,6 +138,7 @@
 		</div>
 	</section>
 </div>
+<?php include "snippets/footer.php"?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
 integrity="sha512-TiY/d3GpuSKgQYgnqegSfdqlXp6ebBvi6A47mFTMSpZM7BMbvfkkvU/SlDzZHs9lWqF+BteevHlqgauHhLLbIA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>

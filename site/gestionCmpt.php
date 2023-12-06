@@ -15,20 +15,7 @@
 </head>
 <body>
 <header>
-	<picture>
-		<source srcset="img/logo/logoAlsagricultureMobileClair.webp"
-			media="(max-width: 950px) and (prefers-color-scheme: light)"/>
-			<source srcset="img/logo/logoAlsagricultureMobileSombre.webp"
-			media="(max-width: 950px) and (prefers-color-scheme: dark)"/>
-
-		<source srcset="img/logo/logoAlsagricultureClair.webp"
-			media="(prefers-color-scheme: light)"/>
-		<source srcset="img/logo/logoAlsagricultureSombre.webp"
-			media="(prefers-color-scheme: dark)"/>
-
-		<img src="img/logo/logoAlsagricultureClair.webp"
-			alt="Logo Als'agriculture"/>
-	</picture>
+	<?php include "snippets/logo.php"?>
 	<section>
 		<p>-</p>
 		<div id="ddCmpt" class="dropdown">
@@ -69,6 +56,7 @@
 		</form>
 </div>
 </dialog>
+<?php include "snippets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>

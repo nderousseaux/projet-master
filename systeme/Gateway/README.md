@@ -1,32 +1,41 @@
 # Conf Gateway 
 
-Faire le [tuto noeud](../Noeuds/README.md) d'abord
+Le script Build_gateway.sh -> Met en place le gateway
 
 ## Creating the gateway
 
 [Tuto](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/ROUTE.md#creating-the-gateway)
 
-The gateway will be the DHCP server for the mesh network.
-The instructions use the following network details:
+La gateway fera office de serveur DHCP.
+Le gateway utilisera les paramettres réseau suivant :  
+Pour l'interface bat0 :
     Network 192.168.199.x
     netmask 255.255.255.0
     gateway address 192.168.199.1
+
+Sous réseau entre les capteurs :
+    Network 10.0.1.x
+    netmask 255.255.255.0
 
 Install the DHCP software with command : 
 ```bash
 sudo apt-get install -y dnsmasq
 ```
 
-Configure the DHCP server by editing the dnsmasq.conf file as root user:
+Configurez le serveur DHCP en configurant le fichier suivant en tant que root :
 ```bash
 sudo nano /etc/dnsmasq.conf
 ```
-and add the following lines to the end of the file:
+et ajouter les lignes suivantes à la fin du fichier :
 
     interface=bat0
     dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h
 
-Change the startup file to add the routing rules to forward mesh traffic to the home/office network and do the Network Address Translation on the reply. Set the node as a mesh gateway and also configure the gateway interface IP address. To do this update the __start-batman-adv.sh__ file and change the content to:
+    interface=wlan0
+    dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h
+
+Modifiez le fichier de démarrage (__start-batman-adv.sh__) en ajoutant les règles de routage nécessaires pour diriger le trafic maillé vers le réseau domestique/de bureau. Assurez-vous d'effectuer la traduction d'adresse réseau sur la réponse. Définissez le nœud en tant que passerelle maillée et configurez l'adresse IP de l'interface de la passerelle.  
+Les modifications à apporter au contenu du fichier sont les suivantes :
 
 ```
 #!/bin/bash
@@ -53,13 +62,8 @@ sudo ifconfig bat0 192.168.199.1/24
 
 [Verify the gateway](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/ROUTE.md#verifying-the-gateway)
 
-Notice that:
+- sudo batctl if : Pour afficher les interfaces qui participent au mesh network
+- sudo batctl n : Pour afficher les voisins qui participent au mesh que le gateway peut voir.
 
-    eth0 has an IP address on your home/office network
-    bat0 has IP address 192.168.199.1
-    wlan0 has no IP address assigned
-
-
-- iwconfig to show the wireless interfaces on the device.
-- sudo batctl if to show the interfaces participating in the mesh.
-- sudo batctl n to show the neighbouring mesh nodes your gateway node can see. 
+## Bibliographie 
+[tuto noeud](../Noeuds/README.md)

@@ -1,0 +1,9 @@
+[Unit]
+Description=Start Copy Python in Docker
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /pm/bdd-mongo/copy-script/start_python.sh
+
+[Install]
+WantedBy=multi-user.target

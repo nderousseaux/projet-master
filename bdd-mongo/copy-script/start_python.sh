@@ -6,5 +6,5 @@ while true; do
 		cp $result /pm/bdd-mongo/copy-script/donnees/donnees.txt
 		docker exec python python3 copy-into-db.py /data/donnees.txt
 	fi
-	sleep 2
+	sleep 120
 done

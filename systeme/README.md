@@ -30,7 +30,12 @@ Ici nous sommes sur le channel 1 (Europe)
 
 [Tuto](Gateway/README.md)
 
-## Pour que à Installer dans la RPI
+## Paquets à Installer dans la RPI _(installation.sh)_
+
+Lancer : 
+```bash
+yes | ./Installation.sh
+```
 
 ```bash
 sudo apt update

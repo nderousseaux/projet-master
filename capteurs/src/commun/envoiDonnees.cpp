@@ -23,30 +23,74 @@ std::vector<std::string> EnvoiDonnees::recupereIdentifiants(
 	return retour;
 }
 
-int EnvoiDonnees::conversionBDDversChar(char *buffer) {
-	const char* requete_totale = "SELECT * FROM db;";
 
-	sqlite3_stmt* stmt;
-	if (sqlite3_prepare_v2(db_, requete_totale, -1, &stmt, NULL) != SQLITE_OK) {
+void EnvoiDonnees::affiche_message_erreur_libssh2(LIBSSH2_SESSION* session,
+					const std::string& msg_erreur) {
+
+	char *tampon_msg_erreur;
+	int longeur_erreur;
+	libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
+							   0);
+	std::cerr << msg_erreur << "\nErreur : " << tampon_msg_erreur << std::endl;
+}
+
+//int EnvoiDonnees::conversionBDDversChar(char *buffer) {
+//	const char* requete_totale = "SELECT * FROM db;";
+//
+//	sqlite3_stmt* stmt;
+//	if (sqlite3_prepare_v2(db_, requete_totale, -1, &stmt, NULL) != SQLITE_OK) {
+//		return -1;
+//	}
+//
+//	int num_colonne = 0, index_buffer = 0;
+//	while (sqlite3_step(stmt) == SQLITE_ROW) {
+//		const char* donnees_colonne = (const char*)sqlite3_column_text(stmt,
+//			num_colonne);
+//
+//		int longueur = strlen(donnees_colonne);
+//		snprintf(buffer + index_buffer, longueur, "%s\n", donnees_colonne);
+//		index_buffer += longueur;
+//
+//		num_colonne++;
+//	}
+//
+//	sqlite3_finalize(stmt);
+//
+//	return 0;
+//}
+
+int EnvoiDonnees::ecrireBDD(LIBSSH2_SFTP_HANDLE *agent)
+{
+	char b[1];
+	int descripteur_de_fichier = open("db.db", O_RDONLY);
+	int lu;
+
+	do {
+		lu = read(descripteur_de_fichier, b, 1);
+		if (lu == 1)
+			libssh2_sftp_write(agent, b, 1);
+		std::cout << b << std::flush;
+	} while (lu == 1);
+
+	std::cout << std::endl;
+	return lu;
+}
+
+int EnvoiDonnees::initialisation_socket(const int &port, const char *ip) {
+
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+	struct sockaddr_in adresse;
+	adresse.sin_family = AF_INET;
+	adresse.sin_port = htons(port);
+	adresse.sin_addr.s_addr = inet_addr(ip);
+
+	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
+		std::cerr << "Echec lors de la connection de la socket." << std::endl;
 		return -1;
 	}
 
-	// Loop through the results
-	int num_colonne = 0, index_buffer = 0;
-	while (sqlite3_step(stmt) == SQLITE_ROW) {
-		const char* donnees_colonne = (const char*)sqlite3_column_text(stmt,
-			num_colonne);
-
-		int longueur = strlen(donnees_colonne);
-		snprintf(buffer + index_buffer, longueur, "%s\n", donnees_colonne);
-		index_buffer += longueur;
-
-		num_colonne++;
-	}
-
-	sqlite3_finalize(stmt);
-
-	return 0;
+	return sockfd;
 }
 
 int EnvoiDonnees::envoiBDD() {
@@ -78,85 +122,60 @@ int EnvoiDonnees::envoiBDD() {
 
 	LIBSSH2_SESSION *session = libssh2_session_init();
 	if (!session) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de la création de la session.\nErreur : " <<
-			tampon_msg_erreur << std::endl;
+		affiche_message_erreur_libssh2(session,
+			"Echec lors de la création de la session.");
 		return -1;
 	}
 
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-	struct sockaddr_in adresse;
-	adresse.sin_family = AF_INET;
-	adresse.sin_port = htons(22);
-//	adresse.sin_addr.s_addr = inet_addr("185.155.93.77");
-    adresse.sin_addr.s_addr = inet_addr(ip.c_str());
-
-	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
-		std::cerr << "Echec lors de la connection de la socket." << std::endl;
-		return err;
-	}
+	int sockfd = initialisation_socket(22, ip.c_str());
+	if (sockfd < 0)
+		return sockfd;
 
 	err = libssh2_session_startup(session, sockfd);
 	if (err) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors du démarage de la session.\nErreur : " <<
-			tampon_msg_erreur << std::endl;
+		affiche_message_erreur_libssh2(session,
+			"Echec lors du démarage de la session.");
 		return err;
 	}
 
-    err = libssh2_userauth_password(session, identifiant.c_str(), mdp.c_str());
-    if (err) {
-        char *tampon_msg_erreur;
-        int longeur_erreur;
-        libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur, 0);
-        std::cerr << "Echec lors de l'authenification." << std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+	err = libssh2_userauth_password(session, identifiant.c_str(), mdp.c_str());
+	if (err) {
+		affiche_message_erreur_libssh2(session, "Echec lors de l'authenification.");
 
-        libssh2_session_disconnect(session, "Normal Shutdown");
-        libssh2_session_free(session);
-        libssh2_exit();
-        return err;
-    }
+		libssh2_session_disconnect(session, "Normal Shutdown");
+		libssh2_session_free(session);
+		libssh2_exit();
+		return err;
+	}
 
 	LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
 	if (!sftp) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de l'initialisation de la session SFTP." <<
-			std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+		affiche_message_erreur_libssh2(session,
+			"Echec lors de l'initialisation de la session SFTP.");
 		return -1;
 	}
 
 	LIBSSH2_SFTP_HANDLE *agent = libssh2_sftp_open(sftp,
 		chemin_distant_vers_BDD, LIBSSH2_FXF_WRITE, 0);
 	if (!agent) {
-		char *tampon_msg_erreur;
-		int longeur_erreur;
-		libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-			0);
-		std::cerr << "Echec lors de l'ouverture du fichier distant." <<
-			std::endl << "Erreur : " << tampon_msg_erreur << std::endl;
+
+		affiche_message_erreur_libssh2(session,
+			"Echec lors de l'ouverture du fichier distant.");
+
 		return -1;
 	}
 
-	// libssh2_sftp_write(agent, );
 	char base_donnees[1024*1024];
-	if (conversionBDDversChar(base_donnees) < 0)
+	if (ecrireBDD(agent) < 0)
 	{
 		// TODO handle error
+		std::cout << "Erreur lors de la conversion du fichier BDD" << std::endl;
+		return -1;
 	}
 	libssh2_sftp_write(agent, base_donnees, strlen(base_donnees));
 
 	libssh2_sftp_shutdown(sftp);
-	libssh2_session_disconnect(session, "Exctinction normale");
+	libssh2_session_disconnect(session, "Extinction normale");
 	libssh2_session_free(session);
 	libssh2_exit();
 	close(sockfd);

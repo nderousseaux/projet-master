@@ -21,3 +21,4 @@ sudo ifconfig bat0 192.168.199.1/24
 sudo iw dev wlan0 set type ibss
 # Forcer le ESSID
 sudo iw dev wlan0 ibss join call-code-mesh 2462
+sudo ifconfig wlan0 10.0.1.1/24

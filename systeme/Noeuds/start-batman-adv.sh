@@ -13,4 +13,4 @@ sudo iwconfig wlan0 mode ad-hoc
 sudo iwconfig wlan0 channel 1
 sudo iwconfig wlan0 call-code-mesh
 
-sudo dhclient wlan0
+sudo dhclient wlan0 

@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8"/>
+	<?php include "snippets/head.php"?>
 	<title>Gestion champs</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<meta name="robots" content="noindex, nofollow"/>
-	<meta name="color-scheme" content="light dark"/>
-	<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)"/>
-	<meta name="theme-color" content="#080809" media="(prefers-color-scheme: dark)"/>
-	<link rel="icon" type="image/webp" href="img/favicon.webp"/>
 	<meta name="description" content="Gestion de champs"/>
-	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 </head>
 <body tabindex="0">
 <header>

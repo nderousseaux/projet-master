@@ -388,7 +388,7 @@ function celluleDirVent(dirVent, cellule) {
 		cellule.textContent += " ⬅️";
 	}
 	else if (dirVent > 270 && dirVent <= 315) {
-		cellule.textContent += " ↖";
+		cellule.textContent += " ↖️";
 	}
 	else {
 		cellule.textContent += " ⬆️";

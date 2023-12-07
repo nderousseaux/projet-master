@@ -13,13 +13,22 @@
 </header>
 <div id="corps">
 	<section id="secForm">
-		<h1>Connexion</h1>
-		<form action="connexionUtilisateur.php" method="post">
+		<h1>Création de compte</h1>
+		<form action="backend/creationUtilisateur.php" method="post">
 			<input type="text" name="prenom" placeholder="Prénom" required/>
 			<input type="text" name="nom" placeholder="Nom" required/>
+			<input type="text" name="role" placeholder="Droits" required/> <!-- standard ou admin -->
+
+			<!-- make nice then put inplace of line above
+			<label for="role">role:</label>
+			<select name="role" id="role" required>
+			  <option value="standard">Standard</option>
+			  <option value="admin">Administrateur</option>
+			</select> -->
+
 			<input type="text" name="courriel" placeholder="Courriel" required/>
-			<input type="password" name="mdp" placeholder="Mot de passe" required/>
-			<input type="submit" value="Création"/>
+			<!--<input type="password" name="mdp" placeholder="Mot de passe" required/> Ne fait pas de sens ici-->
+			<input type="submit" name="creer" value="Créer"/>
 		</form>
 	</section>
 </div>

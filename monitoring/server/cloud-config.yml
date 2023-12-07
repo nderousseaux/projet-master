@@ -54,6 +54,10 @@ runcmd:
   - rm -rf grafana-8.1.5.linux-amd64*
   - chmod +x grafana/bin/grafana-server
 
+  # On prend le fichier de configuration de grafana
+  - rm -rf /grafana/conf
+  - cp -r projet-master-23-24/monitoring/server/conf /grafana/
+
   # On configure grafana comme un service
   - echo "[Unit]" > /etc/systemd/system/grafana.service
   - echo "Description=Grafana Agent" >> /etc/systemd/system/grafana.service

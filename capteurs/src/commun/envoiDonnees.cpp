@@ -62,7 +62,7 @@ void EnvoiDonnees::affiche_message_erreur_libssh2(LIBSSH2_SESSION* session,
 int EnvoiDonnees::ecrireBDD(LIBSSH2_SFTP_HANDLE *agent)
 {
 	char b[1];
-	int descripteur_de_fichier = open("db.db", O_RDONLY);
+	int descripteur_de_fichier = open("donnee.txt", O_RDONLY);
 	int lu;
 
 	do {
@@ -165,14 +165,12 @@ int EnvoiDonnees::envoiBDD() {
 		return -1;
 	}
 
-	char base_donnees[1024*1024];
 	if (ecrireBDD(agent) < 0)
 	{
 		// TODO handle error
 		std::cout << "Erreur lors de la conversion du fichier BDD" << std::endl;
 		return -1;
 	}
-	libssh2_sftp_write(agent, base_donnees, strlen(base_donnees));
 
 	libssh2_sftp_shutdown(sftp);
 	libssh2_session_disconnect(session, "Extinction normale");

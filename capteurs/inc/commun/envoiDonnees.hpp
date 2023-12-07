@@ -28,6 +28,9 @@ class EnvoiDonnees {
 		inline static std::string CHEMIN_FICHIER_IDENTIFIANTS {
 			"./identifiantsSFTP.txt"
 		};
+        inline static std::string CHEMIN_DISTANT_VERS_BDD {
+            "./home/sftp_user/upload/donnee.txt"
+        };
 
 
 	/* Constructeur et destructeur */

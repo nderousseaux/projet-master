@@ -13,7 +13,7 @@
 <div id="corps">
 	<section id="secForm">
 		<h1>Connexion</h1>
-		<form action="connexionUtilisateur.php" method="post">
+		<form action="backend/connexionUtilisateur.php" method="post">
 			<input type="text" name="courriel" placeholder="Courriel" required/>
 			<input type="password" name="mdp" placeholder="Mot de passe" required/>
 			<input type="submit" value="Connexion"/>
@@ -21,8 +21,12 @@
 	</section>
 </div>
 <?php include "snippets/footer.php"?>
+<script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
+	// Gère les champs du formulaire
+	connexionCmpt();
+
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page
 	activerDefilementHautPage();

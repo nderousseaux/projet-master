@@ -11,7 +11,7 @@ def parse_line(line):
     lumi = int(parts[6])
 
     temp_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,
@@ -19,7 +19,7 @@ def parse_line(line):
     }
 
     humi_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,
@@ -27,7 +27,7 @@ def parse_line(line):
     }
     
     lumi_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,

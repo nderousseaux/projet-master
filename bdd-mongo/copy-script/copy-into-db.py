@@ -38,14 +38,12 @@ def parse_line(line):
 
 
 
-if(len(sys.argv) != 3):
-    print("Please specify the file path and IP address as cli argument.")
+if(len(sys.argv) == 1):
+    print("Please specify the file path as cli argument.")
     exit(-1)
 
-ip = sys.argv[2]
-address = "mongodb://"+ip+":30001"
 client = pymongo.MongoClient(
-        address,
+        "mongodb://mongo1:30001/",
     replicaset="rs0",
     serverSelectionTimeoutMS=5000
 )

@@ -19,11 +19,6 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 	echo json_encode($erreur);
 	exit();
 }
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
 
 // Connexion à MongoDB
 use MongoDB\Driver\Manager;
@@ -33,8 +28,7 @@ $uri = "mongodb://localhost:30001";
 $manager = new MongoDB\Driver\Manager("mongodb://localhost:30001");
 
 // Définition de la pipeline de la requete
-// On match sur l'agriculteur et le champ, puis on tri par date decroissante
-// et on recupere la premiere occurence pour chaque ilot (la plus recente)
+// On recupere la valeur la plus recente des capteurs pour chaque ilot
 $pipelinetemp = [
 	['$match' => [
 		'idAgri' => intval($_POST["idUtilisateur"]),
@@ -45,7 +39,6 @@ $pipelinetemp = [
         '_id' => '$idIlot',
         'temp' => ['$first' => '$temp']
     ]],
-	['$sort' => ['idIlot' => 1]],
 ];
 $pipelinehumi = [
 	['$match' => [
@@ -57,7 +50,6 @@ $pipelinehumi = [
         '_id' => '$idIlot',
         'humi' => ['$first' => '$humi'], 
     ]],
-	['$sort' => ['idIlot' => 1]],
 ];
 $pipelinelumi = [
 	['$match' => [
@@ -69,24 +61,23 @@ $pipelinelumi = [
         '_id' => '$idIlot',
         'lumi' => ['$first' => '$lumi'], 
     ]],
-	['$sort' => ['idIlot' => 1]],
 ];
 
 // Création de la commande pour chaque collection
 $commandtemp = new MongoDB\Driver\Command([
     "aggregate" => "temp",
     "pipeline" => $pipelinetemp,
-    "cursor" => new stdClass(), // Spécifier un curseur par défaut
+    "cursor" => new stdClass(),
 ]);
 $commandhumi = new MongoDB\Driver\Command([
     "aggregate" => "humi",
     "pipeline" => $pipelinehumi,
-    "cursor" => new stdClass(), // Spécifier un curseur par défaut
+    "cursor" => new stdClass(),
 ]);
 $commandlumi= new MongoDB\Driver\Command([
     "aggregate" => "lumi",
     "pipeline" => $pipelinelumi,
-    "cursor" => new stdClass(), // Spécifier un curseur par défaut
+    "cursor" => new stdClass(),
 ]);
 
 // Exécution de la commande d'agrégation

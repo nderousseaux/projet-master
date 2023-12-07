@@ -19,27 +19,30 @@ function afficherNomUtilisateur(idUtilisateur) {
  * Affiche les champs de l'utilisateur
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ * @returns {promise} - résolue quand les champs sont affichés
  */
 function afficherChamps(idUtilisateur) {
 	let champPost = new FormData();
 	champPost.append("idUtilisateur", idUtilisateur);
 
-	recupDonnees(champPost, "recupNumChamps.php")
-	.then(donnees => {
-		const container = document.getElementById("selectChamp");
+	return new Promise((resolve, reject) => {
+		recupDonnees(champPost, "recupNumChamps.php")
+		.then(donnees => {
+			const container = document.getElementById("selectChamp");
 
-		let index = 0;
-		donnees.forEach(numChamp => {
-			const champ = document.createElement("button");
-			champ.setAttribute("value", numChamp);
-			champ.textContent = "Champ " + numChamp;
+			for (let i = 1; i <= donnees; i++) {
+				const champ = document.createElement("button");
+				champ.setAttribute("value", i);
+				champ.textContent = "Champ " + i;
 
-			if (index === 0) {
-				champ.classList.add("selected");
-				index++;
-			}
+				container.appendChild(champ);
+			};
+			container.classList.remove("ddHeader");
 
-			container.appendChild(champ);
+			resolve();
+		})
+		.catch(err => {
+			reject(err);
 		});
 	});
 }
@@ -51,18 +54,23 @@ function afficherChamps(idUtilisateur) {
  * @returns {promise} - résolue quand les ilots sont affichés
  */
 function afficherIlots(idUtilisateur) {
-	const numChamp = document.getElementById("champSlct").value;
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("numChamp", numChamp);
 
 	return new Promise((resolve, reject) => {
+
 		recupDonnees(champPost, "recupNumIlots.php")
 		.then(donnees => {
 			const container = document.getElementById("selectIlot");
 
-			let index = 0;
+			// Supprimer les ilots déjà affichés (en cas de changement de champ)
+			while (container.firstChild) {
+				container.removeChild(container.firstChild);
+			}
+
 			for (let i = 1; i <= donnees; i++) {
 				const ilot = document.createElement("button");
 				ilot.setAttribute("value", i);
@@ -80,60 +88,57 @@ function afficherIlots(idUtilisateur) {
 
 /**
  * Affiche les infos du champ sélectionné
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherInfosChamp() {
-	const numChamp = document.getElementById("champSlct").value;
+function afficherInfosChamp(idUtilisateur) {
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
-	/*
-	 * Récupère :
-	 * - Date la plus récente de mesure d'un capteur (récente)
-	 * - Date la plus récente de mesure d'un capteur (ancienne)
-	 *   -> Permet de faire la différence entre les deux et d'afficher l'état
-	 * - Nombre de capteurs
-	 */
 	recupDonnees(champPost, "recupInfosChamp.php")
 	.then(donnees => {
 		// État général du champ
-		if (donnees[0] - donnees[1] < 1) {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "OK";
-		}
-		else {
-			document.querySelector("#secInfos > div:first-child > p")
-				.textContent = "Err";
-		}
+		document.querySelector("#secInfos > div:first-child > p")
+			.textContent = donnees[0];
 
-		// Nombre de capteurs
-		document.querySelector("#secInfos > div:nth-child(2) > p")
+		// Nombre de capteurs actifs
+		document.querySelector("#nbrCapteurs > p:first-child")
+			.textContent = donnees[1];
+		
+		// Nombre de capteurs total
+		document.querySelector("#nbrCapteurs > p:last-child")
 			.textContent = donnees[2];
 
 		// Dernière mise à jour
 		document.querySelector("#secInfos > div:last-child > p")
-			.textContent = donnees[0];
+			.textContent = donnees[3];
 	});
 }
 
 /**
  * Affiche les moyennes de température, d'humidité et de luminosité pour le
  * champ indiqué
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherMoyennes() {
-	const numChamp = document.getElementById("champSlct").value;
+function afficherMoyennes(idUtilisateur) {
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
 	recupDonnees(champPost, "recupMoyennes.php")
 	.then(donnees => {
-		const cellTemp = document.querySelector("#secMoyennes > div > " +
-			"p:first-child");
-		const cellHumi = document.querySelector("#secMoyennes > div > " +
-			"p:nth-child(2)");
-		const cellLumi = document.querySelector("#secMoyennes > div > " +
-			"p:last-child");
+		const cellTemp = document.querySelector("#secMoyennes > " +
+			"div:first-child > p");
+		const cellHumi = document.querySelector("#secMoyennes > " +
+			"div:nth-child(2) > p");
+		const cellLumi = document.querySelector("#secMoyennes > " +
+			"div:last-child > p");
 
 		cellTemp.textContent = donnees[0] + "°C";
 		cellHumi.textContent = donnees[1] + "%";
@@ -144,9 +149,10 @@ function afficherMoyennes() {
 /**
  * Affiche les données météo, récupérées dans le back
  *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {bool} - false si la durée est invalide
  */
-function afficherMeteo() {
+function afficherMeteo(idUtilisateur) {
 	const duree = document.getElementById("dureeSlct").value;
 	if (duree != "jour" && duree != "semaine") {
 		console.error("Durée invalide");
@@ -156,20 +162,24 @@ function afficherMeteo() {
 	// Types de températures possibles
 	const clesTemp = ["tempmin", "tempmax", "temp"];
 
-	// Titres des colonnes (dans l'ordre affiché)
+	// Titres des cellules (dans l'ordre affiché)
 	const ordreCles = [
 		"datetime", "tempmax", "tempmin", "temp", "humidity", "precip",
 		"preciptype", "winddir", "cloudcover", "uvindex", "windspeedmean"
 	]
 
+	const numChamp = document.getElementById("champSlct").value - 1;
+
 	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+	champPost.append("numChamp", numChamp);
 	champPost.append("duree", duree);
 
 	recupDonnees(champPost, "recupMeteo.php")
 	.then(donnees => {
 		if (donnees[0] != "Erreur") {
 			// Supprimer les données déjà affichées
-			supprimerMeteo();
+			viderTableau("donneesMeteo");
 
 			// Adapter l'affichage en fonction de la durée
 			let dureeDonnees;
@@ -237,7 +247,7 @@ function afficherMeteo() {
 						celluleDirVent(valeur, cellule);
 					}
 
-					cellule.classList.add("colonne");
+					cellule.classList.add("cellule");
 					meteoDiv.appendChild(cellule);
 					index++;
 					nbrColonnes--;
@@ -262,33 +272,48 @@ function afficherMeteo() {
 
 /**
  * Affiche toutes les mesures pour un champ indiqué
+ * 
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherTableauToutesMesures() {
-	const numChamp = document.getElementById("champSlct").value;
+function afficherMesuresChamp(idUtilisateur) {
+	const numChamp = document.getElementById("champSlct").value - 1;
 
 	let champPost = new FormData();
 	champPost.append("numChamp", numChamp);
+	champPost.append("idUtilisateur", idUtilisateur);
 
 	recupDonnees(champPost, "recupMesuresChamp.php")
-	.then(donnees => {
+	.then(retour => {
+		viderTableau("donneesTableau");
 		const container = document.getElementById("donneesTableau");
 
-		donnees.forEach(mesure => {
-			const cellule = document.createElement("div");
-			cellule.classList.add("colonne");
-			cellule.textContent = mesure;
-			container.appendChild(cellule);
+		retour.forEach(donnees => {
+			donnees.forEach(element => {
+				const cellule = document.createElement("div");
+				cellule.classList.add("cellule");
+
+				if (element === "KO") {
+					cellule.classList.add("errMesure");
+					cellule.textContent = "⚠️ ";
+				}
+
+				cellule.textContent += element;
+
+				container.appendChild(cellule);
+			});
 		});
 	});
 }
 
 /**
- * Supprime toutes les données sauf la colonne de titre
+ * Supprime toutes les données d'un tableau, sauf la ligne de titre
+ * 
+ * @param {string} id - id du tableau
  */
-function supprimerMeteo() {
-	const meteoDiv = document.getElementById("donneesMeteo");
-	const colonnes = meteoDiv.querySelectorAll(".colonne:not(.titre)");
-	colonnes.forEach(colonne => colonne.remove());
+function viderTableau(id) {
+	const container = document.getElementById(id);
+	const cellules = container.querySelectorAll(".cellule:not(.titre)");
+	cellules.forEach(cellule => cellule.remove());
 }
 
 /**
@@ -299,7 +324,7 @@ function supprimerMeteo() {
  */
 function ajoutCellule(texte) {
 	const cellule = document.createElement("div");
-	cellule.classList.add("colonne");
+	cellule.classList.add("cellule");
 	cellule.textContent = texte;
 	return cellule;
 }
@@ -314,18 +339,21 @@ function ajoutCellule(texte) {
  */
 function cellulePrecip(objPrecip, cellule) {
 	const precipEnVersFr = [
-		["rain", "Pluie 🌧️"], ["snow", "Neige ❄️"],
-		["freezingrain", "Pluie verglaçante 🌧️❄️"], ["ice", "Givre ❄️"]
+		["rain", "Pluie 🌧️\r\n"], ["snow", "Neige ❄️\r\n"],
+		["freezingrain", "Pl. vergla. 🌧️❄️\r\n"], ["ice", "Givre ❄️\r\n"]
 	];
 
 	if (objPrecip === null) {
-		cellule.textContent += "-";
+		cellule.textContent = "-";
 		return cellule;
 	}
+
 	for (const [_, valPrecip] of Object.entries(objPrecip)) {
 		for (const [valEn, valFr] of precipEnVersFr) {
 			if (valPrecip === valEn) {
-				cellule.textContent += valFr;
+				const intraCellule = document.createElement("p");
+				intraCellule.textContent = valFr;
+				cellule.appendChild(intraCellule);
 			}
 		}
 	};
@@ -360,7 +388,7 @@ function celluleDirVent(dirVent, cellule) {
 		cellule.textContent += " ⬅️";
 	}
 	else if (dirVent > 270 && dirVent <= 315) {
-		cellule.textContent += " ↖";
+		cellule.textContent += " ↖️";
 	}
 	else {
 		cellule.textContent += " ⬆️";
@@ -389,4 +417,14 @@ function celluleTemp(temp, cellule) {
 	}
 
 	return cellule;
+}
+
+/**
+ * Affiche le nom du champ sélectionné dans le header
+ */
+function afficherNomChamp() {
+	const container = document.querySelector("header > " +
+		"section:nth-child(2) > p");
+	container.textContent = "Champ " +
+		document.getElementById("champSlct").value;
 }

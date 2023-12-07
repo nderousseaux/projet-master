@@ -1,6 +1,11 @@
-# Dossiers contenant les fichiers de build, et les fichiers temporaires
+# Dossiers
 cmake-build-debug
-bdd
 bin
 build
+stockage
+
+# Dossier masqué
 .idea
+
+# Fichier
+identifiantsSFTP.txt

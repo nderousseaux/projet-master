@@ -5,17 +5,16 @@
 
 # Si l'argument est "clean", nettoie le projet
 
-if [ $# -gt 1 ];
+if [ $# -ne 1 ];
 then
-	echo "Erreur : Trop d'arguments"
-	echo "Usage : sh $0 [clean]"
+	echo "Erreur : Nombre d'argument incorrect"
+	echo "Usage : sh $0 [clean|all|mesures|agregateur]"
 	exit 1
-fi
-
-if [ $# -eq 1 ] && [ "$1" != "clean" ];
+elif [ "$1" != "clean" ] && [ "$1" != "all" ] && [ "$1" != "mesures" ] &&
+	[ "$1" != "agregateur" ];
 then
 	echo "Erreur : Mauvais argument"
-	echo "Usage : sh $0 [clean]"
+	echo "Usage : sh $0 [clean|all|mesures|agregateur]"
 	exit 1
 fi
 
@@ -24,6 +23,6 @@ then
 	rm -rf build bin
 	echo "Projet nettoyé"
 else
-	cmake -S . -B build
-	cmake --build build --clean-first
+	cmake -DPROG_TYPE=$1 -S . -B build
+	cmake --build build --clean-first 
 fi

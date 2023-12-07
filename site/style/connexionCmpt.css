@@ -39,6 +39,12 @@
 	transition: background-color 0.2s ease-in-out;
 }
 
+/* Footer */
+footer {
+	position: fixed;
+	bottom: 0;
+}
+
 
 /* Thème sombre */
 @media (prefers-color-scheme: dark) {

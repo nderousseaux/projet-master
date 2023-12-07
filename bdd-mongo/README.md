@@ -1,6 +1,6 @@
 ## Démarrer le replica set:
 ```
-./setup.sh      # créé les dossiers des dbs(data/*)
+./setup.sh      # créé les dossiers des dbs (data/*)
 ./start.sh      # lance conteneurs et initie replica set avec conf de rs-init.sh
 ```
 
@@ -16,12 +16,12 @@
     ```
 * url de connection au replica set:
     ```
-    mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0i
+    mongodb://mongo1:30001,mongo2:30002,mongo3:30003/?replicaSet=rs0
     # ou pour se connecter directement à la bonne db (data):
     mongodb://mongo1:30001,mongo2:30002,mongo3:30003/data/?replicaSet=rs0
     ```
 * script de remplissage de la bdd:
-    lancé automatiquement dans start.sh (délai de 20 secs) pour les test (à désactiver pour version finale)
+    lancé automatiquement dans start.sh (délai de 20 secs) pour les tests (à désactiver pour version finale)
     ```
     ./add-data.sh   # ajoute des données dans la base "data"
     ```
@@ -44,7 +44,7 @@
         "idAgri": "IDa",
         "nomAgri": "NOMa",
         "champs": {
-            "coords" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
+            "coordonnees" : ["(lat, long) champs 0", "(lat, long) champs 1", "..."],
             "ilots": ["nb ilots champs 0", "nb ilots champs 1", "..."]
         }
 
@@ -53,22 +53,25 @@
     "humi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
-        "valMesures": ["humidité ilot 0", "humidité ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "humi": "humidité ilot Idi"
     },
 
     "temp": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
-        "valMesures": ["température ilot 0", "température ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "temp": "température ilot Idi"
     },
 
     "lumi": {
         "idAgri": "IDa",
         "idChamps": "IDc",
-        "horo": "date+heure",
-        "valMesures": ["luminosité ilot 0", "luminosité ilot 1", "..."]
+        "idIlot": "Idi",
+        "date": "date mesure ilot Idi",
+        "lumi": "luminosité ilot Idi"
     }
 }
 ```

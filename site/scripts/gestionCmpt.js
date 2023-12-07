@@ -1,5 +1,5 @@
 /**
- * Gestion des événements des informations du compte
+ * Vérifie les champs du formulaire, lorsqu'un événement se produit
  */
 function gestionInputCmpt() {
 	// Récupérer toutes les balises input

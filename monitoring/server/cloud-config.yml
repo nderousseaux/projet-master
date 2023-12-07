@@ -14,6 +14,7 @@ repo_upgrade: all
 package_upgrade: true
 packages:
   - wget
+  - git
 
 runcmd:
   # Debug SSH
@@ -27,18 +28,7 @@ runcmd:
   - mv prometheus-2.48.0.linux-amd64/prometheus /
   - rm -rf prometheus-2.48.0.linux-amd64*
   - chmod +x prometheus
-
-  # On crée le fichier de config
-  - echo "global:" > /prometheus.yml
-  - echo "  scrape_interval: 15s" >> /prometheus.yml
-  - echo "  evaluation_interval: 15s" >> /prometheus.yml
-  - echo "scrape_configs:" >> /prometheus.yml
-  - echo "  - job_name: 'prometheus'" >> /prometheus.yml
-  - echo "    static_configs:" >> /prometheus.yml
-  - echo "    - targets: ['localhost:9090']" >> /prometheus.yml
-  - echo "  - job_name: 'VM1'" >> /prometheus.yml
-  - echo "    static_configs:" >> /prometheus.yml
-  - echo "    - targets: ['192.168.0.194:9100']" >> /prometheus.yml
+  
 
   # On configure prometheus comme un service
   - echo "[Unit]" > /etc/systemd/system/prometheus.service
@@ -52,6 +42,31 @@ runcmd:
   - echo "[Install]" >> /etc/systemd/system/prometheus.service
   - echo "WantedBy=multi-user.target" >> /etc/systemd/system/prometheus.service
 
-  # On démarre node_exporter
+  # On prend le fichier de configuration de prometheus
+  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - git config --system --add safe.directory '*'
+  - cp -r projet-master-23-24/monitoring/server/promotheus.yml /prometheus.yml
+
+  # On installe grafana
+  - wget https://dl.grafana.com/oss/release/grafana-8.1.5.linux-amd64.tar.gz
+  - tar -zxvf grafana-8.1.5.linux-amd64.tar.gz
+  - mv grafana-8.1.5 grafana
+  - rm -rf grafana-8.1.5.linux-amd64*
+  - chmod +x grafana/bin/grafana-server
+
+  # On configure grafana comme un service
+  - echo "[Unit]" > /etc/systemd/system/grafana.service
+  - echo "Description=Grafana Agent" >> /etc/systemd/system/grafana.service
+  - echo "" >> /etc/systemd/system/grafana.service
+  - echo "[Service]" >> /etc/systemd/system/grafana.service
+  - echo "User=root" >> /etc/systemd/system/grafana.service
+  - echo "ExecStart=/bin/sh -c '/grafana/bin/grafana-server --config=/grafana/conf/defaults.ini --homepath=/grafana'" >> /etc/systemd/system/grafana.service
+  - echo "Restart=always" >> /etc/systemd/system/grafana.service
+  - echo "" >> /etc/systemd/system/grafana.service
+  - echo "[Install]" >> /etc/systemd/system/grafana.service
+  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/grafana.service
+
+  # On démarre grafana et prometheus
   - systemctl daemon-reload
+  - systemctl start grafana.service
   - systemctl start prometheus.service

@@ -7,6 +7,4 @@ while true; do
         curl -X POST 10.0.0.5/webhook/webhook.sh
         curl -X POST 10.0.0.6/webhook/webhook.sh
         curl -X POST 10.0.0.7/webhook/webhook.sh
-        curl -X POST 10.0.0.8/webhook/webhook.sh
-        curl -X POST 10.0.0.9/webhook/webhook.sh
 done

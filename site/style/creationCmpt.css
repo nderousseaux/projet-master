@@ -10,6 +10,12 @@
 	background-color: #dd4a4ba1 !important;
 }
 
+/* Footer */
+footer {
+	position: fixed;
+	bottom: 0;
+}
+
 
 /* Version mobile */
 @media screen and (max-width: 799px) {

@@ -1,1 +1,1 @@
-mkdir -p data/mongo1 data/mongo2 data/mongo3
+mkdir -p data/mongo1

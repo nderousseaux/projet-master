@@ -11,7 +11,7 @@ def parse_line(line):
     lumi = int(parts[6])
 
     temp_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,
@@ -19,7 +19,7 @@ def parse_line(line):
     }
 
     humi_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,
@@ -27,7 +27,7 @@ def parse_line(line):
     }
     
     lumi_entry = {
-        'datetime': date_time,
+        'date': date_time,
         'idAgri': id_agri,
         'idChamps': id_champ,
         'idIlot': id_ilot,
@@ -39,11 +39,11 @@ def parse_line(line):
 
 
 if(len(sys.argv) == 1):
-    print("Please specify the file path as cli argument.\n")
+    print("Please specify the file path as cli argument.")
     exit(-1)
 
 client = pymongo.MongoClient(
-        "mongodb://mongo1:30001,mongo2:30002,mongo3:30003",
+        "mongodb://mongo1:30001/",
     replicaset="rs0",
     serverSelectionTimeoutMS=5000
 )

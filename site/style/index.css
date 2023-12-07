@@ -217,6 +217,7 @@ header > picture > img {
 	width: 144px;
 	height: 72px;
 	border-radius: 0 0 0 10px;
+	cursor: pointer;
 }
 
 	/* Sous-sections (choix champs, choix utilisateur) */
@@ -233,7 +234,8 @@ header > section > p,
 #optGraph > div > p {
 	font-size: 16px;
 	line-height: 72px;
-	margin: 0 10px 0 0;
+	margin: 0;
+	padding: 0 10px 0 0;
 	text-align: end;
 	overflow-x: scroll;
 	white-space: nowrap;
@@ -257,6 +259,7 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	position: relative;
 	top: 72px;
+	margin-bottom: calc(72px + 40px);
 }
 #corps > section,
 #secMeteo {
@@ -267,9 +270,6 @@ header > section:last-child .dropbtn {
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 	margin-top: 36px;
-}
-#corps > section:last-child {
-	margin-bottom: 40px;
 }
 
 	/* Section informations */
@@ -486,6 +486,25 @@ header > section:last-child .dropbtn {
 	color: #d30000;
 }
 
+	/* Footer */
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 72px;
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border-radius: 10px 10px 0 0;
+	box-shadow: 0 15px 20px 15px #cecece;
+}
+
+footer > p {
+	font-size: 16px;
+}
+
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
 	/* Corps */
@@ -580,7 +599,7 @@ header > section:last-child .dropbtn {
 	#optGraph > div > p {
 		width: fit-content;
 		line-height: 40px;
-		margin-right: 10px;
+		padding-right: 10px;
 	}
 	header > section:nth-child(2) {
 		padding-left: 5px;
@@ -590,13 +609,11 @@ header > section:last-child .dropbtn {
 	/* Corps */
 	#corps {
 		top: calc(72px + 40px + 20px);
+		margin-bottom: calc(72px + 40px + (20px * 2));
 	}
 	#corps > section {
 		width: 95%;
 		margin-top: 20px;
-	}
-	#corps > section:last-child {
-		margin-bottom: 20px;
 	}
 
 		/* Section informations */
@@ -680,6 +697,11 @@ header > section:last-child .dropbtn {
 		grid-template-columns: minmax(80px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
 	}
+
+	/* Footer */
+	footer > p {
+		font-size: 15px;
+	}
 }
 
 
@@ -719,7 +741,6 @@ header > section:last-child .dropbtn {
 
 	/* Header */
 	header {
-		background-color: rgba(0, 0, 0, 0.7);
 		box-shadow: 0 15px 20px -15px #080808;
 	}
 	header::before {
@@ -840,5 +861,11 @@ header > section:last-child .dropbtn {
 		/* Section tableau */
 	.errMesure {
 		color: #ff3535;
+	}
+
+		/* Footer */
+	footer {
+		background-color: rgba(0, 0, 0, 0.7);
+		box-shadow: 0 15px 20px 15px #080808;
 	}
 }

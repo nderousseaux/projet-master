@@ -17,8 +17,9 @@ sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 sudo ifconfig bat0 192.168.199.1/24
 
-# Forcer le mode "ad-hoc" aussi nommé "ibss"
+# Forcer le mode ad-hoc aussi nommé "ibss"
 sudo iw dev wlan0 set type ibss
 # Forcer le ESSID
 sudo iw dev wlan0 ibss join call-code-mesh 2462
+
 sudo ifconfig wlan0 10.0.1.1/24

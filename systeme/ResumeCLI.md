@@ -64,7 +64,10 @@ sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 sudo ifconfig bat0 192.168.199.1/24
 ```
-
+# Code Générer des données
+## Envoyer périodiquement des données
+crontab -e
+*/2 * * * * /path/prog
 
 ================================
 # TODO

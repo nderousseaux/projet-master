@@ -4,6 +4,9 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+# Donne les droits d'execution d'Installation.sh
+chmod +x ../Installation.sh
+
 yes | ../Installation.sh
 
 mv start-batman-adv.sh ~/start-batman-adv.sh
@@ -22,5 +25,6 @@ fi
 # Ligne à ajouter
 nouvelle_ligne="/home/pi/start-batman-adv.sh &"
 
+# TODO ajoute devant les deux exit 0 trouver une solution
 # Ajouter la nouvelle ligne juste avant la ligne "exit 0"
 sed -i "/exit 0/i $nouvelle_ligne" "$fichier"

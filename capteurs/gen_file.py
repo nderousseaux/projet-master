@@ -93,7 +93,7 @@ def compose_text(date,hour,minute,seconde):
     
     # assemble text
     text_time = t_day+" "+t_time
-    text_to_send = text_time + ";1;1;1;10;5;20"
+    text_to_send = text_time + ";0;0;1;10.0;5.0;20"
 
     return text_to_send
 

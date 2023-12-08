@@ -45,7 +45,7 @@
 					</div>
 				</div>
 				<div>
-					<h1>Dernière màj</h1>
+					<h1>Dernière actualisation</h1>
 					<p>-</p>
 				</div>
 			</section>
@@ -59,7 +59,7 @@
 					<p>-</p>
 				</div>
 				<div>
-					<h1>Humidité sol</h1>
+					<h1>Humidité du sol</h1>
 					<p>-</p>
 				</div>
 				<div>
@@ -71,7 +71,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Evolution de mesures dans le temps</h1>
+		<h1>Évolution des mesures dans le temps d'un ilot</h1>
 		<section id="secGraph">
 			<div id="optGraph">
 				<div>
@@ -100,7 +100,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Toutes les mesures relevées du champ</h1>
+		<h1>Récapitulatif des mesures relevées du champ</h1>
 		<section id="secTableau" class="tableau">
 			<div>
 				<div class="cellule titre">Ilot</div>
@@ -116,7 +116,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Prévisions météo</h1>
+		<h1>Prévisions météorologiques du champ</h1>
 		<section id="secMeteo" class="tableau">
 			<div>
 				<div class="cellule titre">

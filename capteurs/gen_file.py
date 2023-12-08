@@ -41,13 +41,23 @@ import time
 # sudo pip install pysftp
 import pysftp
 
-################### FUNCTION #########################
+################### REQUETE BUILDING FUNCTION #########################
 
 # Compose date and add 0 if single digit 
 # ex: 2024-5-14 --> 2024-05-14
 # Work on months and days
 # obviously not for the year
-def compose_date(year, month, day):
+def compose_date():
+    # get current time
+    current_time = datetime.datetime.now()
+
+    # get year     
+    year = current_time.year
+    # get month     
+    month = current_time.month
+    # get day
+    day = current_time.day
+
     year = str(year)
 
     if month < 10:
@@ -65,7 +75,17 @@ def compose_date(year, month, day):
 # Compose time and add 0 if single digit 
 # ex: 1:21:41 --> 01:21.41
 # work for hours, minutes, secondes
-def compose_time(hour, min, sec):
+def compose_time():
+    # get current time
+    current_time = datetime.datetime.now()
+
+    # get hour
+    hour = current_time.hour - 1
+    # get minute
+    min = current_time.minute
+    # get seconde
+    sec = current_time.second
+
     if hour < 10:
         hour = "0"+str(hour)
     else:
@@ -87,41 +107,22 @@ def compose_time(hour, min, sec):
 # format "date;idChamp;idIlot;idCapteur;temp;humi;lumi"
 # ex: '2024-12-08 01:29:40;1;2;3;11:22;33'
 # id & mesure are fake
-def compose_text(date,hour,minute,seconde):
+def compose_text():
+    t_day = compose_date()
+
     # compose hour:minute:seconde
-    t_time = compose_time(hour,minute,seconde)
+    t_time = compose_time()
     
     # assemble text
     text_time = t_day+" "+t_time
-    text_to_send = text_time + ";0;0;1;10.0;5.0;20"
+    text_to_send = text_time + ";0;2;1;10.0;5.0;20"
 
     return text_to_send
 
 #################### PROGRAMMME #######################
 
 print("START")
-
-# get current time
-current_time = datetime.datetime.now()
      
-# get year     
-year = current_time.year
-# get month     
-month = current_time.month
-# get day
-day = current_time.day
-# compose year-month-day
-t_day = compose_date(year,month,day)
-# get hour
-hour = current_time.hour
-# get minute
-minute = current_time.minute
-# get seconde
-seconde = current_time.second
-
-# overwrite sec to 0 for experience
-seconde = 0
-
 print("SFTP CONNECT")
 
 # SFTP connection info
@@ -139,11 +140,9 @@ with pysftp.Connection(hote, username=utilisateur, password=mot_de_passe) as sft
         # Changement de répertoire distant (si nécessaire)
         sftp.chdir(chemin_sftp)
 
-        for i in  range(0, 5):
-            # incremente time
-            seconde = seconde + 1
+        for i in  range(0, 30):
             # compose text
-            text_to_send = compose_text(t_day, hour, minute, seconde)
+            text_to_send = compose_text()
 
             # Print text
             print(text_to_send)

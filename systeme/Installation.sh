@@ -21,4 +21,9 @@ sudo npm install -g --unsafe-perm node-red
 sudo npm -g install node-pre-gyp
 sudo npm -g install node-gyp
 
+# Pour utiliser sshpass
 sudo apt-get install sshpass
+
+# Pour lescript (Python) sftp simulant une connection mesh serveur
+sudo apt install python3-pip
+sudo pip install pysftp

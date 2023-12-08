@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "snippets/head.php"?>
+	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 </head>
 <body>
 <header>
-	<?php include "snippets/logo.php"?>
+	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">
 		<p title=''>-</p>
 		<div id="ddCmpt" class="dropdown" title=''>
@@ -49,7 +49,7 @@
 		</form>
 </div>
 </dialog>
-<?php include "snippets/footer.php"?>
+<?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>

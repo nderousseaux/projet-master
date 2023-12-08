@@ -101,7 +101,7 @@ function afficherInfosChamp(idUtilisateur) {
 	recupDonnees(champPost, "recupInfosChamp.php")
 	.then(donnees => {
 		// État général du champ
-		document.querySelector("#secInfos > div:first-child > p")
+		document.querySelector("#secInfos > section > div:first-child > p")
 			.textContent = donnees[0];
 
 		// Nombre de capteurs actifs
@@ -113,7 +113,7 @@ function afficherInfosChamp(idUtilisateur) {
 			.textContent = donnees[2];
 
 		// Dernière mise à jour
-		document.querySelector("#secInfos > div:last-child > p")
+		document.querySelector("#secInfos > section > div:last-child > p")
 			.textContent = donnees[3];
 	});
 }
@@ -133,11 +133,11 @@ function afficherMoyennes(idUtilisateur) {
 
 	recupDonnees(champPost, "recupMoyennes.php")
 	.then(donnees => {
-		const cellTemp = document.querySelector("#secMoyennes > " +
+		const cellTemp = document.querySelector("#secMoyennes > section > " +
 			"div:first-child > p");
-		const cellHumi = document.querySelector("#secMoyennes > " +
+		const cellHumi = document.querySelector("#secMoyennes > section > " +
 			"div:nth-child(2) > p");
-		const cellLumi = document.querySelector("#secMoyennes > " +
+		const cellLumi = document.querySelector("#secMoyennes > section > " +
 			"div:last-child > p");
 
 		cellTemp.textContent = donnees[0] + "°C";

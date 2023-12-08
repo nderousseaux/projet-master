@@ -34,7 +34,7 @@ class CouleursGraph {
 class CouleursClaires extends CouleursGraph {
 	constructor() {
 		super(
-			"#ffffff", "#eeeeee",
+			"#f9f8fa", "#eeeeee",
 			"#404040", "#e7e7e7",
 			"rgba(205, 205, 205, 0.2)"
 		);
@@ -44,7 +44,7 @@ class CouleursClaires extends CouleursGraph {
 class CouleursSombres extends CouleursGraph {
 	constructor() {
 		super(
-			"#000000", "#494949",
+			"#0e0e0f", "#494949",
 			"#bfbfbf", "#4f4f4f",
 			"rgba(25, 25, 25, 0.8)"
 		);

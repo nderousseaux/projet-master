@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "snippets/head.php"?>
+	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
 </head>
 <body tabindex="0">
 <header>
-	<?php include "snippets/logo.php"?>
+	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">
 		<p title=''>-</p>
 		<div id="ddChamp" class="dropdown" title=''>
@@ -28,26 +28,95 @@
 	</section>
 </header>
 <div id="corps">
-	<section id="secInfos">
-		<div>
-			<h1>État général</h1>
-			<p>-</p>
-		</div>
-		<div>
-			<h1>Nombre de capteurs</h1>
-			<div id="nbrCapteurs">
-				<p>-</p>
-				<p>/</p>
-				<p>-</p>
-			</div>
-		</div>
-		<div>
-			<h1>Dernière màj</h1>
-			<p>-</p>
-		</div>
+	<section id="secInfosMoy">
+		<section id="secInfos" class="containerDoubleVerti">
+			<h1>Informations sur le champ</h1>
+			<section>
+				<div>
+					<h1>État général</h1>
+					<p>-</p>
+				</div>
+				<div>
+					<h1>Nombre de capteurs</h1>
+					<div id="nbrCapteurs">
+						<p>-</p>
+						<p>/</p>
+						<p>-</p>
+					</div>
+				</div>
+				<div>
+					<h1>Dernière màj</h1>
+					<p>-</p>
+				</div>
+			</section>
+		</section>
+
+		<section id="secMoyennes" class="containerDoubleVerti">
+			<h1>Moyennes des mesures du champ</h1>
+			<section>
+				<div>
+					<h1>Température</h1>
+					<p>-</p>
+				</div>
+				<div>
+					<h1>Humidité sol</h1>
+					<p>-</p>
+				</div>
+				<div>
+					<h1>Luminosité</h1>
+					<p>-</p>
+				</div>
+			</section>
+		</section>
 	</section>
 
-	<section id="compMetMoy">
+	<section class="containerSecVerti">
+		<h1>Evolution de mesures dans le temps</h1>
+		<section id="secGraph">
+			<div id="optGraph">
+				<div>
+					<p>Type de données</p>
+					<div id="ddType" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectType" class="dropdownContent">
+							<button value="temp">Température</button>
+							<button value="humi">Humidité du sol</button>
+							<button value="lumi">Luminosité</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>Ilot</p>
+					<div id="ddIlot" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectIlot" class="dropdownContent">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="graph">
+			</div>
+		</section>
+	</section>
+
+	<section class="containerSecVerti">
+		<h1>Toutes les mesures relevées du champ</h1>
+		<section id="secTableau" class="tableau">
+			<div>
+				<div class="cellule titre">Ilot</div>
+				<div class="cellule titre">Date et heure</div>
+				<div class="cellule titre">État</div>
+				<div class="cellule titre">Température (°C)</div>
+				<div class="cellule titre">Humidité du sol (%)</div>
+				<div class="cellule titre">Luminosité (lux)</div>
+			</div>
+			<div id="donneesTableau">
+			</div>
+		</section>
+	</section>
+
+	<section class="containerSecVerti">
+		<h1>Prévisions météo</h1>
 		<section id="secMeteo" class="tableau">
 			<div>
 				<div class="cellule titre">
@@ -76,62 +145,9 @@
 			<div id="donneesMeteo">
 			</div>
 		</section>
-		<section id="secMoyennes">
-			<div>
-				<h1>Température moyenne</h1>
-				<p>-</p>
-			</div>
-			<div>
-				<h1>Humidité moyenne du sol</h1>
-				<p>-</p>
-			</div>
-			<div>
-				<h1>Luminosité moyenne</h1>
-				<p>-</p>
-			</div>
-		</section>
-	</section>
-
-	<section id="secGraph">
-		<div id="optGraph">
-			<div>
-				<p>Type de données</p>
-				<div id="ddType" class="dropdown">
-					<button class="dropbtn">⇩</button>
-					<div id="selectType" class="dropdownContent">
-						<button value="temp">Température</button>
-						<button value="humi">Humidité du sol</button>
-						<button value="lumi">Luminosité</button>
-					</div>
-				</div>
-			</div>
-			<div>
-				<p>Ilot</p>
-				<div id="ddIlot" class="dropdown">
-					<button class="dropbtn">⇩</button>
-					<div id="selectIlot" class="dropdownContent">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="graph">
-		</div>
-	</section>
-
-	<section id="secTableau" class="tableau">
-		<div>
-			<div class="cellule titre">Ilot</div>
-			<div class="cellule titre">Date et heure</div>
-			<div class="cellule titre">État</div>
-			<div class="cellule titre">Température (°C)</div>
-			<div class="cellule titre">Humidité du sol (%)</div>
-			<div class="cellule titre">Luminosité (lux)</div>
-		</div>
-		<div id="donneesTableau">
-		</div>
 	</section>
 </div>
-<?php include "snippets/footer.php"?>
+<?php include "assets/footer.php"?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
 integrity="sha512-TiY/d3GpuSKgQYgnqegSfdqlXp6ebBvi6A47mFTMSpZM7BMbvfkkvU/SlDzZHs9lWqF+BteevHlqgauHhLLbIA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>

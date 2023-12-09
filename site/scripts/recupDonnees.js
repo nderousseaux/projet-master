@@ -26,22 +26,3 @@ function recupDonnees(champPost, fichierBackend) {
 		});
 	});
 }
-
-/**
- * Récupère les données de d'absisses et d'ordonnées pour le graphique
- *
- * @param {FormData} champPost - Champ à envoyer au back
- * @param {string} fichierBackend - Fichier à appeler dans le backend
- * @returns {promise} - les données sous format json
- */
-function recupAbsOrdGraph(champPost, fichierBackend) {
-	return new Promise((resolve, reject) => {
-		recupDonnees(champPost, fichierBackend)
-		.then(retour => {
-			resolve(retour);
-		})
-		.catch(err => {
-			reject(err);
-		});
-	});
-}

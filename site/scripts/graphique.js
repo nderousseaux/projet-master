@@ -41,7 +41,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 		champPost.append("numIlot", numIlot);
 		champPost.append("typeMesures", typeMesures);
 
-		recupAbsOrdGraph(champPost, "recupMesuresIlot.php")
+		recupDonnees(champPost, "recupMesuresIlot.php")
 		.then(retour => {
 			const abscisse = retour[0];
 			const ordonnee = retour[1];
@@ -50,7 +50,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 			const ordMin = Math.min.apply(Math, ordonnee) - margeMesure;
 			const ordMax = Math.max.apply(Math, ordonnee) + margeMesure;
 
-			// Détermine le zoom (range) minimum du graphique
+			// Détermine le zoom (intervalle) minimum du graphique
 			const rangeMin = abscisse[0];
 			const rangeMinMob = abscisse[abscisse.length - (7 * 24) - 1];
 			const rangeMax = abscisse[abscisse.length - 1]
@@ -251,7 +251,7 @@ function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
  *
  * @returns {promise} - Les paramètres du graphique
  */
-function helperRecupParamGraph() {
+function helperRecupParamsGraph() {
 	const valChamp = document.getElementById("champSlct").value;
 	const valIlot = document.getElementById("ilotSlct").value;
 	const valType = document.getElementById("typeSlct").value;
@@ -272,7 +272,7 @@ function helperRecupParamGraph() {
  * actualisation, lorsque le graphique a été affiché
  */
 function helperAfficherGraph() {
-	helperRecupParamGraph()
+	helperRecupParamsGraph()
 	.then(retour => {
 		[typeMesuresStr, unite] = retour[0];
 		[rangeMin, rangeMinMob, rangeMax, ordMin, ordMax] = retour[1];

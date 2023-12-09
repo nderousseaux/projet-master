@@ -1,4 +1,20 @@
 /**
+ * Activer le défilement jusqu'en haut de la page, lors d'un clic sur le header
+ * (sur les espaces vides de contenus)
+ */
+function activerDefilementHautPage() {
+	document.querySelectorAll("header > section").forEach(function(element) {
+		element.addEventListener("click", function(event) {
+			if (event.target !== this) {
+				return;
+			}
+
+			window.scrollTo(0, 0);
+		});
+	});
+}
+
+/**
  * Active la gestion du header réduit en fonction de la distance de défilement
  */
 function activerHeaderReduit() {

@@ -18,23 +18,3 @@ services:
     #   interval: 10s
     #   start_period: 30s
 
-  mongo2:
-    image: mongo:7.0.2
-    container_name: mongo2
-    restart: always
-    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "30002", "--dbpath", "/data/db/"]
-    volumes:
-      - ./data/mongo2:/data/db
-    ports: 
-      - 30002:30002
-
-  mongo3:
-    image: mongo:7.0.2
-    container_name: mongo3
-    restart: always
-    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "30003", "--dbpath", "/data/db/"]
-    volumes:
-      - ./data/mongo3:/data/db
-    ports:
-      - 30003:30003
-

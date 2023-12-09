@@ -6,6 +6,7 @@
 #include "stockageDonnees.hpp"
 
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
@@ -51,7 +52,8 @@ class EnvoiDonnees {
 		 * @param buffer des données
 		 * @return int -1 si erreur, 0 sinon
 		 */
-		int conversionBDDversChar(char* buffer);
+//		int conversionBDDversChar(char* buffer);
+        int ecrireBDD(LIBSSH2_SFTP_HANDLE * agent);
 
         int initialisation_socket(const int& port, const char* ip);
 

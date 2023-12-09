@@ -72,7 +72,7 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 			afficherMeteo(idUtilisateur);
 			afficherMoyennes(idUtilisateur);
 			afficherInfosChamp(idUtilisateur);
-			afficherTableauToutesMesures(idUtilisateur);
+			afficherMesuresChamp(idUtilisateur);
 
 			afficherIlots(idUtilisateur)
 			.then(_ => {

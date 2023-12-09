@@ -4,51 +4,63 @@
 ## Batman-adv
 [Batman-adc wiki](https://www.open-mesh.org/projects/open-mesh/wiki)
 
-Such an instance is a virtual network interface (often called "bat0") which looks to the system like a switch port that allows access to the distributed switch. The actual details of the (direct or indirect) communication between the nodes is then hidden behind the "bat0" network interface.
+Une telle instance est une interface réseau virtuelle (souvent appelée "bat0") qui apparaît au système comme un port de commutateur permettant l'accès au commutateur distribué. Les détails réels de la communication (directe ou indirecte) entre les nœuds sont ensuite masqués derrière l'interface réseau "bat0".
 
 ![Image](Images/bat0.png)
-
-
 
 Nous allons configurer le module noyau batman-adv pour prendre le contrôle de l'interface WiFi wlan0 et créer un réseau maillé sur WiFi. Batman-adv créera ensuite une nouvelle interface bat0 pour permettre au Pi d'envoyer du trafic réseau sur le réseau 
 
 ## Mise en place du noeud
 
-To manage the mesh network, a utility called batctl needs to be installed. This can be done using command
+Pour gérer le réseau maillé, il est nécessaire d'installer un utilitaire appelé batctl. Cela peut être fait à l'aide de la commande :
 ```bash
 sudo apt-get install -y batctl
 ```
-Using your preferred editor create a file ~/start-batman-adv.sh
+Editez le fichier ~/start-batman-adv.sh.
 ```bash
 nano ~/start-batman-adv.sh
 ```
+Avec les lignes suivantes : 
+```
+#!/bin/bash
+# batman-adv interface to use
+sudo batctl if add wlan0
+sudo ifconfig bat0 mtu 1468
 
-Make the start-batman-adv.sh file executable with command :
+# Tell batman-adv this is a gateway client
+sudo batctl gw_mode client 
+
+# Activates batman-adv interfaces
+sudo ifconfig wlan0 up
+sudo ifconfig bat0 up
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 channel 1
+sudo iwconfig wlan0 call-code-mesh
+
+sudo dhclient wlan0 
+```
+
+Rendez le fichier start-batman-adv.sh exécutable à l'aide de la commande :
 ```bash
 chmod +x ~/start-batman-adv.sh
 ```
-Create the network interface definition for the wlan0 interface by creating a file as root user e.g.
-```bash
-sudo nano /etc/network/interfaces.d/wlan0
-```
 
-Ensure the batman-adv kernel module is loaded at boot time by issuing the following command :
+Assurez-vous que le module du noyau batman-adv est chargé au démarrage en utilisant la commande suivante :
 ```bash
 echo 'batman-adv' | sudo tee --append /etc/modules
 ```
 
-Stop the DHCP process from trying to manage the wireless lan interface by issuing the following command :
+Arrêtez le processus DHCP qui tente de gérer l'interface sans fil en utilisant la commande suivante :
 ```bash
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 ```
 
-Make sure the startup script gets called by editing file /etc/rc.local as root user, e.g.
+Assurez-vous que le script de démarrage est appelé en éditant le fichier /etc/rc.local en tant qu'utilisateur root, par exemple :
 ```bash
 sudo nano /etc/rc.local
 ```
-and insert:  
+et insérez : 
 
     /home/pi/start-batman-adv.sh &
 
-before the last line: exit 0
-
+Derriere la derniere ligne: exit 0

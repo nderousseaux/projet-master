@@ -1,0 +1,78 @@
+#cloud-config
+users:
+  - name: nderousseaux
+    passwd: $1$Zk0NDqEp$DRjhMrBOD5CoFrfyp.dkr/
+    groups: users,wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+bootcmd:
+  - loadkeys fr
+
+repo_update: true
+repo_upgrade: all
+
+package_upgrade: true
+packages:
+  - wget
+  - git
+
+runcmd:
+  # Debug SSH
+  - sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+  - systemctl restart sshd
+
+
+  # On installe prometheus
+  - wget https://github.com/prometheus/prometheus/releases/download/v2.48.0/prometheus-2.48.0.linux-amd64.tar.gz
+  - tar xvfz prometheus-2.48.0.linux-amd64.tar.gz
+  - mv prometheus-2.48.0.linux-amd64/prometheus /
+  - rm -rf prometheus-2.48.0.linux-amd64*
+  - chmod +x prometheus
+  
+
+  # On configure prometheus comme un service
+  - echo "[Unit]" > /etc/systemd/system/prometheus.service
+  - echo "Description=Prometheus Agent" >> /etc/systemd/system/prometheus.service
+  - echo "" >> /etc/systemd/system/prometheus.service
+  - echo "[Service]" >> /etc/systemd/system/prometheus.service
+  - echo "User=root" >> /etc/systemd/system/prometheus.service
+  - echo "ExecStart=/bin/sh -c '/prometheus --config.file=prometheus.yml'" >> /etc/systemd/system/prometheus.service
+  - echo "Restart=always" >> /etc/systemd/system/prometheus.service
+  - echo "" >> /etc/systemd/system/prometheus.service
+  - echo "[Install]" >> /etc/systemd/system/prometheus.service
+  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/prometheus.service
+
+  # On prend le fichier de configuration de prometheus
+  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - git config --system --add safe.directory '*'
+  - cp -r projet-master-23-24/monitoring/server/promotheus.yml /prometheus.yml
+
+  # On installe grafana
+  - wget https://dl.grafana.com/oss/release/grafana-8.1.5.linux-amd64.tar.gz
+  - tar -zxvf grafana-8.1.5.linux-amd64.tar.gz
+  - mv grafana-8.1.5 grafana
+  - rm -rf grafana-8.1.5.linux-amd64*
+  - chmod +x grafana/bin/grafana-server
+
+  # On prend la configuration de grafana
+  - rm -rf /grafana/conf
+  - rm -rf /grafana/data
+  - cp -r projet-master-23-24/monitoring/server/grafana-conf/conf /grafana/conf
+  - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /grafana/data
+
+  # On configure grafana comme un service
+  - echo "[Unit]" > /etc/systemd/system/grafana.service
+  - echo "Description=Grafana Agent" >> /etc/systemd/system/grafana.service
+  - echo "" >> /etc/systemd/system/grafana.service
+  - echo "[Service]" >> /etc/systemd/system/grafana.service
+  - echo "User=root" >> /etc/systemd/system/grafana.service
+  - echo "ExecStart=/bin/sh -c '/grafana/bin/grafana-server --config=/grafana/conf/defaults.ini --homepath=/grafana'" >> /etc/systemd/system/grafana.service
+  - echo "Restart=always" >> /etc/systemd/system/grafana.service
+  - echo "" >> /etc/systemd/system/grafana.service
+  - echo "[Install]" >> /etc/systemd/system/grafana.service
+  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/grafana.service
+
+  # On démarre grafana et prometheus
+  - systemctl daemon-reload
+  - systemctl start grafana.service
+  - systemctl start prometheus.service

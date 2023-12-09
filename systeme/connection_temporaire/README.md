@@ -17,14 +17,14 @@ chmod 755 /sftp
 nano /etc/ssh/sshd_config
 ```
 
-Contenue de la fin du fichier sshd_config :
+Contenue de la fin du fichier __sshd_config__ :
 ```
 #override default of no subsystems
 Subsystem sftp internal-sftp
  
 #Example of overriding settings on a per-user basis
 Match Group sftp
-X11Forwarding no
+X11Forwarding yes
 AllowTcpForwarding no
 PermitTunnel no
 ForceCommand internal-sftp -d /upload

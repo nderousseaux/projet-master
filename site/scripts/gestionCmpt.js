@@ -1,5 +1,5 @@
 /**
- * Gestion des événements des informations du compte
+ * Vérifie les champs du formulaire, lorsqu'un événement se produit
  */
 function gestionInputCmpt() {
 	// Récupérer toutes les balises input
@@ -33,7 +33,7 @@ function gestionInputCmpt() {
 }
 
 /**
- * Vériier le format de l'adresse courriel
+ * Vérifier le format de l'adresse courriel
  *
  * @param {string} email à vérifier
  * @return {boolean} true si le format est valide, false sinon
@@ -102,12 +102,59 @@ function creationCmpt() {
 			.querySelector("form > input[type='text'][name='nom']");
 		let courriel = document
 			.querySelector("form > input[type='text'][name='courriel']");
+		// let mdp = document
+		// 	.querySelector("form > input[type='password'][name='mdp']");
+		let role = document
+			.querySelector("form > input[type='text'][name='role']");
+	
+		const champs = [prenom, nom, role];
+	
+		// Prénom, nom et role
+		champs.forEach(element => {
+			if (element.value.length === 0) {
+				element.classList.add("erreur")
+			}
+			else {
+				element.classList.remove("erreur")
+			}
+		});
+	
+		// Courriel
+		if (
+			courriel.value.length === 0 ||
+			!verifFormatCourriel(courriel.value)
+		) {
+			courriel.classList.add("erreur")
+		}
+		else {
+			courriel.classList.remove("erreur")
+		}
+	
+		// Vérifie le nombre de classes "erreur"
+		if (document.querySelectorAll(".erreur").length === 0) {
+			document.querySelector("form").submit()
+		}
+	});
+}
+
+
+/**
+ * Gère les champs du formulaire de connexion
+ */
+function connexionCmpt() {
+	document.querySelector("form > input[type='submit']")
+	.addEventListener("click", event => {
+		event.preventDefault();
+
+		// Vérifie que les champs sont remplis
+		let courriel = document
+			.querySelector("form > input[type='text'][name='courriel']");
 		let mdp = document
 			.querySelector("form > input[type='password'][name='mdp']");
 	
-		const champs = [prenom, nom, mdp];
+		const champs = [mdp];
 	
-		// Prénom, nom et mot de passe
+		//  mdp
 		champs.forEach(element => {
 			if (element.value.length === 0) {
 				element.classList.add("erreur")

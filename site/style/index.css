@@ -114,7 +114,7 @@ p {
 	display: grid;
 	grid-gap: 2px 0;
 	width: calc(100% - 20px);
-	padding: 10px 10px 0 10px;
+	padding: 0 10px;
 	overflow: unset;
 }
 .tableau > div:last-child {
@@ -217,6 +217,7 @@ header > picture > img {
 	width: 144px;
 	height: 72px;
 	border-radius: 0 0 0 10px;
+	cursor: pointer;
 }
 
 	/* Sous-sections (choix champs, choix utilisateur) */
@@ -224,13 +225,17 @@ header > section {
 	display: flex;
 	justify-content: right;
 	width: calc(50% - 72px);
+	cursor: pointer;
+}
+header > section > * {
+	cursor: auto;
 }
 header > section > p,
 #optGraph > div > p {
-	width: 200px;
 	font-size: 16px;
 	line-height: 72px;
-	margin: 0 10px 0 0;
+	margin: 0;
+	padding: 0 10px 0 0;
 	text-align: end;
 	overflow-x: scroll;
 	white-space: nowrap;
@@ -254,151 +259,128 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	position: relative;
 	top: 72px;
+	margin-bottom: calc(72px + 40px);
 }
-#corps > section,
-#secMeteo {
+#corps > section {
 	display: flex;
 	align-items: center;
 	width: 80%;
+	margin-top: 36px;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
-	margin-top: 36px;
-}
-#corps > section:last-child {
-	margin-bottom: 40px;
 }
 
-	/* Section informations */
-#secInfos {
-	flex-direction: row;
-	justify-content: space-between;
-	background-color: unset !important;
-	box-shadow: unset !important;
-}
-#secInfos > div {
+	/* Container verticaux */
+.containerSecVerti,
+.containerDoubleVerti {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: calc(33.33% - 10px);
-	padding: 15px 0;
-	text-align: center;
-	background-color: #ffffff;
+	width: 100%;
+	padding: 20px 0;
 	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.5) !important;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
 	box-shadow: 0 15px 20px -15px #cecece;
 }
-#secInfos > div:nth-child(2) > div {
+.containerSecVerti > h1,
+.containerDoubleVerti > h1 {
+	margin-bottom: 20px;
+}
+
+		/* Simple */
+.containerSecVerti > section {
+	width: calc(100% - 10px);
+}
+
+		/* Double */
+.containerDoubleVerti {
+	width: calc(50% - 10px);
+	padding: 20px 0;
+}
+.containerDoubleVerti > section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+.containerDoubleVerti > section > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	padding:  15px 0;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+	margin-bottom: 5px;
+}
+.containerDoubleVerti > section > div:last-child {
+	margin-bottom: 0;
+}
+.containerDoubleVerti > section > div > h1 {
+	margin-bottom: 15px;
+}
+.containerDoubleVerti > section > div > p {
+	margin: 0;
+}
+
+	/* Section container informations/moyennes */
+#secInfosMoy {
+	background-color: unset !important;
+	box-shadow: unset !important;
+	justify-content: space-between;
+	height: fit-content;
+}
+
+		/* Section informations */
+#secInfos > section > div {
+	background-color: rgba(4, 169, 109, 0.6)
+}
+#secInfos > section > div > h1 {
+	border-image: radial-gradient(#084f35, #7fc7a7) 1;
+}
+#secInfos > section > div:nth-child(2) > div {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	width: 100%;
 }
-#secInfos > div > div > p {
+#secInfos > section > div > div > p {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin: 0;
 }
-#secInfos > div:nth-child(2) > div > p:first-child,
-#secInfos > div:nth-child(2) > div > p:last-child {
+#secInfos > section > div:nth-child(2) > div > p:first-child,
+#secInfos > section > div:nth-child(2) > div > p:last-child {
 	width: 40%
 }
 
-	/* Section météo/moyenne */
-#compMetMoy {
-	flex-direction: row;
-	justify-content: space-between;
-	background-color: unset !important;
-	box-shadow: unset !important;
-}
-
-		/* Météo */
-#secMeteo {
-	width: calc(75% - 18px);
-	height: calc(140px * 3 - 10px);
-	margin-top: 0;
-}
-#secMeteo > div {
-	grid-template-columns: 85px
-		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr)) 70px 120px
-		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr));
-}
-.cellule > p {
-	font-size: 14px;
-	margin: 0;
-}
-#secMeteo > div > .titre:first-child {
-	display: flex;
-	flex-direction: column;
-	padding: 0 10px 0 0;
-}
-#secMeteo > div > .titre:first-child > p {
-	display: flex;
-	align-items: center;
-	font-size: 14px;
-	margin: 0;
-	padding-top: 5px;
-	height: 50%;
-}
-
-			/* Options de la météo */
-#ddDuree {
-	width: 100%;
-	height: 50%;
-}
-#ddDuree > .dropbtn {
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-}
-#ddDuree > .dropdownContent {
-	left: 0;
-}
-
-		/* Moyenne */
-#secMoyennes {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	width: 25%;
-	height: calc(140px * 3);
-	border-radius: 10px;
-}
-#secMoyennes > div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 130px;
-	border-radius: 10px;
-	box-shadow: 0 15px 20px -15px #cecece;
-}
-#secMoyennes > div > p {
-	margin: 0;
-}
-
+		/* Section moyennes */
 			/* Température */
-#secMoyennes > div:first-child {
+#secMoyennes > section > div:first-child {
 	background-color: rgba(160, 179, 255, 0.6);
 }
-#secMoyennes > div:first-child > h1 {
+#secMoyennes > section > div:first-child > h1 {
 	border-image: radial-gradient(#0033ff, #c3ccf7) 1;
 }
 
 			/* Humidité */
-#secMoyennes > div:nth-child(2) {
+#secMoyennes > section > div:nth-child(2) {
 	background-color: rgba(255, 196, 133, 0.6);
 }
-#secMoyennes > div:nth-child(2) > h1 {
+#secMoyennes > section > div:nth-child(2) > h1 {
 	border-image: radial-gradient(#df5d00, #f4d8b7) 1;
 }
 
 			/* Luminosité */
-#secMoyennes > div:last-child {
+#secMoyennes > section > div:last-child {
 	background-color: rgba(255, 220, 130, 0.6);
 }
-#secMoyennes > div:last-child > h1 {
+#secMoyennes > section > div:last-child > h1 {
 	border-image: radial-gradient(#c28b00, #f6e5b6) 1;
 }
 
@@ -483,20 +465,70 @@ header > section:last-child .dropbtn {
 	color: #d30000;
 }
 
+	/* Section météo */
+#secMeteo {
+	max-height: 60vh;
+}
+#secMeteo > div {
+	grid-template-columns: 130px
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr)) 70px 120px
+		repeat(4, minmax(calc((100% - (120px + 70px * 2))/10), 1fr));
+}
+#secMeteo .cellule > p {
+	font-size: 14px;
+	margin: 0;
+}
+#secMeteo > div > .titre:first-child {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10px 0 0;
+}
+#secMeteo > div > .titre:first-child > p {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	margin: 0;
+	padding-top: 5px;
+	height: 50%;
+}
+
+			/* Options de la météo */
+#ddDuree {
+	width: 100%;
+	height: 50%;
+}
+#ddDuree > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+#ddDuree > .dropdownContent {
+	left: 0;
+}
+
+	/* Footer */
+footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 72px;
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	border-radius: 10px 10px 0 0;
+	box-shadow: 0 15px 20px 15px #cecece;
+}
+footer > p {
+	font-size: 16px;
+}
+
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
 	/* Corps */
 	#corps > section {
 		width: 95%;
-	}
-
-		/* Section météo/moyenne */
-			/* Météo */
-				/* Météo */
-	#secMeteo > div {
-		grid-template-columns: 85px repeat(4, minmax(calc((100% - 85px * 3)/10),
-			1fr)) 85px 85px repeat(4, minmax(calc((100% - 85px * 3)/10),
-			1fr));
 	}
 }
 
@@ -522,6 +554,7 @@ header > section:last-child .dropbtn {
 	.tableau {
 		overflow-x: auto;
 		overflow-y: unset !important;
+		max-height: 50vh;
 	}
 	.tableau > div {
 		overflow: unset !important;
@@ -529,6 +562,14 @@ header > section:last-child .dropbtn {
 	.tableau > div:first-child {
 		position: sticky;
 		top: 0;
+	}
+
+		/* Vignettes */
+	#secInfos > div,
+	#secMoyennes > div {
+		width: calc(33.33% - 3px);
+		height: 160px;
+		padding: 10px 0;
 	}
 
 	/* Header */
@@ -543,12 +584,12 @@ header > section:last-child .dropbtn {
 	}
 	header > picture {
 		display: flex;
+		justify-content: center;
 		width: 100%;
-		margin: 10px;
+		margin: 10px 0;
 	}
 	header > picture > img {
 		width: 288px;
-		margin: auto;
 		border-radius: 10px;
 	}
 	.masqueLogo {
@@ -569,7 +610,7 @@ header > section:last-child .dropbtn {
 	#optGraph > div > p {
 		width: fit-content;
 		line-height: 40px;
-		margin-right: 10px;
+		padding-right: 10px;
 	}
 	header > section:nth-child(2) {
 		padding-left: 5px;
@@ -579,78 +620,43 @@ header > section:last-child .dropbtn {
 	/* Corps */
 	#corps {
 		top: calc(72px + 40px + 20px);
+		margin-bottom: calc(72px + 40px + (20px * 2));
 	}
 	#corps > section {
 		width: 95%;
 		margin-top: 20px;
 	}
-	#corps > section:last-child {
-		margin-bottom: 20px;
-	}
 
-		/* Section informations */
-	#secInfos {
-		flex-wrap: wrap;
-	}
-	#secInfos > div {
-		justify-content: space-between;
-		width: calc(33.33% - 3px);
-		height: 160px;
-		margin: 0;
-		padding: 10px 0;
-	}
-	#secInfos > div > h1,
-	#secInfos > div > p,
-	#secInfos > div > div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 50%;
-	}
-	#secInfos > div > p,
-	#secInfos > div > div,
-	#secInfos > div > div > p {
-		margin: 0;
-	}
-
-		/* Section météo/moyenne */
-	#compMetMoy {
-		flex-direction: column-reverse;
-	}
-
-			/* Météo */
-	#secMeteo {
+		/* Container verticaux */
+			/* Double */
+	.containerDoubleVerti {
 		width: 100%;
-		margin-top: 20px;
 	}
-	#secMeteo > div {
-		grid-template-columns: 100px repeat(5, 80px) 120px repeat(4, 80px);
-	}
-
-				/* Options de la météo */
-	#ddDuree > .dropbtn {
-		width: 100% !important;
-		height: 100% !important;
-	}
-
-			/* Moyenne */
-	#secMoyennes {
+	.containerDoubleVerti > section {
 		flex-direction: row;
-		justify-content: space-between;
-		width: 100%;
-		height: fit-content;
+		justify-content: space-evenly;
 	}
-	#secMoyennes > div {
-		width: calc(33.33% - 3px);
-		height: 150px;
-		padding: 10px 0;
+	.containerDoubleVerti > section > div {
+		width: calc(33% - 3px);
+		height: 130px;
+		margin: 0;
 	}
-	#secMoyennes > div > h1,
-	#secMoyennes > div > p {
+	.containerDoubleVerti > section > div > h1,
+	.containerDoubleVerti > section > div > p,
+	.containerDoubleVerti > section > div > div {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 50%;
+	}
+
+
+		/* Section container informations/moyennes */
+	#secInfosMoy {
+		flex-direction: column;
+	}
+	#secInfosMoy > section:first-child {
+		margin-bottom: 20px;
 	}
 
 		/* Section graphique */
@@ -676,6 +682,25 @@ header > section:last-child .dropbtn {
 	#secTableau > div {
 		grid-template-columns: minmax(80px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
+	}
+
+	/* Section météo */
+	#secMeteo {
+		width: 100%;
+	}
+	#secMeteo > div {
+		grid-template-columns: 100px repeat(5, 80px) 120px repeat(4, 80px);
+	}
+
+			/* Options de la météo */
+	#ddDuree > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+	/* Footer */
+	footer > p {
+		font-size: 15px;
 	}
 }
 
@@ -714,30 +739,7 @@ header > section:last-child .dropbtn {
 		background-color: rgba(111, 111, 111, 0.5);
 	}
 
-	/* Header */
-	header {
-		background-color: rgba(0, 0, 0, 0.7);
-		box-shadow: 0 15px 20px -15px #080808;
-	}
-	header::before {
-		background-color: rgba(0, 0, 0, 0.7);
-	}
-
-		/* Sous-sections (choix champs, choix utilisateur) */
-	.ddHeader::before {
-		background-color: rgba(57, 57, 57, 0.7);
-	}
-
-	/* Corps */
-	#corps > section,
-	#secInfos > div,
-	#secMeteo {
-		background-color: #000000;
-		box-shadow: 0 15px 20px -15px #080808;
-	}
-
-		/* Section météo/moyenne */
-			/* Météo */
+		/* Tableaux */
 	#secMeteo > div > .cellule:nth-child(22n+1),
 	#secMeteo > div > .cellule:nth-child(22n+2),
 	#secMeteo > div > .cellule:nth-child(22n+3),
@@ -777,38 +779,72 @@ header > section:last-child .dropbtn {
 		background-color: #1b1b1b;
 	}
 
-			/* Moyenne */
-	#secMoyennes > div {
+	/* Header */
+	header {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
-	#secMoyennes > div > p {
-		color: white;
-	}
-	#secMoyennes > div > h1 {
-		color: white;
+	header::before {
+		background-color: rgba(0, 0, 0, 0.7);
 	}
 
+		/* Sous-sections (choix champs, choix utilisateur) */
+	.ddHeader::before {
+		background-color: rgba(57, 57, 57, 0.7);
+	}
+
+	/* Corps */
+	#corps > section,
+	#secInfos > div,
+	#secMeteo {
+		background-color: #000000;
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+
+		/* Container verticaux */
+	.containerSecVerti,
+	.containerDoubleVerti {
+		background-color: rgba(0, 0, 0, 0.5) !important;
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+
+
+		/* Section container informations/moyennes */
+	.containerDoubleVerti > section > div {
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+	.containerDoubleVerti > section > div > p,
+	.containerDoubleVerti > section > div > h1,
+	.containerDoubleVerti > section > div > div {
+		color: #ffffff;
+	}
+
+			/* Section informations */
+	#secInfos > section > div > h1 {
+		border-image: radial-gradient(#032116, #2f694a) 1;
+	}
+
+			/* Section moyennes */
 				/* Température */
-	#secMoyennes > div:first-child {
+	#secMoyennes > section > div:first-child {
 		background-color: rgba(102, 133, 255, 0.6);
 	}
-	#secMoyennes > div:first-child > h1 {
+	#secMoyennes > section > div:first-child > h1 {
 		border-image: radial-gradient(#00073c, #4c5ba0) 1;
 	}
 
 				/* Humidité */
-	#secMoyennes > div:nth-child(2) {
+	#secMoyennes > section > div:nth-child(2) {
 		background-color: rgba(255, 167, 73, 0.6);
 	}
-	#secMoyennes > div:nth-child(2) > h1 {
+	#secMoyennes > section > div:nth-child(2) > h1 {
 		border-image: radial-gradient(#512200, #936b3e) 1;
 	}
 
 				/* Luminosité */
-	#secMoyennes > div:last-child {
+	#secMoyennes > section > div:last-child {
 		background-color: rgba(255, 200, 61, 0.6);
 	}
-	#secMoyennes > div:last-child > h1 {
+	#secMoyennes > section > div:last-child > h1 {
 		border-image: radial-gradient(#523b00, #9d823f) 1;
 	}
 
@@ -837,5 +873,11 @@ header > section:last-child .dropbtn {
 		/* Section tableau */
 	.errMesure {
 		color: #ff3535;
+	}
+
+		/* Footer */
+	footer {
+		background-color: rgba(0, 0, 0, 0.7);
+		box-shadow: 0 15px 20px 15px #080808;
 	}
 }

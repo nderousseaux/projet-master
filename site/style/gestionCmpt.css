@@ -103,6 +103,12 @@
 	border-radius: 10px;
 }
 
+/* Footer */
+footer {
+	position: fixed;
+	bottom: 0;
+}
+
 
 /* Version mobile */
 @media screen and (max-width: 799px) {
@@ -135,7 +141,7 @@
 	}
 	#icone > div {
 		width: 70%;
-		aspect-ratio: 3/1;
+		aspect-ratio: 2/1;
 	}
 
 	/* Boîte de dialogue */

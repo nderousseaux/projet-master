@@ -3,7 +3,7 @@
 // Récupère les moyennes des mesures du champ envoyés dans la requête
 // Vérification de leur existence
 if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
+	$erreur = array("Erreur", "Numéro de champ manquant dans la requête");
 	echo json_encode($erreur);
 	exit();
 }
@@ -19,50 +19,84 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 	echo json_encode($erreur);
 	exit();
 }
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
 
 // Connexion à MongoDB
 use MongoDB\Driver\Manager;
 $uri = "mongodb://localhost:30001";
 
 // Créé le client
-$client = new MongoDB\Driver\Manager($uri);
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:30001");
 
-// Défini le filtre
-$filtre = [
-	"idAgri" => intval($_POST["idUtilisateur"]),
-	"idChamps" => intval($_POST["numChamp"]),
+// Définition de la pipeline de la requete
+// On recupere la valeur la plus recente des capteurs pour chaque ilot
+$pipelinetemp = [
+	['$match' => [
+		'idAgri' => intval($_POST["idUtilisateur"]),
+		'idChamps' => intval($_POST["numChamp"])
+	]],
+	['$sort' => ['date' => -1]],
+    ['$group' => [
+        '_id' => '$idIlot',
+        'temp' => ['$first' => '$temp']
+    ]],
+];
+$pipelinehumi = [
+	['$match' => [
+		'idAgri' => intval($_POST["idUtilisateur"]),
+		'idChamps' => intval($_POST["numChamp"]),
+	]],
+	['$sort' => ['date' => -1]],
+    ['$group' => [
+        '_id' => '$idIlot',
+        'humi' => ['$first' => '$humi'], 
+    ]],
+];
+$pipelinelumi = [
+	['$match' => [
+		'idAgri' => intval($_POST["idUtilisateur"]),
+		'idChamps' => intval($_POST["numChamp"]),
+	]],
+	['$sort' => ['date' => -1]],
+    ['$group' => [
+        '_id' => '$idIlot',
+        'lumi' => ['$first' => '$lumi'], 
+    ]],
 ];
 
-// Défini les projections
-$options = ["projection" => ["valeurs" => 1]];
+// Création de la commande pour chaque collection
+$commandtemp = new MongoDB\Driver\Command([
+    "aggregate" => "temp",
+    "pipeline" => $pipelinetemp,
+    "cursor" => new stdClass(),
+]);
+$commandhumi = new MongoDB\Driver\Command([
+    "aggregate" => "humi",
+    "pipeline" => $pipelinehumi,
+    "cursor" => new stdClass(),
+]);
+$commandlumi= new MongoDB\Driver\Command([
+    "aggregate" => "lumi",
+    "pipeline" => $pipelinelumi,
+    "cursor" => new stdClass(),
+]);
 
-// Créé la requête
-$requete = new MongoDB\Driver\Query($filtre, $options);
-
-// Exécute la requête pour chaque type de capteur et récupère le résultat
-$resultattemp = $client->executeQuery("data.temp", $requete);
-$resultathumi = $client->executeQuery("data.humi", $requete);
-$resultatlumi = $client->executeQuery("data.lumi", $requete);
+// Exécution de la commande d'agrégation
+$cursortemp = $manager->executeCommand('data', $commandtemp);
+$cursorhumi = $manager->executeCommand('data', $commandhumi);
+$cursorlumi = $manager->executeCommand('data', $commandlumi);
 
 // Traitement des données
-$count = 0;
 $temps = 0.0;
 $humis = 0.0;
 $lumis = 0;
+$count = 0;
 
 // Calcul moyenne températures
-foreach ($resultattemp as $element) {
+foreach ($cursortemp as $element) {
 	//S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
-		foreach ($element->valeurs as $mesure) {
-			$temps = $temps + floatval($mesure);
-			$count += 1;
-		}
+		$temps = $temps + floatval($element->temp);
+		$count += 1;
 	}
 	// Si pas de retour de la bdd, erreur
 	else {
@@ -75,13 +109,11 @@ $moytemp = $temps / $count;
 
 $count = 0;
 // Calcul moyenne humidite
-foreach ($resultathumi as $element) {
-	// S'il y a des valeurs on les additionne pour la moyenne
+foreach ($cursorhumi as $element) {
+	//S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
-		foreach ($element->valeurs as $mesure) {
-			$humis = $humis + floatval($mesure);
-			$count += 1;
-		}
+		$humis = $humis + floatval($element->humi);
+		$count += 1;
 	}
 	// Si pas de retour de la bdd, erreur
 	else {
@@ -94,15 +126,13 @@ $moyhumi = $humis / $count;
 
 $count = 0;
 // Calcul moyenne luminosite
-foreach ($resultatlumi as $element) {
-	// S'il y a des valeurs on les additionne pour la moyenne
+foreach ($cursorlumi as $element) {
+	//S'il y a des valeurs on les additionne pour la moyenne
 	if (isset($element)) {
-		foreach ($element->valeurs as $mesure) {
-			$lumis = $lumis + floatval($mesure);
-			$count += 1;
-		}
+		$lumis = $lumis + floatval($element->lumi);
+		$count += 1;
 	}
-	//Si pas de retour de la bdd, erreur
+	// Si pas de retour de la bdd, erreur
 	else {
 		$erreur = array("Erreur", "Retour vide de la bdd");
 		echo json_encode($erreur);

@@ -17,7 +17,7 @@
 		</div>
 	</section>
 	<section title="Retourner en haut de la page">
-		<p title=''>-</p>
+		<p title=''>Champ</p>
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
@@ -52,7 +52,7 @@
 		</section>
 
 		<section id="secMoyennes" class="containerDoubleVerti">
-			<h1>Moyennes des mesures du champ</h1>
+			<h1>Moyennes des mesures sur le champ</h1>
 			<section>
 				<div>
 					<h1>Température</h1>
@@ -71,11 +71,11 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Évolution des mesures dans le temps d'un ilot</h1>
+		<h1>Évolution des mesures dans le temps sur l'ilot</h1>
 		<section id="secGraph">
 			<div id="optGraph">
 				<div>
-					<p>Type de données</p>
+					<p>Température</p>
 					<div id="ddType" class="dropdown">
 						<button class="dropbtn">⇩</button>
 						<div id="selectType" class="dropdownContent">
@@ -100,7 +100,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Récapitulatif des mesures relevées du champ</h1>
+		<h1>Récapitulatif des mesures relevées sur le champ</h1>
 		<section id="secTableau" class="tableau">
 			<div>
 				<div class="cellule titre">Ilot</div>
@@ -116,7 +116,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Prévisions météorologiques du champ</h1>
+		<h1>Prévisions météorologiques sur le champ</h1>
 		<section id="secMeteo" class="tableau">
 			<div>
 				<div class="cellule titre">
@@ -188,34 +188,24 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	let idUtilisateur = 0;
 
-		// Affiche le nom de l'utilisateur dans le header
-	afficherNomUtilisateur(idUtilisateur);
-
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)
 	.then(_ => {
 		// Active les boutons des champs
 		activerBouton(contIdButtons[0][0], contIdButtons[0][1],
 			contIdButtons[0][2]);
-		
+
 		/*
 		 * Active la fonction de changement de champ pour charger les nouveaux
 		 * ilots dans le dropdown
 		 */
-		activerBoutonChgmtChamp(idUtilisateur);
+		activerBoutonChgmtChamp(idUtilisateur);	
 
-		// Affiche la météo (nécessite de connaitre le champ sélectionné)
-		afficherMeteo(idUtilisateur);
-
-		// Affiche les moyennes des valeurs des capteurs
-		afficherMoyennes(idUtilisateur);
-		afficherInfosChamp(idUtilisateur);
-
-		// Affiche toutes les mesures du champ sélectionné
-		afficherMesuresChamp(idUtilisateur);
-
-		// Affiche les ilots du champ sélectionné
-		afficherIlots(idUtilisateur)
+		/**
+		 * Affiche le nom de l'utilisateur, les informations du champ,
+		 * les moyennes, les mesures et les ilots disponibles
+		 */
+		helperAffichageDonneesChamp(idUtilisateur)
 		.then(_ => {
 			// Active les boutons des ilots
 			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
@@ -225,6 +215,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			helperAfficherGraph();
 		});
 	});
+
+		// Affiche la météo
+	afficherMeteo(idUtilisateur);
 
 
 	/*** Interaction des boutons ***/

@@ -11,7 +11,7 @@ function afficherNomUtilisateur(idUtilisateur) {
 	.then(donnees => {
 		const nomUtilisateur = document.querySelector("header > " +
 			"section:last-child > p")
-		nomUtilisateur.textContent = donnees;
+		nomUtilisateur.textContent = donnees + " #"	+ idUtilisateur;
 	});
 }
 

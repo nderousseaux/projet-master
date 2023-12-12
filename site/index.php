@@ -186,7 +186,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	let idUtilisateur = 0;
+	const idUtilisateur = 0;
 
 		// Affiche le nom de l'utilisateur dans le header
 	afficherNomUtilisateur(idUtilisateur);

@@ -13,7 +13,10 @@ function gestionInputCmpt() {
 				input.value != input.placeholder &&
 				input.value.length > 0
 			) {
-				if (input.name === "courriel") {
+				if (input.name === "idAgri") {
+					return;
+				}
+				else if (input.name === "courriel") {
 					if (!verifFormatCourriel(input.value)) {
 						input.classList.add("erreur");
 					}
@@ -180,4 +183,25 @@ function connexionCmpt() {
 			document.querySelector("form").submit()
 		}
 	});
+}
+
+/**
+ * Copie l'identifiant de l'agriculteur dans le presse-papier
+ */
+function copierPressePapier() {
+	const containerInput = document.getElementById("idAgri");
+	containerInput.select();
+	navigator.clipboard.writeText(containerInput.placeholder);
+
+	// Affiche ce qui a été copié
+	const containerBouton = document.getElementById("texteBouton");
+	containerBouton.innerHTML = "Copié : " + containerInput.placeholder;
+}
+
+/**
+ * Réinitialise le contenu affiché sur le bouton de copie
+ */
+function reinitBouton() {
+	var containerBouton = document.getElementById("texteBouton");
+	containerBouton.innerHTML = "Copier dans le presse-papier";
 }

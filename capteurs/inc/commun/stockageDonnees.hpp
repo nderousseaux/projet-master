@@ -16,11 +16,11 @@ class StockageDonnees {
 		inline static std::string DOSSIER_STOCKAGE {
 			"./stockage/"
 		};
-		inline static std::string NOM_FICHIER_AGREGE {
-			"agrege.txt"
+		inline static std::string CHEMIN_FICHIER_MESURES {
+			DOSSIER_STOCKAGE + "mesures_"
 		};
 		inline static std::string CHEMIN_FICHIER_AGREGE {
-			DOSSIER_STOCKAGE + NOM_FICHIER_AGREGE
+			DOSSIER_STOCKAGE + "agrege_"
 		};
 
 
@@ -35,13 +35,13 @@ class StockageDonnees {
 		/**
 		 * @brief Ecrit les données des différentes mesures dans un fichier
 		 * 
-		 * @param nomFichier où écrire les données
+		 * @param cheminFichierMesures où écrire les données
 		 * @param infosChamp informations du champ
 		 * @param mesures mesures à écrire
 		 * @return int EXIT_SUCCESS ou EXIT_FAILURE
 		 */
 		static int ecrireDonneesFichier(
-			const std::string& nomFichier,
+			const std::string& cheminFichierMesures,
 			InfosChamp infosChamp,
 			Mesures mesures
 		);
@@ -55,8 +55,12 @@ class StockageDonnees {
 
 		/**
 		 * @brief Agrège les fichiers de données en un seul
+		 * 
+		 * @param cheminFichierAgrege où écrire les données agrégées
 		 */
-		static void agregeFichiersDonnees(void);
+		static void agregeFichiersDonnees(
+			const std::string& cheminFichierAgrege
+		);
 };
 
 #endif

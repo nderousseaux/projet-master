@@ -62,10 +62,14 @@ int main(int argc, char** argv) {
 			<< std::endl;
 	}
 
-	// Ecrit les données dans un fichier
-	StockageDonnees::ecrireDonneesFichier("mesures.txt", infosChamp, mesures);
+	// Génère le nom du fichier où écrire les données
+	std::string cheminMesures = StockageDonnees::CHEMIN_FICHIER_MESURES +
+		std::to_string(infosChamp.getIdAgri()) +
+		std::to_string(infosChamp.getIdChamp()) +
+		std::to_string(infosChamp.getIdIlot()) + ".txt";
 
-	// >> Envoie les données vers le serveur SFTP
+	// Ecrit les données dans un fichier
+	StockageDonnees::ecrireDonneesFichier(cheminMesures, infosChamp, mesures);
 
 	return EXIT_SUCCESS;
 }

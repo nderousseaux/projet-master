@@ -9,7 +9,7 @@
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body>
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">

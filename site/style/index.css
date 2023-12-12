@@ -112,7 +112,7 @@ p {
 }
 .tableau > div {
 	display: grid;
-	grid-gap: 2px 0;
+	gap: 2px 0;
 	width: calc(100% - 20px);
 	padding: 0 10px;
 	overflow: unset;
@@ -524,6 +524,7 @@ footer > p {
 	font-size: 16px;
 }
 
+
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
 	/* Corps */
@@ -806,7 +807,6 @@ footer > p {
 		background-color: rgba(0, 0, 0, 0.5) !important;
 		box-shadow: 0 15px 20px -15px #080808;
 	}
-
 
 		/* Section container informations/moyennes */
 	.containerDoubleVerti > section > div {

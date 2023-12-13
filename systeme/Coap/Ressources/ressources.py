@@ -12,5 +12,8 @@ class Basic(Resource):
 
     def render_POST(self, request):
         if request.payload is not None:
-            self.payload = request.payload
+            with open('sortie.txt', '+a') as file:
+                file.write(request.payload)
+            self.payload = request.payload 
         return self
+

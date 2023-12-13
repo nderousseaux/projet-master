@@ -4,7 +4,7 @@ import getopt
 import sys
 from coapthon.server.coap import CoAP
 
-from Ressources.ressources import basic
+from Ressources.ressources import Basic
 
 class CoAPServer(CoAP):
     def __init__(self, host, port, multicast=False):

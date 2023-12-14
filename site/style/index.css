@@ -225,7 +225,6 @@ header > section {
 	display: flex;
 	justify-content: right;
 	width: calc(50% - 72px);
-	cursor: pointer;
 }
 header > section > * {
 	cursor: auto;

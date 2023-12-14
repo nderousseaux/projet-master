@@ -46,22 +46,24 @@
 				</div>
 				<label class="colonne" for="prenom">Prénom</label>
 				<input class="colonne" id="prenom" name="prenom"
-					placeholder="John"></input>
+					placeholder="John" value="John"></input>
 				<label class="colonne" for="nom">Nom</label>
 				<input class="colonne" id="nom" name="nom"
-					placeholder="Doe"></input>
+					placeholder="Doe" value="Doe"></input>
 				<label class="colonne" for="courriel">Courriel</label>
 				<input class="colonne" id="courriel" name="courriel"
-					placeholder="abc@xyz.com"></input>
+					placeholder="abc@xyz.com" value="abc@xyz.com"></input>
 				<label class="colonne" for="mdp">Mot de passe</label>
 				<input type="password" id="mdp" name="mdp"
 					class="colonne" placeholder="******"></input>
 				<label class="colonne" for="couleur1">Couleur 1</label>
 				<input class="colonne selectCouleur" id="couleur1"
-					name="couleur1" type="color" value="#e66465"></input>
+					name="couleur1" type="color" placeholder="#e66465"
+					value="#e66465"></input>
 				<label class="colonne" for="couleur2">Couleur 2</label>
 				<input class="colonne selectCouleur" id="couleur2"
-					name="couleur2" type="color" value="#9198e5"></input>
+					name="couleur2" type="color" placeholder="#9198e5"
+					value="#9198e5"></input>
 				<button>Enregistrer</button>
 			</form>
 		</div>
@@ -76,7 +78,13 @@
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
-	// Gère les vérifications des champs du formulaire
+	const idUtilisateur = 0;
+
+	/*** Gestion des données ***/
+		// Récupère les données de l'utilisateur et rempli le formulaire avec
+	afficherDonneesUtilisateur(idUtilisateur);
+
+		// Gère les vérifications des champs du formulaire
 	document.querySelector("form > button").addEventListener("click", e => {
 		gestionInputCmpt(e);
 	});
@@ -84,9 +92,11 @@
 		gestionInputCmpt(e);
 	});
 
+		// Gère le changement couleur de l'icône
+	chgmtCouleurIcone();
+
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	const idUtilisateur = 0;
 	const containerInput = document.getElementById("idAgri");
 	containerInput.placeholder = idUtilisateur;
 

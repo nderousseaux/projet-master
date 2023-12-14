@@ -47,8 +47,10 @@ input:disabled {
 }
 
 	/* Boutons */
-button {
-	font-family: "Open Sans", Arial, sans-serif;;
+button,
+input {
+	font-family: "Open Sans", Arial, sans-serif;
+	font-size: 14px;
 }
 button:hover {
 	cursor: pointer;
@@ -126,7 +128,7 @@ form > button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(#e66465, #9198e5);
+	background: linear-gradient(#000000, #ffffff);
 	box-shadow: 0 15px 20px -15px #cecece;
 	color: #ffffff;
 	min-width: 70%;
@@ -198,7 +200,6 @@ form > button {
 		/* Infos du compte */
 	#infosCmpt,
 	input,
-	button,
 	.cellule {
 		background-color: #000000;
 		color: #ffffff;
@@ -219,6 +220,9 @@ form > button {
 	}
 
 		/* Bouton de copie */
+	button {
+		background-color: #191919;
+	}
 	button:hover {
 		background-color: #222222;
 	}

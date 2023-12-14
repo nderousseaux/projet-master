@@ -1,6 +1,6 @@
 /**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit
- * 
+ *
  * @param {Event} e - événement
  */
 function gestionInputCmpt(e) {
@@ -9,7 +9,7 @@ function gestionInputCmpt(e) {
 
 	// Regex
 	const regexInput = /^[\S\s]{1,100}$/;
-	const regexEmail = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
+	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
 
 	/* Fonction de vérification des champs */
 		// Au chargement de la page
@@ -44,13 +44,13 @@ function gestionInputCmpt(e) {
 	nomInput.addEventListener("input", inputPostVerif);
 
 		// Courriel
-	let emailInput = document.getElementById("courriel");
-	if (emailInput.value.match(regexEmail) == null) {
-		emailInput.classList.add("erreur");
+	let courrielInput = document.getElementById("courriel");
+	if (courrielInput.value.match(regexCourriel) == null) {
+		courrielInput.classList.add("erreur");
 		contientErr = true;
 	}
-	emailInput.addEventListener("input", function() {
-		if (this.value.match(regexEmail) == null) {
+	courrielInput.addEventListener("input", function() {
+		if (this.value.match(regexCourriel) == null) {
 			this.classList.add("erreur");
 			contientErr = true;
 		}
@@ -62,13 +62,58 @@ function gestionInputCmpt(e) {
 
 	/* Envoi des données au backend */
 	if (contientErr == false) {
-		let champPost = new FormData(document.querySelector("form"));
+		let donneesForm = new FormData(document.querySelector("form"));
+		let champPost = new FormData();
 
-		recupDonnees(champPost, "modifCmpt.php")
-		.catch(err => {
-			console.log(err);
-		});
+		// Trie les valeurs qui ont été modifiées
+		for (let [key, value] of donneesForm.entries()) {
+			let placeholder = document.querySelector(
+				"form > input[name=" + key + "]").placeholder;
+
+			if (key === "mdp") {
+				if (value !== '') {
+					champPost.append(key, value);
+				}
+			}
+			else {
+				if (value !== placeholder) {
+					champPost.append(key, value);
+				}
+			}
+		}
+
+		// N'envoi les données que si au moins un champ a été modifié
+		if (champPost.entries().next().done === false) {
+			recupDonnees(champPost, "modifCmpt.php")
+			.catch(err => {
+				console.log(err);
+			});
+		}
 	}
+}
+
+/**
+ * Modifie les couleurs de l'icône quand l'utilisateur change les couleurs
+ * dans le formulaire
+ */
+function chgmtCouleurIcone() {
+	const icone = document.querySelector("#icone > div");
+	const couleur1 = document.getElementById("couleur1");
+	const couleur2 = document.getElementById("couleur2");
+
+	// Initialise les couleurs de l'icône
+	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		couleur2.value + ")";
+
+	// Ajoute des évenements sur les selecteurs de couleur
+	couleur1.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
+	});
+	couleur2.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
+	});
 }
 
 /**
@@ -90,9 +135,9 @@ function creationCmpt() {
 		// 	.querySelector("form > input[type='password'][name='mdp']");
 		let role = document
 			.querySelector("form > input[type='text'][name='role']");
-	
+
 		const champs = [prenom, nom, role];
-	
+
 		// Prénom, nom et role
 		champs.forEach(element => {
 			if (element.value.length === 0) {
@@ -102,7 +147,7 @@ function creationCmpt() {
 				element.classList.remove("erreur")
 			}
 		});
-	
+
 		// Courriel
 		if (
 			courriel.value.length === 0 ||
@@ -113,14 +158,13 @@ function creationCmpt() {
 		else {
 			courriel.classList.remove("erreur")
 		}
-	
+
 		// Vérifie le nombre de classes "erreur"
 		if (document.querySelectorAll(".erreur").length === 0) {
 			document.querySelector("form").submit()
 		}
 	});
 }
-
 
 /**
  * Gère les champs du formulaire de connexion
@@ -135,9 +179,9 @@ function connexionCmpt() {
 			.querySelector("form > input[type='text'][name='courriel']");
 		let mdp = document
 			.querySelector("form > input[type='password'][name='mdp']");
-	
+
 		const champs = [mdp];
-	
+
 		//  mdp
 		champs.forEach(element => {
 			if (element.value.length === 0) {
@@ -147,7 +191,7 @@ function connexionCmpt() {
 				element.classList.remove("erreur")
 			}
 		});
-	
+
 		// Courriel
 		if (
 			courriel.value.length === 0 ||
@@ -158,7 +202,7 @@ function connexionCmpt() {
 		else {
 			courriel.classList.remove("erreur")
 		}
-	
+
 		// Vérifie le nombre de classes "erreur"
 		if (document.querySelectorAll(".erreur").length === 0) {
 			document.querySelector("form").submit()

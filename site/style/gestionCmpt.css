@@ -103,7 +103,7 @@ button:active {
 }
 
 	/* Selecteurs de couleur */
-.couleur {
+.selectCouleur {
 	cursor: pointer;
 	width: calc(100% + 2 * 4px + 1px);
 }
@@ -135,65 +135,6 @@ form > button {
 	border-radius: 10px;
 }
 
-/* Boîte de dialogue */
-#confirmChgmt {
-	display: none;
-	position: fixed;
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(255, 255, 255, 0.1);
-	-webkit-backdrop-filter: blur(5px);
-	backdrop-filter: blur(5px);
-}
-#confirmChgmt > dialog {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px 0;
-	width: 40%;
-	height: 40%;
-	border: none;
-	border-radius: 10px;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-#confirmChgmt > dialog > form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 90%;
-	height: 100%;
-}
-#confirmChgmt > dialog > form > div:first-child {
-	display: flex;
-	align-items: center;
-	height: 70%;
-}
-#confirmChgmt > dialog > form > div:last-child {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 90%;
-	height: 30%;
-}
-#confirmChgmt > dialog > form > div:last-child > button {
-	font-family: "Open Sans", Arial, sans-serif;
-	width: 40%;
-	line-height: 40px;
-	border: none;
-	border-radius: 10px;
-}
-
-
-/* Version élargie (petits écrans ordinateurs) */
-@media screen and (max-width: 1300px) {
-	/* Boîte de dialogue */
-	#confirmChgmt > dialog {
-		width: 70%;
-	}
-}
-
 
 /* Version mobile */
 @media screen and (max-width: 799px) {
@@ -223,6 +164,10 @@ form > button {
 	#infosCmpt > div {
 		width: 100%;
 	}
+	#infosCmpt > form  > div,
+	.selectCouleur {
+		width: unset !important;
+	}
 	#secCopie > div .bulle {
 		width: 110px;
 		left: 10%;
@@ -244,18 +189,6 @@ form > button {
 		width: 70%;
 		aspect-ratio: 2/1;
 	}
-
-	/* Boîte de dialogue */
-	#confirmChgmt > dialog {
-		width: 95%;
-		height: 30%;
-	}
-	#confirmChgmt > dialog > h1 {
-		min-height: fit-content;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button {
-		min-width: fit-content;
-	}
 }
 
 
@@ -265,8 +198,8 @@ form > button {
 		/* Infos du compte */
 	#infosCmpt,
 	input,
-	.cellule,
-	#secCopie > div > button {
+	button,
+	.cellule {
 		background-color: #000000;
 		color: #ffffff;
 	}
@@ -274,8 +207,8 @@ form > button {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
 	input,
-	#secCopie > div > button {
-		border: 1px solid #3d3d3d;
+	button {
+		border: 1px solid #3d3d3d !important;
 	}
 	#infosCmpt > input::placeholder {
 		color: #ffffff;
@@ -286,10 +219,10 @@ form > button {
 	}
 
 		/* Bouton de copie */
-	#secCopie > div > button:hover {
+	button:hover {
 		background-color: #222222;
 	}
-	#secCopie > div > button:active {
+	button:active {
 		background-color: #2f2f2f;
 	}
 	#secCopie > div .bulle {
@@ -302,23 +235,5 @@ form > button {
 		/* Image de profil */
 	#icone > div {
 		box-shadow: 0 15px 20px -15px #080808;
-	}
-
-	/* Boîte de dialogue */
-	#confirmChgmt {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-	#confirmChgmt > dialog {
-		background-color: #000000;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button {
-		background-color: rgba(55, 55, 55, 0.5);
-		color: #ffffff;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button:hover {
-		background-color: rgba(80, 80, 80, 0.5);
-	}
-	#confirmChgmt > dialog > form > div:last-child > button:active {
-		background-color: rgba(111, 111, 111, 0.5);
 	}
 }

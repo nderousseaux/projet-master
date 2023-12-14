@@ -60,23 +60,6 @@ function gestionInputCmpt(e) {
 		}
 	});
 
-		// Mot de passe
-	let mdpInput = document.getElementById("mdp");
-	if (mdpInput.value.length === 0) {
-		mdpInput.classList.add("erreur");
-		contientErr = true;
-	}
-	mdpInput.addEventListener("input", function() {
-		if (this.value.length === 0) {
-			this.classList.add("erreur");
-			contientErr = true;
-		}
-		else {
-			this.classList.remove("erreur");
-			contientErr = false;
-		}
-	});
-
 	/* Envoi des données au backend */
 	if (contientErr == false) {
 		let champPost = new FormData(document.querySelector("form"));
@@ -86,48 +69,6 @@ function gestionInputCmpt(e) {
 			console.log(err);
 		});
 	}
-}
-
-/**
- * Vérifier le format de l'adresse courriel
- *
- * @param {string} email à vérifier
- * @return {boolean} true si le format est valide, false sinon
- */
-function verifFormatCourriel(email) {
-	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	return regex.test(email);
-}
-
-/**
- * Affiche la boîte de dialogue, en changeant le contenu du message et
- * mets en place les événements sur les boutons (envoi au backend si
- * confirmation)
- *
- * @param {string} nomChamp - le nom du champ
- * @param {string} valAvant - valeur du champ avant modification
- * @param {string} valApres - valeur du champ après modification
- */
-function confirmChangement(nomChamp, valAvant, valApres) {
-	let boite = document.getElementById("confirmChgmt");
-	boite.style.display = "flex";
-
-	let msg = document.getElementById("msg");
-	if (nomChamp === "mdp") {
-		msg.innerHTML = valAvant + " ➡️ " + valAvant;
-	}
-	else {
-		msg.innerHTML = valAvant + " ➡️ " + valApres;
-	}
-
-	document.getElementById("confirmer").addEventListener("click", () => {
-		// Envoi au backend
-		envoiInfoCmptBack(nomChamp, valApres);
-		boite.style.display = "none";
-	});
-	document.getElementById("annuler").addEventListener("click", () => {
-		boite.style.display = "none";
-	});
 }
 
 /**

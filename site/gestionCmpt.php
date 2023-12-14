@@ -57,11 +57,11 @@
 				<input type="password" id="mdp" name="mdp"
 					class="colonne" placeholder="******"></input>
 				<label class="colonne" for="couleur1">Couleur 1</label>
-				<input class="colonne couleur" id="couleur1" name="couleur1"
-					type="color" value="#e66465"></input>
+				<input class="colonne selectCouleur" id="couleur1"
+					name="couleur1" type="color" value="#e66465"></input>
 				<label class="colonne" for="couleur2">Couleur 2</label>
-				<input class="colonne couleur" id="couleur2" name="couleur2"
-					type="color" value="#9198e5"></input>
+				<input class="colonne selectCouleur" id="couleur2"
+					name="couleur2" type="color" value="#9198e5"></input>
 				<button>Enregistrer</button>
 			</form>
 		</div>
@@ -70,19 +70,6 @@
 		</div>
 	</section>
 </div>
-<div id="confirmChgmt">
-	<dialog>
-		<h1>Voulez-vous enregistrer la modification ?</h1>
-		<form method="dialog">
-			<div id="msg">
-			</div>
-			<div>
-				<button id="annuler">Annuler</button>
-				<button id="confirmer">Confirmer</button>
-			</div>
-		</form>
-</div>
-</dialog>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>

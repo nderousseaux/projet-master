@@ -47,8 +47,10 @@ input:disabled {
 }
 
 	/* Boutons */
-button {
-	font-family: "Open Sans", Arial, sans-serif;;
+button,
+input {
+	font-family: "Open Sans", Arial, sans-serif;
+	font-size: 14px;
 }
 button:hover {
 	cursor: pointer;

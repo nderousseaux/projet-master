@@ -445,6 +445,7 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		const courrielInput = document.getElementById("courriel");
 		const couleur1 = document.getElementById("couleur1");
 		const couleur2 = document.getElementById("couleur2");
+		const icone = document.querySelector("#icone > div");
 
 		prenomInput.value = donnees[0];
 		prenomInput.placeholder = donnees[0];
@@ -456,5 +457,7 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		couleur1.placeholder = donnees[3];
 		couleur2.value = donnees[4];
 		couleur2.placeholder = donnees[4];
+
+		icone.innerHTML = prenom[0] + ". " + nom[0] + '.';
 	});
 }

@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]; then
-    echo "Ce script doit être exécuté en tant que superutilisateur (root)."
-    exit 1
-fi
-
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
@@ -29,7 +24,6 @@ fi
 # Ligne à ajouter
 nouvelle_ligne="/home/pi/start-batman-adv.sh &"
 
-# TODO ajoute devant les deux exit 0 trouver une solution
 # Ajouter la nouvelle ligne juste avant la ligne "exit 0"
 sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
 
@@ -39,3 +33,4 @@ sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> /etc/dn
 
 sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
 sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
+

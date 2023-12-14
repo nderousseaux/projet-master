@@ -1,8 +1,4 @@
 #!/bin/bash
-if [ "$EUID" -ne 0 ]; then
-    echo "Ce script doit être exécuté en tant que superutilisateur (root)."
-    exit 1
-fi
 
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
@@ -25,6 +21,5 @@ fi
 # Ligne à ajouter
 nouvelle_ligne="/home/pi/start-batman-adv.sh &"
 
-# TODO ajoute devant les deux exit 0 trouver une solution
 # Ajouter la nouvelle ligne juste avant la ligne "exit 0"
 sed -i "/exit 0/i $nouvelle_ligne" "$fichier"

@@ -15,15 +15,16 @@ sudo apt-get install -y batctl
 # Seulement pour le Gateway :
 sudo apt-get install -y dnsmasq
 
-# Pour connecter et tester le traffic
-sudo apt install npm
-sudo npm install -g --unsafe-perm node-red
-sudo npm -g install node-pre-gyp
-sudo npm -g install node-gyp
-
 # Pour utiliser sshpass
 sudo apt-get install sshpass
 
 # Pour lescript (Python) sftp simulant une connection mesh serveur
 sudo apt install python3-pip
 sudo pip install pysftp
+
+# Pour le fonctionnement de Coapthon
+sudo pip install CoAPthon
+
+CoAPthon3=Coap/CoApthon3
+python3 setup.py $CoAPthon3/sdist
+sudo pip install $CoAPthon3/dist/CoAPthon3-1.0.1+fb.202312141023.tar.gz -r requirements.txt

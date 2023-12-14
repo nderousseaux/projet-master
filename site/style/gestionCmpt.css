@@ -126,7 +126,7 @@ form > button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(#e66465, #9198e5);
+	background: linear-gradient(#000000, #ffffff);
 	box-shadow: 0 15px 20px -15px #cecece;
 	color: #ffffff;
 	min-width: 70%;

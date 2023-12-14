@@ -78,7 +78,13 @@
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
-	// Gère les vérifications des champs du formulaire
+	const idUtilisateur = 0;
+
+	/*** Gestion des données ***/
+		// Récupère les données de l'utilisateur et rempli le formulaire avec
+	afficherDonneesUtilisateur(idUtilisateur);
+
+		// Gère les vérifications des champs du formulaire
 	document.querySelector("form > button").addEventListener("click", e => {
 		gestionInputCmpt(e);
 	});
@@ -86,9 +92,11 @@
 		gestionInputCmpt(e);
 	});
 
+		// Gère le changement couleur de l'icône
+	chgmtCouleurIcone();
+
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	const idUtilisateur = 0;
 	const containerInput = document.getElementById("idAgri");
 	containerInput.placeholder = idUtilisateur;
 

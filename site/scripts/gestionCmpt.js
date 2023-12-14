@@ -9,7 +9,7 @@ function gestionInputCmpt(e) {
 
 	// Regex
 	const regexInput = /^[\S\s]{1,100}$/;
-	const regexEmail = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
+	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
 
 	/* Fonction de vérification des champs */
 		// Au chargement de la page
@@ -44,13 +44,13 @@ function gestionInputCmpt(e) {
 	nomInput.addEventListener("input", inputPostVerif);
 
 		// Courriel
-	let emailInput = document.getElementById("courriel");
-	if (emailInput.value.match(regexEmail) == null) {
-		emailInput.classList.add("erreur");
+	let courrielInput = document.getElementById("courriel");
+	if (courrielInput.value.match(regexCourriel) == null) {
+		courrielInput.classList.add("erreur");
 		contientErr = true;
 	}
-	emailInput.addEventListener("input", function() {
-		if (this.value.match(regexEmail) == null) {
+	courrielInput.addEventListener("input", function() {
+		if (this.value.match(regexCourriel) == null) {
 			this.classList.add("erreur");
 			contientErr = true;
 		}
@@ -90,6 +90,30 @@ function gestionInputCmpt(e) {
 			});
 		}
 	}
+}
+
+/**
+ * Modifie les couleurs de l'icône quand l'utilisateur change les couleurs
+ * dans le formulaire
+ */
+function chgmtCouleurIcone() {
+	const icone = document.querySelector("#icone > div");
+	const couleur1 = document.getElementById("couleur1");
+	const couleur2 = document.getElementById("couleur2");
+
+	// Initialise les couleurs de l'icône
+	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		couleur2.value + ")";
+
+	// Ajoute des évenements sur les selecteurs de couleur
+	couleur1.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
+	});
+	couleur2.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
+	});
 }
 
 /**
@@ -141,7 +165,6 @@ function creationCmpt() {
 		}
 	});
 }
-
 
 /**
  * Gère les champs du formulaire de connexion

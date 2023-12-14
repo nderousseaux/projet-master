@@ -279,10 +279,10 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	width: 100%;
 	padding: 20px 0;
-	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.5) !important;
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
+	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
 .containerSecVerti > h1,
@@ -337,7 +337,7 @@ header > section:last-child .dropbtn {
 
 		/* Section informations */
 #secInfos > section > div {
-	background-color: rgba(4, 169, 109, 0.6)
+	background-color: rgba(4, 169, 109, 0.6);
 }
 #secInfos > section > div > h1 {
 	border-image: radial-gradient(#084f35, #7fc7a7) 1;
@@ -433,15 +433,16 @@ header > section:last-child .dropbtn {
 	font-size: 14px !important;
 }
 .plotly-notifier {
-	right: 30px !important;
+	top: calc(72px + 20px) !important;
+	right: 40px !important;
 }
 .notifier-note {
+	background-color: rgba(4, 169, 109, 0.6) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	backdrop-filter: blur(10px) !important;
 	border: none !important;
 	border-radius: 10px !important;
 	box-shadow: 0 15px 20px -15px #cecece !important;
-	background-color: rgba(255, 255, 255, 0.7) !important;
-	-webkit-backdrop-filter: blur(10px) !important;
-	backdrop-filter: blur(10px) !important;
 }
 .notifier-close,
 .notifier-note > p > span {
@@ -678,6 +679,9 @@ footer > p {
 	.hovertext > text {
 		font-size: 11.5px !important;
 	}
+	.plotly-notifier {
+		top: calc(40px + 20px) !important;
+	}
 
 	/* Section tableau */
 	#secTableau > div {
@@ -857,7 +861,6 @@ footer > p {
 				/* Graphique */
 	.notifier-note {
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2) !important;
-		background-color: rgba(57, 57, 57, 0.7) !important;
 	}
 	.notifier-close,
 	.notifier-note > p > span {

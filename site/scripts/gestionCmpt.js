@@ -1,38 +1,91 @@
 /**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit
+ * 
+ * @param {Event} e - événement
  */
-function gestionInputCmpt() {
-	// Récupérer toutes les balises input
-	const inputs = document.querySelectorAll("input");
+function gestionInputCmpt(e) {
+	e.preventDefault();
+	let contientErr = false;
 
-	// Ajouter un événement "keypress" à chaque input
-	inputs.forEach(input => {
-		input.addEventListener("keypress", touche => {
-			if (
-				touche.key === "Enter" &&
-				input.value != input.placeholder &&
-				input.value.length > 0
-			) {
-				if (input.name === "idAgri") {
-					return;
-				}
-				else if (input.name === "courriel") {
-					if (!verifFormatCourriel(input.value)) {
-						input.classList.add("erreur");
-					}
-					else {
-						input.classList.remove("erreur");
-						confirmChangement(input.name, input.placeholder,
-							input.value);
-					}
-				}
-				else {
-					confirmChangement(input.name, input.placeholder,
-						input.value);
-				}
-			}
-		});
+	// Regex
+	const regexInput = /^[\S\s]{1,100}$/;
+	const regexEmail = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
+
+	/* Fonction de vérification des champs */
+		// Au chargement de la page
+	function inputPreVerif(donnee) {
+		if (donnee.value.match(regexInput) == null) {
+			donnee.classList.add("erreur");
+			contientErr = true;
+		}
+	}
+
+		// Pendant que le champ est rempli
+	const inputPostVerif = function() {
+		if (this.value.match(regexInput) == null) {
+			this.classList.add("erreur");
+			contientErr = true;
+		}
+		else{
+			this.classList.remove("erreur");
+			contientErr = false;
+		}
+	}
+
+	/* Vérification des champs */
+		// Prénom
+	let prenomInput = document.getElementById("prenom");
+	inputPreVerif(prenomInput);
+	prenomInput.addEventListener("input", inputPostVerif);
+
+		// Nom
+	let nomInput = document.getElementById("nom");
+	inputPreVerif(nomInput);
+	nomInput.addEventListener("input", inputPostVerif);
+
+		// Courriel
+	let emailInput = document.getElementById("courriel");
+	if (emailInput.value.match(regexEmail) == null) {
+		emailInput.classList.add("erreur");
+		contientErr = true;
+	}
+	emailInput.addEventListener("input", function() {
+		if (this.value.match(regexEmail) == null) {
+			this.classList.add("erreur");
+			contientErr = true;
+		}
+		else {
+			this.classList.remove("erreur");
+			contientErr = false;
+		}
 	});
+
+		// Mot de passe
+	let mdpInput = document.getElementById("mdp");
+	if (mdpInput.value.length === 0) {
+		mdpInput.classList.add("erreur");
+		contientErr = true;
+	}
+	mdpInput.addEventListener("input", function() {
+		if (this.value.length === 0) {
+			this.classList.add("erreur");
+			contientErr = true;
+		}
+		else {
+			this.classList.remove("erreur");
+			contientErr = false;
+		}
+	});
+
+	/* Envoi des données au backend */
+	if (contientErr == false) {
+		let champPost = new FormData(document.querySelector("form"));
+
+		recupDonnees(champPost, "modifCmpt.php")
+		.catch(err => {
+			console.log(err);
+		});
+	}
 }
 
 /**
@@ -75,19 +128,6 @@ function confirmChangement(nomChamp, valAvant, valApres) {
 	document.getElementById("annuler").addEventListener("click", () => {
 		boite.style.display = "none";
 	});
-}
-
-/**
- * Envoi le nom du champ et la valeur à enregistrer, au backend
- *
- * @param {string} nomChamp - le nom du champ
- * @param {string} valeur - à enregsitrer
- */
-function envoiInfoCmptBack(nomChamp, valeur) {
-	const xhr = new XMLHttpRequest();
-	xhr.open("POST", "/backend/enregistrerInfoCmpt", true);
-	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-	xhr.send(JSON.stringify({champ: nomChamp, valeur: valeur}));
 }
 
 /**

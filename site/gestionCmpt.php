@@ -25,26 +25,45 @@
 <div id="corps">
 	<section id="secCmpt">
 		<div id="infosCmpt">
-			<label class="colonne" for="idAgri">Identifiant agriculteur</label>
-			<div id="secCopie">
-				<input class="colonne" id="idAgri" disabled name="idAgri" placeholder='-'></input>
-				<div>
-					<button onclick="copierPressePapier()" onmouseout="reinitBouton()">
-						<i class="fa fa-copy"></i>
-						<span class="bulle" id="texteBouton">
-							Copier dans le presse-papier
-						</span>
-					</button>
+			<form id="formCmpt">
+				<label class="colonne" for="idAgri">Identifiant agriculteur
+				</label>
+				<div id="secCopie">
+					<input class="colonne" id="idAgri" disabled name="idAgri"
+						placeholder='-'>
+					</input>
+					<div>
+						<button
+							onclick="copierPressePapier()"
+							onmouseout="reinitBouton()"
+						>
+							<i class="fa fa-copy"></i>
+							<span class="bulle" id="texteBouton">
+								Copier dans le presse-papier
+							</span>
+						</button>
+					</div>
 				</div>
-			</div>
-			<label class="colonne" for="prenom">Prénom</label>
-			<input class="colonne" name="prenom" placeholder="John"></input>
-			<label class="colonne" for="nom">Nom</label>
-			<input class="colonne" name="nom" placeholder="Doe"></input>
-			<label class="colonne" for="courriel">Courriel</label>
-			<input class="colonne" name="courriel" placeholder="abc@xyz.com"></input>
-			<label class="colonne" for="mdp">Mot de passe</label>
-			<input type="password" name="mdp" class="colonne" placeholder="******"></input>
+				<label class="colonne" for="prenom">Prénom</label>
+				<input class="colonne" id="prenom" name="prenom"
+					placeholder="John"></input>
+				<label class="colonne" for="nom">Nom</label>
+				<input class="colonne" id="nom" name="nom"
+					placeholder="Doe"></input>
+				<label class="colonne" for="courriel">Courriel</label>
+				<input class="colonne" id="courriel" name="courriel"
+					placeholder="abc@xyz.com"></input>
+				<label class="colonne" for="mdp">Mot de passe</label>
+				<input type="password" id="mdp" name="mdp"
+					class="colonne" placeholder="******"></input>
+				<label class="colonne" for="couleur1">Couleur 1</label>
+				<input class="colonne couleur" id="couleur1" name="couleur1"
+					type="color" value="#e66465"></input>
+				<label class="colonne" for="couleur2">Couleur 2</label>
+				<input class="colonne couleur" id="couleur2" name="couleur2"
+					type="color" value="#9198e5"></input>
+				<button>Enregistrer</button>
+			</form>
 		</div>
 		<div id="icone">
 			<div>J. D.</div>
@@ -71,7 +90,12 @@
 <script src="scripts/entete.js"></script>
 <script>
 	// Gère les vérifications des champs du formulaire
-	gestionInputCmpt();
+	document.querySelector("form > button").addEventListener("click", e => {
+		gestionInputCmpt(e);
+	});
+	document.querySelector("form").addEventListener("submit", e => {
+		gestionInputCmpt(e);
+	});
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)

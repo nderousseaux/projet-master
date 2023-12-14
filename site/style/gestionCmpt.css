@@ -7,18 +7,24 @@
 
 	/* Infos du compte */
 #infosCmpt {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 5px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	width: calc(70% - 40px) !important;
 	padding: 20px;
-	justify-content: center;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
+
+#infosCmpt > form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 5px 0;
+}
 input,
-#secCopie > div > button {
+#secCopie > div > button,
+form > button {
 	width: 100%;
 	height: 40px;
 	padding: 4px;
@@ -40,8 +46,20 @@ input:disabled {
 	color: #848484;
 }
 
+	/* Boutons */
+button {
+	font-family: "Open Sans", Arial, sans-serif;;
+}
+button:hover {
+	cursor: pointer;
+	background-color: #f6f6f6;
+}
+button:active {
+	background-color: #e6e6e6;
+}
+
 	/* Bouton de copie */
-#infosCmpt > div {
+#infosCmpt > form  > div {
 	display: flex;
 	width: calc(100% + 2 * 4px + 1px);
 }
@@ -50,13 +68,6 @@ input:disabled {
 	width: 50px;
 	border-radius: 5px;
 	margin-left: 3px;
-}
-#secCopie > div > button:hover {
-	cursor: pointer;
-	background-color: #f6f6f6;
-}
-#secCopie > div > button:active {
-	background-color: #e6e6e6;
 }
 #secCopie > div {
 	position: relative;
@@ -89,6 +100,18 @@ input:disabled {
 #secCopie > div:hover .bulle {
 	visibility: visible;
 	opacity: 1;
+}
+
+	/* Selecteurs de couleur */
+.couleur {
+	cursor: pointer;
+	width: calc(100% + 2 * 4px + 1px);
+}
+
+	/* Bouton d'enregistrement */
+form > button {
+	margin-top: 30px;
+	grid-column: span 2;
 }
 
 	/* Image de profil */
@@ -160,12 +183,6 @@ input:disabled {
 	line-height: 40px;
 	border: none;
 	border-radius: 10px;
-}
-
-/* Footer */
-footer {
-	position: fixed;
-	bottom: 0;
 }
 
 

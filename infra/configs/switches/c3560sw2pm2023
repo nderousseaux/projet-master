@@ -1,13 +1,10 @@
-version 15.0
+version 12.2
 no service pad
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname sw1pm2023
-!
-boot-start-marker
-boot-end-marker
+hostname sw2pm2023
 !
 enable secret 5 $1$WDAx$MSO4GQxp1DWiILRKG8df./
 enable password florent
@@ -15,20 +12,22 @@ enable password florent
 username cisco password 0 cisco
 aaa new-model
 !
-!
 aaa session-id common
-system mtu routing 1500
-ip domain-name sw1.pm2023
+no ip subnet-zero
+ip domain-name sw2.pm2023
+!
+ip ssh time-out 60
+ip ssh authentication-retries 2
 !
 !
+!
+!
+!
+no file verify auto
 spanning-tree mode pvst
 spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
-!
-ip ssh time-out 60
-ip ssh authentication-retries 2
-ip ssh version 2
 !
 !
 interface FastEthernet0/1
@@ -54,9 +53,6 @@ interface FastEthernet0/10
 interface FastEthernet0/11
 !
 interface FastEthernet0/12
- switchport trunk encapsulation dot1q
- switchport trunk allowed vlan 1,10
- switchport mode trunk
 !
 interface FastEthernet0/13
 !
@@ -81,27 +77,30 @@ interface FastEthernet0/22
 interface FastEthernet0/23
 !
 interface FastEthernet0/24
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,10
+ switchport mode trunk
 !
 interface GigabitEthernet0/1
 !
 interface GigabitEthernet0/2
 !
 interface Vlan1
- ip address 130.79.255.33 255.255.255.224
+ ip address 130.79.255.34 255.255.255.224
 !
 interface Vlan10
- ip address 10.254.0.1 255.255.0.0
+ ip address 10.254.0.2 255.255.0.0
 !
 ip default-gateway 130.79.255.62
+no ip classless
 no ip http server
 no ip http secure-server
-!         
+!
 !
 snmp-server community pm2023 RO
 !
+control-plane
 !
-!
-vstack
 !
 line con 0
 line vty 0 4

@@ -198,7 +198,6 @@ form > button {
 		/* Infos du compte */
 	#infosCmpt,
 	input,
-	button,
 	.cellule {
 		background-color: #000000;
 		color: #ffffff;
@@ -219,6 +218,9 @@ form > button {
 	}
 
 		/* Bouton de copie */
+	button {
+		background-color: #191919;
+	}
 	button:hover {
 		background-color: #222222;
 	}

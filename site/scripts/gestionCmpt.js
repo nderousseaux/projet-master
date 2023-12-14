@@ -1,6 +1,6 @@
 /**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit
- * 
+ *
  * @param {Event} e - événement
  */
 function gestionInputCmpt(e) {
@@ -62,12 +62,33 @@ function gestionInputCmpt(e) {
 
 	/* Envoi des données au backend */
 	if (contientErr == false) {
-		let champPost = new FormData(document.querySelector("form"));
+		let donneesForm = new FormData(document.querySelector("form"));
+		let champPost = new FormData();
 
-		recupDonnees(champPost, "modifCmpt.php")
-		.catch(err => {
-			console.log(err);
-		});
+		// Trie les valeurs qui ont été modifiées
+		for (let [key, value] of donneesForm.entries()) {
+			let placeholder = document.querySelector(
+				"form > input[name=" + key + "]").placeholder;
+
+			if (key === "mdp") {
+				if (value !== '') {
+					champPost.append(key, value);
+				}
+			}
+			else {
+				if (value !== placeholder) {
+					champPost.append(key, value);
+				}
+			}
+		}
+
+		// N'envoi les données que si au moins un champ a été modifié
+		if (champPost.entries().next().done === false) {
+			recupDonnees(champPost, "modifCmpt.php")
+			.catch(err => {
+				console.log(err);
+			});
+		}
 	}
 }
 
@@ -90,9 +111,9 @@ function creationCmpt() {
 		// 	.querySelector("form > input[type='password'][name='mdp']");
 		let role = document
 			.querySelector("form > input[type='text'][name='role']");
-	
+
 		const champs = [prenom, nom, role];
-	
+
 		// Prénom, nom et role
 		champs.forEach(element => {
 			if (element.value.length === 0) {
@@ -102,7 +123,7 @@ function creationCmpt() {
 				element.classList.remove("erreur")
 			}
 		});
-	
+
 		// Courriel
 		if (
 			courriel.value.length === 0 ||
@@ -113,7 +134,7 @@ function creationCmpt() {
 		else {
 			courriel.classList.remove("erreur")
 		}
-	
+
 		// Vérifie le nombre de classes "erreur"
 		if (document.querySelectorAll(".erreur").length === 0) {
 			document.querySelector("form").submit()
@@ -135,9 +156,9 @@ function connexionCmpt() {
 			.querySelector("form > input[type='text'][name='courriel']");
 		let mdp = document
 			.querySelector("form > input[type='password'][name='mdp']");
-	
+
 		const champs = [mdp];
-	
+
 		//  mdp
 		champs.forEach(element => {
 			if (element.value.length === 0) {
@@ -147,7 +168,7 @@ function connexionCmpt() {
 				element.classList.remove("erreur")
 			}
 		});
-	
+
 		// Courriel
 		if (
 			courriel.value.length === 0 ||
@@ -158,7 +179,7 @@ function connexionCmpt() {
 		else {
 			courriel.classList.remove("erreur")
 		}
-	
+
 		// Vérifie le nombre de classes "erreur"
 		if (document.querySelectorAll(".erreur").length === 0) {
 			document.querySelector("form").submit()

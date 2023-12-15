@@ -85,6 +85,12 @@ function gestionInputCmpt(e) {
 		// N'envoi les données que si au moins un champ a été modifié
 		if (champPost.entries().next().done === false) {
 			recupDonnees(champPost, "modifCmpt.php")
+			.then(_ => {
+				champPost.forEach((value, key) => {
+					document.querySelector(
+						"form > input[name=" + key + "]").placeholder = value;
+				});
+			})
 			.catch(err => {
 				console.log(err);
 			});

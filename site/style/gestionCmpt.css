@@ -41,6 +41,12 @@ label {
 .erreur {
 	background-color: #dd4a4ba1;
 }
+input::placeholder {
+	color: #555555;
+}
+.erreur::placeholder {
+	color: #484848;
+}
 input:disabled {
 	background-color: #f6f6f6;
 	color: #848484;

@@ -3,14 +3,31 @@
  * (sur les espaces vides de contenus)
  */
 function activerDefilementHautPage() {
-	document.querySelectorAll("header > section").forEach(function(element) {
-		element.addEventListener("click", function(event) {
-			if (event.target !== this) {
-				return;
-			}
+	// Sur le header
+	defielementSurElement(document.querySelector("header"))
 
-			window.scrollTo(0, 0);
-		});
+	// Sur les sections du header
+	document.querySelectorAll("header > section").forEach(element => {
+		defielementSurElement(element)
+	});
+}
+
+/**
+ * Active le défilement sur un élément spécifique
+ * 
+ * @param {div} element Élément sur lequel activer le défilement
+ */
+function defielementSurElement(element) {
+	// Ajoute le curseur "pointer" sur l'élément
+	element.style.cursor = "pointer";
+
+	// Ajoute l'événement de défilement
+	element.addEventListener("click", function(e) {
+		if (e.target !== this) {
+			return;
+		}
+
+		window.scrollTo(0, 0);
 	});
 }
 

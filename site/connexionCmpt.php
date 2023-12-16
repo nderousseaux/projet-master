@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "snippets/head.php"?>
+	<?php include "assets/head.php"?>
 	<title>Connexion utilisateur</title>
 	<meta name="description" content="Connexion utilisateur"/>
 	<link rel="stylesheet" type="text/css" href="style/connexionCmpt.css"/>
 </head>
 <body>
 <header>
-	<?php include "snippets/logo.php"?>
+	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
 	<section id="secForm">
@@ -20,7 +20,7 @@
 		</form>
 	</section>
 </div>
-<?php include "snippets/footer.php"?>
+<?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>

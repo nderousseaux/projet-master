@@ -50,6 +50,8 @@ iface vmbr2 inet manual
 
 auto vmbr3
 iface vmbr3 inet manual
+	address 10.2.0.1/16
+	gateway 10.2.255.254
 	bridge-ports vxlan3
 	bridge-stp off
 	bridge-fd 0

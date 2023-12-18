@@ -5,7 +5,7 @@ chmod +x ../Installation.sh
 
 yes | ../Installation.sh
 
-mv start-batman-adv.sh ~/start-batman-adv.sh
+cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
@@ -23,3 +23,8 @@ nouvelle_ligne="/home/pi/start-batman-adv.sh &"
 
 # Ajouter la nouvelle ligne juste avant la ligne "exit 0"
 sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
+
+echo "Le systeme va redemarrer dans 5 secondes"
+sleep 5
+
+sudo reboot

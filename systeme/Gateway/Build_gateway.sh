@@ -6,7 +6,7 @@ chmod +x ../Installation.sh
 yes | ../Installation.sh
 
 #Configuration noeud
-mv start-batman-adv.sh ~/start-batman-adv.sh
+cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
@@ -34,3 +34,7 @@ sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> /etc/dn
 sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
 sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
 
+echo "Le systeme va redemarrer dans 5 secondes"
+sleep 5
+
+sudo reboot

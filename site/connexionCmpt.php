@@ -12,7 +12,7 @@
 	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
-	<section id="infosCmpt">
+	<section id="infosCmpt" class="containerSecVerti">
 		<h1>Connexion</h1>
 		<form id="formCmpt">
 			<label class="colonne" for="courriel">Courriel</label>
@@ -39,6 +39,7 @@
 	document.querySelector("form").addEventListener("submit", e => {
 		connexionCmpt(e);
 	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

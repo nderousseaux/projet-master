@@ -12,7 +12,7 @@
 	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
-	<section id="infosCmpt">
+	<section id="infosCmpt" class="containerSecVerti">
 		<h1>Création de compte</h1>
 		<form id="formCmpt">
 			<label class="colonne" for="prenom">Prénom</label>
@@ -47,6 +47,7 @@
 	document.querySelector("form").addEventListener("submit", e => {
 		creationCmpt(e);
 	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

@@ -1,3 +1,8 @@
+<?php
+	// Récupérer ici le rôle de l'utilisateur
+	$role = "admin"; // "admin" ou "standard"
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +29,9 @@
 </header>
 <div id="corps">
 	<section id="secCmpt">
-		<div id="infosCmpt">
+		<div id="infosCmpt" class="containerSecVerti">
+			<h1>Modifier les informations</h1>
+			<?php if ($role === "admin") include "assets/selecteurAdmin.php"?>
 			<form id="formCmpt">
 				<label class="colonne" for="idAgri">Identifiant agriculteur
 				</label>
@@ -64,7 +71,7 @@
 				<input class="colonne selectCouleur" id="couleur2"
 					name="couleur2" type="color" placeholder="#9198e5"
 					value="#9198e5"></input>
-				<button id="reinit">Réintialiser</button>
+				<button id="reinit">Réinitialiser</button>
 				<button id="enreg">Enregistrer</button>
 			</form>
 		</div>
@@ -77,9 +84,11 @@
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
+<?php if ($role === "admin")echo '<script type="text/javascript"
+	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
-	const idUtilisateur = 0;
+	let idUtilisateur = 0;
 
 	/*** Gestion des données ***/
 		// Récupère les données de l'utilisateur et rempli le formulaire avec
@@ -100,7 +109,8 @@
 		// Gère le changement couleur de l'icône
 	chgmtCouleurIcone();
 
-	/*** Affichage des données ***/
+	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
+
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	const containerInput = document.getElementById("idAgri");
 	containerInput.placeholder = idUtilisateur;

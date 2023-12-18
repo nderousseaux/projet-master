@@ -61,7 +61,6 @@ function afficherIlots(idUtilisateur) {
 	champPost.append("numChamp", numChamp);
 
 	return new Promise((resolve, reject) => {
-
 		recupDonnees(champPost, "recupNumIlots.php")
 		.then(donnees => {
 			const container = document.getElementById("selectIlot");
@@ -443,6 +442,7 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		const prenomInput = document.getElementById("prenom");
 		const nomInput = document.getElementById("nom");
 		const courrielInput = document.getElementById("courriel");
+		const mdp = document.getElementById("mdp");
 		const couleur1 = document.getElementById("couleur1");
 		const couleur2 = document.getElementById("couleur2");
 		const icone = document.querySelector("#icone > div");
@@ -453,11 +453,42 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		nomInput.placeholder = donnees[1];
 		courrielInput.value = donnees[2];
 		courrielInput.placeholder = donnees[2];
+		mdp.value = '';
+		mdp.placeholder = "******";
 		couleur1.value = donnees[3];
 		couleur1.placeholder = donnees[3];
 		couleur2.value = donnees[4];
 		couleur2.placeholder = donnees[4];
 
+
 		icone.innerHTML = prenom[0] + ". " + nom[0] + '.';
+	})
+	.catch(err => {
+		console.error(err);
+	});
+}
+
+function afficherUtilisateurs() {
+	return new Promise((resolve) => {
+		let champPost = new FormData();
+
+		recupDonnees(champPost, "recupUtilisateurs.php")
+		.then(donnees => {
+			const container = document.getElementById("selectUtilisateur");
+
+			for (let i = 0; i < donnees.length; i++) {
+				const utilisateur = document.createElement("button");
+				utilisateur.setAttribute("value", donnees[i][0]);
+				utilisateur.textContent = donnees[i][1] + ' ' + donnees[i][2];
+
+				container.appendChild(utilisateur);
+			};
+			container.classList.remove("ddHeader");
+
+			resolve();
+		})
+		.catch(err => {
+			console.error(err);
+		});
 	});
 }

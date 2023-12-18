@@ -17,6 +17,12 @@ form > button {
 
 /* Version mobile */
 @media screen and (max-width: 799px) {
+	/* Corps */
+	#corps {
+		top: calc(72px + 20px);
+		min-height: calc(100vh - 72px + 20px);
+	}
+
 	/* Section création compte */
 		/* Section formulaire */
 	#secForm > form {
@@ -31,4 +37,8 @@ form > button {
 		margin-top: 30px;
 	}
 
+	/* Footer */
+	footer {
+		margin-top: 20px;
+	}
 }

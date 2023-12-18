@@ -1,9 +1,30 @@
+/* Corps */
+	/* Container verticaux */
+.containerSecVerti {
+	background-color: #ffffff !important;
+}
+
 /* Section infos compte/image de profil */
 #secCmpt {
 	background-color: unset !important;
 	box-shadow: none !important;
 	justify-content: space-between;
 	margin-bottom: calc(72px + 36px);
+}
+
+	/* Dropdown utilisateurs */
+#ddUtilisateur {
+	width: 80%;
+	margin-bottom: 30px;
+}
+#ddUtilisateur > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	padding: 10px 0;
+}
+#ddUtilisateur > .dropdownContent {
+	left: 0;
 }
 
 	/* Infos du compte */
@@ -166,8 +187,8 @@ footer {
 
 	/* Corps */
 	#corps {
-		top: 92px;
-		min-height: calc(100vh - 92px);
+		top: calc(72px + 40px + 20px);
+		min-height: calc(100vh - 72px + 40px + 20px);
 	}
 
 	/* Section infos compte/image de profil */
@@ -175,6 +196,12 @@ footer {
 		flex-direction: column-reverse;
 		margin-top: 20px;
 		height: 100%;
+	}
+
+		/* Dropdown utilisateurs */
+	#ddUtilisateur > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
 	}
 
 		/* Infos du compte */
@@ -225,7 +252,7 @@ footer {
 
 	/* Footer */
 	footer {
-		margin-top: 20px;
+		margin-top: 72px;
 	}
 }
 

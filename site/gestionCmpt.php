@@ -53,30 +53,30 @@
 				</div>
 				<label class="colonne" for="prenom">Prénom</label>
 				<input class="colonne" id="prenom" name="prenom"
-					placeholder="John" value="John"></input>
+					placeholder="Prénom" value='-'></input>
 				<label class="colonne" for="nom">Nom</label>
 				<input class="colonne" id="nom" name="nom"
-					placeholder="Doe" value="Doe"></input>
+					placeholder="Nom" value='-'></input>
 				<label class="colonne" for="courriel">Courriel</label>
 				<input class="colonne" id="courriel" name="courriel"
-					placeholder="abc@xyz.com" value="abc@xyz.com"></input>
+					placeholder="adresse@courriel.com" value='-'></input>
 				<label class="colonne" for="mdp">Mot de passe</label>
 				<input type="password" id="mdp" name="mdp"
-					class="colonne" placeholder="******"></input>
+					class="colonne" placeholder="******" value=''></input>
 				<label class="colonne" for="couleur1">Couleur 1</label>
 				<input class="colonne selectCouleur" id="couleur1"
 					name="couleur1" type="color" placeholder="#e66465"
-					value="#e66465"></input>
+					value="#000000"></input>
 				<label class="colonne" for="couleur2">Couleur 2</label>
 				<input class="colonne selectCouleur" id="couleur2"
 					name="couleur2" type="color" placeholder="#9198e5"
-					value="#9198e5"></input>
+					value="#ffffff"></input>
 				<button id="reinit">Réinitialiser</button>
 				<button id="enreg">Enregistrer</button>
 			</form>
 		</div>
 		<div id="icone">
-			<div>J. D.</div>
+			<div>-</div>
 		</div>
 	</section>
 </div>

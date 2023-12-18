@@ -251,6 +251,9 @@ function reinitInputCmpt(e) {
 			const placeholder = input.placeholder;
 			input.value = placeholder;
 		}
+		else {
+			input.value = '';
+		}
 	});
 }
 

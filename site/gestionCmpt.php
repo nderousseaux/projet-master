@@ -6,8 +6,8 @@
 	<meta name="description" content="Gestion du compte"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body tabindex='0'>
 <header>
@@ -85,7 +85,7 @@
 		// Récupère les données de l'utilisateur et rempli le formulaire avec
 	afficherDonneesUtilisateur(idUtilisateur);
 
-		// Gère les vérifications des champs du formulaire
+		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {
 		reinitInputCmpt(e);
 	});

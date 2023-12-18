@@ -5,7 +5,7 @@
 	<title>Création de compte</title>
 	<meta name="description" content="Création de compte"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
-	<link rel="stylesheet" type="text/css" href="style/creationCmpt.css"/>
+	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 </head>
 <body>
 <header>
@@ -38,7 +38,8 @@
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
-	// Gère les champs du formulaire
+	/*** Gestion des données ***/
+		// Gère les champs du formulaire et l'envoi des données
 	document.getElementById("enreg").addEventListener("click",
 	e => {
 		creationCmpt(e);

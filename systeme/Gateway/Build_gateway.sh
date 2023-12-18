@@ -3,7 +3,7 @@
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
-yes | ../Installation.sh
+#yes | ../Installation.sh
 
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
@@ -25,14 +25,14 @@ fi
 nouvelle_ligne="/home/pi/start-batman-adv.sh &"
 
 # Ajouter la nouvelle ligne juste avant la ligne "exit 0"
-sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
+sudo sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
 
 #Configuration Gateway
-sudo echo "interface=bat0" >> /etc/dnsmasq.conf
-sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> /etc/dnsmasq.conf
+sudo echo "interface=bat0" >> sudo /etc/dnsmasq.conf
+sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
 
-sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
-sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
+sudo echo "interface=wlan0" >> sudo /etc/dnsmasq.conf
+sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5

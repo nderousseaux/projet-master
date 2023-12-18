@@ -59,8 +59,8 @@ runcmd:
   # On prend la configuration de grafana
   - rm -rf /grafana/conf
   - rm -rf /grafana/data
-  - cp -r projet-master-23-24/monitoring/server/grafana-conf/conf /grafana/conf
-  - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /grafana/data
+  - cp -r projet-master-23-24/monitoring/server/grafana-conf/conf /root/grafana/conf
+  - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /root/grafana/data
 
   # On configure grafana comme un service
   - echo "[Unit]" > /etc/systemd/system/grafana.service

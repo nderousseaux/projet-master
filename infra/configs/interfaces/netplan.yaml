@@ -3,149 +3,135 @@ network:
   ethernets:
     ens4:
       dhcp4: false
-        name: ens4
       mtu: 1400
     ens5:
       dhcp4: false
-        name: ens5
       mtu: 1400
     ens6:
       dhcp4: false
-        name: ens6
       mtu: 1600
     ens7:
       dhcp4: false
-        name: ens4
       mtu: 1400
     ens8:
       dhcp4: false
-        name: ens8
       mtu: 1400
     ens9:
       dhcp4: false
-        name: ens9
       mtu: 1400
     ens10:
       dhcp4: false
-        name: ens10
       mtu: 1400
     ens11:
       dhcp4: false
-        name: ens11
       mtu: 1400
     ens12:
       dhcp4: false
-        name: ens12
       mtu: 1400
     ens13:
       dhcp4: false
-        name: ens13
       mtu: 1400
     ens14:
       dhcp4: false
-        name: ens14
       mtu: 1400
     ens15:
       dhcp4: false
-        name: ens15
       mtu: 1400
     ens16:
       dhcp4: false
-        name: ens16
       mtu: 1400
     ens17:
       dhcp4: false
-        name: ens17
       mtu: 1400
   tunnels:
     vxlan2:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 2
       port: 9001
     vxlan3:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 3
       port: 9001
     vxlan4:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 4
       port: 9001
     vxlan5:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 5
       port: 9001
     vxlan6:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 6
       port: 9001
     vxlan7:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 7
       port: 9001
     vxlan8:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 8
       port: 9001
     vxlan9:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 9
       port: 9001
     vxlan10:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 10
       port: 9001
     vxlan11:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 11
       port: 9001
     vxlan12:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 12
       port: 9001
     vxlan12:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 12
       port: 9001
     vxlan13:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 13
       port: 9001
     vxlan14:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 14
       port: 9001
     vxlan15:
       mode: vxlan
       local: 10.0.1.2
-      maclearning: false
+      mac-learning: false
       id: 15
       port: 9001
   bridges:

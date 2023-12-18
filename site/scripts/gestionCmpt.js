@@ -1,30 +1,34 @@
 /**
- * Réinitialise les valeurs des inputs du formulaire
- *
- * @param {Event} e - événement
+ * Modifie les couleurs de l'icône quand l'utilisateur change les couleurs
+ * dans le formulaire
  */
-function reinitInputCmpt(e) {
-	e.preventDefault();
+function chgmtCouleurIcone() {
+	const icone = document.querySelector("#icone > div");
+	const couleur1 = document.getElementById("couleur1");
+	const couleur2 = document.getElementById("couleur2");
 
-	// Récupère tous les éléments du formulaire
-	const inputsForm = document.querySelectorAll("form input");
+	// Initialise les couleurs de l'icône
+	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		couleur2.value + ")";
 
-	// Remplace les valeurs des inputs par les placeholders (sauf pour le mdp)
-	inputsForm.forEach(input => {
-		if (input.id !== "mdp") {
-			const placeholder = input.placeholder;
-			input.value = placeholder;
-		}
+	// Ajoute des évenements sur les selecteurs de couleur
+	couleur1.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
+	});
+	couleur2.addEventListener("change", () => {
+		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+			couleur2.value + ")";
 	});
 }
-
 
 /**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit
  *
  * @param {Event} e - événement
+ * @returns {boolean} - true si un champ est incorrect, false sinon
  */
-function modifInputCmpt(e) {
+function verifInputCmpt(e) {
 	e.preventDefault();
 	let contientErr = false;
 
@@ -81,9 +85,22 @@ function modifInputCmpt(e) {
 		}
 	});
 
+	return contientErr;
+}
+
+/**
+ * Vérifie les champs du formulaire, lorsqu'un événement se produit et
+ * envoie les données au backend si elles sont correctes, pour la modification
+ * des informations d'un compte
+ *
+ * @param {Event} e - événement
+ */
+function modifInputCmpt(e) {
+	let contientErr = verifInputCmpt(e);
+
 	/* Envoi des données au backend */
-	if (contientErr == false) {
-		let donneesForm = new FormData(document.querySelector("form"));
+	if (contientErr === false) {
+		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
 
 		// Trie les valeurs qui ont été modifiées
@@ -120,119 +137,119 @@ function modifInputCmpt(e) {
 }
 
 /**
- * Modifie les couleurs de l'icône quand l'utilisateur change les couleurs
- * dans le formulaire
+ * Vérifie les champs du formulaire, lorsqu'un événement se produit et
+ * envoie les données au backend si elles sont correctes pour la création
+ * d'un compte
+ * 
+ * @param {Event} e - événement
  */
-function chgmtCouleurIcone() {
-	const icone = document.querySelector("#icone > div");
-	const couleur1 = document.getElementById("couleur1");
-	const couleur2 = document.getElementById("couleur2");
+function creationCmpt(e) {
+	let contientErr = verifInputCmpt(e);
 
-	// Initialise les couleurs de l'icône
-	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
-		couleur2.value + ")";
-
-	// Ajoute des évenements sur les selecteurs de couleur
-	couleur1.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
-			couleur2.value + ")";
-	});
-	couleur2.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
-			couleur2.value + ")";
-	});
-}
-
-/**
- * Gère les champs du formulaire de création de compte
- */
-function creationCmpt() {
-	document.querySelector("form > input[type='submit']")
-	.addEventListener("click", event => {
-		event.preventDefault();
-
-		// Vérifie que les champs sont remplis
-		let prenom = document
-			.querySelector("form > input[type='text'][name='prenom']");
-		let nom = document
-			.querySelector("form > input[type='text'][name='nom']");
-		let courriel = document
-			.querySelector("form > input[type='text'][name='courriel']");
-		// let mdp = document
-		// 	.querySelector("form > input[type='password'][name='mdp']");
-		let role = document
-			.querySelector("form > input[type='text'][name='role']");
-
-		const champs = [prenom, nom, role];
-
-		// Prénom, nom et role
-		champs.forEach(element => {
-			if (element.value.length === 0) {
-				element.classList.add("erreur")
-			}
-			else {
-				element.classList.remove("erreur")
-			}
-		});
-
-		// Courriel
-		if (
-			courriel.value.length === 0 ||
-			!verifFormatCourriel(courriel.value)
-		) {
-			courriel.classList.add("erreur")
+	/* Vérification des champs */
+		// Rôle
+	let roleInput = document.getElementById("role");
+	if (roleInput.value !== "admin" && roleInput.value !== "standard") {
+		roleInput.classList.add("erreur");
+		contientErr = true;
+	}
+	roleInput.addEventListener("input", function() {
+		if (roleInput.value !== "admin" && roleInput.value !== "standard") {
+			this.classList.add("erreur");
+			contientErr = true;
 		}
 		else {
-			courriel.classList.remove("erreur")
-		}
-
-		// Vérifie le nombre de classes "erreur"
-		if (document.querySelectorAll(".erreur").length === 0) {
-			document.querySelector("form").submit()
+			this.classList.remove("erreur");
+			contientErr = false;
 		}
 	});
+
+	/* Envoi des données au backend */
+	if (contientErr === false) {
+		const champPost = new FormData(document.querySelector("form"));
+
+		recupDonnees(champPost, "creationUtilisateur.php")
+		.catch(err => {
+			console.log(err);
+		});
+	}
 }
 
 /**
  * Gère les champs du formulaire de connexion
  */
-function connexionCmpt() {
-	document.querySelector("form > input[type='submit']")
-	.addEventListener("click", event => {
-		event.preventDefault();
+function connexionCmpt(e) {
+	e.preventDefault();
+	let contientErr = false;
 
-		// Vérifie que les champs sont remplis
-		let courriel = document
-			.querySelector("form > input[type='text'][name='courriel']");
-		let mdp = document
-			.querySelector("form > input[type='password'][name='mdp']");
+	// Regex
+	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
 
-		const champs = [mdp];
-
-		//  mdp
-		champs.forEach(element => {
-			if (element.value.length === 0) {
-				element.classList.add("erreur")
-			}
-			else {
-				element.classList.remove("erreur")
-			}
-		});
-
+	/* Vérification des champs */
 		// Courriel
-		if (
-			courriel.value.length === 0 ||
-			!verifFormatCourriel(courriel.value)
-		) {
-			courriel.classList.add("erreur")
+	let courrielInput = document.getElementById("courriel");
+	if (courrielInput.value.match(regexCourriel) == null) {
+		courrielInput.classList.add("erreur");
+		contientErr = true;
+	}
+	courrielInput.addEventListener("input", function() {
+		if (this.value.match(regexCourriel) == null) {
+			this.classList.add("erreur");
+			contientErr = true;
 		}
 		else {
-			courriel.classList.remove("erreur")
+			this.classList.remove("erreur");
+			contientErr = false;
 		}
+	});
 
-		// Vérifie le nombre de classes "erreur"
-		if (document.querySelectorAll(".erreur").length === 0) {
-			document.querySelector("form").submit()
+		// Mot de passe
+	let mdpInput = document.getElementById("mdp");
+	if (mdpInput.value === '') {
+		mdpInput.classList.add("erreur");
+		contientErr = true;
+	}
+	mdpInput.addEventListener("input", function() {
+		if (mdpInput.value === '') {
+			this.classList.add("erreur");
+			contientErr = true;
+		}
+		else {
+			this.classList.remove("erreur");
+			contientErr = false;
+		}
+	});
+
+	/* Envoi des données au backend */
+	if (contientErr === false) {
+		const champPost = new FormData(document.querySelector("form"));
+
+		recupDonnees(champPost, "connexionUtilisateur.php")
+		.then(_ => {
+			window.location.href = "index.php";
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+}
+
+/**
+ * Réinitialise les valeurs des inputs du formulaire
+ *
+ * @param {Event} e - événement
+ */
+function reinitInputCmpt(e) {
+	e.preventDefault();
+
+	// Récupère tous les éléments du formulaire
+	const inputsForm = document.querySelectorAll("form input");
+
+	// Remplace les valeurs des inputs par les placeholders (sauf pour le mdp)
+	inputsForm.forEach(input => {
+		if (input.id !== "mdp") {
+			const placeholder = input.placeholder;
+			input.value = placeholder;
 		}
 	});
 }

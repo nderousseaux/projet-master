@@ -22,9 +22,10 @@
 	grid-template-columns: repeat(2, 1fr);
 	gap: 5px 0;
 }
-input,
-#secCopie > div > button,
-form > button {
+form input,
+form div > button,
+form > button,
+form > select {
 	width: 100%;
 	height: 40px;
 	padding: 4px;

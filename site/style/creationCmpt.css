@@ -6,20 +6,30 @@
 	height: 100%;
 	padding: 15px 0;
 }
-.erreur {
-	background-color: #dd4a4ba1 !important;
-}
 
-/* Footer */
-footer {
-	position: fixed;
-	bottom: 0;
+	/* Section formulaire */
+form > select {
+	width: calc(100% + 2 * 4px + 1px);
+}
+form > button {
+	grid-column: span 2;
 }
 
 
 /* Version mobile */
 @media screen and (max-width: 799px) {
+	/* Section création compte */
+		/* Section formulaire */
 	#secForm > form {
 		width: 80%;
 	}
+	form > select {
+		width: unset !important;
+	}
+
+		/* Bouton d'enregistrement */
+	form > button:last-child {
+		margin-top: 30px;
+	}
+
 }

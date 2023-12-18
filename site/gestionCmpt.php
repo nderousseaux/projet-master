@@ -64,7 +64,8 @@
 				<input class="colonne selectCouleur" id="couleur2"
 					name="couleur2" type="color" placeholder="#9198e5"
 					value="#9198e5"></input>
-				<button>Enregistrer</button>
+				<button id="reinit">Réintialiser</button>
+				<button id="enreg">Enregistrer</button>
 			</form>
 		</div>
 		<div id="icone">
@@ -85,11 +86,15 @@
 	afficherDonneesUtilisateur(idUtilisateur);
 
 		// Gère les vérifications des champs du formulaire
-	document.querySelector("form > button").addEventListener("click", e => {
-		gestionInputCmpt(e);
+	document.getElementById("reinit").addEventListener("click",	e => {
+		reinitInputCmpt(e);
+	});
+	document.getElementById("enreg").addEventListener("click",
+	e => {
+		modifInputCmpt(e);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		gestionInputCmpt(e);
+		modifInputCmpt(e);
 	});
 
 		// Gère le changement couleur de l'icône

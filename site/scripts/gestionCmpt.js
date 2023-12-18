@@ -1,9 +1,30 @@
 /**
+ * Réinitialise les valeurs des inputs du formulaire
+ *
+ * @param {Event} e - événement
+ */
+function reinitInputCmpt(e) {
+	e.preventDefault();
+
+	// Récupère tous les éléments du formulaire
+	const inputsForm = document.querySelectorAll("form input");
+
+	// Remplace les valeurs des inputs par les placeholders (sauf pour le mdp)
+	inputsForm.forEach(input => {
+		if (input.id !== "mdp") {
+			const placeholder = input.placeholder;
+			input.value = placeholder;
+		}
+	});
+}
+
+
+/**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit
  *
  * @param {Event} e - événement
  */
-function gestionInputCmpt(e) {
+function modifInputCmpt(e) {
 	e.preventDefault();
 	let contientErr = false;
 

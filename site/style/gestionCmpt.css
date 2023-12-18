@@ -3,6 +3,7 @@
 	background-color: unset !important;
 	box-shadow: none !important;
 	justify-content: space-between;
+	margin-bottom: calc(72px + 36px);
 }
 
 	/* Infos du compte */
@@ -148,6 +149,11 @@ form > button {
 	border-radius: 10px;
 }
 
+/* Footer */
+footer {
+	margin-top: 0;
+}
+
 
 /* Version mobile */
 @media screen and (max-width: 799px) {
@@ -156,6 +162,12 @@ form > button {
 	header > section:last-child {
 		width: 100%;
 		justify-content: right;
+	}
+
+	/* Corps */
+	#corps {
+		top: 92px;
+		min-height: calc(100vh - 92px);
 	}
 
 	/* Section infos compte/image de profil */
@@ -209,6 +221,11 @@ form > button {
 	#icone > div {
 		width: 70%;
 		aspect-ratio: 2/1;
+	}
+
+	/* Footer */
+	footer {
+		margin-top: 20px;
 	}
 }
 

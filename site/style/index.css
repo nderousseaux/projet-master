@@ -258,7 +258,7 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	position: relative;
 	top: 72px;
-	margin-bottom: calc(72px + 40px);
+	min-height: calc(100vh - 72px);
 }
 #corps > section {
 	display: flex;
@@ -506,7 +506,7 @@ header > section:last-child .dropbtn {
 	left: 0;
 }
 
-	/* Footer */
+/* Footer */
 footer {
 	display: flex;
 	flex-direction: row;
@@ -514,6 +514,7 @@ footer {
 	align-items: center;
 	width: 100vw;
 	height: 72px;
+	margin-top: calc(72px + 36px);
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
@@ -621,7 +622,7 @@ footer > p {
 	/* Corps */
 	#corps {
 		top: calc(72px + 40px + 20px);
-		margin-bottom: calc(72px + 40px + (20px * 2));
+		min-height: calc(100vh - 72px + 40px + (20px * 2));
 	}
 	#corps > section {
 		width: 95%;
@@ -703,6 +704,9 @@ footer > p {
 	}
 
 	/* Footer */
+	footer {
+		margin-top: calc(72px + (40px * 2));
+	}
 	footer > p {
 		font-size: 15px;
 	}

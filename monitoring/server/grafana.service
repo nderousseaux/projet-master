@@ -3,7 +3,7 @@ Description=Grafana Agent
 
 [Service]
 User=root
-ExecStart=/bin/sh -c '/root/grafana/bin/grafana-server --config=/root/grafana.ini --homepath=/root/grafana'
+ExecStart=/bin/sh -c '/root/grafana/bin/grafana-server --config=/root/conf/default.ini --homepath=/root/grafana'
 Restart=always
 
 [Install]

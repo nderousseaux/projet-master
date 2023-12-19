@@ -20,10 +20,15 @@ packages:
 runcmd:
   - cd /root
 
-  # Debug SSH
+  # Debug SSH -> DO NOT USE IN PRODUCTION
   - sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
   - systemctl restart sshd
 
+
+  # On met le git sur le serveur
+  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - cd projet-master-23-24/ && git checkout origin/monitoring && cd ..
+  - git config --system --add safe.directory '*'
 
   # On installe prometheus
   - wget https://github.com/prometheus/prometheus/releases/download/v2.48.0/prometheus-2.48.0.linux-amd64.tar.gz
@@ -32,24 +37,11 @@ runcmd:
   - rm -rf prometheus-2.48.0.linux-amd64*
   - chmod +x prometheus
   
+  # On prend la configuration de prometheus
+  - cp -r projet-master-23-24/monitoring/server/prometheus.yml prometheus.yml
 
   # On configure prometheus comme un service
-  - echo "[Unit]" > /etc/systemd/system/prometheus.service
-  - echo "Description=Prometheus Agent" >> /etc/systemd/system/prometheus.service
-  - echo "" >> /etc/systemd/system/prometheus.service
-  - echo "[Service]" >> /etc/systemd/system/prometheus.service
-  - echo "User=root" >> /etc/systemd/system/prometheus.service
-  - echo "ExecStart=/bin/sh -c '/root/prometheus --config.file=/root/prometheus.yml'" >> /etc/systemd/system/prometheus.service
-  - echo "Restart=always" >> /etc/systemd/system/prometheus.service
-  - echo "" >> /etc/systemd/system/prometheus.service
-  - echo "[Install]" >> /etc/systemd/system/prometheus.service
-  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/prometheus.service
-
-  # On prend le fichier de configuration de prometheus
-  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
-  - cd projet-master-23-24/ && git fetch && git checkout monitoring && cd ..
-  - git config --system --add safe.directory '*'
-  - cp -r projet-master-23-24/monitoring/server/prometheus.yml prometheus.yml
+  - cp -r projet-master-23-24/monitoring/server/prometheus.service /etc/systemd/system/prometheus.service
 
   # On installe grafana
   - wget https://dl.grafana.com/oss/release/grafana-8.1.5.linux-amd64.tar.gz
@@ -65,16 +57,7 @@ runcmd:
   - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /root/grafana/data
 
   # On configure grafana comme un service
-  - echo "[Unit]" > /etc/systemd/system/grafana.service
-  - echo "Description=Grafana Agent" >> /etc/systemd/system/grafana.service
-  - echo "" >> /etc/systemd/system/grafana.service
-  - echo "[Service]" >> /etc/systemd/system/grafana.service
-  - echo "User=root" >> /etc/systemd/system/grafana.service
-  - echo "ExecStart=/bin/sh -c '/root/grafana/bin/grafana-server --config=/root/grafana.ini --homepath=/root/grafana'" >> /etc/systemd/system/grafana.service
-  - echo "Restart=always" >> /etc/systemd/system/grafana.service
-  - echo "" >> /etc/systemd/system/grafana.service
-  - echo "[Install]" >> /etc/systemd/system/grafana.service
-  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/grafana.service
+  - cp -r projet-master-23-24/monitoring/server/grafana.service /etc/systemd/system/grafana.service
 
   # On démarre grafana et prometheus
   - systemctl daemon-reload

@@ -16,7 +16,6 @@ packages:
   - wget
 
 runcmd:
-  - cd /root
 
   # Debug SSH
   - sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
@@ -24,6 +23,7 @@ runcmd:
 
 
   # On installe node_exporter
+  - cd /root
   - wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
   - tar xvfz node_exporter-1.2.2.linux-amd64.tar.gz
   - mv node_exporter-1.2.2.linux-amd64/node_exporter .

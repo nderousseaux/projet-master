@@ -47,7 +47,7 @@ runcmd:
 
   # On prend le fichier de configuration de prometheus
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
-  - cd projet-master-23-24/ && git checkout monitoring && cd ..
+  - cd projet-master-23-24/ && git fetch && git checkout monitoring && cd ..
   - git config --system --add safe.directory '*'
   - cp -r projet-master-23-24/monitoring/server/prometheus.yml prometheus.yml
 
@@ -59,11 +59,10 @@ runcmd:
   - chmod +x grafana/bin/grafana-server
 
   # On prend la configuration de grafana
-  - rm -rf /grafana/conf
-  - rm -rf /grafana/data
+  - rm -rf /root/grafana/conf
+  - rm -rf /root/grafana/data
   - cp -r projet-master-23-24/monitoring/server/grafana-conf/conf /root/grafana/conf
   - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /root/grafana/data
-  - cp -r projet-master-23-24/monitoring/server/grafana-conf/default.ini /root/grafana.ini
 
   # On configure grafana comme un service
   - echo "[Unit]" > /etc/systemd/system/grafana.service

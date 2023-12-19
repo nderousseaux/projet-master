@@ -47,6 +47,7 @@ runcmd:
 
   # On prend le fichier de configuration de prometheus
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - cd projet-master-23-24/ && git checkout monitoring && cd ..
   - git config --system --add safe.directory '*'
   - cp -r projet-master-23-24/monitoring/server/prometheus.yml prometheus.yml
 
@@ -62,6 +63,7 @@ runcmd:
   - rm -rf /grafana/data
   - cp -r projet-master-23-24/monitoring/server/grafana-conf/conf /root/grafana/conf
   - cp -r projet-master-23-24/monitoring/server/grafana-conf/data /root/grafana/data
+  - cp -r projet-master-23-24/monitoring/server/grafana-conf/default.ini /root/grafana.ini
 
   # On configure grafana comme un service
   - echo "[Unit]" > /etc/systemd/system/grafana.service
@@ -69,7 +71,7 @@ runcmd:
   - echo "" >> /etc/systemd/system/grafana.service
   - echo "[Service]" >> /etc/systemd/system/grafana.service
   - echo "User=root" >> /etc/systemd/system/grafana.service
-  - echo "ExecStart=/bin/sh -c '/root/grafana/bin/grafana-server --config=/root/grafana/conf/defaults.ini --homepath=/root/grafana'" >> /etc/systemd/system/grafana.service
+  - echo "ExecStart=/bin/sh -c '/root/grafana/bin/grafana-server --config=/root/grafana.ini --homepath=/root/grafana'" >> /etc/systemd/system/grafana.service
   - echo "Restart=always" >> /etc/systemd/system/grafana.service
   - echo "" >> /etc/systemd/system/grafana.service
   - echo "[Install]" >> /etc/systemd/system/grafana.service
@@ -85,4 +87,4 @@ runcmd:
   - chmod +x discover.sh
 
   # On crée une tâche cron pour le script discover.sh (toutes les 5 minutes)
-  - echo "*/5 * * * * /root/discover.sh" > /etc/cron.d/discover
+  - (crontab -l 2>/dev/null; echo "*/5 * * * * /root/discover.sh") | crontab -

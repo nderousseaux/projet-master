@@ -15,6 +15,7 @@ package_upgrade: true
 packages:
   - wget
   - git
+  - nmap
 
 runcmd:
   - cd /root
@@ -47,7 +48,7 @@ runcmd:
   # On prend le fichier de configuration de prometheus
   - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
   - git config --system --add safe.directory '*'
-  - cp -r projet-master-23-24/monitoring/server/promotheus.yml prometheus.yml
+  - cp -r projet-master-23-24/monitoring/server/prometheus.yml prometheus.yml
 
   # On installe grafana
   - wget https://dl.grafana.com/oss/release/grafana-8.1.5.linux-amd64.tar.gz
@@ -80,5 +81,8 @@ runcmd:
   - systemctl start prometheus.service
 
   # On prend le script discover.sh
-  - cp -r projet-master-23-24/monitoring/serveur/discover.sh discover.sh
+  - cp -r projet-master-23-24/monitoring/server/discover.sh discover.sh
   - chmod +x discover.sh
+
+  # On crée une tâche cron pour le script discover.sh (toutes les 5 minutes)
+  - echo "*/5 * * * * /root/discover.sh" > /etc/cron.d/discover

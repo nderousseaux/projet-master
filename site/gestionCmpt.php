@@ -2,7 +2,6 @@
 	// Récupérer ici le rôle de l'utilisateur
 	$role = "admin"; // "admin" ou "standard"
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,6 +21,7 @@
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
+				<a href=".">Accueil</a>
 				<button value="deco">Déconnexion</button>
 			</div>
 		</div>

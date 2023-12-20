@@ -21,3 +21,15 @@ Actuellement ce qui s'épare le réseau mesh du restant de l'internet c'est le g
 Pour maintenir une certaine sécurité il est important de renouvelé les paramètre **Diffie-Hellman** à l'aide de la commande `easyrsa gen-dh`. La mise à jour régulière des paramètres réduit le faille.
 
 Le certificat générer est valable 825 jours. Pour des raisons de sécurité et par précaution. Il sera demander de renouveler les certificats chaque année.
+
+## Firewall
+```
+sudo apt-get install iptables-persistent
+
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -A FORWARD -i Wlan0 -o eth0 -j DROP
+sudo iptables -A FORWARD -i bat0 -o eth0 -j DROP
+sudo iptables-save # verif conf
+sudo sh -c 'iptables-save > /etc/iptables/rules.v4'
+sudo systemctl restart iptables
+```

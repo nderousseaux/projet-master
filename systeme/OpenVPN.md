@@ -2,10 +2,18 @@
 
 ## Mise en place Général
 ### Installation
+- Installation OpenVPN
 ```
 sudo apt update
 sudo apt install openvpn
 ```
+- Configuration de de l'heure en fonction de la zone *(éventuellement inutile du à la configuration lors de l'installation)*
+```
+sudo apt update
+sudo apt -y install tzdata
+dpkg-reconfigure tzdata
+```
+
 ### Configuration des clés
 ```
 sudo mkdir /etc/openvpn/easy-rsa

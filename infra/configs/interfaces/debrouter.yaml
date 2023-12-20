@@ -195,6 +195,9 @@ network:
         - to: 10.2.0.0/16
           via: 10.2.255.254
           metric: 100
+        - to: 10.2.0.0/8
+          via: 10.2.255.254
+          metric: 120
       nameservers:
         search: [pm2023]
         addresses: [10.2.255.254]

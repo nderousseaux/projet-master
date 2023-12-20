@@ -3,11 +3,11 @@
  * événement se produit
  *
  * @param {Event} e - événement sur le formulaire
- * @returns {boolean} - true si un champ est incorrect, false sinon
+ * @returns {int} - le nombre de champs incorrects
  */
 function verifInputCmpt(e) {
 	e.preventDefault();
-	let contientErr = false;
+	let nbrErr = 0;
 
 	// Regex
 	const regexInput = /^[\S\s]{1,100}$/;
@@ -17,7 +17,7 @@ function verifInputCmpt(e) {
 	function inputPreVerif(donnee) {
 		if (donnee.value.match(regexInput) == null) {
 			donnee.classList.add("erreur");
-			contientErr = true;
+			nbrErr++;
 		}
 	}
 
@@ -25,11 +25,11 @@ function verifInputCmpt(e) {
 	const inputPostVerif = function() {
 		if (this.value.match(regexInput) == null) {
 			this.classList.add("erreur");
-			contientErr = true;
+			nbrErr++;
 		}
-		else{
+		else {
 			this.classList.remove("erreur");
-			contientErr = false;
+			nbrErr--;
 		}
 	}
 
@@ -45,46 +45,46 @@ function verifInputCmpt(e) {
 	nomInput.addEventListener("input", inputPostVerif);
 
 		// Courriel
-	contientErr = verifInputCourriel();
+	nbrErr += verifInputCourriel();
 
-	return contientErr;
+	return nbrErr;
 }
 
 /**
  * Vérifie le champ du rôle dans le formulaire, lorsqu'un événement se produit
  *
- * @returns {boolean} - true si le champ est incorrect, false sinon
+ * @returns {int} - le nombre de champs incorrects
  */
 function verifSelectRole() {
-	let contientErr = false;
+	let nbrErr = 0;
 
 	let roleInput = document.getElementById("role");
 	if (roleInput.value !== "admin" && roleInput.value !== "standard") {
 		roleInput.classList.add("erreur");
-		contientErr = true;
+		nbrErr++;
 	}
 	roleInput.addEventListener("input", function() {
 		if (roleInput.value !== "admin" && roleInput.value !== "standard") {
 			this.classList.add("erreur");
-			contientErr = true;
+			nbrErr++;
 		}
 		else {
 			this.classList.remove("erreur");
-			contientErr = false;
+			nbrErr--;
 		}
 	});
 
-	return contientErr;
+	return nbrErr;
 }
 
 /**
  * Vérifie le champ du courriel dans le formulaire, lorsqu'un événement se
  * produit
  *
- * @returns {boolean} - true si le champ est incorrect, false sinon
+ * @returns {int} - true si le champ est incorrect, false sinon
  */
 function verifInputCourriel() {
-	let contientErr = false;
+	let nbrErr = 0;
 
 	// Regex
 	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
@@ -92,18 +92,18 @@ function verifInputCourriel() {
 	let courrielInput = document.getElementById("courriel");
 	if (courrielInput.value.match(regexCourriel) == null) {
 		courrielInput.classList.add("erreur");
-		contientErr = true;
+		nbrErr++;
 	}
 	courrielInput.addEventListener("input", function() {
 		if (this.value.match(regexCourriel) == null) {
 			this.classList.add("erreur");
-			contientErr = true;
+			nbrErr++;
 		}
 		else {
 			this.classList.remove("erreur");
-			contientErr = false;
+			nbrErr--;
 		}
 	});
 
-	return contientErr;
+	return nbrErr;
 }

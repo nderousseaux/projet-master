@@ -441,12 +441,6 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("requeteAdmin", requeteAdmin);
 
-	let roleSelect = document.getElementById("role");
-	roleSelect.value = "admin";
-	option = document.querySelector("#role > option[value=" +
-		"admin" +"]");
-	option.id = "selectionne";
-
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
 	.then(donnees => {
 		const prenomInput = document.getElementById("prenom");

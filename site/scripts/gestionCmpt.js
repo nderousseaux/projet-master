@@ -34,15 +34,15 @@ function chgmtCouleurIcone() {
 function modifInputCmpt(e, requeteAdmin = false) {
 	/* Vérification des champs */
 		// Prénom, Nom et Courriel
-	let contientErr = verifInputCmpt(e);
+	let nbrErr = verifInputCmpt(e);
 
 		// Rôle
 	if (requeteAdmin === true) {
-		contientErr = verifSelectRole();
+		nbrErr += verifSelectRole();
 	}
 
 	/* Envoi des données au backend */
-	if (contientErr === false) {
+	if (nbrErr === 0) {
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
 
@@ -135,13 +135,13 @@ function majValInputCmpt(champPost) {
 function creationCmpt(e) {
 	/* Vérification des champs */
 		// Prénom, Nom et Courriel
-	let contientErr = verifInputCmpt(e);
+	let nbrErr = verifInputCmpt(e);
 
 		// Rôle
-	contientErr = verifSelectRole();
+	nbrErr += verifSelectRole();
 
 	/* Envoi des données au backend */
-	if (contientErr === false) {
+	if (nbrErr === 0) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
@@ -156,31 +156,30 @@ function creationCmpt(e) {
  */
 function connexionCmpt(e) {
 	e.preventDefault();
-	let contientErr = false;
 
 	/* Vérification des champs */
 		// Courriel
-	contientErr = verifInputCourriel();
+	let nbrErr = verifInputCourriel();
 
 		// Mot de passe
 	let mdpInput = document.getElementById("mdp");
 	if (mdpInput.value === '') {
 		mdpInput.classList.add("erreur");
-		contientErr = true;
+		nbrErr++;
 	}
 	mdpInput.addEventListener("input", function() {
 		if (mdpInput.value === '') {
 			this.classList.add("erreur");
-			contientErr = true;
+			nbrErr--;
 		}
 		else {
 			this.classList.remove("erreur");
-			contientErr = false;
+			nbrErr--;
 		}
 	});
 
 	/* Envoi des données au backend */
-	if (contientErr === false) {
+	if (nbrErr === 0) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "connexionUtilisateur.php")

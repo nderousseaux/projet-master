@@ -35,6 +35,7 @@
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
+<script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>

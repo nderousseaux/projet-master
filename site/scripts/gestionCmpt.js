@@ -23,72 +23,6 @@ function chgmtCouleurIcone() {
 }
 
 /**
- * Vérifie les champs du formulaire, lorsqu'un événement se produit
- *
- * @param {Event} e - événement
- * @returns {boolean} - true si un champ est incorrect, false sinon
- */
-function verifInputCmpt(e) {
-	e.preventDefault();
-	let contientErr = false;
-
-	// Regex
-	const regexInput = /^[\S\s]{1,100}$/;
-	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
-
-	/* Fonction de vérification des champs */
-		// Au chargement de la page
-	function inputPreVerif(donnee) {
-		if (donnee.value.match(regexInput) == null) {
-			donnee.classList.add("erreur");
-			contientErr = true;
-		}
-	}
-
-		// Pendant que le champ est rempli
-	const inputPostVerif = function() {
-		if (this.value.match(regexInput) == null) {
-			this.classList.add("erreur");
-			contientErr = true;
-		}
-		else{
-			this.classList.remove("erreur");
-			contientErr = false;
-		}
-	}
-
-	/* Vérification des champs */
-		// Prénom
-	let prenomInput = document.getElementById("prenom");
-	inputPreVerif(prenomInput);
-	prenomInput.addEventListener("input", inputPostVerif);
-
-		// Nom
-	let nomInput = document.getElementById("nom");
-	inputPreVerif(nomInput);
-	nomInput.addEventListener("input", inputPostVerif);
-
-		// Courriel
-	let courrielInput = document.getElementById("courriel");
-	if (courrielInput.value.match(regexCourriel) == null) {
-		courrielInput.classList.add("erreur");
-		contientErr = true;
-	}
-	courrielInput.addEventListener("input", function() {
-		if (this.value.match(regexCourriel) == null) {
-			this.classList.add("erreur");
-			contientErr = true;
-		}
-		else {
-			this.classList.remove("erreur");
-			contientErr = false;
-		}
-	});
-
-	return contientErr;
-}
-
-/**
  * Vérifie les champs du formulaire, lorsqu'un événement se produit et
  * envoie les données au backend si elles sont correctes, pour la modification
  * des informations d'un compte
@@ -98,25 +32,13 @@ function verifInputCmpt(e) {
  * 								   vérifie le rôle sélectionné dans ce cas
  */
 function modifInputCmpt(e, requeteAdmin = false) {
+	/* Vérification des champs */
+		// Prénom, Nom et Courriel
 	let contientErr = verifInputCmpt(e);
 
-	// Rôle
+		// Rôle
 	if (requeteAdmin === true) {
-		let roleInput = document.getElementById("role");
-		if (roleInput.value !== "admin" && roleInput.value !== "standard") {
-			roleInput.classList.add("erreur");
-			contientErr = true;
-		}
-		roleInput.addEventListener("input", function() {
-			if (roleInput.value !== "admin" && roleInput.value !== "standard") {
-				this.classList.add("erreur");
-				contientErr = true;
-			}
-			else {
-				this.classList.remove("erreur");
-				contientErr = false;
-			}
-		});
+		contientErr = verifSelectRole();
 	}
 
 	/* Envoi des données au backend */
@@ -157,16 +79,50 @@ function modifInputCmpt(e, requeteAdmin = false) {
 		if (champPost.entries().next().done === false) {
 			recupDonnees(champPost, "modifCmpt.php")
 			.then(_ => {
-				champPost.forEach((value, key) => {
-					document.querySelector(
-						"form > input[name=" + key + "]").placeholder = value;
-				});
+				majValInputCmpt(champPost);
 			})
 			.catch(err => {
 				console.log(err);
 			});
 		}
 	}
+}
+
+/**
+ * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
+ * dans la base de données
+ *
+ * @param {formData} champPost - données du formulaire changées
+ */
+function majValInputCmpt(champPost) {
+	champPost.forEach((value, key) => {
+		// Remplace les valeurs par celles enregistrées dans la base
+			// Rôle
+		if (key === "role") {
+			const optionSelect = document.getElementById(
+				"selectionne"
+			);
+			optionSelect.removeAttribute("id");
+
+			if (value !== optionSelect) {
+				document.querySelector(
+					"#role > option[value=" + value +"]"
+				).id = "selectionne";
+			}
+		}
+			// Mot de passe
+		else if (key === "mdp") {
+			document.querySelector(
+				"form > input[name=" + key + "]"
+			).value = '';
+		}
+			// Autres champs
+		else {
+			document.querySelector(
+				"form > input[name=" + key + "]"
+			).placeholder = value;
+		}
+	});
 }
 
 /**
@@ -177,25 +133,12 @@ function modifInputCmpt(e, requeteAdmin = false) {
  * @param {Event} e - événement
  */
 function creationCmpt(e) {
+	/* Vérification des champs */
+		// Prénom, Nom et Courriel
 	let contientErr = verifInputCmpt(e);
 
-	/* Vérification des champs */
 		// Rôle
-	let roleInput = document.getElementById("role");
-	if (roleInput.value !== "admin" && roleInput.value !== "standard") {
-		roleInput.classList.add("erreur");
-		contientErr = true;
-	}
-	roleInput.addEventListener("input", function() {
-		if (roleInput.value !== "admin" && roleInput.value !== "standard") {
-			this.classList.add("erreur");
-			contientErr = true;
-		}
-		else {
-			this.classList.remove("erreur");
-			contientErr = false;
-		}
-	});
+	contientErr = verifSelectRole();
 
 	/* Envoi des données au backend */
 	if (contientErr === false) {
@@ -215,26 +158,9 @@ function connexionCmpt(e) {
 	e.preventDefault();
 	let contientErr = false;
 
-	// Regex
-	const regexCourriel = /^[a-z0-9-_.]+@[a-z0-9-_.]+\.[a-z]{1,}$/;
-
 	/* Vérification des champs */
 		// Courriel
-	let courrielInput = document.getElementById("courriel");
-	if (courrielInput.value.match(regexCourriel) == null) {
-		courrielInput.classList.add("erreur");
-		contientErr = true;
-	}
-	courrielInput.addEventListener("input", function() {
-		if (this.value.match(regexCourriel) == null) {
-			this.classList.add("erreur");
-			contientErr = true;
-		}
-		else {
-			this.classList.remove("erreur");
-			contientErr = false;
-		}
-	});
+	contientErr = verifInputCourriel();
 
 		// Mot de passe
 	let mdpInput = document.getElementById("mdp");

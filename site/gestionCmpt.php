@@ -88,6 +88,7 @@
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
+<script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <?php if ($role === "admin")echo '<script type="text/javascript"
 	src="scripts/interactionsBtn.js"></script>'?>

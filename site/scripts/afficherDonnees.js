@@ -441,6 +441,12 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("requeteAdmin", requeteAdmin);
 
+	let roleSelect = document.getElementById("role");
+	roleSelect.value = "admin";
+	option = document.querySelector("#role > option[value=" +
+		"admin" +"]");
+	option.id = "selectionne";
+
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
 	.then(donnees => {
 		const prenomInput = document.getElementById("prenom");
@@ -451,7 +457,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 		const couleur2 = document.getElementById("couleur2");
 		const icone = document.querySelector("#icone > div");
 
-		// Si la requête réalisée par un admin, affiche le rôle de l'utilisateur
+		// Si requête réalisée par un admin, affiche le rôle de l'utilisateur
 		let roleSelect;
 		if (requeteAdmin) {
 			roleSelect = document.getElementById("role");

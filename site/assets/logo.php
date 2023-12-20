@@ -3,11 +3,11 @@ $page = $_SERVER["REQUEST_URI"];
 $href = '';
 $onClick = '';
 
-if ($page != '/' && $page != "/index.php") {
-	$href = " href='.'";
+if ($page !== "/gestionCmpt.php") {
+	$onClick = " onClick='window.scrollTo(0, 0);'";
 }
 else {
-	$onClick = " onClick='window.scrollTo(0, 0);'";
+	$href = " href='.'";
 }
 ?>
 <a<?php echo $href?>>

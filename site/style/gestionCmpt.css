@@ -48,6 +48,9 @@ form > select {
 	border: 1px solid #cecece;
 	border-radius: 5px;
 }
+form > select {
+	width: calc(100% + 2 * 4px + 1px);
+}
 label {
 	display: flex;
 	align-items: center;
@@ -190,6 +193,11 @@ footer {
 		flex-direction: column-reverse;
 		margin-top: 20px;
 		height: 100%;
+	}
+
+		/* Infos du compte */
+	form > select {
+		width: unset !important;
 	}
 
 		/* Dropdown utilisateurs */

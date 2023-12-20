@@ -94,9 +94,30 @@ function verifInputCmpt(e) {
  * des informations d'un compte
  *
  * @param {Event} e - événement
+ * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * 								   vérifie le rôle sélectionné dans ce cas
  */
-function modifInputCmpt(e) {
+function modifInputCmpt(e, requeteAdmin = false) {
 	let contientErr = verifInputCmpt(e);
+
+	// Rôle
+	if (requeteAdmin === true) {
+		let roleInput = document.getElementById("role");
+		if (roleInput.value !== "admin" && roleInput.value !== "standard") {
+			roleInput.classList.add("erreur");
+			contientErr = true;
+		}
+		roleInput.addEventListener("input", function() {
+			if (roleInput.value !== "admin" && roleInput.value !== "standard") {
+				this.classList.add("erreur");
+				contientErr = true;
+			}
+			else {
+				this.classList.remove("erreur");
+				contientErr = false;
+			}
+		});
+	}
 
 	/* Envoi des données au backend */
 	if (contientErr === false) {
@@ -105,18 +126,30 @@ function modifInputCmpt(e) {
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
-			let placeholder = document.querySelector(
-				"form > input[name=" + key + "]").placeholder;
+			// Vérifie si le rôle a été modifié
+			if (key === "role") {
+				const optionSelect =
+					document.getElementById("selectionne").value;
 
+				if (value !== optionSelect) {
+					champPost.append(key, value);
+				}
+				continue;
+			}
+
+			// Vérifie si le mot de passe a été modifié
 			if (key === "mdp") {
 				if (value !== '') {
 					champPost.append(key, value);
 				}
+				continue;
 			}
-			else {
-				if (value !== placeholder) {
-					champPost.append(key, value);
-				}
+
+			// Vérifie si les autrs champs ont été modifiés
+			const placeholder = document.querySelector(
+				"form > input[name=" + key + "]").placeholder;
+			if (value !== placeholder) {
+				champPost.append(key, value);
 			}
 		}
 

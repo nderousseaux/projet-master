@@ -432,10 +432,14 @@ function afficherNomChamp() {
  * Affiche les infos de l'utilisateur dans le formulaire
  * 
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ * @param {bool} requeteAdmin - true si la requête est faite par un admin
+ * 								dans ce cas, renvoi le rôle de l'utilisateur en
+ * 								dernier dans la réponse
  */
-function afficherDonneesUtilisateur(idUtilisateur) {
+function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 	let champPost = new FormData();
 	champPost.append("idUtilisateur", idUtilisateur);
+	champPost.append("requeteAdmin", requeteAdmin);
 
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
 	.then(donnees => {
@@ -446,6 +450,12 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		const couleur1 = document.getElementById("couleur1");
 		const couleur2 = document.getElementById("couleur2");
 		const icone = document.querySelector("#icone > div");
+
+		// Si la requête réalisée par un admin, affiche le rôle de l'utilisateur
+		let roleSelect;
+		if (requeteAdmin) {
+			roleSelect = document.getElementById("role");
+		}
 
 		prenomInput.value = donnees[0];
 		prenomInput.placeholder = donnees[0];
@@ -460,6 +470,23 @@ function afficherDonneesUtilisateur(idUtilisateur) {
 		couleur2.value = donnees[4];
 		couleur2.placeholder = donnees[4];
 
+		if (requeteAdmin) {
+			// Vérifie que le rôle est valide
+			let option;
+			if (donnees[5] === "admin" || donnees[5] === "standard") {
+				roleSelect.value = donnees[5];
+				option = document.querySelector("#role > option[value=" +
+					donnees[5] +"]");
+			}
+			// Sinon, par défaut met le rôle à "standard"
+			else {
+				roleSelect.value = "standard";
+				option = document.querySelector("#role > option[value=" +
+					"standard]");
+				console.error("Rôle invalide : " + donnees[5]);
+			}
+			option.id = "selectionne";
+		}
 
 		icone.innerHTML = prenom[0] + ". " + nom[0] + '.';
 	})

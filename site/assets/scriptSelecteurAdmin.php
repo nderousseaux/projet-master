@@ -6,7 +6,7 @@ activerBouton("selectUtilisateur", "utilisateurSlct", true);
 let dropdownUtilisateur = document.getElementById("ddUtilisateur");
 dropdownUtilisateur.addEventListener("click", _ => {
 	idUtilisateur = document.getElementById("utilisateurSlct").value;
-	afficherDonneesUtilisateur(idUtilisateur);
+	afficherDonneesUtilisateur(idUtilisateur, true);
 });
 
 

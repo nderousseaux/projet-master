@@ -31,7 +31,9 @@
 	<section id="secCmpt">
 		<div id="infosCmpt" class="containerSecVerti">
 			<h1>Modifier les informations</h1>
-			<?php if ($role === "admin") include "assets/selecteurAdmin.php"?>
+			<?php if ($role === "admin")
+				include "assets/selecteurUtilisateur.php"
+			?>
 			<form id="formCmpt">
 				<label class="colonne" for="idAgri">Identifiant agriculteur
 				</label>
@@ -57,6 +59,9 @@
 				<label class="colonne" for="nom">Nom</label>
 				<input class="colonne" id="nom" name="nom"
 					placeholder="Nom" value='-'></input>
+				<?php if ($role === "admin")
+					include "assets/selecteurRole.php"
+				?>
 				<label class="colonne" for="courriel">Courriel</label>
 				<input class="colonne" id="courriel" name="courriel"
 					placeholder="adresse@courriel.com" value='-'></input>
@@ -65,11 +70,11 @@
 					class="colonne" placeholder="******" value=''></input>
 				<label class="colonne" for="couleur1">Couleur 1</label>
 				<input class="colonne selectCouleur" id="couleur1"
-					name="couleur1" type="color" placeholder="#e66465"
+					name="couleur1" type="color" placeholder="#000000"
 					value="#000000"></input>
 				<label class="colonne" for="couleur2">Couleur 2</label>
 				<input class="colonne selectCouleur" id="couleur2"
-					name="couleur2" type="color" placeholder="#9198e5"
+					name="couleur2" type="color" placeholder="#ffffff"
 					value="#ffffff"></input>
 				<button id="reinit">Réinitialiser</button>
 				<button id="enreg">Enregistrer</button>
@@ -90,9 +95,11 @@
 <script>
 	let idUtilisateur = 0;
 
+
 	/*** Gestion des données ***/
 		// Récupère les données de l'utilisateur et rempli le formulaire avec
-	afficherDonneesUtilisateur(idUtilisateur);
+	afficherDonneesUtilisateur(idUtilisateur<?php
+		if ($role === "admin") echo ", true";?>);
 
 		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {

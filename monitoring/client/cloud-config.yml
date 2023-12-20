@@ -14,6 +14,7 @@ repo_upgrade: all
 package_upgrade: true
 packages:
   - wget
+  - git
 
 runcmd:
   - cd /root

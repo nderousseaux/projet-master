@@ -3,7 +3,7 @@
 /* Public */
 
 int StockageDonnees::ecrireDonneesFichier(
-	const std::string& nomFichier,
+	const std::string& cheminFichierMesures,
 	InfosChamp infosChamp,
 	Mesures mesures
 ) {
@@ -11,7 +11,7 @@ int StockageDonnees::ecrireDonneesFichier(
 	std::filesystem::create_directory(DOSSIER_STOCKAGE);
 
 	// Ecrit les données dans le fichier
-	std::ofstream file(DOSSIER_STOCKAGE + nomFichier, std::ios::app);
+	std::ofstream file(cheminFichierMesures, std::ios::app);
 	if (file.is_open()) {
 		file <<
 			mesures.getDate() << ';' <<
@@ -25,8 +25,8 @@ int StockageDonnees::ecrireDonneesFichier(
 		file.close();
 	}
 	else {
-		std::cerr << "Impossible d'ouvrir le fichier : \"" << nomFichier << "\""
-			<< std::endl;
+		std::cerr << "Impossible d'ouvrir le fichier : \"" <<
+			cheminFichierMesures << "\"" << std::endl;
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
@@ -48,14 +48,15 @@ std::string StockageDonnees::dateUTCActuelle() {
 	return buffer;
 }
 
-void StockageDonnees::agregeFichiersDonnees() {
+void StockageDonnees::agregeFichiersDonnees(
+	const std::string& cheminFichierAgrege
+) {
 	// Créé le dossier s'il n'existe pas
 	std::filesystem::create_directory(DOSSIER_STOCKAGE);
 
 	// Ouvre le fichier de destination
-	std::string cheminFichier = StockageDonnees::CHEMIN_FICHIER_AGREGE;
-
-	std::ofstream fichierAgrege(cheminFichier, std::ios::out | std::ios::app);
+	std::ofstream fichierAgrege(cheminFichierAgrege,
+		std::ios::out | std::ios::app);
 
 	// Vérifie si le fichier est ouvert
 	if (fichierAgrege.is_open()) {
@@ -67,7 +68,7 @@ void StockageDonnees::agregeFichiersDonnees() {
 			)
 		) {
 			// Vérifie si le fichier est le fichier de destination
-			if (fichier.path().string() == cheminFichier) {
+			if (fichier.path().string() == cheminFichierAgrege) {
 				continue;
 			}
 
@@ -103,6 +104,6 @@ void StockageDonnees::agregeFichiersDonnees() {
 	}
 	else {
 		std::cerr << "Impossible d'ouvrir le fichier source : \"" <<
-			cheminFichier << "\"" << std::endl;
+			cheminFichierAgrege << "\"" << std::endl;
 	}
 }

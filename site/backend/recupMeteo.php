@@ -2,9 +2,6 @@
 
 use MongoDB\Driver\Manager;
 
-// Rester en local pour le debug (API ayant une limite de requêtes)
-const MODE_LOCAL = false;
-
 // Vérifie que les champs sont présents
 if (!(
 	isset($_POST["idUtilisateur"]) &&
@@ -43,91 +40,65 @@ else {
 	exit();
 }
 
-// Coordonnées à récupérer dans la base de données
+// Si le fichier n'existe pas, renvoi une erreur
+$fichierCleAPI = "./cleAPI.txt";
+$cleAPI = "";
+if (file_exists($fichierCleAPI)) {
+	$cleAPI = @file_get_contents($fichierCleAPI);
+}
+else {
+	$erreur = array("Erreur", "Fichier non trouvé");
+	echo json_encode($erreur);
+	exit();
+}
+
+// Connexion à MongoDB
+$uri = "mongodb://localhost:30001";
+
+// Créé le client
+$client = new MongoDB\Driver\Manager($uri);
+
+// Défini le filtre
+$filtre = ["idAgri" => intval($_POST["idUtilisateur"])];
+
+// Défini la projection
+$options = ["projection" => ["champs.coordonnees" => 1]];
+
+// Créé la requête
+$requete = new MongoDB\Driver\Query($filtre, $options);
+
+// Exécute la requête et récupère le résultat
+$resultat = $client->executeQuery("data.agriculteur", $requete);
+
+// Traite les données
+$coordonnees = array();
+foreach ($resultat as $element) {
+	// Accède à la propriété "coordonnees" dans le champ "champs"
+	$coordonnees = $element->champs->coordonnees;
+}
+
+// Récupère les coordonnées du champ
+$numChamp = $_POST["numChamp"];
 $latitude = 0;
 $longitude = 0;
-if (MODE_LOCAL === false) {
-	// Si le fichier n'existe pas, renvoi une erreur
-	$fichierCleAPI = "./cleAPI.txt";
-	$cleAPI = "";
-	if (file_exists($fichierCleAPI)) {
-		$cleAPI = @file_get_contents($fichierCleAPI);
-	}
-	else {
-		$erreur = array("Erreur", "Fichier non trouvé");
-		echo json_encode($erreur);
-		exit();
-	}
+if (isset($coordonnees[$numChamp])) {
+	$latitude = $coordonnees[$numChamp][0];
+	$longitude = $coordonnees[$numChamp][1];
+}
+else {
+	$erreur = array("Erreur", "Index invalide");
+	echo json_encode($erreur);
+	exit();
+}
 
-	// Connexion à MongoDB
-	$uri = "mongodb://localhost:30001";
-
-	// Créé le client
-	$client = new MongoDB\Driver\Manager($uri);
-
-	// Défini le filtre
-	$filtre = ["idAgri" => intval($_POST["idUtilisateur"])];
-
-	// Défini la projection
-	$options = ["projection" => ["champs.coordonnees" => 1]];
-
-	// Créé la requête
-	$requete = new MongoDB\Driver\Query($filtre, $options);
-
-	// Exécute la requête et récupère le résultat
-	$resultat = $client->executeQuery("data.agriculteur", $requete);
-
-	// Traite les données
-	$coordonnees = array();
-	foreach ($resultat as $element) {
-		// Accède à la propriété "coordonnees" dans le champ "champs"
-		$coordonnees = $element->champs->coordonnees;
-	}
-
-	// Récupère les coordonnées du champ
-	$numChamp = $_POST["numChamp"];
-	if (isset($coordonnees[$numChamp])) {
-		$latitude = $coordonnees[$numChamp][0];
-		$longitude = $coordonnees[$numChamp][1];
-	}
-	else {
-		$erreur = array("Erreur", "Index invalide");
-		echo json_encode($erreur);
-		exit();
-	}
-
-	$reponse = @file_get_contents("https://weather.visualcrossing.com/" .
+// Récupère la météo
+$reponse = @file_get_contents("https://weather.visualcrossing.com/" .
 	"VisualCrossingWebServices/rest/services/timeline/". $latitude . "," .
 	$longitude . '/' . $duree .
 	"?unitGroup=metric&elements=datetime%2Ctempmax" .
 	"%2Ctempmin%2Ctemp%2Chumidity%2Cprecip%2Cpreciptype%2Cwindspeedmean%2C" .
 	"winddir%2Ccloudcover%2Cuvindex&include=" . $granularite .
 	"&key=" . $cleAPI .	"&contentType=json");
-}
-else {
-	if ($_POST["duree"] === "jour") {
-		$fichierDonnees = "./json/donneesMeteoJour.json";
-		if (file_exists($fichierDonnees)) {
-			$reponse = @file_get_contents($fichierDonnees);
-		}
-		else {
-			$erreur = array("Erreur", "Fichier non trouvé");
-			echo json_encode($erreur);
-			exit();
-		}
-	}
-	else {
-		$fichierDonnees = "./json/donneesMeteoSemaine.json";
-		if (file_exists($fichierDonnees)) {
-			$reponse = @file_get_contents($fichierDonnees);
-		}
-		else {
-			$erreur = array("Erreur", "Fichier non trouvé");
-			echo json_encode($erreur);
-			exit();
-		}
-	}
-}
 
 // Renvoi l'erreur HTTP, si la requête a échoué
 if ($reponse === false) {

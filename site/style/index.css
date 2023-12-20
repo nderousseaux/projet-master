@@ -112,7 +112,7 @@ p {
 }
 .tableau > div {
 	display: grid;
-	grid-gap: 2px 0;
+	gap: 2px 0;
 	width: calc(100% - 20px);
 	padding: 0 10px;
 	overflow: unset;
@@ -226,7 +226,6 @@ header > section {
 	display: flex;
 	justify-content: right;
 	width: calc(50% - 72px);
-	cursor: pointer;
 }
 header > section > * {
 	cursor: auto;
@@ -260,7 +259,7 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	position: relative;
 	top: 72px;
-	margin-bottom: calc(72px + 40px);
+	min-height: calc(100vh - 72px);
 }
 #corps > section {
 	display: flex;
@@ -280,10 +279,10 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	width: 100%;
 	padding: 20px 0;
-	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.5) !important;
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
+	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
 .containerSecVerti > h1,
@@ -312,7 +311,7 @@ header > section:last-child .dropbtn {
 	flex-direction: column;
 	align-items: center;
 	width: 60%;
-	padding:  15px 0;
+	padding: 15px 0;
 	text-align: center;
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
@@ -460,15 +459,16 @@ header > section:last-child .dropbtn {
 	font-size: 14px !important;
 }
 .plotly-notifier {
-	right: 30px !important;
+	top: calc(72px + 20px) !important;
+	right: 40px !important;
 }
 .notifier-note {
+	background-color: rgba(4, 169, 109, 0.6) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	backdrop-filter: blur(10px) !important;
 	border: none !important;
 	border-radius: 10px !important;
 	box-shadow: 0 15px 20px -15px #cecece !important;
-	background-color: rgba(255, 255, 255, 0.7) !important;
-	-webkit-backdrop-filter: blur(10px) !important;
-	backdrop-filter: blur(10px) !important;
 }
 .notifier-close,
 .notifier-note > p > span {
@@ -533,7 +533,7 @@ header > section:last-child .dropbtn {
 	left: 0;
 }
 
-	/* Footer */
+/* Footer */
 footer {
 	display: flex;
 	flex-direction: row;
@@ -541,6 +541,7 @@ footer {
 	align-items: center;
 	width: 100vw;
 	height: 72px;
+	margin-top: calc(72px + 36px);
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
@@ -550,6 +551,7 @@ footer {
 footer > p {
 	font-size: 16px;
 }
+
 
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
@@ -647,7 +649,7 @@ footer > p {
 	/* Corps */
 	#corps {
 		top: calc(72px + 40px + 20px);
-		margin-bottom: calc(72px + 40px + (20px * 2));
+		min-height: calc(100vh - 72px + 40px + (20px * 2));
 	}
 	#corps > section {
 		width: 95%;
@@ -703,6 +705,9 @@ footer > p {
 	.hovertext > text {
 		font-size: 11.5px !important;
 	}
+	.plotly-notifier {
+		top: calc(40px + 20px) !important;
+	}
 
 	/* Section tableau */
 	#secTableau > div {
@@ -725,6 +730,9 @@ footer > p {
 	}
 
 	/* Footer */
+	footer {
+		margin-top: calc(72px + (40px * 2));
+	}
 	footer > p {
 		font-size: 15px;
 	}
@@ -893,7 +901,6 @@ footer > p {
 				/* Graphique */
 	.notifier-note {
 		box-shadow: 0 8px 16px 0 rgba(107, 107, 107, 0.2) !important;
-		background-color: rgba(57, 57, 57, 0.7) !important;
 	}
 	.notifier-close,
 	.notifier-note > p > span {

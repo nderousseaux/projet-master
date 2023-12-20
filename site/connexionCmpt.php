@@ -2,30 +2,45 @@
 <html lang="fr">
 <head>
 	<?php include "assets/head.php"?>
-	<title>Connexion utilisateur</title>
-	<meta name="description" content="Connexion utilisateur"/>
-	<link rel="stylesheet" type="text/css" href="style/connexionCmpt.css"/>
+	<title>Connexion au compte</title>
+	<meta name="description" content="Connexion au compte"/>
+	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
+	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 </head>
 <body>
 <header>
 	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
-	<section id="secForm">
+	<section id="infosCmpt" class="containerSecVerti">
 		<h1>Connexion</h1>
-		<form action="backend/connexionUtilisateur.php" method="post">
-			<input type="text" name="courriel" placeholder="Courriel" required/>
-			<input type="password" name="mdp" placeholder="Mot de passe" required/>
-			<input type="submit" value="Connexion"/>
+		<form id="formCmpt">
+			<label class="colonne" for="courriel">Courriel</label>
+			<input class="colonne" id="courriel" name="courriel"
+				placeholder="adresse@courriel.com"></input>
+			<label class="colonne" for="mdp">Mot de passe</label>
+			<input type="password" id="mdp" name="mdp"
+				class="colonne" placeholder="******"></input>
+			<button id="enreg">Connexion</button>
 		</form>
 	</section>
 </div>
 <?php include "assets/footer.php"?>
+<script type="text/javascript" src="scripts/recupDonnees.js"></script>
+<script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
-	// Gère les champs du formulaire
-	connexionCmpt();
+	/*** Gestion des données ***/
+		// Gère les champs du formulaire et l'envoi des données
+	document.getElementById("enreg").addEventListener("click",
+	e => {
+		connexionCmpt(e);
+	});
+	document.querySelector("form").addEventListener("submit", e => {
+		connexionCmpt(e);
+	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

@@ -3,33 +3,147 @@
 	background-color: unset !important;
 	box-shadow: none !important;
 	justify-content: space-between;
-	height: 255px;
+	margin-bottom: calc(72px + 36px);
+}
+
+	/* Dropdown utilisateurs */
+#ddUtilisateur {
+	width: 80%;
+	margin-bottom: 30px;
+}
+#ddUtilisateur > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	padding: 10px 0;
+}
+#ddUtilisateur > .dropdownContent {
+	left: 0;
 }
 
 	/* Infos du compte */
 #infosCmpt {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 5px 0;
-	width: calc(70% - 40px) !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: calc(70% - 36px) !important;
 	padding: 20px;
-	justify-content: center;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
-#infosCmpt > input {
+
+#infosCmpt > form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 5px 0;
+}
+form input,
+form div > button,
+form > button,
+form > select {
 	width: 100%;
 	height: 40px;
 	padding: 4px;
 	border: 1px solid #cecece;
 	border-radius: 5px;
 }
+form > select {
+	width: calc(100% + 2 * 4px + 1px);
+}
+label {
+	display: flex;
+	align-items: center;
+}
 .cellule {
 	justify-content: left;
 }
 .erreur {
 	background-color: #dd4a4ba1;
+}
+input::placeholder {
+	color: #555555;
+}
+.erreur::placeholder {
+	color: #484848;
+}
+input:disabled {
+	background-color: #f6f6f6;
+	color: #848484;
+}
+
+	/* Boutons */
+button,
+input {
+	font-family: "Open Sans", Arial, sans-serif;
+	font-size: 14px;
+}
+button {
+	background-color: #fbfbfb;
+}
+button:hover {
+	cursor: pointer;
+	background-color: #f6f6f6;
+}
+button:active {
+	background-color: #e6e6e6;
+}
+
+	/* Bouton de copie */
+#infosCmpt > form  > div {
+	display: flex;
+	width: calc(100% + 2 * 4px + 1px);
+}
+#secCopie > div > button {
+	height: calc(40px + 2 * 4px + 2 * 1px);
+	width: 50px;
+	border-radius: 5px;
+	margin-left: 3px;
+}
+#secCopie > div {
+	position: relative;
+	display: inline-block;
+}
+#secCopie > div .bulle {
+	visibility: hidden;
+	position: absolute;
+	background-color: #76cda6;
+	text-align: center;
+	width: 140px;
+	padding: 5px;
+	border-radius: 5px;
+	z-index: 9999;
+	bottom: calc(100% + 5px);
+	left: 50%;
+	margin-left: calc(140px / -2);
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+#secCopie > div .bulle::after {
+	position: absolute;
+	content: '';
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border: solid 5px;
+	border-color: #7fc7a7 transparent transparent transparent;
+}
+#secCopie > div:hover .bulle {
+	visibility: visible;
+	opacity: 1;
+}
+
+	/* Selecteurs de couleur */
+.selectCouleur {
+	cursor: pointer;
+	width: calc(100% + 2 * 4px + 1px);
+}
+
+	/* Bouton d'enregistrement */
+form > button {
+	width: 70%;
+	margin: auto;
+	margin-top: 30px;
 }
 
 	/* Image de profil */
@@ -44,69 +158,18 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(#e66465, #9198e5);
+	background: linear-gradient(#000000, #ffffff);
 	box-shadow: 0 15px 20px -15px #cecece;
 	color: #ffffff;
-	max-width: 90%;
+	min-width: 70%;
 	height: calc(100% - 40px);
 	aspect-ratio: 1/1;
 	border-radius: 10px;
 }
 
-/* Boîte de dialogue */
-#confirmChgmt {
-	display: none;
-	position: fixed;
-	justify-content: center;
-	align-items: center;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(255, 255, 255, 0.1);
-	-webkit-backdrop-filter: blur(5px);
-	backdrop-filter: blur(5px);
-}
-#confirmChgmt > dialog {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px 0;
-	height: 40%;
-	width: 40%;
-	border: none;
-	border-radius: 10px;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-#confirmChgmt > dialog > form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 90%;
-	height: 100%;
-}
-#confirmChgmt > dialog > form > div:first-child {
-	display: flex;
-	align-items: center;
-	height: 70%;
-}
-#confirmChgmt > dialog > form > div:last-child {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 90%;
-	height: 30%;
-}
-#confirmChgmt > dialog > form > div:last-child > button {
-	font-family: "Open Sans", Arial, sans-serif;
-	width: 40%;
-	line-height: 40px;
-	border: none;
-	border-radius: 10px;
-}
-
 /* Footer */
 footer {
-	position: fixed;
-	bottom: 0;
+	margin-top: 0;
 }
 
 
@@ -119,6 +182,12 @@ footer {
 		justify-content: right;
 	}
 
+	/* Corps */
+	#corps {
+		top: calc(72px + 40px + 20px);
+		min-height: calc(100vh - 72px + 40px + 20px);
+	}
+
 	/* Section infos compte/image de profil */
 	#secCmpt {
 		flex-direction: column-reverse;
@@ -127,11 +196,50 @@ footer {
 	}
 
 		/* Infos du compte */
+	form > select {
+		width: unset !important;
+	}
+
+		/* Dropdown utilisateurs */
+	#ddUtilisateur > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+		/* Infos du compte */
 	#infosCmpt {
 		width: calc(95% - 20px) !important;
 	}
-	#infosCmpt > input {
+	input {
 		width: calc(100% - 10px) !important;
+	}
+
+		/* Bouton de copie */
+	#infosCmpt > div {
+		width: 100%;
+	}
+	#infosCmpt > form  > div,
+	.selectCouleur {
+		width: unset !important;
+	}
+	#secCopie > div .bulle {
+		width: 110px;
+		left: 10%;
+		margin-left: calc(110px / -2);
+	}
+	#secCopie > div .bulle::after {
+		left: 75%;
+		margin-left: -5px;
+		border: solid 5px;
+		border-color: #555555 transparent transparent transparent;
+	}
+
+		/* Bouton d'enregistrement */
+	form > button {
+		grid-column: span 2;
+	}
+	form > button:last-child {
+		margin-top: 10px;
 	}
 
 		/* Image de profil */
@@ -144,16 +252,9 @@ footer {
 		aspect-ratio: 2/1;
 	}
 
-	/* Boîte de dialogue */
-	#confirmChgmt > dialog {
-		width: 95%;
-		height: 30%;
-	}
-	#confirmChgmt > dialog > h1 {
-		min-height: fit-content;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button {
-		min-width: fit-content;
+	/* Footer */
+	footer {
+		margin-top: 72px;
 	}
 }
 
@@ -163,7 +264,7 @@ footer {
 	/* Section infos compte/image de profil */
 		/* Infos du compte */
 	#infosCmpt,
-	#infosCmpt > input,
+	input,
 	.cellule {
 		background-color: #000000;
 		color: #ffffff;
@@ -171,33 +272,38 @@ footer {
 	#infosCmpt {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
-	#infosCmpt > input {
-		border: 1px solid #3d3d3d;
+	input,
+	form button,
+	form > select {
+		border: 1px solid #3d3d3d !important;
 	}
 	#infosCmpt > input::placeholder {
 		color: #ffffff;
+	}
+	input:disabled {
+		background-color: #373737;
+		color: #d2d2d2;
+	}
+
+		/* Bouton de copie */
+	button {
+		background-color: #191919;
+	}
+	button:hover {
+		background-color: #222222;
+	}
+	button:active {
+		background-color: #2f2f2f;
+	}
+	#secCopie > div .bulle {
+		background-color: #2f694a;
+	}
+	#secCopie > div .bulle::after {
+		border-color: #2f694a transparent transparent transparent;
 	}
 
 		/* Image de profil */
 	#icone > div {
 		box-shadow: 0 15px 20px -15px #080808;
-	}
-
-	/* Boîte de dialogue */
-	#confirmChgmt {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-	#confirmChgmt > dialog {
-		background-color: #000000;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button {
-		background-color: rgba(55, 55, 55, 0.5);
-		color: #ffffff;
-	}
-	#confirmChgmt > dialog > form > div:last-child > button:hover {
-		background-color: rgba(80, 80, 80, 0.5);
-	}
-	#confirmChgmt > dialog > form > div:last-child > button:active {
-		background-color: rgba(111, 111, 111, 0.5);
 	}
 }

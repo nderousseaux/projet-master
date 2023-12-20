@@ -12,14 +12,17 @@ sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 sudo iptables -A FORWARD -i eth0 -o bat0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 sudo iptables -A FORWARD -i bat0 -o eth0 -j ACCEPT
 
+# Mise en place de wlan0
+sudo ifconfig wlan0 down
+
+sudo iwconfig wlan0 mode ad-hoc
+sudo iwconfig wlan0 essid call-code-mesh
+sudo iwconfig wlan0 channel 1 frequency 2462
+# ou sudo iw dev wlan0 set freq 2462
+
+sudo ifconfig wlan0 10.0.1.1/24
+
 # Activates batman-adv interfaces
 sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 sudo ifconfig bat0 192.168.199.1/24
-
-# Forcer le mode ad-hoc aussi nommé "ibss"
-sudo iw dev wlan0 set type ibss
-# Forcer le ESSID
-sudo iw dev wlan0 ibss join call-code-mesh 2462
-
-sudo ifconfig wlan0 10.0.1.1/24

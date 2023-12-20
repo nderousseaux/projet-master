@@ -14,31 +14,29 @@ repo_upgrade: all
 package_upgrade: true
 packages:
   - wget
+  - git
 
 runcmd:
-  # Debug SSH
+  - cd /root
+
+  # Debug SSH -> DO NOT USE IN PRODUCTION
   - sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
   - systemctl restart sshd
 
+  # On met le git sur le serveur
+  - git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+  - cd projet-master-23-24/ && git checkout origin/monitoring && cd ..
+  - git config --system --add safe.directory '*'
 
   # On installe node_exporter
   - wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
   - tar xvfz node_exporter-1.2.2.linux-amd64.tar.gz
-  - mv node_exporter-1.2.2.linux-amd64/node_exporter /
+  - mv node_exporter-1.2.2.linux-amd64/node_exporter .
   - rm -rf node_exporter-1.2.2.linux-amd64*
   - chmod +x node_exporter
 
   # On configure node_exporter comme un service
-  - echo "[Unit]" > /etc/systemd/system/node_exporter.service
-  - echo "Description=Node Exporter Agent" >> /etc/systemd/system/node_exporter.service
-  - echo "" >> /etc/systemd/system/node_exporter.service
-  - echo "[Service]" >> /etc/systemd/system/node_exporter.service
-  - echo "User=root" >> /etc/systemd/system/node_exporter.service
-  - echo "ExecStart=/bin/sh -c '/node_exporter'" >> /etc/systemd/system/node_exporter.service
-  - echo "Restart=always" >> /etc/systemd/system/node_exporter.service
-  - echo "" >> /etc/systemd/system/node_exporter.service
-  - echo "[Install]" >> /etc/systemd/system/node_exporter.service
-  - echo "WantedBy=multi-user.target" >> /etc/systemd/system/node_exporter.service
+  - cp -r projet-master-23-24/monitoring/client/node_exporter.service /etc/systemd/system/node_exporter.service
 
   # On démarre node_exporter
   - systemctl daemon-reload

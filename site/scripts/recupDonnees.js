@@ -1,7 +1,7 @@
 /**
  * Récupère des données dans le back, en fonction du champPost
  *
- * @param {int} champPost - Champ à envoyer au back
+ * @param {formData} champPost - Champ à envoyer au back
  * @param {string} urlBackend - URL du backend
  * @returns {promise} - les données sous format json
  */

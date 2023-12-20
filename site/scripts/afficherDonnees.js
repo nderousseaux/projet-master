@@ -32,14 +32,21 @@ function afficherChamps(idUtilisateur) {
 
 /**
  * Affiche le nom de l'utilisateur
- * 
- * @param {string} nom - Nom de l'utilisateur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherNomUtilisateur(nom) {
-	const nomUtilisateur = document.querySelector("header > " +
-		"section:last-child > p")
-	nomUtilisateur.textContent = nom;
+function afficherNomUtilisateur(idUtilisateur) {
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+
+	recupDonnees(champPost, "recupNomUtilisateur.php")
+	.then(donnees => {
+		const nomUtilisateur = document.querySelector("header > " +
+			"section:last-child > p")
+		nomUtilisateur.textContent = donnees + " #"	+ idUtilisateur;
+	});
 }
+
 
 /**
  * Affiche les infos du champ sélectionné
@@ -408,7 +415,7 @@ function celluleTemp(temp, cellule) {
  * @returns {promise} - résolue quand les données sont affichées
  */
 function helperAffichageDonneesChamp(idUtilisateur) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const numChamp = document.getElementById("champSlct").value - 1;
 
 		let champPost = new FormData();
@@ -426,7 +433,7 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 			resolve();
 		})
 		.catch(err => {
-			reject(err);
+			console.error(err);
 		});
 	});
 }

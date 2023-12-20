@@ -24,13 +24,15 @@ std::vector<std::string> EnvoiDonnees::recupereIdentifiants(
 }
 
 
-void EnvoiDonnees::affiche_message_erreur_libssh2(LIBSSH2_SESSION* session,
-					const std::string& msg_erreur) {
+void EnvoiDonnees::affiche_message_erreur_libssh2(
+	LIBSSH2_SESSION* session,
+	const std::string& msg_erreur
+) {
 
 	char *tampon_msg_erreur;
 	int longeur_erreur;
 	libssh2_session_last_error(session, &tampon_msg_erreur, &longeur_erreur,
-							   0);
+		0);
 	std::cerr << msg_erreur << "\nErreur : " << tampon_msg_erreur << std::endl;
 }
 

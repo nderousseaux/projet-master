@@ -1,0 +1,39 @@
+/* Section infos compte */
+#secCmpt {
+	flex-direction: column;
+	background-color: #ffffff !important;
+	box-shadow: 0 15px 20px -15px #cecece !important;
+	height: 100%;
+	padding: 15px 0;
+}
+
+	/* Section formulaire */
+form > button {
+	grid-column: span 2;
+}
+
+
+/* Version mobile */
+@media screen and (max-width: 799px) {
+	/* Corps */
+	#corps {
+		top: calc(72px + 20px);
+		min-height: calc(100vh - 72px + 20px);
+	}
+
+	/* Section création compte */
+		/* Section formulaire */
+	#secForm > form {
+		width: 80%;
+	}
+
+		/* Bouton d'enregistrement */
+	form > button:last-child {
+		margin-top: 30px;
+	}
+
+	/* Footer */
+	footer {
+		margin-top: 20px;
+	}
+}

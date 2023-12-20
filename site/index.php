@@ -5,7 +5,7 @@
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
 </head>
-<body tabindex="0">
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">
@@ -186,7 +186,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	let idUtilisateur = 0;
+	const idUtilisateur = 0;
 
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)

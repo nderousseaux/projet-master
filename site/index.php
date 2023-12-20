@@ -17,7 +17,7 @@
 		</div>
 	</section>
 	<section title="Retourner en haut de la page">
-		<p title=''>Champ</p>
+		<p title=''>-</p>
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">

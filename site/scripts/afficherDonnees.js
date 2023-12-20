@@ -50,7 +50,7 @@ function afficherNomUtilisateur(idUtilisateur) {
 
 /**
  * Affiche les infos du champ sélectionné
- * 
+ *
  * @param {array} donnees - contient les infos du champ :
  * 							-> état du champ (0, 1, 2 ou 3),
  * 							-> nombre de capteurs actifs,
@@ -85,7 +85,7 @@ function afficherInfosChamp(donnees) {
 	// Nombre de capteurs actifs
 	document.querySelector("#nbrCapteurs > p:first-child")
 		.textContent = donnees[1];
-	
+
 	// Nombre de capteurs total
 	document.querySelector("#nbrCapteurs > p:last-child")
 		.textContent = donnees[2];
@@ -98,7 +98,7 @@ function afficherInfosChamp(donnees) {
 /**
  * Affiche les moyennes de température, d'humidité et de luminosité pour le
  * champ indiqué
- * 
+ *
  * @param {array} donnees - contient les moyennes de température, d'humidité et
  * 							de luminosité pour le champ indiqué
  */
@@ -117,7 +117,7 @@ function afficherMoyennes(donnees) {
 
 /**
  * Affiche toutes les mesures pour un champ indiqué
- * 
+ *
  * @param {array} donnees - contient toutes les mesures pour le champ indiqué
  */
 function afficherMesuresChamp() {
@@ -149,7 +149,7 @@ function afficherMesuresChamp() {
 
 /**
  * Affiche les ilots du champ sélectionné
- * 
+ *
  * @param {int} nbrIlots - Nombre d'ilots du champ sélectionné
  */
 function afficherIlots(nbrIlots) {
@@ -295,7 +295,7 @@ function afficherMeteo(idUtilisateur) {
 
 /**
  * Supprime toutes les données d'un tableau, sauf la ligne de titre
- * 
+ *
  * @param {string} idTableau - id du tableau
  */
 function viderTableau(idTableau) {
@@ -410,7 +410,7 @@ function celluleTemp(temp, cellule) {
 /**
  * Affiche le nom de l'utilisateur, les informations du champ, les moyennes,
  * les mesures et les ilots disponibles
- * 
+ *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {promise} - résolue quand les données sont affichées
  */
@@ -429,6 +429,103 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 			afficherMoyennes(donnees[2]);
 			afficherMesuresChamp(donnees[3]);
 			afficherIlots(donnees[4]);
+
+			resolve();
+		})
+		.catch(err => {
+			console.error(err);
+		});
+	});
+}
+
+/**
+ * Affiche les infos de l'utilisateur dans le formulaire
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ * @param {bool} requeteAdmin - true si la requête est faite par un admin
+ * 								dans ce cas, renvoi le rôle de l'utilisateur en
+ * 								dernier dans la réponse
+ */
+function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+	champPost.append("requeteAdmin", requeteAdmin);
+
+	recupDonnees(champPost, "recupInfosUtilisateur.php")
+	.then(donnees => {
+		const prenomInput = document.getElementById("prenom");
+		const nomInput = document.getElementById("nom");
+		const courrielInput = document.getElementById("courriel");
+		const mdp = document.getElementById("mdp");
+		const couleur1 = document.getElementById("couleur1");
+		const couleur2 = document.getElementById("couleur2");
+		const icone = document.querySelector("#icone > div");
+
+		// Si requête réalisée par un admin, affiche le rôle de l'utilisateur
+		let roleSelect;
+		if (requeteAdmin) {
+			roleSelect = document.getElementById("role");
+		}
+
+		prenomInput.value = donnees[0];
+		prenomInput.placeholder = donnees[0];
+		nomInput.value = donnees[1];
+		nomInput.placeholder = donnees[1];
+		courrielInput.value = donnees[2];
+		courrielInput.placeholder = donnees[2];
+		mdp.value = '';
+		mdp.placeholder = "******";
+		couleur1.value = donnees[3];
+		couleur1.placeholder = donnees[3];
+		couleur2.value = donnees[4];
+		couleur2.placeholder = donnees[4];
+
+		if (requeteAdmin) {
+			// Vérifie que le rôle est valide
+			let option;
+			if (donnees[5] === "admin" || donnees[5] === "standard") {
+				roleSelect.value = donnees[5];
+				option = document.querySelector("#role > option[value=" +
+					donnees[5] +"]");
+			}
+			// Sinon, par défaut met le rôle à "standard"
+			else {
+				roleSelect.value = "standard";
+				option = document.querySelector("#role > option[value=" +
+					"standard]");
+				console.error("Rôle invalide : " + donnees[5]);
+			}
+			option.id = "selectionne";
+		}
+
+		icone.innerHTML = prenom[0] + ". " + nom[0] + '.';
+	})
+	.catch(err => {
+		console.error(err);
+	});
+}
+
+/**
+ * Affiche tous les utilisateurs dans le menu déroulant
+ *
+ * @returns {promise} - résolue quand les utilisateurs sont affichés
+ */
+function afficherUtilisateurs() {
+	return new Promise((resolve) => {
+		let champPost = new FormData();
+
+		recupDonnees(champPost, "recupUtilisateurs.php")
+		.then(donnees => {
+			const container = document.getElementById("selectUtilisateur");
+
+			for (let i = 0; i < donnees.length; i++) {
+				const utilisateur = document.createElement("button");
+				utilisateur.setAttribute("value", donnees[i][0]);
+				utilisateur.textContent = donnees[i][1] + ' ' + donnees[i][2];
+
+				container.appendChild(utilisateur);
+			};
+			container.classList.remove("ddHeader");
 
 			resolve();
 		})

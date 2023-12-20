@@ -129,7 +129,7 @@ function majValInputCmpt(champPost) {
  * Vérifie les champs du formulaire, lorsqu'un événement se produit et
  * envoie les données au backend si elles sont correctes pour la création
  * d'un compte
- * 
+ *
  * @param {Event} e - événement
  */
 function creationCmpt(e) {

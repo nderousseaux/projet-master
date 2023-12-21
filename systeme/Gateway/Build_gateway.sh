@@ -19,27 +19,10 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-# Emplacement du fichier
-file="/etc/rc.local"
-
 # Texte à ajouter
 line_to_add="/home/pi/start-batman-adv.sh &"
 
-# Compteurs pour suivre le nombre de fois que "exit 0" est trouvé
-exit_count=0
-
-# Parcourir le fichier ligne par ligne
-while IFS= read -r line; do
-    # Vérifier si la ligne contient "exit 0"
-    if [[ $line == *"exit 0"* ]]; then
-        ((exit_count++))
-        # Ajouter la nouvelle ligne au-dessus du deuxième "exit 0"
-        if [ $exit_count -eq 2 ]; then
-            sed -i "s/exit 0/$line_to_add\nexit 0/" "$file"
-            echo "Ligne ajoutée avec succès."
-        fi
-    fi
-done < "$file"
+sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add\nexit 0|" "$fichier"
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)

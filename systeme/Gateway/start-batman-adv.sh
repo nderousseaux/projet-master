@@ -17,7 +17,7 @@ sudo ifconfig wlan0 down
 
 sudo iwconfig wlan0 mode ad-hoc
 sudo iwconfig wlan0 essid call-code-mesh
-sudo iwconfig wlan0 channel 1 frequency 2462
+sudo iwconfig wlan0 channel 1
 # ou sudo iw dev wlan0 set freq 2462
 
 sudo ifconfig wlan0 10.0.1.1/24

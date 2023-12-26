@@ -213,8 +213,8 @@ header::before,
 }
 
 	/* Logo */
-header > picture,
-header > picture > img {
+header > a,
+header > a > picture > img {
 	width: 144px;
 	height: 72px;
 	border-radius: 0 0 0 10px;
@@ -602,7 +602,6 @@ footer > p {
 	}
 
 	/* Header */
-		/* Logo */
 	header {
 		transform-origin: top;
 		transform: scaleY(1);
@@ -611,13 +610,15 @@ footer > p {
 	.miseEchelleHeader {
 		transform: scaleY(0.3);
 	}
-	header > picture {
+
+		/* Logo */
+	header > a {
 		display: flex;
 		justify-content: center;
 		width: 100%;
 		margin: 10px 0;
 	}
-	header > picture > img {
+	header > a > picture > img {
 		width: 288px;
 		border-radius: 10px;
 	}

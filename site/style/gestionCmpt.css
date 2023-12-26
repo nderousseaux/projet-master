@@ -74,7 +74,8 @@ input:disabled {
 
 	/* Boutons */
 button,
-input {
+input,
+.bulle {
 	font-family: "Open Sans", Arial, sans-serif;
 	font-size: 14px;
 }
@@ -100,11 +101,13 @@ button:active {
 	border-radius: 5px;
 	margin-left: 3px;
 }
-#secCopie > div {
+#secCopie > div,
+#secMdp {
 	position: relative;
 	display: inline-block;
 }
-#secCopie > div .bulle {
+#secCopie > div .bulle,
+#secMdp .bulle {
 	visibility: hidden;
 	position: absolute;
 	background-color: #76cda6;
@@ -115,11 +118,12 @@ button:active {
 	z-index: 9999;
 	bottom: calc(100% + 5px);
 	left: 50%;
-	margin-left: calc(140px / -2);
+	margin-left: calc((140px / -2));
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }
-#secCopie > div .bulle::after {
+#secCopie > div .bulle::after,
+#secMdp .bulle::after {
 	position: absolute;
 	content: '';
 	top: 100%;
@@ -128,9 +132,16 @@ button:active {
 	border: solid 5px;
 	border-color: #7fc7a7 transparent transparent transparent;
 }
-#secCopie > div:hover .bulle {
+#secCopie > div:hover .bulle,
+#secMdp:hover .bulle {
 	visibility: visible;
 	opacity: 1;
+}
+
+	/* Section mot de passe */
+#secMdp .bulle {
+	width: 280px;
+	margin-left: calc(280px / -2);
 }
 
 	/* Selecteurs de couleur */
@@ -174,7 +185,7 @@ footer {
 
 
 /* Version mobile */
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 950px) {
 	/* Header */
 		/* Sous-sections */
 	header > section:last-child {
@@ -232,6 +243,17 @@ footer {
 		margin-left: -5px;
 		border: solid 5px;
 		border-color: #555555 transparent transparent transparent;
+	}
+
+		/* Section mot de passe */
+	#secMdp .bulle {
+		width: 220px;
+		margin-left: calc((220px / -2) - 5px);
+	}
+	#secMdp:focus-within .bulle {
+		display: block;
+		visibility: visible;
+		opacity: 1;
 	}
 
 		/* Bouton d'enregistrement */
@@ -295,10 +317,12 @@ footer {
 	button:active {
 		background-color: #2f2f2f;
 	}
-	#secCopie > div .bulle {
+	#secCopie > div .bulle,
+	#secMdp .bulle {
 		background-color: #2f694a;
 	}
-	#secCopie > div .bulle::after {
+	#secCopie > div .bulle::after,
+	#secMdp .bulle::after {
 		border-color: #2f694a transparent transparent transparent;
 	}
 

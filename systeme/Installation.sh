@@ -14,6 +14,7 @@ sudo apt-get install -y batctl
 
 # Seulement pour le Gateway :
 sudo apt-get install -y dnsmasq
+sudo apt install iptables
 
 # Pour utiliser sshpass
 sudo apt-get install sshpass

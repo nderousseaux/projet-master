@@ -2,7 +2,6 @@
 	// Récupérer ici le rôle de l'utilisateur
 	$role = "admin"; // "admin" ou "standard"
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,6 +21,7 @@
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
+				<a href=".">Accueil</a>
 				<button value="deco">Déconnexion</button>
 			</div>
 		</div>
@@ -66,8 +66,14 @@
 				<input class="colonne" id="courriel" name="courriel"
 					placeholder="adresse@courriel.com" value='-'></input>
 				<label class="colonne" for="mdp">Mot de passe</label>
-				<input type="password" id="mdp" name="mdp"
+				<div id="secMdp">
+					<input type="password" id="mdp" name="mdp"
 					class="colonne" placeholder="******" value=''></input>
+					<span class="bulle">
+						Minimum 14 caractères, 1 majuscule, 1 minuscule,
+						1 chiffre et 1 caractère spécial
+					</span>
+				</div>
 				<label class="colonne" for="couleur1">Couleur 1</label>
 				<input class="colonne selectCouleur" id="couleur1"
 					name="couleur1" type="color" placeholder="#000000"

@@ -7,6 +7,11 @@ function chgmtCouleurIcone() {
 	const couleur1 = document.getElementById("couleur1");
 	const couleur2 = document.getElementById("couleur2");
 
+	if (verifCouleur() !== 0) {
+		console.erreur("Le format des couleurs est incorrect")
+		return;
+	}
+
 	// Initialise les couleurs de l'icône
 	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
 		couleur2.value + ")";
@@ -41,6 +46,9 @@ function modifInputCmpt(e, requeteAdmin = false) {
 		nbrErr += verifSelectRole();
 	}
 
+		// Couleur
+	nbrErr += verifCouleur();
+
 	/* Envoi des données au backend */
 	if (nbrErr === 0) {
 		const donneesForm = new FormData(document.querySelector("form"));
@@ -67,7 +75,7 @@ function modifInputCmpt(e, requeteAdmin = false) {
 				continue;
 			}
 
-			// Vérifie si les autrs champs ont été modifiés
+			// Vérifie si les autres champs ont été modifiés
 			const placeholder = document.querySelector(
 				"form > input[name=" + key + "]").placeholder;
 			if (value !== placeholder) {
@@ -161,7 +169,7 @@ function connexionCmpt(e) {
 		// Courriel
 	let nbrErr = verifInputCourriel();
 
-		// Mot de passe
+		// Mot de passe (vérifie uniquement que le champ n'est pas vide)
 	let mdpInput = document.getElementById("mdp");
 	if (mdpInput.value === '') {
 		mdpInput.classList.add("erreur");

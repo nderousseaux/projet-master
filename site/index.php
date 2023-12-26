@@ -246,8 +246,16 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 */
 		activerBoutonChgmtChamp(idUtilisateur);
 
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		afficherIlots(4);
+		activerBouton(contIdButtons[3][0], contIdButtons[3][1],
+			contIdButtons[3][2]);
+		activerBouton(contIdButtons[7][0], contIdButtons[7][1],
+			contIdButtons[7][2]);
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 		// Affiche la météo pour le champ sélectionné
-		afficherMeteo(idUtilisateur);
+		// afficherMeteo(idUtilisateur);
 
 		/**
 		 * Affiche le nom de l'utilisateur, les informations du champ,

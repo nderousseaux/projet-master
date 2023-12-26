@@ -167,7 +167,7 @@ function afficherIlots(nbrIlots) {
 		if (container.id === "selectIlotExport") {
 			const ilot = document.createElement("button");
 			ilot.setAttribute("value", "tous");
-			ilot.textContent = "Tous ilots";
+			ilot.textContent = "Tous";
 
 			container.appendChild(ilot);
 		}

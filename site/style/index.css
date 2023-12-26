@@ -434,7 +434,7 @@ header > section:last-child .dropbtn {
 	width: 135px;
 }
 .options > div:last-child > p {
-	width: 90px;
+	width: 100px;
 }
 .options > div > p {
 	width: fit-content;
@@ -762,8 +762,17 @@ footer > p {
 	}
 
 		/* Section export de données */
+	#secExport > .options {
+		flex-wrap: wrap;
+	}
+	#secExport > .options > div:last-child > p {
+		width: 135px;
+	}
+
+		/* Footer */
 	#export > button {
 		width: 50%;
+	
 	}
 
 	/* Footer */

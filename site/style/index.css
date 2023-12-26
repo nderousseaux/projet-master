@@ -118,6 +118,7 @@ p {
 	overflow: unset;
 }
 .tableau > div:last-child {
+	padding-top: 2px;
 	overflow: auto;
 }
 .cellule {
@@ -358,6 +359,28 @@ header > section:last-child .dropbtn {
 	width: 40%
 }
 
+			/* Etats du champ */
+.etatAcceptable {
+	background-color: rgba(144, 169, 4, 0.6) !important;
+}
+.etatAcceptable > h1 {
+	border-image: radial-gradient(#032116, #bdc873) 1 !important;
+}
+
+.etatDegrade {
+	background-color: rgba(169, 122, 4, 0.6) !important;
+}
+.etatDegrade > h1 {
+	border-image: radial-gradient(#5a5a00, #c4ad70) 1 !important;
+}
+
+.etatHorsService {
+	background-color: rgba(169, 4, 4, 0.6)!important;
+}
+.etatHorsService > h1 {
+	border-image: radial-gradient(#5a0000, #bc6b69) 1 !important;
+}
+
 		/* Section moyennes */
 			/* Température */
 #secMoyennes > section > div:first-child {
@@ -403,6 +426,7 @@ header > section:last-child .dropbtn {
 	display: flex;
 	width: fit-content;
 }
+
 .options > div > p {
 	width: fit-content;
 	line-height: 60px;
@@ -678,7 +702,6 @@ footer > p {
 		height: 50%;
 	}
 
-
 		/* Section container informations/moyennes */
 	#secInfosMoy {
 		flex-direction: column;
@@ -711,7 +734,7 @@ footer > p {
 
 		/* Section tableau */
 	#secTableau > div {
-		grid-template-columns: minmax(80px, 1fr) 150px 80px
+		grid-template-columns: minmax(60px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
 	}
 
@@ -859,6 +882,17 @@ footer > p {
 			/* Section informations */
 	#secInfos > section > div > h1 {
 		border-image: radial-gradient(#032116, #2f694a) 1;
+	}
+
+				/* Etats du champ */
+	.etatAcceptable > h1 {
+		border-image: radial-gradient(#b7cf3f, #5f6b20) 1 !important;
+	}
+	.etatDegrade > h1 {
+		border-image: radial-gradient(#c29630, #675019) 1 !important;
+	}
+	.etatHorsService > h1 {
+		border-image: radial-gradient(#cf2c20, #62140f) 1 !important;
 	}
 
 			/* Section moyennes */

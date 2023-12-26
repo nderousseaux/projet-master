@@ -21,13 +21,7 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 					btn.classList.add("selected");
 					btn.setAttribute("id", idAttr);
 
-					/*
-					 * Si le bouton sélectionné est celui du champ, afficher
-					 * son nom dans le header
-					 */
-					if (idContainer === "selectChamp") {
-						afficherNomChamp();
-					}
+					afficherTitreDropdown(idContainer);
 				}
 				else {
 					btn.classList.remove("selected");
@@ -48,11 +42,55 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			button.classList.add("selected");
 			button.setAttribute("id", idAttr);
 
-			if (idContainer === "selectChamp") {
-				afficherNomChamp();
-			}
+			afficherTitreDropdown(idContainer);
 		}
 	});
+}
+
+/**
+ * Modifie le texte adjacent au dropdown pour afficher la valeur sélectionnée
+ * 
+ * @param {string} idContainer - ID du container du dropdown
+ */
+function afficherTitreDropdown(idContainer) {
+	// Titre du champ
+	if (idContainer === "selectChamp") {
+		afficherChampSelectionne();
+	}
+	// Titre de l'ilot
+	else if (idContainer === "selectIlot") {
+		afficherIlotSelectionne();
+	}
+	// Titre du type de mesure
+	else if (idContainer === "selectType") {
+		afficherMesureSelectionnee();
+	}
+}
+
+/**
+ * Affiche le nom du champ sélectionné dans le header
+ */
+function afficherChampSelectionne() {
+	const container = document.querySelector("header > " +
+		"section:nth-child(2) > p");
+	container.textContent = "Champ " +
+		document.getElementById("champSlct").value;
+}
+
+/**
+ * Affiche le numéro de l'ilot sélectionné dans les options du graphique
+ */
+function afficherIlotSelectionne() {
+	const container = document.querySelector("#optGraph > div:last-child > p");
+	container.textContent = "Ilot " + document.getElementById("ilotSlct").value;
+}
+
+/**
+ * Affiche le type de mesure sélectionné dans les options du graphique
+ */
+function afficherMesureSelectionnee() {
+	const container = document.querySelector("#optGraph > div:first-child > p");
+	container.textContent = document.getElementById("typeSlct").textContent;
 }
 
 /**

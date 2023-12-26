@@ -153,20 +153,24 @@ function afficherMesuresChamp() {
  * @param {int} nbrIlots - Nombre d'ilots du champ sélectionné
  */
 function afficherIlots(nbrIlots) {
-	const container = document.getElementById("selectIlot");
+	// Récupère les containers des dropdown des ilots
+	const containers = document.getElementsByClassName("ilot");
 
-	// Supprimer les ilots déjà affichés (en cas de changement de champ)
-	while (container.firstChild) {
-		container.removeChild(container.firstChild);
-	}
+	// Itère sur les containers
+	Array.prototype.forEach.call(containers, container => {
+		// Supprimer les ilots déjà affichés (en cas de changement de champ)
+		while (container.firstChild) {
+			container.removeChild(container.firstChild);
+		}
 
-	for (let i = 1; i <= nbrIlots; i++) {
-		const ilot = document.createElement("button");
-		ilot.setAttribute("value", i);
-		ilot.textContent = "Ilot " + i;
+		for (let i = 1; i <= nbrIlots; i++) {
+			const ilot = document.createElement("button");
+			ilot.setAttribute("value", i);
+			ilot.textContent = "Ilot " + i;
 
-		container.appendChild(ilot);
-	};
+			container.appendChild(ilot);
+		};
+	});
 }
 
 /**

@@ -426,7 +426,11 @@ header > section:last-child .dropbtn {
 	display: flex;
 	width: fit-content;
 }
-
+.options > div:first-child > p,
+.options > div:nth-child(2) > p {
+	width: 135px;
+	text-align: center;
+}
 .options > div > p {
 	width: fit-content;
 	line-height: 60px;

@@ -21,7 +21,7 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 					btn.classList.add("selected");
 					btn.setAttribute("id", idAttr);
 
-					afficherTitreDropdown(idContainer);
+					afficherTitreDropdown(idContainer, idAttr);
 				}
 				else {
 					btn.classList.remove("selected");
@@ -42,55 +42,93 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			button.classList.add("selected");
 			button.setAttribute("id", idAttr);
 
-			afficherTitreDropdown(idContainer);
+			afficherTitreDropdown(idContainer, idAttr);
 		}
 	});
 }
 
 /**
  * Modifie le texte adjacent au dropdown pour afficher la valeur sélectionnée
- * 
+ *
  * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
  */
-function afficherTitreDropdown(idContainer) {
+function afficherTitreDropdown(idContainer, idAttr) {
 	// Titre du champ
 	if (idContainer === "selectChamp") {
-		afficherChampSelectionne();
+		afficherChampSelectionne(idContainer, idAttr);
 	}
 	// Titre de l'ilot
-	else if (idContainer === "selectIlot") {
-		afficherIlotSelectionne();
+	else if (
+		idContainer === "selectIlot" ||
+		idContainer === "selectIlotExport"
+	) {
+		afficherIlotSelectionne(idContainer, idAttr);
 	}
 	// Titre du type de mesure
-	else if (idContainer === "selectType") {
-		afficherMesureSelectionnee();
+	else if (
+		idContainer === "selectType" ||
+		idContainer === "selectTypeExport"
+	) {
+		afficherMesureSelectionnee(idContainer, idAttr);
+	}
+	// Titre durée mesure export
+	else if (idContainer === "selectDureeExport") {
+		afficherDureeSelectionnee(idContainer, idAttr);
 	}
 }
 
 /**
  * Affiche le nom du champ sélectionné dans le header
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
  */
-function afficherChampSelectionne() {
-	const container = document.querySelector("header > " +
-		"section:nth-child(2) > p");
+function afficherChampSelectionne(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
 	container.textContent = "Champ " +
-		document.getElementById("champSlct").value;
+		document.getElementById(idAttr).value;
 }
 
 /**
- * Affiche le numéro de l'ilot sélectionné dans les options du graphique
+ * Affiche le numéro de l'ilot sélectionné dans les options du graphique et
+ * de l'export de données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
  */
-function afficherIlotSelectionne() {
-	const container = document.querySelector("#optGraph > div:last-child > p");
-	container.textContent = "Ilot " + document.getElementById("ilotSlct").value;
+function afficherIlotSelectionne(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
+	container.textContent = "Ilot " + document.getElementById(idAttr).value;
 }
 
 /**
- * Affiche le type de mesure sélectionné dans les options du graphique
+ * Affiche le type de mesure sélectionné dans les options du graphique et
+ * de l'export de données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
  */
-function afficherMesureSelectionnee() {
-	const container = document.querySelector("#optGraph > div:first-child > p");
-	container.textContent = document.getElementById("typeSlct").textContent;
+function afficherMesureSelectionnee(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
+	container.textContent = document.getElementById(idAttr).textContent;
+}
+
+/**
+ * Affiche la durée de mesure sélectionnée dans les options de l'export de
+ * données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherDureeSelectionnee(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+	.previousElementSibling;
+	container.textContent = document.getElementById(idAttr)
+		.textContent;
 }
 
 /**

@@ -73,7 +73,7 @@
 	<section class="containerSecVerti">
 		<h1>Évolution des mesures dans le temps sur l'ilot</h1>
 		<section id="secGraph">
-			<div class="options">
+			<div id="optGraph" class="options">
 				<div>
 					<p>Température</p>
 					<div id="ddType" class="dropdown">
@@ -89,7 +89,7 @@
 					<p>Ilot</p>
 					<div id="ddIlot" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectIlot" class="dropdownContent">
+						<div id="selectIlot" class="dropdownContent ilot">
 						</div>
 					</div>
 				</div>
@@ -150,13 +150,13 @@
 	<section class="containerSecVerti">
 		<h1>Export des données du champ</h1>
 		<section id="secExport">
-			<div id="optGraph" class="options">
+			<div id="optExport" class="options">
 				<div>
 					<p>Type de données</p>
 					<div id="ddTypeExport" class="dropdown">
 						<button class="dropbtn">⇩</button>
 						<div id="selectTypeExport" class="dropdownContent">
-							<button value="tous">Tout</button>
+							<button value="tous">Toutes mesures</button>
 							<button value="temp">Température</button>
 							<button value="humi">Humidité du sol</button>
 							<button value="lumi">Luminosité</button>
@@ -164,10 +164,21 @@
 					</div>
 				</div>
 				<div>
+					<p>Durée</p>
+					<div id="ddTypeExport" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectDureeExport" class="dropdownContent">
+							<button value="7">Semaine passée</button>
+							<button value="31">Mois passé</button>
+							<button value="365">Année passée</button>
+						</div>
+					</div>
+				</div>
+				<div>
 					<p>Ilot</p>
 					<div id="ddIlotExport" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectIlotExport" class="dropdownContent">
+						<div id="selectIlotExport" class="dropdownContent ilot">
 						</div>
 					</div>
 				</div>
@@ -202,7 +213,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		["selectCmpt", "cmptSlct", false],
 		["selectType", "typeSlct", true],
 		["selectIlot", "ilotSlct", true],
-		["selectDuree", "dureeSlct", true]
+		["selectDuree", "dureeSlct", true],
+		["selectTypeExport", "typeExportSlct", true],
+		["selectDureeExport", "dureeExportSlct", true],
+		["selectIlotExport", "ilotExportSlct", true]
 	];
 
 		// Préselectionne les boutons des dropdowns
@@ -230,7 +244,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 * Active la fonction de changement de champ pour charger les nouveaux
 		 * ilots dans le dropdown
 		 */
-		activerBoutonChgmtChamp(idUtilisateur);	
+		activerBoutonChgmtChamp(idUtilisateur);
+
 
 		/**
 		 * Affiche le nom de l'utilisateur, les informations du champ,

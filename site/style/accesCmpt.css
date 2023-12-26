@@ -13,7 +13,7 @@ form > button {
 }
 
 
-/* Version mobile */
+/* Version tablette et mobile */
 @media screen and (max-width: 950px) {
 	/* Corps */
 	#corps {

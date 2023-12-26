@@ -73,7 +73,7 @@
 	<section class="containerSecVerti">
 		<h1>Évolution des mesures dans le temps d'un ilot</h1>
 		<section id="secGraph">
-			<div id="optGraph">
+			<div class="options">
 				<div>
 					<p>Type de données</p>
 					<div id="ddType" class="dropdown">
@@ -143,6 +143,36 @@
 				<div class="cellule titre">Vit. vent (km/h)</div>
 			</div>
 			<div id="donneesMeteo">
+			</div>
+		</section>
+	</section>
+
+	<section class="containerSecVerti">
+		<h1>Export des données du champ</h1>
+		<section id="secExport">
+			<div class="options">
+				<div>
+					<p>Type de données</p>
+					<div id="ddType" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectType" class="dropdownContent">
+							<button value="temp">Température</button>
+							<button value="humi">Humidité du sol</button>
+							<button value="lumi">Luminosité</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>Ilot</p>
+					<div id="ddIlot" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectIlot" class="dropdownContent">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="export">
+				<button id="btnExport" class="btn">Exporter en CSV</button>
 			</div>
 		</section>
 	</section>

@@ -230,7 +230,7 @@ header > section > * {
 	cursor: auto;
 }
 header > section > p,
-#optGraph > div > p {
+.options > div > p {
 	font-size: 16px;
 	line-height: 72px;
 	margin: 0;
@@ -390,7 +390,7 @@ header > section:last-child .dropbtn {
 }
 
 		/* Options du graphique */
-#optGraph {
+.options {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -399,23 +399,23 @@ header > section:last-child .dropbtn {
 	border-radius: 10px;
 	z-index: 1;
 }
-#optGraph > div {
+.options > div {
 	display: flex;
 	width: fit-content;
 }
-#optGraph > div > p {
+.options > div > p {
 	width: fit-content;
 	line-height: 60px;
 	padding-left: 10px;
 }
-#optGraph > div .dropbtn {
+.options > div .dropbtn {
 	width: 50px;
 	height: 60px;
 }
-#optGraph > div:first-child > p {
+.options > div:first-child > p {
 	border-radius: 10px 0 0 10px;
 }
-#optGraph > div:last-child .dropbtn {
+.options > div:last-child .dropbtn {
 	border-radius: 0 10px 10px 0;
 }
 
@@ -506,12 +506,37 @@ header > section:last-child .dropbtn {
 	left: 0;
 }
 
+	/* Section export de données */
+#export {
+	display: flex;
+	justify-content: center;
+}
+#export > button {
+	font-family: "Open Sans", Arial, sans-serif;
+	font-size: 14px;
+	background-color: #fbfbfb;
+	width: 20%;
+	height: 40px;
+	margin-top: 20px;
+	padding: 4px;
+	border: 1px solid #cecece;
+	border-radius: 5px;
+}
+#export button:hover {
+	cursor: pointer;
+	background-color: #f6f6f6;
+}
+#export button:active {
+	background-color: #e6e6e6;
+}
+
 /* Footer */
 footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	z-index: -1;
 	width: 100vw;
 	height: 72px;
 	margin-top: calc(72px + 36px);
@@ -535,7 +560,7 @@ footer > p {
 }
 
 
-/* Version tablette */
+/* Version tablette et mobile */
 @media screen and (max-width: 950px) {
 	/* Général */
 	h1,
@@ -610,7 +635,7 @@ footer > p {
 		transform: scaleY(3.3);
 	}
 	header > section > p,
-	#optGraph > div > p {
+	.options > div > p {
 		width: fit-content;
 		line-height: 40px;
 		padding-right: 10px;
@@ -664,7 +689,7 @@ footer > p {
 
 		/* Section graphique */
 			/* Options du graphique */
-	#optGraph > div > p {
+	.options > div > p {
 		font-size: 15px;
 		line-height: 40px;
 	}
@@ -684,13 +709,13 @@ footer > p {
 		top: calc(40px + 20px) !important;
 	}
 
-	/* Section tableau */
+		/* Section tableau */
 	#secTableau > div {
 		grid-template-columns: minmax(80px, 1fr) 150px 80px
 			repeat(3, minmax(90px, 1fr));
 	}
 
-	/* Section météo */
+		/* Section météo */
 	#secMeteo {
 		width: 100%;
 	}
@@ -698,10 +723,15 @@ footer > p {
 		grid-template-columns: 100px repeat(5, 80px) 120px repeat(4, 80px);
 	}
 
-			/* Options de la météo */
+				/* Options de la météo */
 	#ddDuree > .dropbtn {
 		width: 100% !important;
 		height: 100% !important;
+	}
+
+		/* Section export de données */
+	#export > button {
+		width: 50%;
 	}
 
 	/* Footer */
@@ -858,7 +888,7 @@ footer > p {
 
 		/* Section graphique */
 				/* Options du graphique */
-	#optGraph {
+	.options {
 		box-shadow: 0 15px 20px -15px #353535;
 	}
 
@@ -880,6 +910,18 @@ footer > p {
 		/* Section tableau */
 	.errMesure {
 		color: #ff3535;
+	}
+
+		/* Section export de données */
+	#export > button {
+		border: 1px solid #3d3d3d;
+		background-color: #191919;
+	}
+	#export > button:hover {
+		background-color: #222222;
+	}
+	#export > button:active {
+		background-color: #2f2f2f;
 	}
 
 		/* Footer */

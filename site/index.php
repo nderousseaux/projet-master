@@ -153,9 +153,10 @@
 			<div class="options">
 				<div>
 					<p>Type de données</p>
-					<div id="ddType" class="dropdown">
+					<div id="ddTypeExport" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectType" class="dropdownContent">
+						<div id="selectTypeExport" class="dropdownContent">
+							<button value="tous">Tout</button>
 							<button value="temp">Température</button>
 							<button value="humi">Humidité du sol</button>
 							<button value="lumi">Luminosité</button>
@@ -164,9 +165,9 @@
 				</div>
 				<div>
 					<p>Ilot</p>
-					<div id="ddIlot" class="dropdown">
+					<div id="ddIlotExport" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectIlot" class="dropdownContent">
+						<div id="selectIlotExport" class="dropdownContent">
 						</div>
 					</div>
 				</div>

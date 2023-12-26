@@ -86,3 +86,10 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 		});
 	});
 }
+
+// function exportCSV(idUtilisateur) {
+// 	const valChamp = document.getElementById("champSlct").value;
+// 	const valIlot = document.getElementById("ilotSlctExport").value;
+// 	const valType = document.getElementById("typeSlctExport").value;value;
+
+// }

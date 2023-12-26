@@ -163,6 +163,15 @@ function afficherIlots(nbrIlots) {
 			container.removeChild(container.firstChild);
 		}
 
+		// Ajoute le bouton "Tous les ilots" dans le dropdown de l'export
+		if (container.id === "selectIlotExport") {
+			const ilot = document.createElement("button");
+			ilot.setAttribute("value", "tous");
+			ilot.textContent = "Tous ilots";
+
+			container.appendChild(ilot);
+		}
+
 		for (let i = 1; i <= nbrIlots; i++) {
 			const ilot = document.createElement("button");
 			ilot.setAttribute("value", i);
@@ -433,7 +442,6 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 			afficherMoyennes(donnees[2]);
 			afficherMesuresChamp(donnees[3]);
 			afficherIlots(donnees[4]);
-			afficherMeteo(idUtilisateur);
 
 			resolve();
 		})

@@ -246,6 +246,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 */
 		activerBoutonChgmtChamp(idUtilisateur);
 
+		// Affiche la météo pour le champ sélectionné
+		afficherMeteo(idUtilisateur);
 
 		/**
 		 * Affiche le nom de l'utilisateur, les informations du champ,
@@ -279,6 +281,12 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	let dropdownIlotGraph = document.getElementById("ddIlot");
 	dropdownIlotGraph.addEventListener("click", _ => {
 		helperAfficherGraph();
+	});
+
+		// Bouton pour exporter les données
+	document.getElementById("btnExport").addEventListener("click",
+	e => {
+		exportCSV(idUtilisateur);
 	});
 
 

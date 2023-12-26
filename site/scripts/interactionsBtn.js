@@ -101,6 +101,12 @@ function afficherChampSelectionne(idContainer, idAttr) {
 function afficherIlotSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
 		.previousElementSibling;
+	
+	if (document.getElementById(idAttr).value === "tous") {
+		container.textContent = "Tous ilots";
+		return;
+	}
+
 	container.textContent = "Ilot " + document.getElementById(idAttr).value;
 }
 
@@ -163,9 +169,68 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 	});
 }
 
-// function exportCSV(idUtilisateur) {
-// 	const valChamp = document.getElementById("champSlct").value;
-// 	const valIlot = document.getElementById("ilotSlctExport").value;
-// 	const valType = document.getElementById("typeSlctExport").value;value;
+/**
+ * Converti les données passées en paramètre en CSV
+ *
+ * @param {array} donnees - à convertir
+ * @returns {string} - les données converties en CSV
+ */
+function convertirEnCSV(donnees) {
+	let csv = '';
 
-// }
+	// Ajoute les titres des colonnes
+	csv += "numChamp;numIlot;dateHeureMesure;temp;humi;lumi\n"
+
+	// Ajoute les données
+	donnees.forEach(donnee => {
+		csv += donnee.join(";") + "\n";
+	});
+
+	return csv;
+}
+
+/**
+ * Lance le téléchargement d'un fichier, avec les données passées en paramètre
+ *
+ * @param {string} nomFichier - à télécharger
+ * @param {string} donnees - à placer dans le fichier
+ */
+function lancerTelechargement(nomFichier, donnees) {
+	// Créé un lien de téléchargement, avec les données à télécharger
+	const container = document.createElement('a');
+	container.setAttribute("href", "data:text/plain;charset=utf-8," +
+		encodeURIComponent(donnees));
+	container.setAttribute("download", nomFichier);
+
+	// Ajoute le lien au DOM
+	container.style.display = "none";
+	document.body.appendChild(container);
+
+	// Clique sur le lien pour lancer le téléchargement
+	container.click();
+
+	// Supprime le lien du DOM
+	document.body.removeChild(container);
+}
+
+function exportCSV(idUtilisateur) {
+	const valChamp = document.getElementById("champSlct").value;
+	const valType = document.getElementById("typeExportSlct").value
+	const valDuree = document.getElementById("dureeExportSlct").value;
+	const valIlot = document.getElementById("ilotExportSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+	champPost.append("champ", valChamp);
+	champPost.append("type", valType);
+	champPost.append("duree", valDuree);
+	champPost.append("ilot", valIlot);
+
+	recupDonnees(champPost, "recupExport.php")
+	.then(donnees => {
+		lancerTelechargement("export.csv", convertirEnCSV(donnees));
+	})
+	.catch(err => {
+		console.log(err);
+	});
+}

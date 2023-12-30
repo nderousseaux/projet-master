@@ -198,7 +198,7 @@ function connexionCmpt(e) {
 			}
 			// Demande de changer mot de passe (à la première connexion)
 			else if (donnees[0] === 1) {
-				changerFormulaire();
+				changerFormulaire(donnees[1]);
 			}
 			// Erreur dans les identifiants
 			else {
@@ -258,8 +258,10 @@ function reinitBouton() {
 /**
  * Change le formulaire pour permettre à l'utilisateur de changer son mot de
  * passe lors de sa première connexion
+ * 
+ * @param {int} idAgri - identifiant de l'agriculteur
  */
-function changerFormulaire() {
+function changerFormulaire(idAgri) {
 	const container = document.getElementById("infosCmpt");
 
 	// Supprime l'ancien formulaire
@@ -290,10 +292,10 @@ function changerFormulaire() {
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
 	document.getElementById("enregMdp").addEventListener("click",
 	e => {
-		enregistrerMdp(e);
+		enregistrerMdp(e, idAgri);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		enregistrerMdp(e);
+		enregistrerMdp(e, idAgri);
 	});
 }
 
@@ -302,14 +304,16 @@ function changerFormulaire() {
  * produit et envoie le mot de passe au backend s'il respecte les critères
  *
  * @param {Event} e - événement
+ * @param {int} idAgri - identifiant de l'agriculteur
  */
-function enregistrerMdp(e) {
+function enregistrerMdp(e, idAgri) {
 	e.preventDefault();
 
 	let nbrErr = verifInputMdp();
 
 	if (nbrErr === 0) {
 		const champPost = new FormData();
+		champPost.append("idAgri", idAgri);
 		champPost.append("mdp", mdp);
 
 		recupDonnees(champPost, "modifCmpt.php")

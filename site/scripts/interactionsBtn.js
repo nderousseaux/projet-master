@@ -231,6 +231,6 @@ function exportCSV(idUtilisateur) {
 		lancerTelechargement("export.csv", convertirEnCSV(donnees));
 	})
 	.catch(err => {
-		console.log(err);
+		console.error(err);
 	});
 }

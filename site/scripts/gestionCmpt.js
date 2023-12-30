@@ -90,7 +90,7 @@ function modifInputCmpt(e, requeteAdmin = false) {
 				majValInputCmpt(champPost);
 			})
 			.catch(err => {
-				console.log(err);
+				console.error(err);
 			});
 		}
 	}
@@ -154,7 +154,7 @@ function creationCmpt(e) {
 
 		recupDonnees(champPost, "creationUtilisateur.php")
 		.catch(err => {
-			console.log(err);
+			console.error(err);
 		});
 	}
 }
@@ -206,7 +206,7 @@ function connexionCmpt(e) {
 			}
 		})
 		.catch(err => {
-			console.log(err);
+			console.error(err);
 		});
 	}
 }
@@ -258,10 +258,10 @@ function reinitBouton() {
 /**
  * Change le formulaire pour permettre à l'utilisateur de changer son mot de
  * passe lors de sa première connexion
- * 
- * @param {int} idAgri - identifiant de l'agriculteur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function changerFormulaire(idAgri) {
+function changerFormulaire(idUtilisateur) {
 	const container = document.getElementById("infosCmpt");
 
 	// Supprime l'ancien formulaire
@@ -292,10 +292,10 @@ function changerFormulaire(idAgri) {
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
 	document.getElementById("enregMdp").addEventListener("click",
 	e => {
-		enregistrerMdp(e, idAgri);
+		enregistrerMdp(e, idUtilisateur);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		enregistrerMdp(e, idAgri);
+		enregistrerMdp(e, idUtilisateur);
 	});
 }
 
@@ -304,16 +304,16 @@ function changerFormulaire(idAgri) {
  * produit et envoie le mot de passe au backend s'il respecte les critères
  *
  * @param {Event} e - événement
- * @param {int} idAgri - identifiant de l'agriculteur
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function enregistrerMdp(e, idAgri) {
+function enregistrerMdp(e, idUtilisateur) {
 	e.preventDefault();
 
 	let nbrErr = verifInputMdp();
 
 	if (nbrErr === 0) {
 		const champPost = new FormData();
-		champPost.append("idAgri", idAgri);
+		champPost.append("idUtilisateur", idUtilisateur);
 		champPost.append("mdp", mdp);
 
 		recupDonnees(champPost, "modifCmpt.php")

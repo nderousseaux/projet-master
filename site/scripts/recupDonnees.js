@@ -1,13 +1,13 @@
 /**
- * Récupère des données dans le back, en fonction du champPost
+ * Récupère des données dans le back, en fonction du champPost, en
+ * accédant à un fichier spécifié, dans le backend
  *
  * @param {formData} champPost - Champ à envoyer au back
  * @param {string} urlBackend - URL du backend
- * @returns {promise} - les données sous format json
+ * @returns {promise} - Promesse contenant les données récupérées
  */
 function recupDonnees(champPost, fichierBackend) {
 	return new Promise((resolve, reject) => {
-		// Récupère les dates des mesures et les données de la colonne demandée
 		fetch("../backend/" + fichierBackend, {
 			method: "POST",
 			body: champPost

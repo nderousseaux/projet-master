@@ -43,6 +43,7 @@
 					</input>
 					<div>
 						<button
+							type="button"
 							onclick="copierPressePapier()"
 							onmouseout="reinitBouton()"
 						>
@@ -74,16 +75,16 @@
 						1 chiffre et 1 caractère spécial
 					</span>
 				</div>
-				<label class="colonne" for="couleur1">Couleur 1</label>
+				<label class="colonne" for="couleur1">Couleur haute</label>
 				<input class="colonne selectCouleur" id="couleur1"
 					name="couleur1" type="color" placeholder="#000000"
 					value="#000000"></input>
-				<label class="colonne" for="couleur2">Couleur 2</label>
+				<label class="colonne" for="couleur2">Couleur basse</label>
 				<input class="colonne selectCouleur" id="couleur2"
 					name="couleur2" type="color" placeholder="#ffffff"
 					value="#ffffff"></input>
-				<button id="reinit">Réinitialiser</button>
-				<button id="enreg">Enregistrer</button>
+				<button type="button" id="reinit">Réinitialiser</button>
+				<button type="button" id="enreg">Enregistrer</button>
 			</form>
 		</div>
 		<div id="icone">
@@ -112,8 +113,7 @@
 	document.getElementById("reinit").addEventListener("click",	e => {
 		reinitInputCmpt(e);
 	});
-	document.getElementById("enreg").addEventListener("click",
-	e => {
+	document.getElementById("enreg").addEventListener("click",	e => {
 		modifInputCmpt(e);
 	});
 	document.querySelector("form").addEventListener("submit", e => {

@@ -29,7 +29,7 @@
 			<label class="colonne" for="courriel">Courriel</label>
 			<input class="colonne" id="courriel" name="courriel"
 				placeholder="adresse@courriel.com"></input>
-			<button id="enreg">Créer</button>
+			<button type="button" id="enreg">Créer</button>
 		</form>
 	</section>
 </div>

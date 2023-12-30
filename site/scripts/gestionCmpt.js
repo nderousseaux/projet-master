@@ -281,7 +281,7 @@ function changerFormulaire(idAgri) {
 				1 chiffre et 1 caractère spécial
 			</span>
 		</div>
-		<button id="enregMdp">Enregistrer</button>
+		<button type="button" id="enregMdp">Enregistrer</button>
 	`;
 	container.appendChild(nouveauForm);
 

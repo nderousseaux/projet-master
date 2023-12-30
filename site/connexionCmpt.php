@@ -21,7 +21,7 @@
 			<label class="colonne" for="mdp">Mot de passe</label>
 			<input type="password" id="mdp" name="mdp"
 				class="colonne" placeholder="******"></input>
-			<button id="enreg">Connexion</button>
+			<button type="button" id="enreg">Connexion</button>
 		</form>
 	</section>
 </div>

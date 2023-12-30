@@ -191,8 +191,19 @@ function connexionCmpt(e) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
-		.then(_ => {
-			window.location.href = "index.php";
+		.then(donnees => {
+			// Redige vers la page d'accueil
+			if (donnees[0] === 0) {
+				window.location.href = "index.php";
+			}
+			// Demande de changer mot de passe (à la première connexion)
+			else if (donnees[0] === 1) {
+				changerFormulaire();
+			}
+			// Erreur dans les identifiants
+			else {
+				console.log("Erreur dans les identifiants");
+			}
 		})
 		.catch(err => {
 			console.log(err);
@@ -240,6 +251,71 @@ function copierPressePapier() {
  * Réinitialise le contenu affiché sur le bouton de copie
  */
 function reinitBouton() {
-	var containerBouton = document.getElementById("texteBouton");
+	let containerBouton = document.getElementById("texteBouton");
 	containerBouton.innerHTML = "Copier dans le presse-papier";
+}
+
+
+/**
+ * Change le formulaire pour permettre à l'utilisateur de changer son mot de
+ * passe lors de sa première connexion
+ */
+function changerFormulaire() {
+	const container = document.getElementById("infosCmpt");
+
+	// Supprime l'ancien formulaire
+	const ancienForm = document.getElementById("formCmpt");
+	ancienForm.remove();
+
+	// Crée le nouveau formulaire
+	const nouveauForm = document.createElement("form");
+	nouveauForm.id = "formMdp";
+	nouveauForm.innerHTML = `
+		<label class="colonne" for="mdp">Mot de passe</label>
+		<div id="secMdp">
+			<input type="password" id="mdp" name="mdp"
+			class="colonne" placeholder="******" value=''></input>
+			<span class="bulle">
+				Minimum 14 caractères, 1 majuscule, 1 minuscule,
+				1 chiffre et 1 caractère spécial
+			</span>
+		</div>
+		<button id="enregMdp">Enregistrer</button>
+	`;
+	container.appendChild(nouveauForm);
+
+	// Change le titre du container
+	const h1Element = container.querySelector("h1");
+	h1Element.textContent = "Définir un nouveau mot de passe";
+
+	// Ajoute les événements au bouton d'enregistrement et au formulaire
+	document.getElementById("enregMdp").addEventListener("click",
+	e => {
+		enregistrerMdp(e);
+	});
+	document.querySelector("form").addEventListener("submit", e => {
+		enregistrerMdp(e);
+	});
+}
+
+/**
+ * Vérifie le champ du mot de passe dans le formulaire, lorsqu'un événement se
+ * produit et envoie le mot de passe au backend s'il respecte les critères
+ *
+ * @param {Event} e - événement
+ */
+function enregistrerMdp(e) {
+	e.preventDefault();
+
+	let nbrErr = verifInputMdp();
+
+	if (nbrErr === 0) {
+		const champPost = new FormData();
+		champPost.append("mdp", mdp);
+
+		recupDonnees(champPost, "modifCmpt.php")
+		.catch(err => {
+			console.error(err);
+		});
+	}
 }

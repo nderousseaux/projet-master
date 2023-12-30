@@ -202,7 +202,7 @@ function connexionCmpt(e) {
 			}
 			// Erreur dans les identifiants
 			else {
-				console.log("Erreur dans les identifiants");
+				afficherMsgErreur(donnees[1]);
 			}
 		})
 		.catch(err => {
@@ -255,7 +255,6 @@ function reinitBouton() {
 	containerBouton.innerHTML = "Copier dans le presse-papier";
 }
 
-
 /**
  * Change le formulaire pour permettre à l'utilisateur de changer son mot de
  * passe lors de sa première connexion
@@ -285,8 +284,8 @@ function changerFormulaire() {
 	container.appendChild(nouveauForm);
 
 	// Change le titre du container
-	const h1Element = container.querySelector("h1");
-	h1Element.textContent = "Définir un nouveau mot de passe";
+	const titre = container.querySelector("h1");
+	titre.textContent = "Définir un nouveau mot de passe";
 
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
 	document.getElementById("enregMdp").addEventListener("click",
@@ -318,4 +317,27 @@ function enregistrerMdp(e) {
 			console.error(err);
 		});
 	}
+}
+
+/**
+ * Affiche un message d'erreur dans le formulaire
+ *
+ * @param {string} message - message d'erreur à afficher
+ */
+function afficherMsgErreur(message) {
+	// Supprime le message d'erreur précédent
+	if (document.getElementById("msgErr") !== null) {
+		document.getElementById("msgErr").remove();
+	}
+
+	// Ajoute le message d'erreur au formulaire
+	const container = document.getElementById("formCmpt");
+	const msgErreur = document.createElement("p");
+	msgErreur.textContent = message;
+	msgErreur.id = "msgErr";
+	container.prepend(msgErreur);
+
+	// Ajoute la classe erreur aux champs du formulaire
+	document.getElementById("courriel").classList.add("erreur");
+	document.getElementById("mdp").classList.add("erreur");
 }

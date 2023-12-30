@@ -11,6 +11,11 @@
 form > button {
 	grid-column: span 2;
 }
+#msgErr {
+	grid-column: span 2;
+	text-align: center;
+	color: #d30000;
+}
 
 
 /* Version tablette et mobile */

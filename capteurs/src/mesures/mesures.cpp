@@ -2,6 +2,19 @@
 
 /* Public */
 
+int Mesures::updateLux() {
+    int fd = open(I2C_DEVICE.c_str(), O_RDWR);
+
+    if (fd < 0) {
+
+    }
+
+    if (ioctl(fd, I2C_SLAVE, LUX_ADDR) < 0) {
+
+    }
+    return 0;
+}
+
 float Mesures::genValeursFloat(float borneInf, float borneSupp) {
 	std::random_device rdm;
 	std::mt19937 gen(rdm());

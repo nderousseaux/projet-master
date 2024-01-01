@@ -1,6 +1,13 @@
 #ifndef MESURES_H
 #define MESURES_H
 
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <linux/ioctl.h>
+#include <linux/types.h>
+#include <linux/i2c-dev.h>
+
 #include <random>
 
 class Mesures {
@@ -11,6 +18,12 @@ class Mesures {
 		float humidite_;
 		int luminosite_;
 
+        inline static std::string I2C_DEVICE = {
+                "/dev/i2c-1"
+        };
+        static constexpr int LUX_ADDR = 0x10;
+        static constexpr int HUM_ADDR = 0x36;
+
 
 	/* Constructeur et destructeur */
 	public:
@@ -20,16 +33,16 @@ class Mesures {
 
 	/* Getters */
 	public:
-		inline std::string getDate(void) const {
+		[[nodiscard]] inline std::string getDate(void) const {
 			return date_;
 		}
-		inline float getTemperature(void) const {
+		[[nodiscard]] inline float getTemperature(void) const {
 			return temperature_;
 		}
-		inline float getHumidite(void) const {
+		[[nodiscard]] inline float getHumidite(void) const {
 			return humidite_;
 		}
-		inline int getLuminosite(void) const {
+		[[nodiscard]] inline int getLuminosite(void) const {
 			return luminosite_;
 		}
 
@@ -51,6 +64,9 @@ class Mesures {
 
 
 	/* Méthodes */
+    private:
+        static int updateLux();
+
 	public:
 		/**
 		 * @brief Génère des valeurs aléatoires entre borneInf et borneSupp

@@ -1,5 +1,11 @@
 <?php
 
+
+// codes de retour sur l'etat de l'authentification'
+define('OK', 0);
+define('TMP_PWD', 1);
+define('CONN_FAILED', 2);
+
 // fonction de hashage du mot de passe (pour comparaison avec celui stocké en bdd)
 function hash_mdp($mdp) {
     //TODO
@@ -41,45 +47,50 @@ try {
 $filtre = [
 	"mail" => $_POST["courriel"]
 ];
-//$options = [];
 
 // Créé la requête
 $requete = new MongoDB\Driver\Query($filtre);
-$curdate = new DateTime("UTC");
+//$curdate = new DateTime("UTC");
 
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
-if (empty($cursor)) { // mail non existant
-    echo "Email erroné, veuillez réessayer";
-    echo "<script>location.href='../connexionCmpt.php';</script>";
-    die();
-    //http_redirect($url);
+if ($cursor->isDead()) { // mail non existant
+    echo json_encode([CONN_FAILED, "identifiants erronés"]);
+    exit();
 }
 
 foreach ($cursor as $infosUser) {
-    $idUser = $infosUser->idUser;
-    $idAgri = $infosUser->idAgri;
-    $role = $infosUser->role;
-    $nom = $infosUser->nom;
-    $prenom = $infosUser->prenom;
-    $mail = $infosUser->mail;
-    $mdp = $infosUser->mdp;
+    $idUser     = $infosUser->idUser;
+    $idAgri     = $infosUser->idAgri;
+    $role       = $infosUser->role;
+    $nom        = $infosUser->nom;
+    $prenom     = $infosUser->prenom;
+    $mail       = $infosUser->mail;
+    $mdp        = $infosUser->mdp;
+    $mdp_temp   = $infosUser->mdp_temp;
 }
 
-if ($mdp == "pasSafeDuTout" && $_POST["mdp"] == "pasSafeDuTout") {  // nouveau compte
-    echo "Bienvenue, veuillez définir votre mot de passe.";
-    // TODO: formulaire de saisie nouveau mdp
-} else if (hash_mdp($_POST["mdp"]) == $mdp) {   // mdp valide
-    //echo "Connexion réussie!";
-    echo "<script>location.href='../index.php';</script>";
-    die();
-    //TODO: rediriger sur index.php
+if (hash_mdp($_POST["mdp"]) == $mdp) {   // mdp valide
+    // demarre une session avec les infos du user
+    session_start();
+    $_SESSION["idUser"] = $idUser;
+    $_SESSION["idAgri"] = $idAgri;
+    $_SESSION["role"]   = $role;
+    $_SESSION["nom"]    = $nom;
+    $_SESSION["prenom"] = $prenom;
+    $_SESSION["mail"]   = $mail;
+
+    if ($mdp_temp == true) {    // nouveau compte
+        echo json_encode([TMP_PWD, "change mdp"]); // preciser str a renvoyer
+        exit();
+    }
+    else {
+        echo json_encode([OK, ""]);
+        exit();
+    }
+    
+
 } else {    // mauvais mdp
-    //echo "Mot de passe erroné, veuillez réessayer";
-    echo "<script>location.href='../connexionCmpt.php';</script>";
-    die();
-    //http_redirect($url);
+    echo json_encode([CONN_FAILED, "identifiants erronés"]);
+    exit();
 }
-
-
-?>

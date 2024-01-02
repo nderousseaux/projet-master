@@ -47,9 +47,6 @@ function verifInputCmpt(e) {
 		// Courriel
 	nbrErr += verifInputCourriel();
 
-		// Mot de passe
-	nbrErr += verifInputMdp();
-
 	return nbrErr;
 }
 

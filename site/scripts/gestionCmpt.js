@@ -41,6 +41,9 @@ function modifInputCmpt(e, requeteAdmin = false) {
 		// Prénom, Nom et Courriel
 	let nbrErr = verifInputCmpt(e);
 
+		// Mot de passe
+	nbrErr += verifInputMdp();
+
 		// Rôle
 	if (requeteAdmin === true) {
 		nbrErr += verifSelectRole();

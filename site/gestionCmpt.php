@@ -1,10 +1,13 @@
 <?php
 	// Récupérer ici le rôle de l'utilisateur
-	$role = "admin"; // "admin" ou "standard"
+	//$role = "admin"; // "admin" ou "standard"
+	session_start();
+	$role = $_SESSION["role"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>
@@ -101,8 +104,11 @@
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
-	let idUtilisateur = 0;
-
+	//let idUtilisateur = 0;
+	const idUtilisateur = <?php 
+		//session_start();
+		echo json_encode($_SESSION["idAgri"]); //idUser ?
+	?>;
 
 	/*** Gestion des données ***/
 		// Récupère les données de l'utilisateur et rempli le formulaire avec

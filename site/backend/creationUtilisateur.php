@@ -46,6 +46,21 @@ function generate_password() {
 }
 
 
+// envoie un email pour informer l'utilisateur de la création d'un compte à son nom
+// et lui fournir son mot de passe initial
+// /!\ utilise le paquet sendmail
+function notify($nom, $prenom, $mail, $mdp) {
+    $to      = $mail;
+    $subject = 'Compte ajouté';
+    $message = "Bonjour $prenom $nom,\nVoici votre mot de passe temporaire: $mdp\n";
+    $headers = array(
+        'From' => 'account-notify@agri-net.com'
+);
+
+mail($to, $subject, $message, $headers);
+}
+
+
 // Requete pour récupérer le plus grand idUser pour trouver le 1er libre
 function firstFreeIdUser($mongoClient, $database, $collection) {
     $filter = [];
@@ -95,24 +110,24 @@ try {
 
 // Récupérer IdAgri de l'utilisateur actuel pour ajouter nouveau user au même agri
 session_start();
-$idAgri = $_SESSION["idAgri"];
-// $idAgri = 0;
 
+$mail = $_POST["courriel"];
+$mdp = generate_password();
 $newCompte = [
     "idUser"    => firstFreeIdUser($mongoClient, $database, $collection),
-    "idAgri"    => $idAgri,
+    "idAgri"    => $_SESSION["idAgri"],
     "role"      => $_POST['role'],
     "nom"       => $_POST['nom'],
     "prenom"    => $_POST['prenom'],
-    "mail"      => $_POST['courriel'],
-    "mdp"       => generate_password(),
+    "mail"      => $mail,
+    "mdp"       => $mdp,
     "mdp_temp"  => true,
 ];
 
 // vérifier qu'il n'y a pas déjà un compte pour cette @ mail
 // Défini le filtre
 $filtre = [
-	"mail" => $_POST["courriel"]
+	"mail" => $mail
 ];
 
 // Créé la requête
@@ -120,8 +135,8 @@ $requete = new MongoDB\Driver\Query($filtre);
 
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
-if (!empty($cursor)) { // mail deja existant
-    echo "Il existe deja un utilisateur avec cette adresse de courriel";
+if (!$cursor->isDead()) { // mail deja existant
+    echo json_encode("Il existe deja un utilisateur avec comme adresse de courriel $mail");
     exit();
 }
 
@@ -133,7 +148,9 @@ $insert->insert($newCompte);
 
 try {
     $result = $mongoClient->executeBulkWrite("$database.$collection", $insert, $writeConcern);
-    echo "Document inserted successfully. Inserted document ID: " . $result->getInsertedCount();
+    $mail = "florent.seel@etu.unistra.fr";
+    notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
+    echo json_encode("Utilisateur ajoute.");
 } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
     die("Error inserting document: " . $e->getMessage());
 }

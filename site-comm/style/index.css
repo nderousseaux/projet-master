@@ -30,18 +30,21 @@ header {
 	color: #ffffff;
 	text-align: center;
 }
-header > img:first-child {
+header > div > img:first-child {
 	width: 100px;
 	height: 100px;
 	padding: 20px;
 }
-header > h1,
+header > div {
+	display: flex;
+}
+header > div > h1,
 header > p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-header > h1 {
+header > div > h1 {
 	width: 250px;
 	margin: 0;
 	padding: 20px;
@@ -117,6 +120,14 @@ header > h2 {
 	right: 74px;
 	background-color: #4caf50;
 	border-radius: 10px;
+	box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2);
+	transform: scaleY(0);
+	transform-origin: bottom;
+	transition: transform ease-in-out 0.2s;
+}
+.visible {
+	transform: scaleY(1) !important;
+	transition: transform ease-in-out 0.2s;
 }
 #formulaire > h2 {
 	margin-top: 0;
@@ -126,6 +137,7 @@ header > h2 {
 	flex-direction: column;
 	width: 30vw;
 	height: calc(100vh - 64px - 20px - 100px);
+	overflow-y: auto;
 }
 #formulaire > form > label {
 	display: flex;
@@ -134,11 +146,12 @@ header > h2 {
 }
 #formulaire > form > input,
 #formulaire > form > textarea {
+	font-family: "Open Sans", Arial, sans-serif;
 	padding: 10px;
 	border: none;
 	border-radius: 5px;
 	background-color: #ffffff;
-
+	font-size: 15px;
 }
 #formulaire > form > textarea {
 	height: 100px;
@@ -151,6 +164,18 @@ header > h2 {
 	margin-top: 20px;
 	cursor: pointer;
 }
+#formulaire > form > input:last-child:hover {
+	background-color: #405840;
+}
+#formulaire > form > input:last-child:active {
+	background-color: #3d623a;
+}
+.erreur {
+	background-color: rgba(255, 0, 0, 0.5) !important;
+}
+.erreur::placeholder {
+	color: #ffffff !important;
+}
 
 /* Footer */
 footer {
@@ -159,4 +184,46 @@ footer {
 	text-align: center;
 	padding: 20px;
 	margin: 0;
+}
+
+
+/* Version tablette et mobile */
+@media screen and (max-width: 950px) {
+	/* En-tête */
+	header {
+		flex-direction: column;
+	}
+	header > div {
+		display: flex;
+		align-items: center;
+		padding: 10px 0;
+	}
+	header > div > img:first-child {
+		width: 50px;
+		height: 50px;
+		padding: 0 0 0 10px;
+	}
+	header > div > h1 {
+		width: calc(100% - 50px - 10px);
+		padding: 0;
+	}
+	header > h2 {
+		width: 100%;
+		height: 70px;
+		font-size: 15px;
+	}
+
+	/* Formulaire */
+	#formulaire {
+		bottom: 94px;
+		right: 10px;
+		width: calc(90vw - 2 * 10px);
+	}
+	#formulaire > form {
+		width: 100%;
+		height: fit-content;
+	}
+	#formulaire > p {
+		font-size: 15px;
+	}
 }

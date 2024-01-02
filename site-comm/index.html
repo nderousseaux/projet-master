@@ -10,10 +10,12 @@
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<title>Accueil</title>
 </head>
-<body>
+<body tabindex='0'>
 	<header>
-		<img src="img/AlsAgriNet.svg" alt="Logo AlsAgriNet"/>
-		<h1>AlsAgriNet</h1>
+		<div>
+			<img src="img/AlsAgriNet.svg" alt="Logo AlsAgriNet"/>
+			<h1>AlsAgriNet</h1>
+		</div>
 		<h2>Votre partenaire pour une agriculture durable</h2>
 	</header>
 	<div id="corps">
@@ -67,21 +69,40 @@
 	</div>
 	<div id="formulaire">
 		<h2>Contactez-nous</h2>
-		<form action="contact.php" method="post">
+		<form action="contact.php">
 			<label for="nom">Nom</label>
-			<input type="text" name="nom" id="nom" required/>
+			<input type="text" name="nom" id="nom" placeholder="Nom" required/>
 			<label for="prenom">Prénom</label>
-			<input type="text" name="prenom" id="prenom" required/>
+			<input type="text" name="prenom" id="prenom" placeholder="Prénom"
+				required/>
 			<label for="email">Courriel</label>
-			<input type="email" name="courriel" id="courriel" required/>
+			<input type="email" name="courriel" id="courriel"
+				placeholder="adresse@courriel.fr" required/>
 			<label for="message" aria-required>Message</label>
-			<textarea required></textarea>
+			<textarea id="message" placeholder="Votre demande..."
+				required></textarea>
 			<input type="submit" value="Envoyer"/>
 		</form>
-
 	</div>
 	<footer>
 		Tous droits réservés - AlsAgriNet - 2024
 	</footer>
+<script src="scripts/recupDonnees.js"></script>
+<script src="scripts/formulaire.js"></script>
+<script>
+	document.querySelector("#formulaire > form").addEventListener("submit",
+	(e) => {
+		enregistrementContact(e);
+	});
+	document.querySelector("#formulaire input[type=submit]").addEventListener(
+	"click", e => {
+		enregistrementContact(e);
+	});
+
+	document.querySelector("#bulle").addEventListener("click", () => {
+		const formulaire = document.querySelector("#formulaire");
+		formulaire.classList.toggle("visible");
+	});
+</script>
 </body>
 </html>

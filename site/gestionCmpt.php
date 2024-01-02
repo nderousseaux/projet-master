@@ -35,10 +35,10 @@
 				include "assets/selecteurUtilisateur.php"
 			?>
 			<form id="formCmpt">
-				<label class="colonne" for="idAgri">Identifiant agriculteur
+				<label class="colonne" for="idUtili">Identifiant utilisateur
 				</label>
 				<div id="secCopie">
-					<input class="colonne" id="idAgri" disabled name="idAgri"
+					<input class="colonne" id="idUtili" disabled name="idUtili"
 						placeholder='-'>
 					</input>
 					<div>
@@ -126,7 +126,7 @@
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	const containerInput = document.getElementById("idAgri");
+	const containerInput = document.getElementById("idUtili");
 	containerInput.placeholder = idUtilisateur;
 
 		// Affiche le nom de l'utilisateur dans le header

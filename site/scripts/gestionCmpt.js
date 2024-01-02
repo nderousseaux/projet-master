@@ -238,10 +238,10 @@ function reinitInputCmpt(e) {
 }
 
 /**
- * Copie l'identifiant de l'agriculteur dans le presse-papier
+ * Copie l'identifiant de l'utilisateur dans le presse-papier
  */
 function copierPressePapier() {
-	const containerInput = document.getElementById("idAgri");
+	const containerInput = document.getElementById("idUtili");
 	containerInput.select();
 	navigator.clipboard.writeText(containerInput.placeholder);
 

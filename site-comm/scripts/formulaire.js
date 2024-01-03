@@ -94,8 +94,9 @@ function verifInputCmpt(e) {
  * Envoie les données du formulaire au backend
  *
  * @param {Event} e - événement sur le formulaire
+ * @param {string} langue - la langue du site
  */
-function enregistrementContact(e) {
+function enregistrementContact(e, langue) {
 	e.preventDefault();
 
 	const formulaire = document.querySelector("#formulaire > form");
@@ -104,28 +105,14 @@ function enregistrementContact(e) {
 	// Créé un objet FormData avec les données du formulaire
 	const champPost = new FormData(formulaire);
 	champPost.append("message", message.value);
+	champPost.append("lang", langue);
 
 	if (nbrErreur === 0) {
 		// Envoie les données du formulaire au backend
 		recupDonnees(champPost, "nouveauMsg.php")
 		.then(donnees => {
-			const container = document.querySelector("#formulaire");
-
 			// Affiche un message de confirmation ou d'erreur
-			if (donnees === 0) {
-				container.innerHTML = "<p>Votre message a été envoyé avec " +
-					"succès !</p>";
-			}
-			else if (donnees === 1) {
-				container.innerHTML = "<p>Le formulaire envoyé n'est pas " +
-					"formaté correctement.<br/>Veuillez réessayer plus tard." +
-					"</p>";
-			}
-			else {
-				container.innerHTML = "<p>Une erreur est survenue lors de " +
-					"l'envoi de votre message. <br/>Veuillez réessayer plus " +
-					"tard.</p>";
-			}
+			document.getElementById("formulaire").innerHTML = donnees;
 		})
 		.catch(err => {
 			console.error(err);

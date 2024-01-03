@@ -4,6 +4,21 @@ $bdd = new BaseDeDonnees("./bdd/donnees.db");
 
 $bdd->initialiserTable();
 
+if (isset($_POST["lang"])) {
+	if ($_POST["lang"] === "fr") {
+		include_once "../assets/tradFr.php";
+	}
+	elseif ($_POST["lang"] === "en") {
+		include_once "../assets/tradEn.php";
+	}
+	elseif ($_POST["lang"] === "de") {
+		include_once "../assets/tradDe.php";
+	}
+	else {
+		include_once "../assets/tradFr.php";
+	}
+}
+
 // Si les données sont présentes, les insérer dans la base de données
 // En cas d'erreur, renvoie 1, sinon 0
 if (
@@ -21,11 +36,12 @@ if (
 
 	// En cas d'erreur, afficher l'erreur
 	if ($retour !== null) {
-		echo 2;
+		echo json_encode($trad["contact"]["retour"][2]);
 		die();
 	}
-	echo 0;
+
+	echo json_encode($trad["contact"]["retour"][0]);
 }
 else {
-	echo 1;
+	echo json_encode($trad["contact"]["retour"][1]);
 }

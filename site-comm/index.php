@@ -50,28 +50,28 @@ else {
 		<section>
 			<h2><?=$trad["pres"]["titre"];?></h2>
 			<p>
-				<?=$trad["pres"]["contenu"];?>
+				<?=$trad["pres"]["contenu"] . PHP_EOL;?>
 			</p>
 		</section>
 		<section>
 			<h2><?=$trad["serv"]["titre"];?></h2>
 			<ul>
-				<?=$trad["serv"]["contenu"];?>
+				<?=$trad["serv"]["contenu"] . PHP_EOL;?>
 			</ul>
 		</section>
 		<section>
 			<h2><?=$trad["apropos"]["titre"];?></h2>
 			<p>
-				<?=$trad["apropos"]["contenu"];?>
+				<?=$trad["apropos"]["contenu"] . PHP_EOL;?>
 			</p>
 			<div id="equipe">
 				<h3><?=$trad["apropos"]["equipe"]["titre"];?></h3>
 				<div>
 					<p>
-						<?=$trad["apropos"]["equipe"]["contenu"];?>
+						<?=$trad["apropos"]["equipe"]["contenu"] . PHP_EOL;?>
 					</p>
 					<img src="img/equipe.webp"
-						alt=<?=$trad["apropos"]["equipe"]["alt"];?>/>
+						alt="<?=$trad["apropos"]["equipe"]["alt"];?>"/>
 				</div>
 			</div>
 			<div id="reseaux">
@@ -80,19 +80,19 @@ else {
 					<a href="https://www.facebook.com/AlsAgriNet"
 						target="_blank" rel="noopener">
 						<img src="img/icones/facebook.svg"
-							alt=<?=$trad["apropos"]["rs"]["alt"]["facebook"]?>/>
+							alt="<?=$trad["apropos"]["rs"]["alt"]["fb"]?>"/>
 						<p>Facebook</p>
 					</a>
-					<a href="https://www.x.com/AlsAgriNet" target="_blank"
-						rel="noopener">
+					<a href="https://www.x.com/AlsAgriNet"
+						target="_blank" rel="noopener">
 						<img src="img/icones/x.svg"
-						alt=<?=$trad["apropos"]["rs"]["alt"]["x"]?>/>
+							alt="<?=$trad["apropos"]["rs"]["alt"]["x"]?>"/>
 						<p>X</p>
 					</a>
 					<a href="https://www.linkedin.com/alsagrinet/"
 						target="_blank" rel="noopener">
 						<img src="img/icones/linkedin.svg"
-							alt=<?=$trad["apropos"]["rs"]["alt"]["linkedin"]?>/>
+							alt="<?=$trad["apropos"]["rs"]["alt"]["lkdn"]?>"/>
 						<p>LinkedIn</p>
 					</a>
 				</div>

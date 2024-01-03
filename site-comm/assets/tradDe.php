@@ -11,26 +11,26 @@ $trad = [
 	"pres" => [
 		"titre" => "Willkommen bei AlsAgriNet",
 		"contenu" => "Wir setzen uns dafür ein, innovative und nachhaltige Lösungen für die Landwirtschaft bereitzustellen.
-					<br/>
-					Zu diesem Zweck ermöglichen Ihnen unsere vernetzten Feldlösungen,
-					Ihre Pflanzen in Echtzeit zu überwachen und die
-					richtigen Entscheidungen zum richtigen Zeitpunkt zu treffen."
+				<br/>
+				Zu diesem Zweck ermöglichen Ihnen unsere vernetzten Feldlösungen,
+				Ihre Pflanzen in Echtzeit zu überwachen und die
+				richtigen Entscheidungen zum richtigen Zeitpunkt zu treffen."
 	],
 	"serv" => [
 		"titre" => "Unsere Dienstleistungen",
 		"contenu" => "<li>Verkauf von Sensorsätzen</li>
-					<li>Sensorinstallation</li>
-					<li>Sensorwartung</li>
-					<li>Individuelle Sensorset-Erstellung</li>
-					<li>Komplettlösung für ein vernetztes Feld</li>"
+				<li>Sensorinstallation</li>
+				<li>Sensorwartung</li>
+				<li>Individuelle Sensorset-Erstellung</li>
+				<li>Komplettlösung für ein vernetztes Feld</li>"
 	],
 	"apropos" => [
 		"titre" => "Über uns",
 		"contenu" => "AlsAgriNet ist ein Unternehmen mit Sitz im Elsass, das sich auf
-					die Entwicklung von vernetzten Feldern spezialisiert hat.
-					Mit 8 Jahren Erfahrung haben wir uns
-					als führend in nachhaltiger Landwirtschaft im
-					Elsass etabliert.",
+				die Entwicklung von vernetzten Feldern spezialisiert hat.
+				Mit 8 Jahren Erfahrung haben wir uns
+				als führend in nachhaltiger Landwirtschaft im
+				Elsass etabliert.",
 		"equipe" => [
 			"titre" => "Unser Team",
 			"contenu" => "Wir sind ein Team von 9 Personen, die sich leidenschaftlich für
@@ -44,9 +44,9 @@ $trad = [
 		"rs" => [
 			"titre" => "Unsere sozialen Medien",
 			"alt" => [
-				"facebook" =>  "Facebook-Symbol",
+				"fb" =>  "Facebook-Symbol",
 				"x" => "X-Symbol",
-				"linkedin" => "LinkedIn-Symbol"
+				"lkdn" => "LinkedIn-Symbol"
 			]
 		]
 	],

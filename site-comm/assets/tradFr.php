@@ -20,10 +20,29 @@ $trad = [
 	"serv" => [
 		"titre" => "Nos services",
 		"contenu" => "<li>Vente d'ensemble de capteurs</li>
+					<ul>
+						<li>Choix du micro-ordinateur</li>
+						<li>Les capteurs adaptés à vos besoin</li>
+						<li>Logiciel adapté à votre projet</li>
+					</ul>
+				<li>Solution de suivi des mesures des capteurs par Internet</li>
 				<li>Installation de capteurs</li>
+					<ul>
+						<li>Directement sur le champ</li>
+						<li>Explications pour la maintenance</li>
+					</ul>
 				<li>Entretien de capteurs</li>
-				<li>Création d'ensemble de capteurs adaptés</li>
-				<li>Offre clé en main pour un champ connecté</li>"
+					<ul>
+						<li>Service de maintenance</li>
+						<li>Service de réparation</li>
+						<li>Conseil en cas de problème</li>
+					</ul>
+				<li>Offre clé en main pour un champ connecté</li>
+					<ul>
+						<li>Fournissage de capteurs adaptés à votre projet</li>
+						<li>Un site web pour suivre vos champs</li>
+						<li>Un service de maintenance</li>
+					</ul>"
 	],
 	"apropos" => [
 		"titre" => "À propos de nous",
@@ -52,6 +71,22 @@ $trad = [
 		]
 	],
 	"contact" => [
+		"courriel" => "Adresse courriel :",
+		"telephone" => "Numéro de téléphone :",
+		"adresse" => "Adresse :",
+		"horaires" => "Horaires d'ouverture :",
+		"jours" => [
+			1 => "Lundi : ",
+			2 => "Mardi : ",
+			3 => "Mercredi : ",
+			4 => "Jeudi : ",
+			5 => "Vendredi : ",
+			6 => "Samedi : ",
+			7 => "Dimanche : ",
+			"ferme" => "Fermé",
+		]
+	],
+	"bulle" => [
 		"titre" => "Contactez-nous",
 		"form" => [
 			"nom" => "Nom",

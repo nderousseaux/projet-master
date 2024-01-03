@@ -148,24 +148,73 @@ header > div:last-child > h2 {
 	border-radius: 10px;
 	background-color: rgba(76, 175, 80, 0.3);
 }
-#corps > section > h2 {
+#corps > section h2,
+#corps > section h3 {
 	margin: 0;
+	margin-bottom: 15px;
+}
+#corps > section h2 {
 	text-align: center;
 }
+#corps > section p {
+	margin: 0;
+}
 
-/* A propos */
+	/* Nos services */
+#corps > section:nth-child(2) > ul > li:first-child {
+	margin-top: 0;
+}
+#corps > section:nth-child(2) > ul > li {
+	margin-top: 15px;
+}
+
+	/* A propos */
 #corps > section:last-child h3 {
 	margin-top: 40px;
 }
 
-	/* L'équipe */
+		/* Notre équipe */
 #equipe > div > img {
 	width: 100%;
 	aspect-ratio: 4/1;
 	object-fit: cover;
 }
 
-	/* Réseaux sociaux */
+		/* Nos locaux */
+#locaux > div {
+	display: flex;
+}
+#locaux > div > iframe {
+	width: 60%;
+}
+#locaux > div > section {
+	width: calc(40% - 2%);
+	padding-left: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+}
+#locaux > div h4 {
+	margin-bottom: 0;
+}
+#locaux > div > section > div:last-child > ul,
+#locaux > div > section > div:first-child > h4 {
+	margin: 0;
+}
+#locaux a {
+	color: #000000;
+	text-decoration: none;
+	text-decoration: underline;
+}
+#locaux a:hover {
+	color: #646464;
+}
+#locaux a:active {
+	color: #838383;
+}
+
+		/* Nos réseaux sociaux */
 #reseaux > div {
 	display: flex;
 	justify-content: center;
@@ -175,7 +224,7 @@ header > div:last-child > h2 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 10px 5%;
+	margin: 0 5%;
 	text-decoration: none;
 	user-select: none;
 	outline: none;
@@ -334,6 +383,25 @@ footer {
 		/* Général */
 	#corps > section {
 		width: calc(97vw - 2 * 20px);
+	}
+
+		/* A propos */
+			/* Nos locaux */
+	#locaux > div {
+		flex-direction: column;
+	}
+	#locaux > div > iframe {
+		width: 100%;
+	}
+	#locaux > div > section {
+		width: 100%;
+		padding-left: 0;
+	}
+	#locaux > div > section > div:first-child > h4 {
+		margin-top: 10px;
+	}
+	#locaux > div > section h4 {
+		margin-top: 10px;
 	}
 
 		/* Formulaire */

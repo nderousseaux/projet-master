@@ -74,6 +74,45 @@ else {
 						alt="<?=$trad["apropos"]["equipe"]["alt"];?>"/>
 				</div>
 			</div>
+			<div id="locaux">
+				<h3>Nos locaux</h3>
+				<div>
+					<iframe title="Carte d'accès à notre local"
+					src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5279.154413707231!2d7.762937!3d48.579646!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x617f2b3fe9ea7667!2sUnit%C3%A9%20de%20Formation%20de%20Recherche%20Math%C3%A9matique%20et%20Informatique%20(UFR)!5e0!3m2!1sfr!2suk!4v1606318473139!5m2!1sfr!2suk"
+					style="border:0;" allowfullscreen="" aria-hidden="false"
+					tabindex="0"></iframe>
+					<section>
+						<div>
+							<h4><?=$trad["contact"]["courriel"];?></h4>
+							<a href="mailto:projet@alsagrinet.alsace">
+								projet@alsagrinet.alsace
+							</a>
+						</div>
+						<div>
+							<h4><?=$trad["contact"]["telephone"];?></h4>
+							<a href="tel:+33-3-01-02-03-04">+33 3 01 02 03 04</a>
+						</div>
+						<div>
+							<h4><?=$trad["contact"]["adresse"];?></h4>
+							<a href="https://www.google.com/maps/place/Unit%C3%A9+de+Formation+de+Recherche+Math%C3%A9matique+et+Informatique+(UFR)/@48.5796169,7.7625071,17z/data=!4m8!1m2!2m1!1s7+Rue+Ren%C3%A9+Descartes,+67084+Strasbourg,+France!3m4!1s0x0:0x617f2b3fe9ea7667!8m2!3d48.579646!4d7.7629372">
+								42 Rue des Pépins, 67000 Strasbourg, France
+							</a>
+						</div>
+						<div>
+							<h4><?=$trad["contact"]["horaires"];?></h4>
+							<ul>
+								<li><?=$trad["contact"]["jours"][1];?>8h - 17h</li>
+								<li><?=$trad["contact"]["jours"][2];?>8h - 17h</li>
+								<li><?=$trad["contact"]["jours"][3];?>10h - 17h</li>
+								<li><?=$trad["contact"]["jours"][4];?>8h - 17h</li>
+								<li><?=$trad["contact"]["jours"][5];?>8h - 17h</li>
+								<li><?=$trad["contact"]["jours"][6];?>8h - 12h</li>
+								<li><?=$trad["contact"]["jours"][7];?><?=$trad["contact"]["jours"]["ferme"];?></li>
+							</ul>
+						</div>
+					</section>
+				</div>
+			</div>
 			<div id="reseaux">
 				<h3><?=$trad["apropos"]["rs"]["titre"]?></h3>
 				<div>
@@ -104,26 +143,26 @@ else {
 			alt="Icône de point d'interrogation"/>
 	</div>
 	<div id="formulaire">
-		<h2><?=$trad["contact"]["titre"]?></h2>
+		<h2><?=$trad["bulle"]["titre"]?></h2>
 		<form>
-			<label for="nom"><?=$trad["contact"]["form"]["nom"]?></label>
+			<label for="nom"><?=$trad["bulle"]["form"]["nom"]?></label>
 			<input type="text" name="nom" id="nom"
-				placeholder="<?=$trad["contact"]["form"]["nom"]?>" required/>
-			<label for="prenom"><?=$trad["contact"]["form"]["prenom"]?></label>
+				placeholder="<?=$trad["bulle"]["form"]["nom"]?>" required/>
+			<label for="prenom"><?=$trad["bulle"]["form"]["prenom"]?></label>
 			<input type="text" name="prenom" id="prenom"
-				placeholder="<?=$trad["contact"]["form"]["prenom"]?>" required/>
-			<label for="email"><?=$trad["contact"]["form"]["courriel"]?></label>
+				placeholder="<?=$trad["bulle"]["form"]["prenom"]?>" required/>
+			<label for="email"><?=$trad["bulle"]["form"]["courriel"]?></label>
 			<input type="email" name="courriel" id="courriel"
-				placeholder="<?=$trad["contact"]["form"]["phCourriel"]?>"
+				placeholder="<?=$trad["bulle"]["form"]["phCourriel"]?>"
 				required/>
 			<label for="message" aria-required>
-				<?=$trad["contact"]["form"]["message"]?>
+				<?=$trad["bulle"]["form"]["message"]?>
 			</label>
 			<textarea id="message"
-				placeholder="<?=$trad["contact"]["form"]["phMessage"]?>"
+				placeholder="<?=$trad["bulle"]["form"]["phMessage"]?>"
 				required></textarea>
 			<input type="submit"
-				value="<?=$trad["contact"]["form"]["envoi"]?>"/>
+				value="<?=$trad["bulle"]["form"]["envoi"]?>"/>
 		</form>
 	</div>
 	<footer>

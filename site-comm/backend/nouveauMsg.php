@@ -37,12 +37,12 @@ if (
 
 	// En cas d'erreur, afficher l'erreur
 	if ($retour !== null) {
-		echo json_encode($trad["contact"]["retour"][2]);
+		echo json_encode($trad["bulle"]["retour"][2]);
 		die();
 	}
 
-	echo json_encode($trad["contact"]["retour"][0]);
+	echo json_encode($trad["bulle"]["retour"][0]);
 }
 else {
-	echo json_encode($trad["contact"]["retour"][1]);
+	echo json_encode($trad["bulle"]["retour"][1]);
 }

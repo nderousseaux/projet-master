@@ -9,6 +9,9 @@ if (isset($_GET["lang"])) {
 	elseif ($_GET["lang"] === "de") {
 		include "assets/tradDe.php";
 	}
+	else {
+		include "assets/tradFr.php";
+	}
 }
 else {
 	include "assets/tradFr.php";

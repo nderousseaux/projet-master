@@ -59,8 +59,9 @@ body {
 .dropdownContent a {
 	display: block;
 	width: 100px;
+	line-height: 45px;
 	border: none;
-	padding: 12px;
+	padding: 0 12px;
 	border-radius: 10px;
 	background-color: unset;
 	text-decoration: none;

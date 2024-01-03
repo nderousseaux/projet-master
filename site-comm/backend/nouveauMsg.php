@@ -4,6 +4,7 @@ $bdd = new BaseDeDonnees("./bdd/donnees.db");
 
 $bdd->initialiserTable();
 
+// Si la langue est présente, on l'utilise, sinon on utilise le français
 if (isset($_POST["lang"])) {
 	if ($_POST["lang"] === "fr") {
 		include_once "../assets/tradFr.php";

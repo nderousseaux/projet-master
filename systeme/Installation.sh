@@ -13,7 +13,7 @@ sudo apt-get install libsqlite3-dev
 sudo apt-get install -y batctl
 
 # Seulement pour le Gateway :
-sudo apt-get install -y dnsmasq
+sudo apt-get install -y dnsmasq 
 sudo apt install iptables
 
 # Pour utiliser sshpass

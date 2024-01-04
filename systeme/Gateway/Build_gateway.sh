@@ -36,8 +36,8 @@ else
 fi
 
 #(interface wlan0)
-sudo echo "interface=wlan0" >> sudo /etc/dnsmasq.conf
-sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
+sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
+sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
 
 if grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
     echo "La ligne existe déjà."

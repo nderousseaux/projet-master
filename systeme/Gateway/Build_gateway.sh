@@ -2,9 +2,8 @@
 
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
-yes | ../Installation.sh
 
-sudo systemctl stop NetworkManager
+yes | ../Installation.sh
 
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh

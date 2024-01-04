@@ -3,7 +3,7 @@
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
-yes | ../Installation.sh
+#yes | ../Installation.sh
 
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
@@ -20,9 +20,9 @@ if [ ! -f "$fichier" ]; then
 fi
 
 # Texte à ajouter
-line_to_add="/home/pi/start-batman-adv.sh &"
+line_to_add="/home/pi/start-batman-adv.sh \&"
 
-sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add\nexit 0|" "$fichier"
+sudo sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add \nexit 0|" "$fichier"
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)

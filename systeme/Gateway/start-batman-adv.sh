@@ -14,6 +14,7 @@ sudo iptables -A FORWARD -i bat0 -o eth0 -j ACCEPT
 
 # Mise en place de wlan0
 sudo ifconfig wlan0 down
+sudo rfkill unblock wifi; sudo rfkill unblock all
 
 sudo iwconfig wlan0 mode ad-hoc
 sudo iwconfig wlan0 essid call-code-mesh

@@ -53,11 +53,17 @@ else {
 				<?=$trad["pres"]["contenu"] . PHP_EOL;?>
 			</p>
 		</section>
-		<section>
+		<section id="services">
 			<h2><?=$trad["serv"]["titre"];?></h2>
-			<ul>
-				<?=$trad["serv"]["contenu"] . PHP_EOL;?>
-			</ul>
+			<div>
+				<ul>
+					<?=$trad["serv"]["contenu"] . PHP_EOL;?>
+				</ul>
+				<div>
+					<img src="img/rpi4.webp"
+						alt="<?=$trad["serv"]["alt"];?>"/>
+				</div>
+			</div>
 		</section>
 		<section>
 			<h2><?=$trad["apropos"]["titre"];?></h2>
@@ -141,14 +147,14 @@ else {
 	<div>
 		<div id="bulle">
 			<img src="img/icones/interrogation.svg"
-				alt="Icône de point d'interrogation"/>
+				alt="<?=$trad["bulle"]["altBulle"]?>"/>
 		</div>
 		<div id="formulaire">
 			<div id="enteteForm">
 				<h2><?=$trad["bulle"]["titre"]?></h2>
 				<div>
 					<img src="img/icones/croix.svg"
-						alt="Icône de croix"/>
+						alt="<?=$trad["bulle"]["altEnt"]?>"/>
 				</div>
 			</div>
 			<form>

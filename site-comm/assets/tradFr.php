@@ -42,7 +42,8 @@ $trad = [
 						<li>Fournissage de capteurs adaptés à votre projet</li>
 						<li>Un site web pour suivre vos champs</li>
 						<li>Un service de maintenance</li>
-					</ul>"
+					</ul>",
+		"alt" => "Photo d'un Raspberry Pi 4"
 	],
 	"apropos" => [
 		"titre" => "À propos de nous",
@@ -87,6 +88,8 @@ $trad = [
 		]
 	],
 	"bulle" => [
+		"altBulle" => "Icône de point d'interrogation",
+		"altEnt" => "Icône de croix",
 		"titre" => "Contactez-nous",
 		"form" => [
 			"nom" => "Nom",
@@ -102,7 +105,7 @@ $trad = [
 			1 => "<p>Une erreur est survenue lors de l'envoi du message.</p>",
 			2 => "<p>Une erreur est survenue lors de l'envoi du message.
 				Veuillez réessayer plus tard.</p>"
-		]
+		],
 	],
 	"footer" => [
 		"droits" => "Tous droits réservés"

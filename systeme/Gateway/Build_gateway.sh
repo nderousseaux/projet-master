@@ -26,6 +26,8 @@ sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add\nexit 0|" "$fichier"
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)
+sudo chmod +0700 /etc/dnsmasq.conf
+
 if sudo grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
     echo "La ligne existe déjà."
 else

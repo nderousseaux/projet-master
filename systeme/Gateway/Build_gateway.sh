@@ -24,9 +24,9 @@ if [ ! -f "$fichier" ]; then
 fi
 
 # Texte à ajouter
-line_to_add="/home/pi/start-batman-adv.sh \&"
-
-sudo sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add \nexit 0|" "$fichier"
+#line_to_add="/home/pi/start-batman-adv.sh \&"
+#sudo sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add \nexit 0|" "$fichier"
+python3 rclocalwrite.py
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)

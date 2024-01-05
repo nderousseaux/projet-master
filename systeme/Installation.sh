@@ -20,6 +20,7 @@ sudo apt install iptables
 sudo apt-get install sshpass
 
 # Pour lescript (Python) sftp simulant une connection mesh serveur
+sudo apt install python3
 sudo apt install python3-pip
 sudo pip install pysftp
 

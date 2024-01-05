@@ -5,6 +5,9 @@ chmod +x ../Installation.sh
 
 yes | ../Installation.sh
 
+sudo systemctl stop NetworkManager
+
+
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh

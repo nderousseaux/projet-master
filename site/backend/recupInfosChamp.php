@@ -1,39 +1,16 @@
 <?php
-/* === recupInfosChamp.php === */
-// Ordre 4
-
 // Récupère les informations des capteurs du champ envoyés dans la requête
-// Vérification de leur existence
-if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Numéro de champ manquant dans la requête");
+// Doit être appelé par un script ayant une connexion existante à la bdd
+
+// Check si la connexion à la bdd existe 
+if (!(isset($manager))) {
+	$erreur = array("Erreur", "Connexion bdd inexistante");
 	echo json_encode($erreur);
 	exit();
 }
 
-// Vérifie que les entrées sont de type numérique
-if (!(is_numeric($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-
-// Connexion à MongoDB
-use MongoDB\Driver\Manager;
-$uri = "mongodb://localhost:30001";
-
-// Créé le client
-$client = new MongoDB\Driver\Manager($uri);
-$curdate = new DateTime("UTC");
+// Récupération de la timezone du champ du client
+$curdate = new DateTime();
 
 // Défini la pipeline de la requete
 // On recupere la date de derniere maj des capteurs de chaque ilot
@@ -132,4 +109,4 @@ $status = ($countko == $count ? "KO" :"OK");
 // Renvoi le statut des capteurs du champ
 $localDate = $curdate->setTimezone(new DateTimeZone("Europe/Paris"))->
 	format("Y-m-d H:i:s");
-echo json_encode(array($status, $count-$countko , $count, $localDate));
+echo array($status, $count-$countko , $count, $localDate);

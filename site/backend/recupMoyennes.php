@@ -1,31 +1,13 @@
 <?php
-
 // Récupère les moyennes des mesures du champ envoyés dans la requête
-// Vérification de leur existence
-if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Numéro de champ manquant dans la requête");
+// Doit être appelé par un script ayant une connexion existante à la bdd
+
+// Check si la connexion à la bdd existe 
+if (!(isset($manager))) {
+	$erreur = array("Erreur", "Connexion bdd inexistante");
 	echo json_encode($erreur);
 	exit();
 }
-
-// Vérifie que les entrées sont de type numérique
-if (!(is_numeric($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-
-// Connexion à MongoDB
-use MongoDB\Driver\Manager;
-$uri = "mongodb://localhost:30001";
-
-// Créé le client
-$manager = new MongoDB\Driver\Manager("mongodb://localhost:30001");
 
 // Définition de la pipeline de la requete
 // On recupere la valeur la plus recente des capteurs pour chaque ilot
@@ -40,6 +22,7 @@ $pipelinetemp = [
         'temp' => ['$first' => '$temp']
     ]],
 ];
+
 $pipelinehumi = [
 	['$match' => [
 		'idAgri' => intval($_POST["idUtilisateur"]),
@@ -51,6 +34,7 @@ $pipelinehumi = [
         'humi' => ['$first' => '$humi'], 
     ]],
 ];
+
 $pipelinelumi = [
 	['$match' => [
 		'idAgri' => intval($_POST["idUtilisateur"]),

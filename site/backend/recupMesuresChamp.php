@@ -20,13 +20,6 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 	exit();
 }
 
-// Connexion à MongoDB
-use MongoDB\Driver\Manager;
-$uri = "mongodb://localhost:30001";
-
-// Créé le client
-$manager = new MongoDB\Driver\Manager($uri);
-
 // Définition de la pipeline de la requete
 // On recupere la valeur la plus recente des capteurs pour chaque ilot
 $pipelinetemp = [
@@ -152,7 +145,7 @@ foreach ($cursorhumi as $element) {
 		setTimezone(new DateTimeZone("Europe/Paris"));
 		$ilot = intval($element->_id);
 
-		// On garde la date la plus ancienne pour chaque ilot
+		// On garde la date la plus nouvelle pour chaque ilot
 		if ($dates[$ilot] > $dbdate)
 			$dates[$ilot] = $dbdate;
 
@@ -184,8 +177,8 @@ foreach ($cursorlumi as $element) {
 			setTimezone(new DateTimeZone("Europe/Paris"));
 		$ilot = intval($element->_id);
 		
-		// On garde la date la plus ancienne pour chaque ilot
-		if ($dates[$ilot] > $dbdate)
+		// On garde la date la plus nouvelle pour chaque ilot
+		if ($dates[$ilot] < $dbdate)
 			$dates[$ilot] = $dbdate;
 
 		// Si dernier valeur du capteur date de plus de 30 minutes, ko
@@ -205,7 +198,7 @@ foreach ($cursorlumi as $element) {
 }
 
 // Construction du tableau 
-// [numchamp, numilot(s), date_dernier_val,temp, humi, lumi]
+// [renumilot(s), date_dernier_val,temp, humi, lumi]
 if (!($counttemp == $counthumi && $counttemp == $countlumi)) {
 	echo json_encode("Erreur", "comptes différents");
 	echo json_encode($counttemp, $counthumi, $countlumi);

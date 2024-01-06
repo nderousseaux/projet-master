@@ -7,6 +7,7 @@
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/i2c-dev.h>
+#include <unistd.h>
 
 #include <random>
 
@@ -22,8 +23,18 @@ class Mesures {
                 "/dev/i2c-1"
         };
         static constexpr int LUX_ADDR = 0x10;
-        static constexpr int HUM_ADDR = 0x36;
+        static constexpr int LUX_PTR_MANID = 0x0;
+        static constexpr int LUX_PTR_DEVID = 0x0;
+        static constexpr int LUX_PTR_CFG = 0x0;
+        static constexpr int LUX_PTR_VALUE = 0x1;
 
+        static constexpr int HUM_ADDR = 0x36;
+        static constexpr int HUM_PTR_MANID = 0x0;
+        static constexpr int HUM_PTR_DEVID = 0x0;
+        static constexpr int HUM_PTR_CFG = 0x0;
+        static constexpr int HUM_PTR_VALUE = 0x1;
+        static constexpr int HUM_THRESHOLD_HIGH = 0x0;
+        static constexpr int HUM_THRESHOLD_LOW = 0x0;
 
 	/* Constructeur et destructeur */
 	public:
@@ -65,7 +76,9 @@ class Mesures {
 
 	/* Méthodes */
     private:
-        static int updateLux();
+        void normalizeHumidity(const int& raw_value);
+        int updateLux();
+        int updateHumidity();
 
 	public:
 		/**

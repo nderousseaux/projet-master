@@ -130,4 +130,4 @@ $moytemp = round($moytemp, 1);
 $moyhumi = round($moyhumi, 1);
 $moylumi = round($moylumi, 1);
 
-echo json_encode(array($moytemp, $moyhumi, $moylumi));
+echo json_encode([$moytemp, $moyhumi, $moylumi]);

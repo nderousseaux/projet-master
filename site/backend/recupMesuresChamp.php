@@ -1,21 +1,10 @@
 <?php
-
 // Récupère les informations du champ pour le tableau
-// Vérification de leur existence
-if (!(isset($_POST["idUtilisateur"]) && isset($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Champ(s) manquant(s) dans la requête");
-	echo json_encode($erreur);
-	exit();
-}
+// Doit être appelé par un script ayant une connexion existante à la bdd
 
-// Vérifie que les entrées sont de type numérique
-if (!(is_numeric($_POST["numChamp"]))) {
-	$erreur = array("Erreur", "Type du numéro de champ non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
+// Check si la connexion à la bdd existe 
+if (!(isset($manager))) {
+	$erreur = array("Erreur", "Connexion bdd inexistante");
 	echo json_encode($erreur);
 	exit();
 }
@@ -146,14 +135,18 @@ foreach ($cursorhumi as $element) {
 		$ilot = intval($element->_id);
 
 		// On garde la date la plus nouvelle pour chaque ilot
-		if ($dates[$ilot] > $dbdate)
+		if ($dates[$ilot] < $dbdate)
 			$dates[$ilot] = $dbdate;
 
 		// Si dernier valeur du capteur date de plus de 30 minutes, ko
 		$diff = $curdate->diff($dbdate);
 		$gap = $diff->days * 24 * 60 + $diff->h * 60 + $diff->i;
 		if ($gap > 30) {
-			$state[$ilot] = "KO";
+			if ($state[$ilot] == "KO") {
+				$state[$ilot] = "KO2";
+			} else {
+				$state[$ilot] = "KO";
+			}
 		}
 		$counthumi = $counthumi + 1;
 	}
@@ -185,7 +178,16 @@ foreach ($cursorlumi as $element) {
 		$diff = $curdate->diff($dbdate);
 		$gap = $diff->days * 24 * 60 + $diff->h * 60 + $diff->i;
 		if ($gap > 30) {
-			$state[$ilot] = "KO";
+			//Si les deux autres types de capteurs sont ko, la RPI est ko
+			if ($state[$ilot] == "KO2") {
+				$state[$ilot] = "KO3";
+			} 
+			else if ($state[$ilot] == "KO"){
+				$state[$ilot] = "KO2";
+			} 
+			else {
+				$state[$ilot] = "KO";
+			}
 		}
 		$countlumi = $countlumi + 1;
 	}
@@ -206,11 +208,14 @@ if (!($counttemp == $counthumi && $counttemp == $countlumi)) {
 
 $res = [];
 // Renvoi du resultat
+// Format : ilot, date, code état, temp, humi, lumi
 for ($i = 0; $i < $counttemp; $i++) {
 	$fd = $dates[$i]->format("Y-m-d H:i");
+	$code = ($state[$i] == "KO3" ? "C2" : 
+		(($state[$i] == "KO2" || $state[$i] == "KO") ? "C1" : "CO"));
 	$rest = round(floatval($temps[$i]),1);
 	$resh = round(floatval($humis[$i]),1);
 	$resl = round(floatval($lumis[$i]),1);
-	$res[] = array($i, $fd, $state[$i], $rest, $resh, $resl);
+	$res[] = [$i, $fd, $code, $rest, $resh, $resl];
 }
 echo json_encode($res);

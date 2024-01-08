@@ -3,10 +3,18 @@
 // Doit être appelé par un script ayant une connexion existante à la bdd
 
 // Check si la connexion à la bdd existe 
-if (!(isset($manager))) {
-	$erreur = array("Erreur", "Connexion bdd inexistante");
+if (!(isset($manager)) && !(isset($_POST["idUtilisateur"]))) {
+	$erreur = array("Erreur", "Paramètres manquants");
 	echo json_encode($erreur);
 	exit();
+}
+
+$notload = false;
+// Création connexion bdd si inexistante
+if (!isset($manager)) {
+	$uri = "mongodb://localhost:30001";
+	$manager = new MongoDB\Driver\Manager($uri);
+	$notload = true;
 }
 
 // Création de la pipeline pour récupérer le nom d'agriculteur
@@ -14,9 +22,6 @@ $pipelineagri = [
 	['$match' => [
 		'idAgri' => intval($_POST["idUtilisateur"]),
 	]],
-    ['$group' => [
-        'nomAgri' => 'nomAgri'
-    ]]
 ];
 
 // Création de la commande pour chaque collection
@@ -35,4 +40,4 @@ foreach ($cursor as $element) {
 }
 
 // Renvoi le nom d'utilisateur
-echo $resultat;
+echo ($notload ? json_encode($resultat) : $resultat);

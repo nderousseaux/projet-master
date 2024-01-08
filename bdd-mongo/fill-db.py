@@ -66,7 +66,7 @@ db.agriculteur.insertMany([
         """
         for j in range(nbc):
 
-        champs += 
+
         insertcmd += f"""
         {{
             idAgri: {i},

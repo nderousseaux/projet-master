@@ -13,16 +13,16 @@ function chgmtCouleurIcone() {
 	}
 
 	// Initialise les couleurs de l'icône
-	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+	icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 		couleur2.value + ")";
 
 	// Ajoute des évenements sur les selecteurs de couleur
 	couleur1.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 			couleur2.value + ")";
 	});
 	couleur2.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 			couleur2.value + ")";
 	});
 }

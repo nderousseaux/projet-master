@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 	<?php include "backend/checkConnexion.php"?>
-	<?php include "assets/head.php"?>	
+	<?php include "assets/head.php"?>
 	<title>Création de compte</title>
 	<meta name="description" content="Création de compte"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>

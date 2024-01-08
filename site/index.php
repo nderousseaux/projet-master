@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>	
+	
 	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
@@ -232,8 +232,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	//const idUtilisateur = 0;
-	const idUtilisateur = <?php 
+	const idUtilisateur = <?php
 		session_start();
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;

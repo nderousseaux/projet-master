@@ -91,7 +91,7 @@ button:active {
 }
 
 	/* Bouton de copie */
-#infosCmpt > form  > div {
+#infosCmpt > form > div {
 	display: flex;
 	width: calc(100% + 2 * 4px + 1px);
 }
@@ -229,7 +229,7 @@ footer {
 	#infosCmpt > div {
 		width: 100%;
 	}
-	#infosCmpt > form  > div,
+	#infosCmpt > form > div,
 	.selectCouleur {
 		width: unset !important;
 	}

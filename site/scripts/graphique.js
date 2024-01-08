@@ -19,7 +19,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 	}
 	else if (typeMesures === "lumi") {
 		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
-			["Luminosité", " lux", new CouleursDonneesLumi(), 0, 100000, 5000];
+			["Luminosité", " lux", new CouleursDonneesLumi(), 0, 100000, 10000];
 	}
 	else {
 		console.error("Type de mesures inconnu \"" + typeMesures + "\"");

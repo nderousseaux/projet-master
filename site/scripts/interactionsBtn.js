@@ -101,7 +101,7 @@ function afficherChampSelectionne(idContainer, idAttr) {
 function afficherIlotSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
 		.previousElementSibling;
-	
+
 	if (document.getElementById(idAttr).value === "tous") {
 		container.textContent = "Tous les ilots";
 		return;

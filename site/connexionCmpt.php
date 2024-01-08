@@ -25,6 +25,19 @@
 		</form>
 	</section>
 </div>
+<section id="secCookie">
+	<h1>Notice de confidentialité</h1>
+	<p>
+		Notre site utilise des cookies pour assurer une expérience utilisateur
+		optimale.
+		<br/>
+		En accédant à notre site, vous consentez à l'utilisation du cookie
+		mentionné ci-dessus, conformément à notre politique de confidentialité,
+		accessible ci-dessous.
+	</p>
+	<a href="politiqueConf.php">Politique de confidentalité</a>
+	<button type="button">Fermer la notice</button>
+</section>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/verificationsInput.js"></script>
@@ -48,6 +61,14 @@
 
 		// Gère la taille du header en fonction du défilement
 	activerHeaderReduit();
+
+
+	/*** Gestion des cookies ***/
+		// Gère la fermeture de la notice de cookie
+	document.querySelector("#secCookie > button").addEventListener("click",
+	_ => {
+		document.querySelector("#secCookie").style.display = "none";
+	});
 </script>
 </body>
 </html>

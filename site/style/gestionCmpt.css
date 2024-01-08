@@ -39,6 +39,7 @@
 	gap: 5px 0;
 }
 form input,
+#secCookie > button,
 form div > button,
 form > button,
 form > select {
@@ -347,6 +348,7 @@ dialog > form > button {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
 	input,
+	#secCookie > button,
 	form button,
 	form > select {
 		border: 1px solid #3d3d3d !important;

@@ -586,18 +586,20 @@ footer > p {
 	margin: 0;
 	z-index: 10;
 }
-footer > a {
+footer > a,
+#secCookie > a {
 	color: #000000;
 	text-decoration: underline;
 	text-underline-offset: 4px;
 }
-footer > a:hover {
+footer > a:hover,
+#secCookie > a:hover {
 	color: #333333;
 }
-footer > a:active {
+footer > a:active,
+#secCookie > a:active {
 	color: #676767
 }
-
 
 /* Version élargie (petits écrans ordinateurs) */
 @media screen and (max-width: 1300px) {
@@ -997,13 +999,16 @@ footer > a:active {
 	footer > p {
 		color: #bebebe;
 	}
-	footer > a {
+	footer > a,
+	#secCookie > a {
 		color: #bebebe;
 	}
-	footer > a:hover {
+	footer > a:hover,
+	#secCookie > a:hover {
 		color: #d3d3d3;
 	}
-	footer > a:active {
+	footer > a:active,
+	#secCookie > a:active {
 		color: #a8a8a8
 	}
 }

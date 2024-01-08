@@ -435,7 +435,7 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 		champPost.append("idUtilisateur", idUtilisateur);
 		champPost.append("numChamp", numChamp);
 
-		recupDonnees(champPost, "recupDonneesChamp.php")
+		recupDonnees(champPost, "recupDonneesAgri.php")
 		.then(donnees => {
 			afficherNomUtilisateur(donnees[0]);
 			afficherInfosChamp(donnees[1]);

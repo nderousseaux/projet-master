@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	
+	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
@@ -22,7 +22,7 @@
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
-				<a href="gestionCmpt.php">Paramètres</a>
+				<a href="gestionCmpt.php">Gestion du compte</a>
 				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>

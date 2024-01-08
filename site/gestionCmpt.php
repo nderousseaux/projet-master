@@ -88,6 +88,7 @@
 					value="#ffffff"></input>
 				<button type="button" id="reinit">Réinitialiser</button>
 				<button type="button" id="enreg">Enregistrer</button>
+				<button type="button" id="suppr">Supprimer le compte</button>
 			</form>
 		</div>
 		<div id="icone">
@@ -121,6 +122,9 @@
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
 		modifInputCmpt(e);
+	});
+	document.getElementById("suppr").addEventListener("click",	e => {
+		supprCmpt(e);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
 		modifInputCmpt(e);

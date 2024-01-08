@@ -71,7 +71,7 @@ p {
 	display: block;
 	width: 100%;
 	border: none;
-	padding: 12px 36px 12px 12px;
+	padding: 12px;
 	border-radius: 10px;
 	background-color: unset;
 	text-decoration: none;
@@ -244,7 +244,7 @@ header > section:last-child .dropbtn {
 	border-radius: 0 0 10px 0;
 }
 #selectCmpt > a {
-	width: calc(100% - 48px);
+	width: calc(100% - 24px);
 }
 .ddHeader {
 	background-color: unset;
@@ -721,6 +721,12 @@ footer > p {
 
 		/* Section graphique */
 			/* Options du graphique */
+	.options {
+		flex-wrap: wrap;
+	}
+	.options > div:last-child > p {
+		width: 135px;
+	}
 	.options > div > p {
 		font-size: 15px;
 		line-height: 40px;
@@ -759,14 +765,6 @@ footer > p {
 	#ddDuree > .dropbtn {
 		width: 100% !important;
 		height: 100% !important;
-	}
-
-		/* Section export de données */
-	#secExport > .options {
-		flex-wrap: wrap;
-	}
-	#secExport > .options > div:last-child > p {
-		width: 135px;
 	}
 
 		/* Footer */

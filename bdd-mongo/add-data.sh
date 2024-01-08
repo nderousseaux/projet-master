@@ -10,7 +10,7 @@ db.compte.insertMany( [
         nom: "John",
         prenom: "Doe",
         mail: "email@bidon.eu",
-        mdp: "Helloworld00++",
+        mdp: "\$2y\$10\$1U8UqTDO.24jCqj8aRaLU./hpPaZsvB431j92djtD9xwKYNPym6cy",
 	mdp_temp: false
     },
     {
@@ -20,7 +20,7 @@ db.compte.insertMany( [
         nom: "Jean",
         prenom: "Dupont",
         mail: "email2@bidon.eu",
-        mdp: "Helloworld00++",
+        mdp: "\$2y\$10\$1U8UqTDO.24jCqj8aRaLU./hpPaZsvB431j92djtD9xwKYNPym6cy",
 	mdp_temp: true
     },
     {
@@ -30,7 +30,7 @@ db.compte.insertMany( [
         nom: "John",
         prenom: "Jones",
         mail: "email3@bidon.eu",
-        mdp: "Helloworld00++",
+        mdp: "\$2y\$10\$1U8UqTDO.24jCqj8aRaLU./hpPaZsvB431j92djtD9xwKYNPym6cy",
 	mdp_temp: false
     }
 ] );

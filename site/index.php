@@ -1,7 +1,7 @@
+<?php include "backend/checkConnexion.php"?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>

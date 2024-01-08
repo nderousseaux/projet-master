@@ -1,16 +1,9 @@
 <?php
 
-
-// codes de retour sur l'etat de l'authentification'
+// codes de retour sur l'etat de l'authentification
 define('OK', 0);
 define('TMP_PWD', 1);
 define('CONN_FAILED', 2);
-
-// fonction de hashage du mot de passe (pour comparaison avec celui stocké en bdd)
-function hash_mdp($mdp) {
-    //TODO
-    return $mdp;
-}
 
 // Vérifie que toutes les infos sont présentes
 if (!(isset($_POST["courriel"]) && isset($_POST["mdp"]))) {
@@ -70,7 +63,7 @@ foreach ($cursor as $infosUser) {
     $mdp_temp   = $infosUser->mdp_temp;
 }
 
-if (hash_mdp($_POST["mdp"]) == $mdp) {   // mdp valide
+if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
     // demarre une session avec les infos du user
     session_start();
     $_SESSION["idUser"] = $idUser;

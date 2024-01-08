@@ -1,4 +1,5 @@
 <?php
+	include "backend/checkConnexion.php";
 	// Récupérer ici le rôle de l'utilisateur
 	//$role = "admin"; // "admin" ou "standard"
 	session_start();
@@ -7,7 +8,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>

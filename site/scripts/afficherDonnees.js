@@ -35,16 +35,9 @@ function afficherChamps(idUtilisateur) {
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherNomUtilisateur(idUtilisateur) {
-	let champPost = new FormData();
-	champPost.append("idUtilisateur", idUtilisateur);
-
-	recupDonnees(champPost, "recupNomUtilisateur.php")
-	.then(donnees => {
-		const nomUtilisateur = document.querySelector("header > " +
-			"section:last-child > p")
-		nomUtilisateur.textContent = donnees + " #"	+ idUtilisateur;
-	});
+function afficherNomUtilisateur(nomUtilisateur, idUtilisateur) {
+	const container = document.querySelector("header > section:last-child > p");
+	container.textContent = nomUtilisateur + " #" + idUtilisateur;
 }
 
 
@@ -120,7 +113,7 @@ function afficherMoyennes(donnees) {
  *
  * @param {array} donnees - contient toutes les mesures pour le champ indiqué
  */
-function afficherMesuresChamp() {
+function afficherMesuresChamp(donnees) {
 	viderTableau("donneesTableau");
 	const container = document.getElementById("donneesTableau");
 
@@ -437,7 +430,7 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 
 		recupDonnees(champPost, "recupDonneesAgri.php")
 		.then(donnees => {
-			afficherNomUtilisateur(donnees[0]);
+			afficherNomUtilisateur(donnees[0], idUtilisateur);
 			afficherInfosChamp(donnees[1]);
 			afficherMoyennes(donnees[2]);
 			afficherMesuresChamp(donnees[3]);

@@ -110,7 +110,6 @@
 <script src="scripts/entete.js"></script>
 <script>
 	const idUtilisateur = <?php
-		session_start();
 		echo json_encode($_SESSION["idAgri"]);
 	?>;
 

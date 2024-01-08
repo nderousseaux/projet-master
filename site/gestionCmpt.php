@@ -95,6 +95,13 @@
 			<div>-</div>
 		</div>
 	</section>
+	<dialog id="quitter">
+		<h1>Supprimer le compte ?</h1>
+		<form method="dialog">
+			<button value="annuler">Annuler</button>
+			<button value="confirmer">Confirmer</button>
+		</form>
+	</dialog>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
@@ -105,9 +112,8 @@
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
-	//let idUtilisateur = 0;
 	const idUtilisateur = <?php
-		//session_start();
+		session_start();
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
 
@@ -123,17 +129,24 @@
 	document.getElementById("enreg").addEventListener("click",	e => {
 		modifInputCmpt(e);
 	});
-	document.getElementById("suppr").addEventListener("click",	e => {
-		supprCmpt(e);
-	});
 	document.querySelector("form").addEventListener("submit", e => {
 		modifInputCmpt(e);
+	});
+
+		// Gère la suppression du compte
+	document.getElementById("suppr").addEventListener("click",	e => {
+		document.getElementById("quitter").showModal();
+	});
+	document.getElementById("quitter").addEventListener("click", e => {
+		if (e.target.value === "confirmer") {
+			supprCompte(idUtilisateur);
+		}
 	});
 
 		// Gère le changement couleur de l'icône
 	chgmtCouleurIcone();
 
-	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
+	// <?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	const containerInput = document.getElementById("idUtili");

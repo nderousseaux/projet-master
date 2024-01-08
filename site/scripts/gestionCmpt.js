@@ -348,3 +348,25 @@ function afficherMsgErreur(message) {
 	document.getElementById("courriel").classList.add("erreur");
 	document.getElementById("mdp").classList.add("erreur");
 }
+
+/**
+ * Supprime le compte de l'utilisateur
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ */
+function supprCompte(idUtilisateur) {
+	const champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+
+	recupDonnees(champPost, "supprCmpt.php")
+	.then(retour => {
+		if (retour === 0) {
+			window.location.href = "connexionCmpt.php";
+		}
+		else {
+			console.erreur("Erreur lors de la suppression du compte");
+		}
+	})
+	.catch(err => {
+		console.error(err);
+	});
+}

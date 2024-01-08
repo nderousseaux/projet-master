@@ -157,6 +157,18 @@ form > button {
 	margin-top: 30px;
 }
 
+	/* Bouton de suppression */
+#suppr {
+	grid-column: span 2;
+	background-color: #ff8181;
+}
+#suppr:hover {
+	background-color: #ff9b9b;
+}
+#suppr:active {
+	background-color: #ff6b6b;
+}
+
 	/* Image de profil */
 #icone {
 	display: flex;
@@ -181,6 +193,36 @@ form > button {
 /* Footer */
 footer {
 	margin-top: 0;
+}
+
+/* Boîtes de dialogue */
+dialog {
+	width: 40vw;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 20px -15px #cecece;
+	border-style: unset;
+	padding: 15px;
+}
+dialog::backdrop {
+	background-color: rgba(200, 200, 200, 0.25);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+dialog > h1 {
+	margin: auto;
+	text-align: center;
+}
+dialog > form {
+	display: flex;
+	margin: 10px 0 0 0;
+	padding: 15px 15px 0 15px;
+	align-items: center;
+	justify-content: space-between;
+}
+dialog > form > button {
+	width: calc(50% - 10px);
+	margin: 0;
 }
 
 
@@ -260,8 +302,13 @@ footer {
 	form > button {
 		grid-column: span 2;
 	}
-	form > button:last-child {
+	form > button {
 		margin-top: 10px;
+	}
+
+		/* Bouton de suppression */
+	#suppr {
+		margin-top: 30px;
 	}
 
 		/* Image de profil */
@@ -277,6 +324,11 @@ footer {
 	/* Footer */
 	footer {
 		margin-top: 72px;
+	}
+
+	/* Boîtes de dialogue */
+	dialog {
+		width: 80vw;
 	}
 }
 
@@ -326,8 +378,32 @@ footer {
 		border-color: #2f694a transparent transparent transparent;
 	}
 
+		/* Bouton de suppression */
+	#suppr {
+		background-color: #f75555;
+	}
+	#suppr:hover {
+		background-color: #ff6b6b;
+	}
+	#suppr:active {
+		background-color: #e64b4b;
+	}
+
 		/* Image de profil */
 	#icone > div {
 		box-shadow: 0 15px 20px -15px #080808;
+	}
+
+	/* Boîtes de dialogue */
+	dialog {
+		background-color: #000000;
+		color: #ffffff;
+		box-shadow: 0 15px 20px -15px #080808;
+	}
+	dialog > h1 {
+		color: #ffffff;
+	}
+	dialog::backdrop {
+		background: rgba(95, 95, 95, 0.25);
 	}
 }

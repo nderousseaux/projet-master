@@ -54,8 +54,11 @@ function modifInputCmpt(e, requeteAdmin = false) {
 
 	/* Envoi des données au backend */
 	if (nbrErr === 0) {
+		// Récupère les données du formulaire
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
+		champPost.append("idUtilisateur",
+			document.getElementById("idUtili").value);
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
@@ -351,19 +354,28 @@ function afficherMsgErreur(message) {
 
 /**
  * Supprime le compte de l'utilisateur
+ *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function supprCompte(idUtilisateur) {
+function supprCmpt(idUtilisateur) {
 	const champPost = new FormData();
-	champPost.append("idUtilisateur", idUtilisateur);
+	const idUtiliForm = document.getElementById("idUtili").value;
+	champPost.append("idUtilisateur", idUtilForm);
 
 	recupDonnees(champPost, "supprCmpt.php")
 	.then(retour => {
-		if (retour === 0) {
+		/*
+		 * Si l'utilisateur supprime son propre compte, il est redirigé vers
+		 * la page de connexion
+		 */
+		if (retour === 0 && idUtilisateur === idUtiliForm) {
 			window.location.href = "connexionCmpt.php";
 		}
-		else {
+		else if (retour === 1) {
 			console.erreur("Erreur lors de la suppression du compte");
+		}
+		else {
+			window.location.href = "gestionCmpt.php";
 		}
 	})
 	.catch(err => {

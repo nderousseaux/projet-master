@@ -1,9 +1,7 @@
 <?php
 	include "backend/checkConnexion.php";
-	// Récupérer ici le rôle de l'utilisateur
-	//$role = "admin"; // "admin" ou "standard"
 	session_start();
-	$role = $_SESSION["role"];
+	$role = $_SESSION["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -114,7 +112,7 @@
 <script>
 	const idUtilisateur = <?php
 		session_start();
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
+		echo json_encode($_SESSION["idAgri"]);
 	?>;
 
 	/*** Gestion des données ***/
@@ -134,19 +132,20 @@
 	});
 
 		// Gère la suppression du compte
+	const dialogConfirmer = document.getElementById("quitter");
 	document.getElementById("suppr").addEventListener("click",	e => {
-		document.getElementById("quitter").showModal();
+		dialogConfirmer.showModal();
 	});
-	document.getElementById("quitter").addEventListener("click", e => {
+	dialogConfirmer.addEventListener("click", e => {
 		if (e.target.value === "confirmer") {
-			supprCompte(idUtilisateur);
+			supprCmpt();
 		}
 	});
 
 		// Gère le changement couleur de l'icône
 	chgmtCouleurIcone();
 
-	// <?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
+	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	const containerInput = document.getElementById("idUtili");

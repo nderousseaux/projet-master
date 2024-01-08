@@ -55,9 +55,9 @@ function notify($nom, $prenom, $mail, $mdp) {
     $message = "Bonjour $prenom $nom,\nVoici votre mot de passe temporaire: $mdp\n";
     $headers = array(
         'From' => 'account-notify@agri-net.com'
-);
+    );
 
-mail($to, $subject, $message, $headers);
+    mail($to, $subject, $message, $headers);
 }
 
 
@@ -120,7 +120,7 @@ $newCompte = [
     "nom"       => $_POST['nom'],
     "prenom"    => $_POST['prenom'],
     "mail"      => $mail,
-    "mdp"       => $mdp,
+    "mdp"       => password_hash($mdp, PASSWORD_DEFAULT),
     "mdp_temp"  => true,
 ];
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Pour déconnecter un tilisateur en détruisant la session associée.
+ * Pour déconnecter un utilisateur en détruisant la session associée.
  */
 
 session_start();

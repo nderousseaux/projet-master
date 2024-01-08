@@ -41,7 +41,8 @@ $trad = [
 						<li>Bereitstellung von Sensoren, die zu Ihrem Projekt passen</li>
 						<li>Eine Website, um Ihre Felder zu verfolgen</li>
 						<li>Wartungsdienst</li>
-					</ul>"
+					</ul>",
+		"alt" => "Foto eines Raspberry Pi 4"
 	],
 	"apropos" => [
 		"titre" => "Über uns",
@@ -86,6 +87,8 @@ $trad = [
 		]
 	],
 	"bulle" => [
+		"altBulle" => "Fragezeichensymbol",
+		"altEnt" => "Kreuzsymbol",
 		"titre" => "Kontaktiere uns",
 		"form" => [
 			"nom" => "Name",

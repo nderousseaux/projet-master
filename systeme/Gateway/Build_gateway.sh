@@ -5,6 +5,10 @@ chmod +x ../Installation.sh
 
 yes | ../Installation.sh
 
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
+
+
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
@@ -20,12 +24,14 @@ if [ ! -f "$fichier" ]; then
 fi
 
 # Texte à ajouter
-line_to_add="/home/pi/start-batman-adv.sh &"
-
-sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add\nexit 0|" "$fichier"
+#line_to_add="/home/pi/start-batman-adv.sh \&"
+#sudo sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add \nexit 0|" "$fichier"
+sudo python3 rclocalwrite.py
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)
+sudo chmod +0770 /etc/dnsmasq.conf
+
 if sudo grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
     echo "La ligne existe déjà."
 else
@@ -36,8 +42,8 @@ else
 fi
 
 #(interface wlan0)
-sudo echo "interface=wlan0" >> sudo /etc/dnsmasq.conf
-sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
+sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
+sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
 
 if grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
     echo "La ligne existe déjà."

@@ -61,8 +61,7 @@ void EnvoiDonnees::affiche_message_erreur_libssh2(
 //	return 0;
 //}
 
-int EnvoiDonnees::ecrireBDD(LIBSSH2_SFTP_HANDLE *agent)
-{
+int EnvoiDonnees::ecrireBDD(LIBSSH2_SFTP_HANDLE *agent) {
 	char b[1];
 	int descripteur_de_fichier = open("db.db", O_RDONLY);
 	int lu;
@@ -88,7 +87,7 @@ int EnvoiDonnees::initialisation_socket(const int &port, const char *ip) {
 	adresse.sin_addr.s_addr = inet_addr(ip);
 
 	if (connect(sockfd, (struct sockaddr*)&adresse, sizeof(adresse)) < 0) {
-		std::cerr << "Echec lors de la connection de la socket." << std::endl;
+		std::cerr << "Echec lors de la connexion de la socket" << std::endl;
 		return -1;
 	}
 
@@ -101,8 +100,8 @@ int EnvoiDonnees::envoiBDD() {
 		EnvoiDonnees::CHEMIN_FICHIER_IDENTIFIANTS);
 
 	/*
-	 * Vérifie que le fichier est mal formé (3 lignes : IP, identifiant, mot de
-	 * passe)
+	 * Vérifie que le fichier n'est pas mal formé
+	 * (3 lignes : IP, identifiant, mot de passe)
 	 */
 	if (contenu.size() != 3) {
 		std::cerr << "Le fichier d'identifiants est mal formé" << std::endl;
@@ -118,14 +117,14 @@ int EnvoiDonnees::envoiBDD() {
 
 	int err = libssh2_init(0);
 	if (err < 0) {
-		std::cerr << "Echec lors de l'initialisation de libssh2." << std::endl;
+		std::cerr << "Echec lors de l'initialisation de libssh2" << std::endl;
 		return err;
 	}
 
 	LIBSSH2_SESSION *session = libssh2_session_init();
 	if (!session) {
 		affiche_message_erreur_libssh2(session,
-			"Echec lors de la création de la session.");
+			"Echec lors de la création de la session");
 		return -1;
 	}
 
@@ -136,15 +135,16 @@ int EnvoiDonnees::envoiBDD() {
 	err = libssh2_session_startup(session, sockfd);
 	if (err) {
 		affiche_message_erreur_libssh2(session,
-			"Echec lors du démarage de la session.");
+			"Echec lors du démarage de la session");
 		return err;
 	}
 
 	err = libssh2_userauth_password(session, identifiant.c_str(), mdp.c_str());
 	if (err) {
-		affiche_message_erreur_libssh2(session, "Echec lors de l'authenification.");
+		affiche_message_erreur_libssh2(session,
+			"Echec lors de l'authenification");
 
-		libssh2_session_disconnect(session, "Normal Shutdown");
+		libssh2_session_disconnect(session, "Extinction normale");
 		libssh2_session_free(session);
 		libssh2_exit();
 		return err;
@@ -153,16 +153,16 @@ int EnvoiDonnees::envoiBDD() {
 	LIBSSH2_SFTP *sftp = libssh2_sftp_init(session);
 	if (!sftp) {
 		affiche_message_erreur_libssh2(session,
-			"Echec lors de l'initialisation de la session SFTP.");
+			"Echec lors de l'initialisation de la session SFTP");
 		return -1;
 	}
 
 	LIBSSH2_SFTP_HANDLE *agent = libssh2_sftp_open(sftp,
 		chemin_distant_vers_BDD, LIBSSH2_FXF_WRITE, 0);
-	if (!agent) {
 
+	if (!agent) {
 		affiche_message_erreur_libssh2(session,
-			"Echec lors de l'ouverture du fichier distant.");
+			"Echec lors de l'ouverture du fichier distant");
 
 		return -1;
 	}

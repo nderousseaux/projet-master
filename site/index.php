@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
+	
 	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
@@ -23,7 +23,7 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.php">Paramètres</a>
-				<button value="deco">Déconnexion</button>
+				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
 	</section>
@@ -232,8 +232,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	//const idUtilisateur = 0;
-	const idUtilisateur = <?php 
+	const idUtilisateur = <?php
 		session_start();
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
@@ -249,7 +248,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 * Active la fonction de changement de champ pour charger les nouveaux
 		 * ilots dans le dropdown
 		 */
-		activerBoutonChgmtChamp(idUtilisateur);
+		activerBoutonChgmtChamp(idUtilisateur, contIdButtons);
 
 		// Affiche la météo pour le champ sélectionné
 		afficherMeteo(idUtilisateur);

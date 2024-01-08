@@ -142,6 +142,9 @@ header > div:last-child > h2 {
 	margin: 10px 0;
 }
 #corps > section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: calc(90vw - 2 * 20px);
 	margin: 10px 0;
 	padding: 20px;
@@ -155,16 +158,43 @@ header > div:last-child > h2 {
 }
 #corps > section h2 {
 	text-align: center;
+	padding: 0 4% 5px 4%;
+	margin-top: 0;
+	font-size: 18px;
+	font-weight: normal;
+	border-style: solid;
+	border-width: 0 0 4px 0;
+	margin-bottom: 20px;
+	border-image: radial-gradient(#2c422c, #c5dcc5) 1;
+}
+#corps > section *:not(h2) {
+	width: 100%;
 }
 #corps > section p {
 	margin: 0;
 }
 
 	/* Nos services */
-#corps > section:nth-child(2) > ul > li:first-child {
+#services > div {
+	display: flex;
+	justify-content: center;
+}
+#services > div > ul {
+	width: 40%;
+}
+#services > div > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60%;
+}
+#services > div > div > img {
+	width: 100%;
+}
+#services > div > ul > li:first-child {
 	margin-top: 0;
 }
-#corps > section:nth-child(2) > ul > li {
+#services > div > ul > li {
 	margin-top: 15px;
 }
 
@@ -224,12 +254,15 @@ header > div:last-child > h2 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: unset;
 	margin: 0 5%;
 	text-decoration: none;
 	user-select: none;
 	outline: none;
 }
 #reseaux > div > a > p {
+	width: unset;
+	text-align: center;
 	color: #000000;
 	font-size: 17px;
 	padding: 5px;
@@ -268,11 +301,16 @@ header > div:last-child > h2 {
 }
 
 	/* Formulaire */
+.visible {
+	transform: scaleY(1) !important;
+	transition: transform ease-in-out 0.2s;
+}
 #formulaire {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
+	width: 30vw;
+	padding: 15px;
 	position: fixed;
 	bottom: 74px;
 	right: 74px;
@@ -283,17 +321,43 @@ header > div:last-child > h2 {
 	transform-origin: bottom;
 	transition: transform ease-in-out 0.2s;
 }
-.visible {
-	transform: scaleY(1) !important;
-	transition: transform ease-in-out 0.2s;
+#enteteForm {
+	display: flex;
+	position: relative;
+	top: -15px;
+	width: calc(100% + 2 * 15px);
+	justify-content: space-between;
 }
-#formulaire > h2 {
-	margin-top: 0;
+#enteteForm:before {
+	content: '';
+	width: 32px;
+}
+#enteteForm > h2 {
+	margin: 10px 0 0 0;
+}
+#enteteForm > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #000000;
+	border-radius: 0 10px 0 10px;
+	cursor: pointer;
+}
+#enteteForm > div > img {
+	width: calc(100% - 8px);
+}
+#enteteForm > div > img:hover {
+	filter: invert(30%);
+}
+#enteteForm > div > img:active {
+	filter: invert(15%);
 }
 #formulaire > form {
 	display: flex;
 	flex-direction: column;
-	width: 30vw;
+	width: calc(100% - 20px);
 	height: calc(100vh - 64px - 20px - 100px);
 	overflow-y: auto;
 }
@@ -384,6 +448,20 @@ footer {
 	#corps > section {
 		width: calc(97vw - 2 * 20px);
 	}
+	#corps > section h2 {
+		padding: 0 8% 5px 8%;
+	}
+
+		/* Nos services */
+	#services > div {
+		flex-direction: column;
+	}
+	#services > div > ul {
+		width: calc(100% - 40px);
+	}
+	#services > div > div {
+		width: 100%;
+	}
 
 		/* A propos */
 			/* Nos locaux */
@@ -392,6 +470,7 @@ footer {
 	}
 	#locaux > div > iframe {
 		width: 100%;
+		height: 30vh;
 	}
 	#locaux > div > section {
 		width: 100%;

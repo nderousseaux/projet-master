@@ -140,7 +140,7 @@ function afficherMesuresChamp() {
 		}
 		// Aucun problème
 		else {
-			cellule.textContent = element;
+			cellule.textContent = "OK";
 		}
 
 		container.appendChild(cellule);

@@ -14,7 +14,7 @@ function activerDefilementHautPage() {
 
 /**
  * Active le défilement sur un élément spécifique
- * 
+ *
  * @param {div} element - sur lequel activer le défilement
  */
 function defielementSurElement(element) {

@@ -53,11 +53,17 @@ else {
 				<?=$trad["pres"]["contenu"] . PHP_EOL;?>
 			</p>
 		</section>
-		<section>
+		<section id="services">
 			<h2><?=$trad["serv"]["titre"];?></h2>
-			<ul>
-				<?=$trad["serv"]["contenu"] . PHP_EOL;?>
-			</ul>
+			<div>
+				<ul>
+					<?=$trad["serv"]["contenu"] . PHP_EOL;?>
+				</ul>
+				<div>
+					<img src="img/rpi4.webp"
+						alt="<?=$trad["serv"]["alt"];?>"/>
+				</div>
+			</div>
 		</section>
 		<section>
 			<h2><?=$trad["apropos"]["titre"];?></h2>
@@ -138,32 +144,43 @@ else {
 			</div>
 		</section>
 	</div>
-	<div id="bulle">
-		<img src="img/icones/interrogation.svg"
-			alt="Icône de point d'interrogation"/>
-	</div>
-	<div id="formulaire">
-		<h2><?=$trad["bulle"]["titre"]?></h2>
-		<form>
-			<label for="nom"><?=$trad["bulle"]["form"]["nom"]?></label>
-			<input type="text" name="nom" id="nom"
-				placeholder="<?=$trad["bulle"]["form"]["nom"]?>" required/>
-			<label for="prenom"><?=$trad["bulle"]["form"]["prenom"]?></label>
-			<input type="text" name="prenom" id="prenom"
-				placeholder="<?=$trad["bulle"]["form"]["prenom"]?>" required/>
-			<label for="email"><?=$trad["bulle"]["form"]["courriel"]?></label>
-			<input type="email" name="courriel" id="courriel"
-				placeholder="<?=$trad["bulle"]["form"]["phCourriel"]?>"
-				required/>
-			<label for="message" aria-required>
-				<?=$trad["bulle"]["form"]["message"]?>
-			</label>
-			<textarea id="message"
-				placeholder="<?=$trad["bulle"]["form"]["phMessage"]?>"
-				required></textarea>
-			<input type="submit"
-				value="<?=$trad["bulle"]["form"]["envoi"]?>"/>
-		</form>
+	<div>
+		<div id="bulle">
+			<img src="img/icones/interrogation.svg"
+				alt="<?=$trad["bulle"]["altBulle"]?>"/>
+		</div>
+		<div id="formulaire">
+			<div id="enteteForm">
+				<h2><?=$trad["bulle"]["titre"]?></h2>
+				<div>
+					<img src="img/icones/croix.svg"
+						alt="<?=$trad["bulle"]["altEnt"]?>"/>
+				</div>
+			</div>
+			<form>
+				<label for="nom"><?=$trad["bulle"]["form"]["nom"]?></label>
+				<input type="text" name="nom" id="nom"
+					placeholder="<?=$trad["bulle"]["form"]["nom"]?>" required/>
+				<label for="prenom"><?=$trad["bulle"]["form"]["prenom"]?>
+				</label>
+				<input type="text" name="prenom" id="prenom"
+					placeholder="<?=$trad["bulle"]["form"]["prenom"]?>"
+					required/>
+				<label for="email"><?=$trad["bulle"]["form"]["courriel"]?>
+				</label>
+				<input type="email" name="courriel" id="courriel"
+					placeholder="<?=$trad["bulle"]["form"]["phCourriel"]?>"
+					required/>
+				<label for="message" aria-required>
+					<?=$trad["bulle"]["form"]["message"]?>
+				</label>
+				<textarea id="message"
+					placeholder="<?=$trad["bulle"]["form"]["phMessage"]?>"
+					required></textarea>
+				<input type="submit"
+					value="<?=$trad["bulle"]["form"]["envoi"]?>"/>
+			</form>
+		</div>
 	</div>
 	<footer>
 		<?=$trad["footer"]["droits"]?> - AlsAgriNet - 2024
@@ -171,6 +188,7 @@ else {
 <script src="scripts/recupDonnees.js"></script>
 <script src="scripts/formulaire.js"></script>
 <script>
+	// Enregistrement du message de contact
 	document.querySelector("#formulaire > form").addEventListener("submit",
 	(e) => {
 		enregistrementContact(e, "<?=$trad["langue"]["abrevia"];?>");
@@ -180,9 +198,14 @@ else {
 		enregistrementContact(e, "<?=$trad["langue"]["abrevia"];?>");
 	});
 
+	// Affichage du formulaire
 	document.querySelector("#bulle").addEventListener("click", () => {
 		const formulaire = document.querySelector("#formulaire");
 		formulaire.classList.toggle("visible");
+	});
+	document.querySelector("#formulaire > div").addEventListener("click", _ => {
+		const formulaire = document.querySelector("#formulaire");
+		formulaire.classList.remove("visible");
 	});
 
 	// Selecteur de langue

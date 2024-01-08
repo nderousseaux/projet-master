@@ -41,7 +41,8 @@ $trad = [
 					<li>Supply of sensors tailored to your project</li>
 					<li>A website to monitor your fields</li>
 					<li>Maintenance service</li>
-				</ul>"
+				</ul>",
+		"alt" => "Photo of a Raspberry Pi 4"
 	],
 	"apropos" => [
 		"titre" => "About us",
@@ -86,6 +87,8 @@ $trad = [
 		]
 	],
 	"bulle" => [
+		"altBulle" => "Question mark icon",
+		"altEnt" => "Cross icon",
 		"titre" => "Contact us",
 		"form" => [
 			"nom" => "Name",

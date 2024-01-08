@@ -25,7 +25,7 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href=".">Accueil</a>
-				<button value="deco">Déconnexion</button>
+				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
 	</section>
@@ -105,7 +105,7 @@
 <script src="scripts/entete.js"></script>
 <script>
 	//let idUtilisateur = 0;
-	const idUtilisateur = <?php 
+	const idUtilisateur = <?php
 		//session_start();
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;

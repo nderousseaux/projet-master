@@ -13,13 +13,14 @@ sudo apt-get install libsqlite3-dev
 sudo apt-get install -y batctl
 
 # Seulement pour le Gateway :
-sudo apt-get install -y dnsmasq
+sudo apt-get install -y dnsmasq 
 sudo apt install iptables
 
 # Pour utiliser sshpass
 sudo apt-get install sshpass
 
 # Pour lescript (Python) sftp simulant une connection mesh serveur
+sudo apt install python3
 sudo apt install python3-pip
 sudo pip install pysftp
 

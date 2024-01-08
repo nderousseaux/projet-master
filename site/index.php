@@ -1,8 +1,11 @@
-<?php include "backend/checkConnexion.php"?>
+<?php
+	include "backend/checkConnexion.php";
+	$role = $_SESSION["role"]; // "admin" ou "standard"
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "assets/head.php"?>
+<?php include "assets/head.php"; echo PHP_EOL;?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
 </head>
@@ -23,7 +26,12 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.php">Gestion du compte</a>
-				<a href="creationCmpt.php">Ajouter un utilisateur</a>
+<?php
+					if ($role === "admin") {
+						echo '<a href="creationCmpt.php">Ajouter un ' .
+							'utilisateur</a>' . PHP_EOL;
+					}
+?>
 				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
@@ -191,7 +199,7 @@
 		</section>
 	</section>
 </div>
-<?php include "assets/footer.php"?>
+<?php include "assets/footer.php"; echo PHP_EOL?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
 integrity="sha512-TiY/d3GpuSKgQYgnqegSfdqlXp6ebBvi6A47mFTMSpZM7BMbvfkkvU/SlDzZHs9lWqF+BteevHlqgauHhLLbIA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -234,7 +242,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
 	const idUtilisateur = <?php
-		session_start();
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
 

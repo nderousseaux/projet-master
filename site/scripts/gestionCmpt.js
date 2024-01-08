@@ -160,10 +160,10 @@ function creationCmpt(e) {
 
 		recupDonnees(champPost, "creationUtilisateur.php")
 		.then(donnees => {
-			if (donnees[0] === 0) { // ok
-				//console.log(donnees[1]);
+			if (donnees[0] === 0) {
 				afficherMsgErreur(donnees[1]);
-			} else if (donnees[0] === 1) { // erreur
+			}
+			else if (donnees[0] === 1) {
 				afficherMsgErreur(donnees[1]);
 			}
 		})

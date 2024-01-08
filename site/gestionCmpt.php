@@ -1,6 +1,5 @@
 <?php
 	include "backend/checkConnexion.php";
-	session_start();
 	$role = $_SESSION["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>

@@ -144,19 +144,16 @@ function afficherDureeSelectionnee(idContainer, idAttr) {
  * par défaut.
  *
  * @param {int} idUtilisateur - ID de l'utilisateur
+ * @param {array} contIdButtons - ID des containers des boutons
  */
-function activerBoutonChgmtChamp(idUtilisateur) {
+function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
 	const dropdownContent = document.getElementById(contIdButtons[0][0]);
 	const buttons = dropdownContent.querySelectorAll("button");
 
 	buttons.forEach(button => {
 		button.addEventListener("click", _ => {
 			afficherMeteo(idUtilisateur);
-			afficherMoyennes(idUtilisateur);
-			afficherInfosChamp(idUtilisateur);
-			afficherMesuresChamp(idUtilisateur);
-
-			afficherIlots(idUtilisateur)
+			helperAffichageDonneesChamp(idUtilisateur)
 			.then(_ => {
 				// Active les boutons des ilots
 				activerBouton(contIdButtons[3][0], contIdButtons[3][1],

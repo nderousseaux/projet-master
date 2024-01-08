@@ -1,41 +1,38 @@
 <?php
+// Script permettant de récupérer le nom d'utilisateur
+// Doit être appelé par un script ayant une connexion existante à la bdd
 
-use MongoDB\Driver\Manager;
-
-// Vérifie que le champ est présent
-if (!(isset($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Champ manquant dans la requête");
+// Check si la connexion à la bdd existe 
+if (!(isset($manager))) {
+	$erreur = array("Erreur", "Connexion bdd inexistante");
 	echo json_encode($erreur);
 	exit();
 }
 
-// Vérifie que le champ est numérique
-if (!(is_numeric($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Type du numéro d'utilisateur non reconnu");
-	echo json_encode($erreur);
-	exit();
-}
+// Création de la pipeline pour récupérer le nom d'agriculteur
+$pipelineagri = [
+	['$match' => [
+		'idAgri' => intval($_POST["idUtilisateur"]),
+	]],
+    ['$group' => [
+        'nomAgri' => 'nomAgri'
+    ]]
+];
 
-// Connexion à MongoDB
-$uri = "mongodb://localhost:30001";
+// Création de la commande pour chaque collection
+$commandagri = new MongoDB\Driver\Command([
+    "aggregate" => "agriculteur",
+    "pipeline" => $pipelineagri,
+    "cursor" => new stdClass(),
+]);
 
-// Créé le client
-$client = new MongoDB\Driver\Manager($uri);
-
-// Défini le filtre
-$filtre = ["idAgri" => intval($_POST["idUtilisateur"])];
-
-// Créé la requête
-$requete = new MongoDB\Driver\Query($filtre);
-
-// Exécute la requête et récupère le résultat
-$resultat = $client->executeQuery("data.agriculteur", $requete);
+// Exécution de la commande
+$cursor = $manager->executeCommand('data', $commandagri);
 
 // Traite les données
-foreach ($resultat as $element) {
-	// Accède à la propriété "nomAgri"
+foreach ($cursor as $element) {
 	$resultat = $element->nomAgri;
 }
 
 // Renvoi le nom d'utilisateur
-echo json_encode($resultat);
+echo $resultat;

@@ -12,4 +12,25 @@ if (!(isset($manager))) {
 // Récupération du numéro du champ courant via la variable POST
 $numchamp = intval($_POST["numChamp"]);
 
-// Récupération des coordonnées du champ dans la bdd
+// Création de la commande
+$pipeline = [
+	['$match' => [
+		'idAgri' => intval($_POST["idUtilisateur"]),
+	]],
+    ['$group' => [
+        'champs' => 'champs',
+    ]],
+];
+
+// Création de la commande pour chaque collection
+$commandtz = new MongoDB\Driver\Command([
+    "aggregate" => "agriculteur",
+    "pipeline" => $pipeline,
+    "cursor" => new stdClass(),
+]);
+
+$cursor = $manager->executeCommand('data', $commandtz);
+$champs = $cursor->toArray();
+
+// Récupération des coordonnées du champ courant
+$coords = $champs->coordonnees[$numchamp];

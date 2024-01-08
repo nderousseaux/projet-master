@@ -7,8 +7,15 @@ RUN apt-get update && apt-get upgrade -y
 # Installation des paquets nécessaires
 RUN apt install -y git apache2 php php-mongodb
 
+# Installation de composer
+RUN apt install -y curl php-cli php-mbstring unzip
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Suppression du contenu du dossier web
 RUN rm -rf /var/www/html/*
+
+# Installation de la librairie mongodb
+RUN cd /var/www/html && composer require mongodb/mongodb
 
 # Configuration du serveur apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf

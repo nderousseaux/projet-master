@@ -23,7 +23,7 @@ form > button {
 	/* Corps */
 	#corps {
 		top: calc(72px + 20px);
-		min-height: calc(100vh - 72px + 20px);
+		min-height: calc(100vh - 85px - 20px);
 	}
 
 	/* Section création compte */

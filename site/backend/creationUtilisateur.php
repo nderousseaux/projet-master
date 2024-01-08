@@ -1,5 +1,8 @@
 <?php
 
+define('OK', 0);
+define('ERROR', 1);
+
 /**
  * Genere une chaine de caractere aleatoire
  * @param length la longueur de la chaine
@@ -55,9 +58,9 @@ function notify($nom, $prenom, $mail, $mdp) {
     $message = "Bonjour $prenom $nom,\nVoici votre mot de passe temporaire: $mdp\n";
     $headers = array(
         'From' => 'account-notify@agri-net.com'
-);
+    );
 
-mail($to, $subject, $message, $headers);
+    mail($to, $subject, $message, $headers);
 }
 
 
@@ -120,7 +123,7 @@ $newCompte = [
     "nom"       => $_POST['nom'],
     "prenom"    => $_POST['prenom'],
     "mail"      => $mail,
-    "mdp"       => $mdp,
+    "mdp"       => password_hash($mdp, PASSWORD_DEFAULT),
     "mdp_temp"  => true,
 ];
 
@@ -136,7 +139,7 @@ $requete = new MongoDB\Driver\Query($filtre);
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
 if (!$cursor->isDead()) { // mail deja existant
-    echo json_encode("Il existe deja un utilisateur avec comme adresse de courriel $mail");
+    echo json_encode([ERROR, "Il existe deja un utilisateur avec comme adresse de courriel $mail"]);
     exit();
 }
 
@@ -149,8 +152,8 @@ $insert->insert($newCompte);
 try {
     $result = $mongoClient->executeBulkWrite("$database.$collection", $insert, $writeConcern);
     $mail = "florent.seel@etu.unistra.fr";
-    notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
-    echo json_encode("Utilisateur ajoute.");
+    //notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
+    echo json_encode([OK, "Utilisateur ajouté. mdp: $mdp"]);
 } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
     die("Error inserting document: " . $e->getMessage());
 }

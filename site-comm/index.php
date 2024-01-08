@@ -122,7 +122,7 @@ else {
 			<div id="reseaux">
 				<h3><?=$trad["apropos"]["rs"]["titre"]?></h3>
 				<div>
-					<a href="https://www.facebook.com/AlsAgriNet"
+					<a href="https://www.facebook.com/alsagrinet/"
 						target="_blank" rel="noopener">
 						<img src="img/icones/facebook.svg"
 							alt="<?=$trad["apropos"]["rs"]["alt"]["fb"]?>"/>

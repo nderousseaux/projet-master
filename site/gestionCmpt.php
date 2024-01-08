@@ -1,13 +1,11 @@
 <?php
-	// Récupérer ici le rôle de l'utilisateur
-	//$role = "admin"; // "admin" ou "standard"
+	include "backend/checkConnexion.php";
 	session_start();
-	$role = $_SESSION["role"];
+	$role = $_SESSION["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>
@@ -88,12 +86,20 @@
 					value="#ffffff"></input>
 				<button type="button" id="reinit">Réinitialiser</button>
 				<button type="button" id="enreg">Enregistrer</button>
+				<button type="button" id="suppr">Supprimer le compte</button>
 			</form>
 		</div>
 		<div id="icone">
 			<div>-</div>
 		</div>
 	</section>
+	<dialog id="quitter">
+		<h1>Supprimer le compte ?</h1>
+		<form method="dialog">
+			<button value="annuler">Annuler</button>
+			<button value="confirmer">Confirmer</button>
+		</form>
+	</dialog>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
@@ -104,10 +110,9 @@
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
-	//let idUtilisateur = 0;
 	const idUtilisateur = <?php
-		//session_start();
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
+		session_start();
+		echo json_encode($_SESSION["idAgri"]);
 	?>;
 
 	/*** Gestion des données ***/
@@ -124,6 +129,17 @@
 	});
 	document.querySelector("form").addEventListener("submit", e => {
 		modifInputCmpt(e);
+	});
+
+		// Gère la suppression du compte
+	const dialogConfirmer = document.getElementById("quitter");
+	document.getElementById("suppr").addEventListener("click",	e => {
+		dialogConfirmer.showModal();
+	});
+	dialogConfirmer.addEventListener("click", e => {
+		if (e.target.value === "confirmer") {
+			supprCmpt();
+		}
 	});
 
 		// Gère le changement couleur de l'icône

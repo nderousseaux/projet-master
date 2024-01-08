@@ -54,8 +54,11 @@ function modifInputCmpt(e, requeteAdmin = false) {
 
 	/* Envoi des données au backend */
 	if (nbrErr === 0) {
+		// Récupère les données du formulaire
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
+		champPost.append("idUtilisateur",
+			document.getElementById("idUtili").value);
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
@@ -156,6 +159,14 @@ function creationCmpt(e) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
+		.then(donnees => {
+			if (donnees[0] === 0) { // ok
+				//console.log(donnees[1]);
+				afficherMsgErreur(donnees[1]);
+			} else if (donnees[0] === 1) { // erreur
+				afficherMsgErreur(donnees[1]);
+			}
+		})
 		.catch(err => {
 			console.error(err);
 		});
@@ -195,7 +206,7 @@ function connexionCmpt(e) {
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
 		.then(donnees => {
-			// Redige vers la page d'accueil
+			// Redirige vers la page d'accueil
 			if (donnees[0] === 0) {
 				window.location.href = "index.php";
 			}
@@ -347,4 +358,35 @@ function afficherMsgErreur(message) {
 	// Ajoute la classe erreur aux champs du formulaire
 	document.getElementById("courriel").classList.add("erreur");
 	document.getElementById("mdp").classList.add("erreur");
+}
+
+/**
+ * Supprime le compte de l'utilisateur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ */
+function supprCmpt(idUtilisateur) {
+	const champPost = new FormData();
+	const idUtiliForm = document.getElementById("idUtili").value;
+	champPost.append("idUtilisateur", idUtilForm);
+
+	recupDonnees(champPost, "supprCmpt.php")
+	.then(retour => {
+		/*
+		 * Si l'utilisateur supprime son propre compte, il est redirigé vers
+		 * la page de connexion
+		 */
+		if (retour === 0 && idUtilisateur === idUtiliForm) {
+			window.location.href = "connexionCmpt.php";
+		}
+		else if (retour === 1) {
+			console.erreur("Erreur lors de la suppression du compte");
+		}
+		else {
+			window.location.href = "gestionCmpt.php";
+		}
+	})
+	.catch(err => {
+		console.error(err);
+	});
 }

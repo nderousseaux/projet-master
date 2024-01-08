@@ -17,13 +17,36 @@ form > button {
 	color: #d30000;
 }
 
+	/* Bannière cookie */
+#secCookie {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	padding: 20px 0;
+	background-color: #ffffff;
+	box-shadow: 0 15px 20px 15px #cecece;
+	z-index: 100;
+}
+#secCookie > button {
+	width: 20%;
+	margin-top: 20px;
+}
+#secCookie > p {
+	font-size: 16px;
+	margin: 0 20px 10px 20px;
+}
+
 
 /* Version tablette et mobile */
 @media screen and (max-width: 950px) {
 	/* Corps */
 	#corps {
 		top: calc(72px + 20px);
-		min-height: calc(100vh - 72px + 20px);
+		min-height: calc(100vh - 85px - 20px);
 	}
 
 	/* Section création compte */
@@ -40,5 +63,16 @@ form > button {
 	/* Footer */
 	footer {
 		margin-top: 20px;
+	}
+}
+
+
+/* Thème sombre */
+@media (prefers-color-scheme: dark) {
+	/* Banière cookie */
+	#secCookie {
+		background-color: #000000;
+		color: #ffffff;
+		box-shadow: 0 15px 20px 15px #080808;
 	}
 }

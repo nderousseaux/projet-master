@@ -32,6 +32,9 @@ RUN cd projet-master-23-24 && git checkout -- infra && cd ..
 # Ajout d'un site pour connaître le hostname
 RUN cp projet-master-23-24/infra/iaas/hostname.php /var/www/html/
 
+# Ajout d'un site pour tester la connexion à la base de données
+RUN cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/
+
 # Retour du git sur la branche master
 RUN cd projet-master-23-24 && git checkout main && cd ..
 

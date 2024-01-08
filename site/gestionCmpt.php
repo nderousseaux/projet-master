@@ -25,7 +25,7 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href=".">Accueil</a>
-				<button value="deco">Déconnexion</button>
+				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
 	</section>

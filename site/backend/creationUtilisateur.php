@@ -1,5 +1,8 @@
 <?php
 
+define('OK', 0);
+define('ERROR', 1);
+
 /**
  * Genere une chaine de caractere aleatoire
  * @param length la longueur de la chaine
@@ -136,7 +139,7 @@ $requete = new MongoDB\Driver\Query($filtre);
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
 if (!$cursor->isDead()) { // mail deja existant
-    echo json_encode("Il existe deja un utilisateur avec comme adresse de courriel $mail");
+    echo json_encode([ERROR, "Il existe deja un utilisateur avec comme adresse de courriel $mail"]);
     exit();
 }
 
@@ -149,8 +152,8 @@ $insert->insert($newCompte);
 try {
     $result = $mongoClient->executeBulkWrite("$database.$collection", $insert, $writeConcern);
     $mail = "florent.seel@etu.unistra.fr";
-    notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
-    echo json_encode("Utilisateur ajoute.");
+    //notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
+    echo json_encode([OK, "Utilisateur ajouté. mdp: $mdp"]);
 } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
     die("Error inserting document: " . $e->getMessage());
 }

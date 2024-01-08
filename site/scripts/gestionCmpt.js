@@ -159,6 +159,14 @@ function creationCmpt(e) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
+		.then(donnees => {
+			if (donnees[0] === 0) { // ok
+				//console.log(donnees[1]);
+				afficherMsgErreur(donnees[1]);
+			} else if (donnees[0] === 1) { // erreur
+				afficherMsgErreur(donnees[1]);
+			}
+		})
 		.catch(err => {
 			console.error(err);
 		});
@@ -198,7 +206,7 @@ function connexionCmpt(e) {
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
 		.then(donnees => {
-			// Redige vers la page d'accueil
+			// Redirige vers la page d'accueil
 			if (donnees[0] === 0) {
 				window.location.href = "index.php";
 			}

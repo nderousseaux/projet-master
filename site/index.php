@@ -23,6 +23,7 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.php">Gestion du compte</a>
+				<a href="creationCmpt.php">Ajouter un utilisateur</a>
 				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>

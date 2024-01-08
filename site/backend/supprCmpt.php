@@ -4,6 +4,9 @@
  */
 
 
+define('OK', 0);
+define('ERROR', 1);
+
 // Vérifie que toutes les infos sont présentes
 if (!(isset($_POST["idUser"]))) {
 	$erreur = array("Erreur", "Infos manquantes dans la requête");
@@ -46,10 +49,12 @@ $bulk->delete($filter);
 $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
 
 if ($result->getDeletedCount() == 0) {
-    echo json_encode("Suppression échouée. L'utilisateur n'existe peut-être pas.");
+    //echo json_encode("Suppression échouée. L'utilisateur n'existe peut-être pas.");
+    echo json_encode(ERROR);
     exit();
 }
 else {
-    echo json_encode("Utilisateur supprimé.");
+    //echo json_encode("Utilisateur supprimé.");
+    echo json_encode(OK);
     exit();
 }

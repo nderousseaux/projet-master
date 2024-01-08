@@ -1,0 +1,42 @@
+# Dockerfile pour une instance web
+FROM debian:latest
+
+# Mise à jour du système
+RUN apt-get update && apt-get upgrade -y
+
+# Installation des paquets nécessaires
+RUN apt install -y git apache2 php php-mongodb
+
+# Suppression du contenu du dossier web
+RUN rm -rf /var/www/html/*
+
+# Configuration du serveur apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf
+
+# Clonage du dépôt ou se trouve le site web
+RUN git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
+
+# Permission de pull par n'importe qui
+RUN git config --system --add safe.directory '*'
+
+# Copie du site web dans le dossier web
+RUN cp -r projet-master-23-24/site/* /var/www/html/
+
+# Création du fichier de statut PHP
+RUN echo -e "<?php\nphpinfo();\n?>" > /var/www/html/phpinfo.php
+
+# Ajout d'un site pour connaître le hostname
+RUN cp projet-master-23-24/infra/iaas/hostname.php /var/www/html/
+
+# Ajout d'un site pour tester la connexion à la base de données
+RUN cp projet-master-23-24/infra/iaas/test_bdd.php /var/www/html/
+
+# Configuration du HTTPS sans DNS
+# ???
+
+# Exposition du port 80
+EXPOSE 80
+
+# Lancement du serveur apache
+CMD ["apachectl", "-D", "FOREGROUND"]

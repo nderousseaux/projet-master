@@ -120,8 +120,11 @@ function afficherMesuresChamp(donnees) {
 		const cellule = document.createElement("div");
 		cellule.classList.add("cellule");
 
-		// Capteur défectueux
-		if (element === "C1") {
+		// Vérifie l'état du capteur
+		if (element === "C0") {
+			cellule.textContent = "OK";
+		}
+		else if (element === "C1") {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Capteur défectueux";
 		}
@@ -130,9 +133,9 @@ function afficherMesuresChamp(donnees) {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Raspberry Pi défectueux";
 		}
-		// Aucun problème
+		// Il s'agit d'un autre type de cellule
 		else {
-			cellule.textContent = "OK";
+			cellule.textContent = element;
 		}
 
 		container.appendChild(cellule);

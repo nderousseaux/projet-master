@@ -173,9 +173,7 @@ function creationCmpt() {
 /**
  * Gère les champs du formulaire de connexion
  */
-function connexionCmpt(e) {
-	e.preventDefault();
-
+function connexionCmpt() {
 	/* Vérification des champs */
 		// Courriel
 	let nbrErr = verifInputCourriel();
@@ -225,7 +223,7 @@ function connexionCmpt(e) {
 /**
  * Réinitialise les valeurs des inputs du formulaire
  */
-function reinitInputCmpt(e) {
+function reinitInputCmpt() {
 	// Récupère tous les éléments du formulaire
 	const inputsForm = document.querySelectorAll("form input");
 

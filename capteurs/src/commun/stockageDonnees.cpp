@@ -67,12 +67,21 @@ void StockageDonnees::agregeFichiersDonnees(
 				StockageDonnees::DOSSIER_STOCKAGE
 			)
 		) {
-			// Vérifie si le fichier est le fichier de destination
+			// Vérifie si le fichier source est le fichier de destination
 			if (fichier.path().string() == cheminFichierAgrege) {
 				continue;
 			}
 
-			// Vérifie si le fichier est un fichier texte
+			// Vérifie si le fichier source contient dans son nom "agrege_"
+			if (
+				fichier.path().string().find(
+					StockageDonnees::CHEMIN_FICHIER_AGREGE
+				) != std::string::npos
+			) {
+				continue;
+			}
+
+			// Vérifie si le fichier source est un fichier texte
 			if (fichier.path().extension() == ".txt") {
 				// Ouvre le fichier source
 				std::ifstream fichierSource(fichier.path().string(),
@@ -103,7 +112,7 @@ void StockageDonnees::agregeFichiersDonnees(
 		fichierAgrege.close();
 	}
 	else {
-		std::cerr << "Impossible d'ouvrir le fichier source : \"" <<
+		std::cerr << "Impossible d'ouvrir le fichier de destionation : \"" <<
 			cheminFichierAgrege << "\"" << std::endl;
 	}
 }

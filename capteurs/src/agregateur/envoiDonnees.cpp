@@ -117,8 +117,13 @@ int EnvoiDonnees::envoiFichierSFTP(std::string cheminFichier) {
 		return -1;
 	}
 
-	LIBSSH2_SFTP_HANDLE* agent = libssh2_sftp_open(sftp,
-		cheminDistantServ.c_str(), LIBSSH2_FXF_CREAT, 0);
+	LIBSSH2_SFTP_HANDLE* agent = libssh2_sftp_open(
+		sftp,
+		cheminDistantServ.c_str(),
+		LIBSSH2_FXF_WRITE | LIBSSH2_FXF_CREAT,
+		LIBSSH2_SFTP_S_IRUSR | LIBSSH2_SFTP_S_IWUSR | LIBSSH2_SFTP_S_IRGRP |
+			LIBSSH2_SFTP_S_IROTH
+	);
 
 	if (!agent) {
 		afficheMsgErrLibssh2(session,
@@ -132,9 +137,15 @@ int EnvoiDonnees::envoiFichierSFTP(std::string cheminFichier) {
 		std::istreambuf_iterator<char>());
 
 	// Envoie le tampon vers le serveur SFTP
-	libssh2_sftp_write(agent, tampon.c_str(), strlen(tampon.c_str()));
+	err = libssh2_sftp_write(agent, tampon.c_str(), tampon.size());
+	if (err < 0) {
+		afficheMsgErrLibssh2(session,
+			"Echec lors de l'écriture dans le fichier distant");
+		return err;
+	}
 
 	// Ferme les connexions
+	libssh2_sftp_close(agent);
 	libssh2_sftp_shutdown(sftp);
 	libssh2_session_disconnect(session, "Extinction normale");
 	libssh2_session_free(session);

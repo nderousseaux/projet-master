@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<?php include "assets/head.php"; echo PHP_EOL;?>
+	<?php include "assets/head.php"; echo PHP_EOL;?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
 </head>
@@ -79,7 +79,6 @@
 			</section>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Évolution des mesures dans le temps sur l'ilot</h1>
 		<section id="secGraph">
@@ -108,7 +107,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Récapitulatif des mesures relevées sur le champ</h1>
 		<section id="secTableau" class="tableau">
@@ -124,7 +122,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Prévisions météorologiques sur le champ</h1>
 		<section id="secMeteo" class="tableau">
@@ -156,7 +153,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Export des données du champ</h1>
 		<section id="secExport">
@@ -199,7 +195,7 @@
 		</section>
 	</section>
 </div>
-<?php include "assets/footer.php"; echo PHP_EOL?>
+<?php include "assets/footer.php"?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
 integrity="sha512-TiY/d3GpuSKgQYgnqegSfdqlXp6ebBvi6A47mFTMSpZM7BMbvfkkvU/SlDzZHs9lWqF+BteevHlqgauHhLLbIA=="
 crossorigin="anonymous" referrerpolicy="no-referrer"></script>

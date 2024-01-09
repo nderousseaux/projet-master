@@ -46,12 +46,13 @@
 <script>
 	/*** Gestion des données ***/
 		// Gère les champs du formulaire et l'envoi des données
-	document.getElementById("enreg").addEventListener("click",
-	e => {
-		connexionCmpt(e);
+	document.getElementById("enreg").addEventListener("click", e => {
+		e.preventDefault();
+		connexionCmpt();
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		connexionCmpt(e);
+		e.preventDefault();
+		connexionCmpt();
 	});
 
 

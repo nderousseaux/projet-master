@@ -210,6 +210,11 @@ function lancerTelechargement(nomFichier, donnees) {
 	document.body.removeChild(container);
 }
 
+/**
+ * Exporte les données de l'utilisateur au format CSV
+ *
+ * @param {int} idUtilisateur - ID de l'utilisateur
+ */
 function exportCSV(idUtilisateur) {
 	const valChamp = document.getElementById("champSlct").value;
 	const valType = document.getElementById("typeExportSlct").value

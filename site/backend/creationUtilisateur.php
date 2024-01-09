@@ -153,7 +153,7 @@ try {
     $result = $mongoClient->executeBulkWrite("$database.$collection", $insert, $writeConcern);
     $mail = "florent.seel@etu.unistra.fr";
     //notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
-    echo json_encode([OK, "Utilisateur ajouté. mdp: $mdp"]);
+    echo json_encode([OK, "Utilisateur ajouté. Mot de passe : $mdp"]);
 } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
     die("Error inserting document: " . $e->getMessage());
 }

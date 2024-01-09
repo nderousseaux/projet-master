@@ -70,6 +70,8 @@ input::placeholder {
 }
 input:disabled {
 	background-color: #f6f6f6;
+}
+input:disabled::placeholder {
 	color: #848484;
 }
 
@@ -358,6 +360,8 @@ dialog > form > button {
 	}
 	input:disabled {
 		background-color: #373737;
+	}
+	input:disabled::placeholder {
 		color: #d2d2d2;
 	}
 

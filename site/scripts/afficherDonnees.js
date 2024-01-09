@@ -40,7 +40,6 @@ function afficherNomUtilisateur(nomUtilisateur, idUtilisateur) {
 	container.textContent = nomUtilisateur + " #" + idUtilisateur;
 }
 
-
 /**
  * Affiche les infos du champ sélectionné
  *

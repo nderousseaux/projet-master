@@ -8,10 +8,6 @@
 #include <ctime>
 #include <iostream>
 
-/* Constante */
-
-#define NOM_BDD_AGR "mesuresAgregees.db"	// Nom de la base de données agrégée
-
 /* Fonction */
 
 /**

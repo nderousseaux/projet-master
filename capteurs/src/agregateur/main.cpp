@@ -27,5 +27,8 @@ int main(int argc, char** argv) {
 	// Agrège les fichiers de données
 	StockageDonnees::agregeFichiersDonnees(cheminAgrege);
 
+	// Envoie les données agrégées vers le serveur SFTP
+	EnvoiDonnees::envoiFichierSFTP(cheminAgrege);
+
 	return EXIT_SUCCESS;
 }

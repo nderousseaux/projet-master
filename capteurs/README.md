@@ -44,15 +44,6 @@ peut être lancé avec les arguments suivants : `<id agri>` `<id champ>`
 Une constante, nommée `DEBUG`, se trouvant dans le fichier 'inc/main.h', permet
 d'afficher des informations supplémentaires dans la sortie standard.
 
-Un fichier pour stocker les identifiants SFTP est nécessaire. Il doit se trouver
-dans le dossier `capteurs` et se nommer `identifiantsSFTP.txt`.  
-Il doit comporter les champs suivants, dans l'ordre :  
-```
-IPServeur
-nomUtilisateur
-motDePasse
-```
-
 Les données sont enregistrées dans le dossier `stockage`, dans un fichier
 nommé `mesures_idAgriIdChampIdIlot.txt`, sous
 la forme :  
@@ -69,3 +60,15 @@ peut être lancé.
 Il agrégera les mesures des bases de données présentes dans le dossier
 `stockage`, dans un nouveau fichier nommés
 `agrege_nombreAleatoire_horodatage.txt` (afin de le rendre unique).
+
+Le programme se charge d'envoyer le fichier sur le serveur SFTP.  
+Pour cela, un fichier stockant les identifiants SFTP est nécessaire.
+Il doit se trouver dans le dossier `capteurs` et se nommer
+`identifiantsSFTP.txt`.  
+Il doit comporter les champs suivants, dans l'ordre :  
+```
+IP du serveur
+Port
+Nom d'utilisateur
+Mot de passe
+```

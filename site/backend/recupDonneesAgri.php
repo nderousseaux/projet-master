@@ -53,6 +53,11 @@ include "recupMesuresChamp.php";
 $data[] = json_decode(ob_get_contents(), true);
 ob_end_clean();
 
+ob_start();
+include "recupNumIlots.php";
+$data[] = ob_get_contents();
+ob_end_clean();
+
 /*
 ob_start();
 include "recupMesuresIlot.php";

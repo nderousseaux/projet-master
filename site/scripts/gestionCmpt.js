@@ -299,10 +299,10 @@ function changerFormulaire(idUtilisateur) {
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
 	document.getElementById("enregMdp").addEventListener("click",
 	e => {
-		enregistrerMdp(e, idUtilisateur);
+		enregistrerMdp(idUtilisateur);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		enregistrerMdp(e, idUtilisateur);
+		enregistrerMdp(idUtilisateur);
 	});
 }
 
@@ -364,7 +364,7 @@ function afficherMsgErreur(message, creaUtili = false) {
 function supprCmpt(idUtilisateur) {
 	const champPost = new FormData();
 	const idUtiliForm = document.getElementById("idUtili").value;
-	champPost.append("idUtilisateur", idUtilForm);
+	champPost.append("idUtilisateur", idUtiliForm);
 
 	recupDonnees(champPost, "supprCmpt.php")
 	.then(retour => {

@@ -1,14 +1,12 @@
 #!/bin/bash
-
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
 yes | ../Installation.sh
 
-# Donne les droits d'execution d'Installation.sh
-chmod +x ../Installation.sh
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
 
-yes | ../Installation.sh
 
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
@@ -24,12 +22,8 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-# Texte à ajouter
-line_to_add="/home/pi/start-batman-adv.sh &"
-
-sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add\nexit 0|" "$fichier"
+python3 ../rclocalwrite.py
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5
-
 sudo reboot

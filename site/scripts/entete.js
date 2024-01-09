@@ -15,7 +15,7 @@ function activerDefilementHautPage() {
 /**
  * Active le défilement sur un élément spécifique
  * 
- * @param {div} element Élément sur lequel activer le défilement
+ * @param {div} element - sur lequel activer le défilement
  */
 function defielementSurElement(element) {
 	// Ajoute le curseur "pointer" sur l'élément
@@ -57,7 +57,7 @@ function retracterScroll() {
 			.add("miseEchelleHeader");
 
 		// Box centrale
-		document.querySelector("header > picture > img").classList
+		document.querySelector("header > a > picture > img").classList
 			.add("masqueLogo");
 
 		// Sections
@@ -72,7 +72,7 @@ function retracterScroll() {
 			.remove("miseEchelleHeader");
 
 		// Box centrale
-		document.querySelector("header > picture > img").classList
+		document.querySelector("header > a > picture > img").classList
 			.remove("masqueLogo");
 
 		// Sections

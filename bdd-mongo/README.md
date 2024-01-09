@@ -37,7 +37,8 @@
         "nom": "nom",
         "prenom": "prénom",
         "mail": "email@bidon.eu",
-        "mdp": "mdp"
+        "mdp": "mdp",
+        "mdp_temp": true|false
     },
 
     "agriculteur": {

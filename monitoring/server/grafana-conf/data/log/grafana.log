@@ -388,3 +388,29 @@ t=2023-12-07T18:23:19+0000 lvl=eror msg="Data proxy error" logger=data-proxy-log
 t=2023-12-07T18:23:19+0000 lvl=eror msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=POST path=/api/datasources/proxy/1/api/v1/query_range status=502 remote_addr=[::1] time_ms=0 size=0 referer="http://localhost:3000/d/ov0oEgdik/metriques-des-vms?orgId=1"
 t=2023-12-07T18:23:19+0000 lvl=eror msg="Data proxy error" logger=data-proxy-log userId=1 orgId=1 uname=admin path=/api/datasources/proxy/1/api/v1/query_range remote_addr=[::1] referer="http://localhost:3000/d/ov0oEgdik/metriques-des-vms?orgId=1" error="http: proxy error: context canceled"
 t=2023-12-07T18:23:19+0000 lvl=eror msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=POST path=/api/datasources/proxy/1/api/v1/query_range status=502 remote_addr=[::1] time_ms=0 size=0 referer="http://localhost:3000/d/ov0oEgdik/metriques-des-vms?orgId=1"
+t=2023-12-18T17:53:50+0000 lvl=info msg="Starting Grafana" logger=server version=8.1.5 commit=c725a4259a branch=HEAD compiled=2021-09-21T08:54:08+0000
+t=2023-12-18T17:53:50+0000 lvl=info msg="Config loaded from" logger=settings file=/grafana/conf/defaults.ini
+t=2023-12-18T17:53:50+0000 lvl=info msg="Config loaded from" logger=settings file=/grafana/conf/defaults.ini
+t=2023-12-18T17:53:50+0000 lvl=info msg="Path Home" logger=settings path=/grafana
+t=2023-12-18T17:53:50+0000 lvl=info msg="Path Data" logger=settings path=/grafana/data
+t=2023-12-18T17:53:50+0000 lvl=info msg="Path Logs" logger=settings path=/grafana/data/log
+t=2023-12-18T17:53:50+0000 lvl=info msg="Path Plugins" logger=settings path=/grafana/data/plugins
+t=2023-12-18T17:53:50+0000 lvl=info msg="Path Provisioning" logger=settings path=/grafana/conf/provisioning
+t=2023-12-18T17:53:50+0000 lvl=info msg="App mode production" logger=settings
+t=2023-12-18T17:53:50+0000 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2023-12-18T17:53:50+0000 lvl=warn msg="SQLite database file has broader permissions than it should" logger=sqlstore path=/grafana/data/grafana.db mode=-rwxr-xr-x expected=-rw-r-----
+t=2023-12-18T17:53:50+0000 lvl=info msg="Starting DB migrations" logger=migrator
+t=2023-12-18T17:53:50+0000 lvl=info msg="migrations completed" logger=migrator performed=0 skipped=330 duration=1.778247ms
+t=2023-12-18T17:53:50+0000 lvl=info msg="Starting plugin search" logger=plugins
+t=2023-12-18T17:53:50+0000 lvl=info msg="Registering plugin" logger=plugins id=input
+t=2023-12-18T17:53:50+0000 lvl=info msg="External plugins directory created" logger=plugins directory=/grafana/data/plugins
+t=2023-12-18T17:53:50+0000 lvl=info msg="Live Push Gateway initialization" logger=live.push_http
+t=2023-12-18T17:53:50+0000 lvl=info msg="HTTP Server Listen" logger=http.server address=[::]:80 protocol=http subUrl= socket=
+t=2023-12-18T17:54:00+0000 lvl=eror msg="Failed to look up user based on cookie" logger=context error="user token not found"
+t=2023-12-18T17:54:00+0000 lvl=info msg="Request Completed" logger=context userId=0 orgId=0 uname= method=GET path=/ status=302 remote_addr=109.14.238.4 time_ms=0 size=29 referer=
+t=2023-12-18T17:54:00+0000 lvl=eror msg="Failed to look up user based on cookie" logger=context error="user token not found"
+t=2023-12-18T17:54:08+0000 lvl=eror msg="Failed to look up user based on cookie" logger=context error="user token not found"
+t=2023-12-18T17:54:08+0000 lvl=info msg="Successful Login" logger=http.server User=admin@localhost
+t=2023-12-18T17:54:22+0000 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=POST path=/api/user/password/reset status=400 remote_addr=109.14.238.4 time_ms=329 size=52 referer=http://185.155.93.201/login
+t=2023-12-18T17:54:22+0000 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/live/ws status=0 remote_addr=109.14.238.4 time_ms=0 size=0 referer=
+t=2023-12-18T17:54:37+0000 lvl=info msg="Initialized channel handler" logger=live channel=grafana/dashboard/uid/ov0oEgdik address=grafana/dashboard/uid/ov0oEgdik

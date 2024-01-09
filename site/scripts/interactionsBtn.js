@@ -21,13 +21,7 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 					btn.classList.add("selected");
 					btn.setAttribute("id", idAttr);
 
-					/*
-					 * Si le bouton sélectionné est celui du champ, afficher
-					 * son nom dans le header
-					 */
-					if (idContainer === "selectChamp") {
-						afficherNomChamp();
-					}
+					afficherTitreDropdown(idContainer, idAttr);
 				}
 				else {
 					btn.classList.remove("selected");
@@ -48,11 +42,99 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 			button.classList.add("selected");
 			button.setAttribute("id", idAttr);
 
-			if (idContainer === "selectChamp") {
-				afficherNomChamp();
-			}
+			afficherTitreDropdown(idContainer, idAttr);
 		}
 	});
+}
+
+/**
+ * Modifie le texte adjacent au dropdown pour afficher la valeur sélectionnée
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherTitreDropdown(idContainer, idAttr) {
+	// Titre du champ
+	if (idContainer === "selectChamp") {
+		afficherChampSelectionne(idContainer, idAttr);
+	}
+	// Titre de l'ilot
+	else if (
+		idContainer === "selectIlot" ||
+		idContainer === "selectIlotExport"
+	) {
+		afficherIlotSelectionne(idContainer, idAttr);
+	}
+	// Titre du type de mesure
+	else if (
+		idContainer === "selectType" ||
+		idContainer === "selectTypeExport"
+	) {
+		afficherMesureSelectionnee(idContainer, idAttr);
+	}
+	// Titre durée mesure export
+	else if (idContainer === "selectDureeExport") {
+		afficherDureeSelectionnee(idContainer, idAttr);
+	}
+}
+
+/**
+ * Affiche le nom du champ sélectionné dans le header
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherChampSelectionne(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
+	container.textContent = "Champ " +
+		document.getElementById(idAttr).value;
+}
+
+/**
+ * Affiche le numéro de l'ilot sélectionné dans les options du graphique et
+ * de l'export de données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherIlotSelectionne(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
+	
+	if (document.getElementById(idAttr).value === "tous") {
+		container.textContent = "Tous les ilots";
+		return;
+	}
+
+	container.textContent = "Ilot " + document.getElementById(idAttr).value;
+}
+
+/**
+ * Affiche le type de mesure sélectionné dans les options du graphique et
+ * de l'export de données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherMesureSelectionnee(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+		.previousElementSibling;
+	container.textContent = document.getElementById(idAttr).textContent;
+}
+
+/**
+ * Affiche la durée de mesure sélectionnée dans les options de l'export de
+ * données
+ *
+ * @param {string} idContainer - ID du container du dropdown
+ * @param {string} idAttr - ID attribué au bouton sélectionné
+ */
+function afficherDureeSelectionnee(idContainer, idAttr) {
+	const container = document.getElementById(idContainer).parentNode
+	.previousElementSibling;
+	container.textContent = document.getElementById(idAttr)
+		.textContent;
 }
 
 /**
@@ -84,5 +166,71 @@ function activerBoutonChgmtChamp(idUtilisateur) {
 				helperAfficherGraph();
 			});
 		});
+	});
+}
+
+/**
+ * Converti les données passées en paramètre en CSV
+ *
+ * @param {array} donnees - à convertir
+ * @returns {string} - les données converties en CSV
+ */
+function convertirEnCSV(donnees) {
+	let csv = '';
+
+	// Ajoute les titres des colonnes
+	csv += "numChamp;numIlot;dateHeureMesure;temp;humi;lumi\n"
+
+	// Ajoute les données
+	donnees.forEach(donnee => {
+		csv += donnee.join(";") + "\n";
+	});
+
+	return csv;
+}
+
+/**
+ * Lance le téléchargement d'un fichier, avec les données passées en paramètre
+ *
+ * @param {string} nomFichier - à télécharger
+ * @param {string} donnees - à placer dans le fichier
+ */
+function lancerTelechargement(nomFichier, donnees) {
+	// Créé un lien de téléchargement, avec les données à télécharger
+	const container = document.createElement('a');
+	container.setAttribute("href", "data:text/plain;charset=utf-8," +
+		encodeURIComponent(donnees));
+	container.setAttribute("download", nomFichier);
+
+	// Ajoute le lien au DOM
+	container.style.display = "none";
+	document.body.appendChild(container);
+
+	// Clique sur le lien pour lancer le téléchargement
+	container.click();
+
+	// Supprime le lien du DOM
+	document.body.removeChild(container);
+}
+
+function exportCSV(idUtilisateur) {
+	const valChamp = document.getElementById("champSlct").value;
+	const valType = document.getElementById("typeExportSlct").value
+	const valDuree = document.getElementById("dureeExportSlct").value;
+	const valIlot = document.getElementById("ilotExportSlct").value;
+
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+	champPost.append("champ", valChamp);
+	champPost.append("type", valType);
+	champPost.append("duree", valDuree);
+	champPost.append("ilot", valIlot);
+
+	recupDonnees(champPost, "recupExport.php")
+	.then(donnees => {
+		lancerTelechargement("export.csv", convertirEnCSV(donnees));
+	})
+	.catch(err => {
+		console.error(err);
 	});
 }

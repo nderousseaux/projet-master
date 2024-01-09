@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>	
 	<title>Création de compte</title>
 	<meta name="description" content="Création de compte"/>
@@ -12,7 +13,7 @@
 	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
-	<section id="infosCmpt">
+	<section id="infosCmpt" class="containerSecVerti">
 		<h1>Création de compte</h1>
 		<form id="formCmpt">
 			<label class="colonne" for="prenom">Prénom</label>
@@ -29,12 +30,13 @@
 			<label class="colonne" for="courriel">Courriel</label>
 			<input class="colonne" id="courriel" name="courriel"
 				placeholder="adresse@courriel.com"></input>
-			<button id="enreg">Créer</button>
+			<button type="button" id="enreg">Créer</button>
 		</form>
 	</section>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
+<script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
@@ -47,6 +49,7 @@
 	document.querySelector("form").addEventListener("submit", e => {
 		creationCmpt(e);
 	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

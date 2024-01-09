@@ -12,7 +12,7 @@
 	<?php include "assets/logo.php"?>
 </header>
 <div id="corps">
-	<section id="infosCmpt">
+	<section id="infosCmpt" class="containerSecVerti">
 		<h1>Connexion</h1>
 		<form id="formCmpt">
 			<label class="colonne" for="courriel">Courriel</label>
@@ -21,12 +21,13 @@
 			<label class="colonne" for="mdp">Mot de passe</label>
 			<input type="password" id="mdp" name="mdp"
 				class="colonne" placeholder="******"></input>
-			<button id="enreg">Connexion</button>
+			<button type="button" id="enreg">Connexion</button>
 		</form>
 	</section>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
+<script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
@@ -39,6 +40,7 @@
 	document.querySelector("form").addEventListener("submit", e => {
 		connexionCmpt(e);
 	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

@@ -10,7 +10,8 @@ db.compte.insertMany( [
         nom: "John",
         prenom: "Doe",
         mail: "email@bidon.eu",
-        mdp: "helloworld"
+        mdp: "Helloworld00++",
+	mdp_temp: false
     },
     {
         idUser: 1,
@@ -19,7 +20,8 @@ db.compte.insertMany( [
         nom: "Jean",
         prenom: "Dupont",
         mail: "email2@bidon.eu",
-        mdp: "helloworld"
+        mdp: "Helloworld00++",
+	mdp_temp: true
     },
     {
         idUser: 2,
@@ -28,7 +30,8 @@ db.compte.insertMany( [
         nom: "John",
         prenom: "Jones",
         mail: "email3@bidon.eu",
-        mdp: "helloworld"
+        mdp: "Helloworld00++",
+	mdp_temp: false
     }
 ] );
 

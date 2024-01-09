@@ -2,19 +2,30 @@
 
 int main(int argc, char** argv) {
 	// Vérifie le nombre d'arguments
-	if (argc != 4) {
+	if (argc != 5) {
 		std::cerr << "Usage: " <<
 			argv[0] <<
-			" <id agri> <id champ> <id ilot>" <<
+			" <id agri> <id champ> <id ilot> <simuler>" <<
 			std::endl;
 
 		return EXIT_FAILURE;
 	}
 	else {
+		// Vérifie que le dernier argument est un booléen
+		if (atoi(argv[4]) != 0 && atoi(argv[4]) != 1) {
+			std::cerr << "Simuler doit être égal à 0 ou 1" <<
+				std::endl;
+			std::cerr << "Usage: " << argv[0] <<
+				" <id agri> <id champ> <id ilot> <simuler>" << std::endl;
+			return EXIT_FAILURE;
+		}
+
+		// Affiche les arguments
 		if (DEBUG) {
 			std::cout << "Id agri : " << argv[1] << std::endl;
 			std::cout << "Id champ : " << argv[2] << std::endl;
-			std::cout << "Id ilot : " << argv[3] << std::endl << std::endl;
+			std::cout << "Id ilot : " << argv[3] << std::endl;
+			std::cout << "Simuler : " << argv[4] << std::endl << std::endl;
 		}
 
 		// Vérifie que les arguments sont des entiers positifs
@@ -28,6 +39,7 @@ int main(int argc, char** argv) {
 			return EXIT_FAILURE;
 		}
 	}
+
 	// Stocke les informations du champ
 	InfosChamp infosChamp;
 	infosChamp.setInfosChamp(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
@@ -38,9 +50,9 @@ int main(int argc, char** argv) {
 	int lumi = 0;
 
 		// Génère des valeurs factices
-	if (SIMULATEUR) {
+	if (atoi(argv[4]) == 1) {
 		temp = Mesures::genValeursFloat(-20.0, 40.0);
-		humi = Mesures::genValeursFloat(0.0, 100.0);
+		humi = Mesures::genValeursFloat(0.0, 150.0);
 		lumi = Mesures::genValeursInt(0, 120000);
 	}
 		// Récupère les valeurs des capteurs

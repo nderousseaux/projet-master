@@ -6,6 +6,21 @@
 	margin-bottom: calc(72px + 36px);
 }
 
+	/* Dropdown utilisateurs */
+#ddUtilisateur {
+	width: 80%;
+	margin-bottom: 30px;
+}
+#ddUtilisateur > .dropbtn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	padding: 10px 0;
+}
+#ddUtilisateur > .dropdownContent {
+	left: 0;
+}
+
 	/* Infos du compte */
 #infosCmpt {
 	display: flex;
@@ -33,6 +48,9 @@ form > select {
 	border: 1px solid #cecece;
 	border-radius: 5px;
 }
+form > select {
+	width: calc(100% + 2 * 4px + 1px);
+}
 label {
 	display: flex;
 	align-items: center;
@@ -56,7 +74,8 @@ input:disabled {
 
 	/* Boutons */
 button,
-input {
+input,
+.bulle {
 	font-family: "Open Sans", Arial, sans-serif;
 	font-size: 14px;
 }
@@ -82,11 +101,13 @@ button:active {
 	border-radius: 5px;
 	margin-left: 3px;
 }
-#secCopie > div {
+#secCopie > div,
+#secMdp {
 	position: relative;
 	display: inline-block;
 }
-#secCopie > div .bulle {
+#secCopie > div .bulle,
+#secMdp .bulle {
 	visibility: hidden;
 	position: absolute;
 	background-color: #76cda6;
@@ -97,11 +118,12 @@ button:active {
 	z-index: 9999;
 	bottom: calc(100% + 5px);
 	left: 50%;
-	margin-left: calc(140px / -2);
+	margin-left: calc((140px / -2));
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
 }
-#secCopie > div .bulle::after {
+#secCopie > div .bulle::after,
+#secMdp .bulle::after {
 	position: absolute;
 	content: '';
 	top: 100%;
@@ -110,9 +132,16 @@ button:active {
 	border: solid 5px;
 	border-color: #7fc7a7 transparent transparent transparent;
 }
-#secCopie > div:hover .bulle {
+#secCopie > div:hover .bulle,
+#secMdp:hover .bulle {
 	visibility: visible;
 	opacity: 1;
+}
+
+	/* Section mot de passe */
+#secMdp .bulle {
+	width: 280px;
+	margin-left: calc(280px / -2);
 }
 
 	/* Selecteurs de couleur */
@@ -155,8 +184,8 @@ footer {
 }
 
 
-/* Version mobile */
-@media screen and (max-width: 799px) {
+/* Version tablette et mobile */
+@media screen and (max-width: 950px) {
 	/* Header */
 		/* Sous-sections */
 	header > section:last-child {
@@ -166,8 +195,8 @@ footer {
 
 	/* Corps */
 	#corps {
-		top: 92px;
-		min-height: calc(100vh - 92px);
+		top: calc(72px + 40px + 20px);
+		min-height: calc(100vh - 72px + 40px + 20px);
 	}
 
 	/* Section infos compte/image de profil */
@@ -175,6 +204,17 @@ footer {
 		flex-direction: column-reverse;
 		margin-top: 20px;
 		height: 100%;
+	}
+
+		/* Infos du compte */
+	form > select {
+		width: unset !important;
+	}
+
+		/* Dropdown utilisateurs */
+	#ddUtilisateur > .dropbtn {
+		width: 100% !important;
+		height: 100% !important;
 	}
 
 		/* Infos du compte */
@@ -205,6 +245,17 @@ footer {
 		border-color: #555555 transparent transparent transparent;
 	}
 
+		/* Section mot de passe */
+	#secMdp .bulle {
+		width: 220px;
+		margin-left: calc((220px / -2) - 5px);
+	}
+	#secMdp:focus-within .bulle {
+		display: block;
+		visibility: visible;
+		opacity: 1;
+	}
+
 		/* Bouton d'enregistrement */
 	form > button {
 		grid-column: span 2;
@@ -225,7 +276,7 @@ footer {
 
 	/* Footer */
 	footer {
-		margin-top: 20px;
+		margin-top: 72px;
 	}
 }
 
@@ -244,7 +295,8 @@ footer {
 		box-shadow: 0 15px 20px -15px #080808;
 	}
 	input,
-	button {
+	form button,
+	form > select {
 		border: 1px solid #3d3d3d !important;
 	}
 	#infosCmpt > input::placeholder {
@@ -265,10 +317,12 @@ footer {
 	button:active {
 		background-color: #2f2f2f;
 	}
-	#secCopie > div .bulle {
+	#secCopie > div .bulle,
+	#secMdp .bulle {
 		background-color: #2f694a;
 	}
-	#secCopie > div .bulle::after {
+	#secCopie > div .bulle::after,
+	#secMdp .bulle::after {
 		border-color: #2f694a transparent transparent transparent;
 	}
 

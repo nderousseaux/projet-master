@@ -12,6 +12,5 @@
 /* Constantes */
 
 #define DEBUG 1			// Affiche les valeurs générées
-#define SIMULATEUR 1	// Génère des valeurs factices (faux appareil)
 
 #endif

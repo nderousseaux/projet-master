@@ -5,13 +5,15 @@ chmod +x ../Installation.sh
 
 #yes | ../Installation.sh
 
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
+
+
 #Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
-
-# Manque la derniere etape
 
 fichier="/etc/rc.local"
 
@@ -21,22 +23,35 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-# Ligne à ajouter
-nouvelle_ligne="/home/pi/start-batman-adv.sh &"
-
-# Ajouter la nouvelle ligne juste avant la ligne "exit 0"
-sudo sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
+python3 ../rclocalwrite.py
 
 #Configuration Gateway
-sudo echo "interface=bat0" >> sudo /etc/dnsmasq.conf
-sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
+## Configuration du serveur DHCP (interface bat0)
+sudo chmod +0770 /etc/dnsmasq.conf
 
-sudo echo "interface=wlan0" >> sudo /etc/dnsmasq.conf
-sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> sudo /etc/dnsmasq.conf
+if sudo grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
+    echo "La ligne existe déjà."
+else
+    echo "La ligne n'existe pas. Ajout en cours..."
+    sudo echo "interface=bat0" >> /etc/dnsmasq.conf
+    sudo echo "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" >> /etc/dnsmasq.conf
+    echo "Lignes ajoutées avec succès."
+fi
+
+#(interface wlan0)
+sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
+sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
+
+if grep -q "dhcp-range=192.168.199.2,192.168.199.99,255.255.255.0,12h" /etc/dnsmasq.conf; then
+    echo "La ligne existe déjà."
+else
+    echo "La ligne n'existe pas. Ajout en cours..."
+    sudo echo "interface=wlan0" >> /etc/dnsmasq.conf
+    sudo echo "dhcp-range=10.0.1.2,10.0.1.255,255.255.255.0,12h" >> /etc/dnsmasq.conf
+    echo "Lignes ajoutées avec succès."
+fi
+
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5
-
 sudo reboot
-
-

@@ -1,10 +1,14 @@
 #!/bin/bash
-
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
 yes | ../Installation.sh
 
+sudo systemctl stop NetworkManager
+sudo systemctl disable NetworkManager
+
+
+#Configuration noeud
 cp start-batman-adv.sh ~/start-batman-adv.sh
 chmod +x ~/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
@@ -18,13 +22,8 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-# Ligne à ajouter
-nouvelle_ligne="/home/pi/start-batman-adv.sh &"
-
-# Ajouter la nouvelle ligne juste avant la ligne "exit 0"
-sed -i "/exit 0/i $nouvelle_ligne" "$fichier"
+python3 ../rclocalwrite.py
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5
-
 sudo reboot

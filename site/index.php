@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
@@ -52,7 +53,7 @@
 		</section>
 
 		<section id="secMoyennes" class="containerDoubleVerti">
-			<h1>Moyennes des mesures du champ</h1>
+			<h1>Moyennes des mesures sur le champ</h1>
 			<section>
 				<div>
 					<h1>Température</h1>
@@ -71,11 +72,11 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Évolution des mesures dans le temps d'un ilot</h1>
+		<h1>Évolution des mesures dans le temps sur l'ilot</h1>
 		<section id="secGraph">
-			<div id="optGraph">
+			<div id="optGraph" class="options">
 				<div>
-					<p>Type de données</p>
+					<p>Température</p>
 					<div id="ddType" class="dropdown">
 						<button class="dropbtn">⇩</button>
 						<div id="selectType" class="dropdownContent">
@@ -89,7 +90,7 @@
 					<p>Ilot</p>
 					<div id="ddIlot" class="dropdown">
 						<button class="dropbtn">⇩</button>
-						<div id="selectIlot" class="dropdownContent">
+						<div id="selectIlot" class="dropdownContent ilot">
 						</div>
 					</div>
 				</div>
@@ -100,7 +101,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Récapitulatif des mesures relevées du champ</h1>
+		<h1>Récapitulatif des mesures relevées sur le champ</h1>
 		<section id="secTableau" class="tableau">
 			<div>
 				<div class="cellule titre">Ilot</div>
@@ -116,7 +117,7 @@
 	</section>
 
 	<section class="containerSecVerti">
-		<h1>Prévisions météorologiques du champ</h1>
+		<h1>Prévisions météorologiques sur le champ</h1>
 		<section id="secMeteo" class="tableau">
 			<div>
 				<div class="cellule titre">
@@ -146,6 +147,48 @@
 			</div>
 		</section>
 	</section>
+
+	<section class="containerSecVerti">
+		<h1>Export des données du champ</h1>
+		<section id="secExport">
+			<div id="optExport" class="options">
+				<div>
+					<p>Type de données</p>
+					<div id="ddTypeExport" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectTypeExport" class="dropdownContent">
+							<button value="tous">Toutes mesures</button>
+							<button value="temp">Température</button>
+							<button value="humi">Humidité du sol</button>
+							<button value="lumi">Luminosité</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>Durée</p>
+					<div id="ddTypeExport" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectDureeExport" class="dropdownContent">
+							<button value="7">Semaine passée</button>
+							<button value="31">Mois passé</button>
+							<button value="365">Année passée</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>Ilot</p>
+					<div id="ddIlotExport" class="dropdown">
+						<button class="dropbtn">⇩</button>
+						<div id="selectIlotExport" class="dropdownContent ilot">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="export">
+				<button id="btnExport" class="btn">Exporter en CSV</button>
+			</div>
+		</section>
+	</section>
 </div>
 <?php include "assets/footer.php"?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly-basic.min.js"
@@ -171,7 +214,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		["selectCmpt", "cmptSlct", false],
 		["selectType", "typeSlct", true],
 		["selectIlot", "ilotSlct", true],
-		["selectDuree", "dureeSlct", true]
+		["selectDuree", "dureeSlct", true],
+		["selectTypeExport", "typeExportSlct", true],
+		["selectDureeExport", "dureeExportSlct", true],
+		["selectIlotExport", "ilotExportSlct", true]
 	];
 
 		// Préselectionne les boutons des dropdowns
@@ -186,10 +232,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	const idUtilisateur = 0;
-
-		// Affiche le nom de l'utilisateur dans le header
-	afficherNomUtilisateur(idUtilisateur);
+	//const idUtilisateur = 0;
+	const idUtilisateur = <?php 
+		session_start();
+		echo json_encode($_SESSION["idAgri"]); //idUser ?
+	?>;
 
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)
@@ -197,25 +244,21 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Active les boutons des champs
 		activerBouton(contIdButtons[0][0], contIdButtons[0][1],
 			contIdButtons[0][2]);
-		
+
 		/*
 		 * Active la fonction de changement de champ pour charger les nouveaux
 		 * ilots dans le dropdown
 		 */
 		activerBoutonChgmtChamp(idUtilisateur);
 
-		// Affiche la météo (nécessite de connaitre le champ sélectionné)
+		// Affiche la météo pour le champ sélectionné
 		afficherMeteo(idUtilisateur);
 
-		// Affiche les moyennes des valeurs des capteurs
-		afficherMoyennes(idUtilisateur);
-		afficherInfosChamp(idUtilisateur);
-
-		// Affiche toutes les mesures du champ sélectionné
-		afficherMesuresChamp(idUtilisateur);
-
-		// Affiche les ilots du champ sélectionné
-		afficherIlots(idUtilisateur)
+		/**
+		 * Affiche le nom de l'utilisateur, les informations du champ,
+		 * les moyennes, les mesures et les ilots disponibles
+		 */
+		helperAffichageDonneesChamp(idUtilisateur)
 		.then(_ => {
 			// Active les boutons des ilots
 			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
@@ -243,6 +286,12 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	let dropdownIlotGraph = document.getElementById("ddIlot");
 	dropdownIlotGraph.addEventListener("click", _ => {
 		helperAfficherGraph();
+	});
+
+		// Bouton pour exporter les données
+	document.getElementById("btnExport").addEventListener("click",
+	e => {
+		exportCSV(idUtilisateur);
 	});
 
 

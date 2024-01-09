@@ -20,7 +20,7 @@ fi
 
 if [ "$1" = "clean" ];
 then
-	rm -rf build bin
+	rm -rf build bin stockage
 	echo "Projet nettoyé"
 else
 	cmake -DPROG_TYPE=$1 -S . -B build

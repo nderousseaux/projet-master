@@ -22,7 +22,6 @@
 			<br/>
 			Date de la dernière mise à jour : 08/01/2024
 		</p>
-
 		<h2>Cookies</h2>
 		<p>
 			Notre site utilise des cookies pour assurer une expérience
@@ -33,14 +32,12 @@
 			du site, car il nous permet de maintenir votre session active
 			pendant que vous naviguez.
 		</p>
-
 		<h2>Finalité du cookie</h2>
 		<p>
 			Le cookie de gestion de session est utilisé pour maintenir votre
 			session active pendant que vous naviguez sur le site. Il est
 			essentiel au bon fonctionnement du site.
 		</p>
-
 		<h2>Consentement</h2>
 		<p>
 			En accédant à notre site, vous consentez à l'utilisation du cookie
@@ -50,20 +47,17 @@
 			de votre navigateur, cependant, cela peut affecter certaines
 			fonctionnalités du site.
 		</p>
-
 		<h2>Durée de conservation</h2>
 		<p>
 			Le cookie de gestion de session est automatiquement supprimé à la
 			fin de votre session de navigation.
 		</p>
-
 		<h2>Sécurité des données</h2>
 		<p>
 			Nous mettons en œuvre des mesures de sécurité appropriées pour
 			protéger vos données, y compris celles stockées dans le cookie de
 			gestion de session.
 		</p>
-
 		<h2>Vos droits</h2>
 		<p>
 			Conformément au RGPD, vous avez le droit d'accéder à vos données
@@ -73,7 +67,6 @@
 			question concernant notre politique de confidentialité, veuillez
 			nous contacter à dpo@alsagrinet.alsace.
 		</p>
-
 		<h2>Modifications de la politique de confidentialité</h2>
 		<p>
 			Nous nous réservons le droit de modifier cette politique de

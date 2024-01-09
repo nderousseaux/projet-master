@@ -105,7 +105,7 @@
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
-<?php if ($role === "admin")echo '<script type="text/javascript"
+<?php if ($role === "admin") echo '<script type="text/javascript"
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
@@ -120,13 +120,16 @@
 
 		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {
-		reinitInputCmpt(e);
+		e.preventDefault();
+		reinitInputCmpt();
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
-		modifInputCmpt(e);
+		e.preventDefault();
+		modifInputCmpt();
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		modifInputCmpt(e);
+		e.preventDefault();
+		modifInputCmpt();
 	});
 
 		// Gère la suppression du compte
@@ -143,14 +146,17 @@
 		// Gère le changement couleur de l'icône
 	chgmtCouleurIcone();
 
+		// Gère le selecteur de rôle
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
-		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
+		// Récupére l'id de l'utilisateur
 	const containerInput = document.getElementById("idUtili");
 	containerInput.placeholder = idUtilisateur;
 
 		// Affiche le nom de l'utilisateur dans le header
-	afficherNomUtilisateur(idUtilisateur);
+	const nom = document.getElementById("nom").value;
+	const prenom = document.getElementById("prenom").value;
+	afficherNomUtilisateur(nom + ' ' + prenom, idUtilisateur);
 
 
 	/** Changements du DOM **/

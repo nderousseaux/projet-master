@@ -1,4 +1,11 @@
-<?php include "backend/checkConnexion.php"?>
+<?php
+	include "backend/checkConnexion.php";
+
+	// Vérifie que l'utilisateur est bien un administrateur
+	if ($_SESSION["role"] !== "admin") {
+		header("Location: .");
+	}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -42,14 +49,14 @@
 <script>
 	/*** Gestion des données ***/
 		// Gère les champs du formulaire et l'envoi des données
-	document.getElementById("enreg").addEventListener("click",
-	e => {
-		creationCmpt(e);
+	document.getElementById("enreg").addEventListener("click", e => {
+		e.preventDefault();
+		creationCmpt();
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		creationCmpt(e);
+		e.preventDefault();
+		creationCmpt();
 	});
-
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

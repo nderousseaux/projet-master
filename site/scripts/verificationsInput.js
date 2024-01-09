@@ -2,11 +2,9 @@
  * Vérifie les champs de Prénom, Nom et Courriel du formulaire, lorsqu'un
  * événement se produit
  *
- * @param {Event} e - événement sur le formulaire
  * @returns {int} - le nombre de champs incorrects
  */
-function verifInputCmpt(e) {
-	e.preventDefault();
+function verifInputCmpt() {
 	let nbrErr = 0;
 
 	// Regex

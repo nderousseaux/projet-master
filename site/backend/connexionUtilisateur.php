@@ -74,7 +74,7 @@ if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
     $_SESSION["mail"]   = $mail;
 
     if ($mdp_temp == true) {    // nouveau compte
-        echo json_encode([TMP_PWD, "change mdp"]); // preciser str a renvoyer
+        echo json_encode([TMP_PWD, $idUser]); // preciser str a renvoyer
         exit();
     }
     else {

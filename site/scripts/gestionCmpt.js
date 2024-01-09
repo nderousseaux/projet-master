@@ -13,16 +13,16 @@ function chgmtCouleurIcone() {
 	}
 
 	// Initialise les couleurs de l'icône
-	icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+	icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 		couleur2.value + ")";
 
 	// Ajoute des évenements sur les selecteurs de couleur
 	couleur1.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 			couleur2.value + ")";
 	});
 	couleur2.addEventListener("change", () => {
-		icone.style.background =  "linear-gradient(" + couleur1.value  + ", " +
+		icone.style.background = "linear-gradient(" + couleur1.value + ", " +
 			couleur2.value + ")";
 	});
 }
@@ -32,14 +32,13 @@ function chgmtCouleurIcone() {
  * envoie les données au backend si elles sont correctes, pour la modification
  * des informations d'un compte
  *
- * @param {Event} e - événement
  * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
  */
-function modifInputCmpt(e, requeteAdmin = false) {
+function modifInputCmpt(requeteAdmin = false) {
 	/* Vérification des champs */
 		// Prénom, Nom et Courriel
-	let nbrErr = verifInputCmpt(e);
+	let nbrErr = verifInputCmpt();
 
 		// Mot de passe
 	nbrErr += verifInputMdp();
@@ -54,8 +53,11 @@ function modifInputCmpt(e, requeteAdmin = false) {
 
 	/* Envoi des données au backend */
 	if (nbrErr === 0) {
+		// Récupère les données du formulaire
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
+		champPost.append("idUtilisateur",
+			document.getElementById("idUtili").value);
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
@@ -140,13 +142,11 @@ function majValInputCmpt(champPost) {
  * Vérifie les champs du formulaire, lorsqu'un événement se produit et
  * envoie les données au backend si elles sont correctes pour la création
  * d'un compte
- *
- * @param {Event} e - événement
  */
-function creationCmpt(e) {
+function creationCmpt() {
 	/* Vérification des champs */
 		// Prénom, Nom et Courriel
-	let nbrErr = verifInputCmpt(e);
+	let nbrErr = verifInputCmpt();
 
 		// Rôle
 	nbrErr += verifSelectRole();
@@ -156,6 +156,14 @@ function creationCmpt(e) {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
+		.then(donnees => {
+			if (donnees[0] === 0) {
+				afficherMsgErreur(donnees[1]);
+			}
+			else if (donnees[0] === 1) {
+				afficherMsgErreur(donnees[1], true);
+			}
+		})
 		.catch(err => {
 			console.error(err);
 		});
@@ -165,9 +173,7 @@ function creationCmpt(e) {
 /**
  * Gère les champs du formulaire de connexion
  */
-function connexionCmpt(e) {
-	e.preventDefault();
-
+function connexionCmpt() {
 	/* Vérification des champs */
 		// Courriel
 	let nbrErr = verifInputCourriel();
@@ -195,7 +201,7 @@ function connexionCmpt(e) {
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
 		.then(donnees => {
-			// Redige vers la page d'accueil
+			// Redirige vers la page d'accueil
 			if (donnees[0] === 0) {
 				window.location.href = "index.php";
 			}
@@ -216,12 +222,8 @@ function connexionCmpt(e) {
 
 /**
  * Réinitialise les valeurs des inputs du formulaire
- *
- * @param {Event} e - événement
  */
-function reinitInputCmpt(e) {
-	e.preventDefault();
-
+function reinitInputCmpt() {
 	// Récupère tous les éléments du formulaire
 	const inputsForm = document.querySelectorAll("form input");
 
@@ -295,10 +297,10 @@ function changerFormulaire(idUtilisateur) {
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
 	document.getElementById("enregMdp").addEventListener("click",
 	e => {
-		enregistrerMdp(e, idUtilisateur);
+		enregistrerMdp(idUtilisateur);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		enregistrerMdp(e, idUtilisateur);
+		enregistrerMdp(idUtilisateur);
 	});
 }
 
@@ -306,20 +308,20 @@ function changerFormulaire(idUtilisateur) {
  * Vérifie le champ du mot de passe dans le formulaire, lorsqu'un événement se
  * produit et envoie le mot de passe au backend s'il respecte les critères
  *
- * @param {Event} e - événement
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function enregistrerMdp(e, idUtilisateur) {
-	e.preventDefault();
-
+function enregistrerMdp(idUtilisateur) {
 	let nbrErr = verifInputMdp();
 
 	if (nbrErr === 0) {
 		const champPost = new FormData();
 		champPost.append("idUtilisateur", idUtilisateur);
-		champPost.append("mdp", mdp);
+		champPost.append("mdp", document.getElementById("mdp").value);
 
 		recupDonnees(champPost, "modifCmpt.php")
+		.then(_ => {
+			window.location.href = "index.php";
+		})
 		.catch(err => {
 			console.error(err);
 		});
@@ -331,7 +333,7 @@ function enregistrerMdp(e, idUtilisateur) {
  *
  * @param {string} message - message d'erreur à afficher
  */
-function afficherMsgErreur(message) {
+function afficherMsgErreur(message, creaUtili = false) {
 	// Supprime le message d'erreur précédent
 	if (document.getElementById("msgErr") !== null) {
 		document.getElementById("msgErr").remove();
@@ -346,5 +348,39 @@ function afficherMsgErreur(message) {
 
 	// Ajoute la classe erreur aux champs du formulaire
 	document.getElementById("courriel").classList.add("erreur");
-	document.getElementById("mdp").classList.add("erreur");
+
+	if (creaUtili === false) {
+		document.getElementById("mdp").classList.add("erreur");
+	}
+}
+
+/**
+ * Supprime le compte de l'utilisateur
+ *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
+ */
+function supprCmpt(idUtilisateur) {
+	const champPost = new FormData();
+	const idUtiliForm = document.getElementById("idUtili").value;
+	champPost.append("idUtilisateur", idUtiliForm);
+
+	recupDonnees(champPost, "supprCmpt.php")
+	.then(retour => {
+		/*
+		 * Si l'utilisateur supprime son propre compte, il est redirigé vers
+		 * la page de connexion
+		 */
+		if (retour === 0 && idUtilisateur === idUtiliForm) {
+			window.location.href = "connexionCmpt.php";
+		}
+		else if (retour === 1) {
+			console.erreur("Erreur lors de la suppression du compte");
+		}
+		else {
+			window.location.href = "gestionCmpt.php";
+		}
+	})
+	.catch(err => {
+		console.error(err);
+	});
 }

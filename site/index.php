@@ -1,8 +1,11 @@
+<?php
+	include "backend/checkConnexion.php";
+	$role = $_SESSION["role"]; // "admin" ou "standard"
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
-	<?php include "assets/head.php"?>
+	<?php include "assets/head.php"; echo PHP_EOL;?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
 </head>
@@ -22,8 +25,14 @@
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
-				<a href="gestionCmpt.php">Paramètres</a>
-				<button value="deco">Déconnexion</button>
+				<a href="gestionCmpt.php">Gestion du compte</a>
+<?php
+					if ($role === "admin") {
+						echo '<a href="creationCmpt.php">Ajouter un ' .
+							'utilisateur</a>' . PHP_EOL;
+					}
+?>
+				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
 	</section>
@@ -70,7 +79,6 @@
 			</section>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Évolution des mesures dans le temps sur l'ilot</h1>
 		<section id="secGraph">
@@ -99,7 +107,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Récapitulatif des mesures relevées sur le champ</h1>
 		<section id="secTableau" class="tableau">
@@ -115,7 +122,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Prévisions météorologiques sur le champ</h1>
 		<section id="secMeteo" class="tableau">
@@ -147,7 +153,6 @@
 			</div>
 		</section>
 	</section>
-
 	<section class="containerSecVerti">
 		<h1>Export des données du champ</h1>
 		<section id="secExport">
@@ -232,9 +237,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
-	//const idUtilisateur = 0;
-	const idUtilisateur = <?php 
-		session_start();
+	const idUtilisateur = <?php
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
 
@@ -249,7 +252,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		 * Active la fonction de changement de champ pour charger les nouveaux
 		 * ilots dans le dropdown
 		 */
-		activerBoutonChgmtChamp(idUtilisateur);
+		activerBoutonChgmtChamp(idUtilisateur, contIdButtons);
 
 		// Affiche la météo pour le champ sélectionné
 		afficherMeteo(idUtilisateur);

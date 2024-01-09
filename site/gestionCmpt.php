@@ -1,13 +1,10 @@
 <?php
-	// Récupérer ici le rôle de l'utilisateur
-	//$role = "admin"; // "admin" ou "standard"
-	session_start();
-	$role = $_SESSION["role"];
+	include "backend/checkConnexion.php";
+	$role = $_SESSION["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<?php include "backend/checkConnexion.php"?>
 	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>
@@ -25,7 +22,7 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href=".">Accueil</a>
-				<button value="deco">Déconnexion</button>
+				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
 	</section>
@@ -88,26 +85,32 @@
 					value="#ffffff"></input>
 				<button type="button" id="reinit">Réinitialiser</button>
 				<button type="button" id="enreg">Enregistrer</button>
+				<button type="button" id="suppr">Supprimer le compte</button>
 			</form>
 		</div>
 		<div id="icone">
 			<div>-</div>
 		</div>
 	</section>
+	<dialog id="quitter">
+		<h1>Supprimer le compte ?</h1>
+		<form method="dialog">
+			<button value="annuler">Annuler</button>
+			<button value="confirmer">Confirmer</button>
+		</form>
+	</dialog>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
-<?php if ($role === "admin")echo '<script type="text/javascript"
+<?php if ($role === "admin") echo '<script type="text/javascript"
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
-	//let idUtilisateur = 0;
-	const idUtilisateur = <?php 
-		//session_start();
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
+	const idUtilisateur = <?php
+		echo json_encode($_SESSION["idAgri"]);
 	?>;
 
 	/*** Gestion des données ***/
@@ -117,26 +120,43 @@
 
 		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {
-		reinitInputCmpt(e);
+		e.preventDefault();
+		reinitInputCmpt();
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
-		modifInputCmpt(e);
+		e.preventDefault();
+		modifInputCmpt();
 	});
 	document.querySelector("form").addEventListener("submit", e => {
-		modifInputCmpt(e);
+		e.preventDefault();
+		modifInputCmpt();
+	});
+
+		// Gère la suppression du compte
+	const dialogConfirmer = document.getElementById("quitter");
+	document.getElementById("suppr").addEventListener("click",	e => {
+		dialogConfirmer.showModal();
+	});
+	dialogConfirmer.addEventListener("click", e => {
+		if (e.target.value === "confirmer") {
+			supprCmpt();
+		}
 	});
 
 		// Gère le changement couleur de l'icône
 	chgmtCouleurIcone();
 
+		// Gère le selecteur de rôle
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
-		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
+		// Récupére l'id de l'utilisateur
 	const containerInput = document.getElementById("idUtili");
 	containerInput.placeholder = idUtilisateur;
 
 		// Affiche le nom de l'utilisateur dans le header
-	afficherNomUtilisateur(idUtilisateur);
+	const nom = document.getElementById("nom").value;
+	const prenom = document.getElementById("prenom").value;
+	afficherNomUtilisateur(nom + ' ' + prenom, idUtilisateur);
 
 
 	/** Changements du DOM **/

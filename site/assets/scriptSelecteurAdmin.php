@@ -5,7 +5,7 @@ activerBouton("selectUtilisateur", "utilisateurSlct", true);
 	// Gère le changement d'utilisateur dans le formulaire
 let dropdownUtilisateur = document.getElementById("ddUtilisateur");
 dropdownUtilisateur.addEventListener("click", _ => {
-	idUtilisateur = document.getElementById("utilisateurSlct").value;
+	const idUtilisateur = document.getElementById("utilisateurSlct").value;
 	afficherDonneesUtilisateur(idUtilisateur, true);
 });
 

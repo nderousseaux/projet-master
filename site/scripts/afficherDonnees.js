@@ -35,18 +35,10 @@ function afficherChamps(idUtilisateur) {
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherNomUtilisateur(idUtilisateur) {
-	let champPost = new FormData();
-	champPost.append("idUtilisateur", idUtilisateur);
-
-	recupDonnees(champPost, "recupNomUtilisateur.php")
-	.then(donnees => {
-		const nomUtilisateur = document.querySelector("header > " +
-			"section:last-child > p")
-		nomUtilisateur.textContent = donnees + " #"	+ idUtilisateur;
-	});
+function afficherNomUtilisateur(nomUtilisateur, idUtilisateur) {
+	const container = document.querySelector("header > section:last-child > p");
+	container.textContent = nomUtilisateur + " #" + idUtilisateur;
 }
-
 
 /**
  * Affiche les infos du champ sélectionné
@@ -120,7 +112,7 @@ function afficherMoyennes(donnees) {
  *
  * @param {array} donnees - contient toutes les mesures pour le champ indiqué
  */
-function afficherMesuresChamp() {
+function afficherMesuresChamp(donnees) {
 	viderTableau("donneesTableau");
 	const container = document.getElementById("donneesTableau");
 
@@ -128,8 +120,11 @@ function afficherMesuresChamp() {
 		const cellule = document.createElement("div");
 		cellule.classList.add("cellule");
 
-		// Capteur défectueux
-		if (element === "C1") {
+		// Vérifie l'état du capteur
+		if (element === "C0") {
+			cellule.textContent = "OK";
+		}
+		else if (element === "C1") {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Capteur défectueux";
 		}
@@ -138,9 +133,9 @@ function afficherMesuresChamp() {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Raspberry Pi défectueux";
 		}
-		// Aucun problème
+		// Il s'agit d'un autre type de cellule
 		else {
-			cellule.textContent = "OK";
+			cellule.textContent = element;
 		}
 
 		container.appendChild(cellule);
@@ -435,9 +430,9 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 		champPost.append("idUtilisateur", idUtilisateur);
 		champPost.append("numChamp", numChamp);
 
-		recupDonnees(champPost, "recupDonneesChamp.php")
+		recupDonnees(champPost, "recupDonneesAgri.php")
 		.then(donnees => {
-			afficherNomUtilisateur(donnees[0]);
+			afficherNomUtilisateur(donnees[0], idUtilisateur);
 			afficherInfosChamp(donnees[1]);
 			afficherMoyennes(donnees[2]);
 			afficherMesuresChamp(donnees[3]);

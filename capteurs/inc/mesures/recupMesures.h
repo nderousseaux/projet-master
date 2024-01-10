@@ -11,8 +11,8 @@
 
 /* Constantes */
 
-#define DEBUG 1						// Affiche les valeurs générées
-#define FICHIER_PARAMS "./configuration/params.txt"	// Fichier de configuration
+#define DEBUG 1	// À 1, affiche les valeurs générées
+#define FICHIER_PARAMS "./configuration/argumentsMesures.txt"
 
 /* Fonction */
 

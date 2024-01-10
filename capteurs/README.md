@@ -40,8 +40,8 @@ compiler :
 Une fois compilé, un fichier `mesures` est créé dans le dossier `bin` et
 peut être lancé avec les arguments suivants : `<id agri>` `<id champ>`
 `<id ilot>` `<simuler>`.
-Il peut également être lancé sans arguments, grâce au fichier `arguments.txt`,
-se trouvant le dossier `capteurs/configuration'.
+Il peut également être lancé sans arguments, grâce au fichier
+`argumentsMesures.txt`, se trouvant le dossier `capteurs/configuration'.
 Un fichier est déjà donné, où il suffit de modifier les champs ne commencants
 pas par `#`.
 

@@ -14,7 +14,6 @@ float Mesures::genValeur(float borneInf, float borneSupp, bool type) {
 	// Génère un double, sans décimales
 	else {
 		std::uniform_real_distribution<double> distr(borneInf, borneSupp);
-		double val = distr(gen);
-		return trunc(val);
+		return trunc(distr(gen));
 	}
 }

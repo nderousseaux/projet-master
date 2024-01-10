@@ -4,21 +4,23 @@ INTERFACE=lo
 PORT=5683
 IP=127.0.0.1
 
-folder_to_watch="/etc/coap"
-OUT=$folder_to_watch/out.txt
+folder_to_watch="/capteurs/stockage"
 COUNT=0
 
+#!/bin/bash
 
-inotifywait -m -e create --format '%w%f' "${folder_to_watch}" | while read file
-do
-    ((COUNT++))
-    if ((COUNT % 2 == 1)); then
-        # La commande à exécuter lorsqu'un fichier est créé
-        sudo python3 coapclient.py -o POST -p coap://$IP:$PORT/basic -f $OUT
-
-        current_time=$(date "+%Y%m%d_%H%M%S")
-        file_name="fichier_${current_time}.txt"
-
-        mv 
+while true; do
+    if [ "$(ls -A $folder_to_watch)" ]; then
+        # Itérer sur chaque fichier dans le dossier
+        for file in "$folder_to_watch"/*; do
+            if [ -f "$file" ]; then
+            echo "$file"
+            # Le dossier n'est pas vide, exécutez la commande
+            sudo python3 coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file"
+            sudo rm $file 
+            fi 
+        done 
+        # Ajoutez une pause (sleep) si nécessaire avant la prochaine itération
+        sleep 30  # Pause de 5 secondes avant de répéter la boucle
     fi
 done

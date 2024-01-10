@@ -24,6 +24,7 @@ sudo apt install python3-pip
 sudo pip install pysftp
 
 # Pour le fonctionnement de Coapthon
+mkdir /capteurs/stockage/
 sudo pip install CoAPthon
 
 CoAPthon3=Coap/CoApthon3

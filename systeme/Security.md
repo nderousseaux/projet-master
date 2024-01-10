@@ -21,3 +21,29 @@ Actuellement ce qui s'épare le réseau mesh du restant de l'internet c'est le g
 Pour maintenir une certaine sécurité il est important de renouvelé les paramètre **Diffie-Hellman** à l'aide de la commande `easyrsa gen-dh`. La mise à jour régulière des paramètres réduit le faille.
 
 Le certificat générer est valable 825 jours. Pour des raisons de sécurité et par précaution. Il sera demander de renouveler les certificats chaque année.
+
+## Firewall
+L'outil **iptables-persistent** peut être utilisé pour simplifier la sauvegarde des règles du firewall.
+```
+sudo apt-get install iptables-persistent
+```
+
+La modification des règles s'effectue comme suit. Ici ce sont les modifications effectué sur le Gateway du réseau mesh.
+```
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j DROP
+sudo iptables -A FORWARD -i bat0 -o eth0 -j DROP
+```
+
+Pour supprimer une règle vous pouvez faire les commandes suivantes
+```
+sudo iptables-save # Récapitule les modifications actuels
+sudo iptables -D FORWARD 1 # supprimera la première règle de forward, 1 étant le premier
+```
+
+Sauvegarder la configuration et l'appliqué (pour des backups il faut d'autres nom que *rules.v4* et *rules.v6*)
+```
+sudo iptables-save # verif conf
+sudo sh -c 'iptables-save > /etc/iptables/rules.v4'
+sudo systemctl restart iptables
+```

@@ -26,12 +26,12 @@
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
 				<a href="gestionCmpt.php">Gestion du compte</a>
-<?php
+				<?php
 					if ($role === "admin") {
 						echo '<a href="creationCmpt.php">Ajouter un ' .
 							'utilisateur</a>' . PHP_EOL;
 					}
-?>
+				?>
 				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>

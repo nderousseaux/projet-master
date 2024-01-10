@@ -14,6 +14,17 @@
 	<meta name="description" content="Politique de confidentialité"/>
 </head>
 <body>
+<header>
+	<?php include "assets/logo.php"?>
+	<section title="Retourner en haut de la page">
+		<div id="ddCmpt" class="dropdown" title=''>
+			<button class="dropbtn">⇩</button>
+			<div id="selectCmpt" class="dropdownContent ddHeader">
+				<a href='.'>Accueil</a>
+			</div>
+		</div>
+	</section>
+</header>
 <div id="corps">
 	<section class="containerSecVerti">
 		<h1>Notice de confidentialité</h1>

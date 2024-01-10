@@ -42,7 +42,8 @@ form input,
 #secCookie > button,
 form div > button,
 form > button,
-form > select {
+form > select,
+.btnDlg {
 	width: 100%;
 	height: 40px;
 	padding: 4px;
@@ -78,18 +79,23 @@ input:disabled::placeholder {
 	/* Boutons */
 button,
 input,
-.bulle {
+.bulle,
+.btnDlg {
 	font-family: "Open Sans", Arial, sans-serif;
+	color: #000000;
 	font-size: 14px;
 }
-button {
+button,
+.btnDlg {
 	background-color: #fbfbfb;
 }
-button:hover {
+button:hover,
+.btnDlg:hover {
 	cursor: pointer;
 	background-color: #f6f6f6;
 }
-button:active {
+button:active,
+.btnDlg:active {
 	background-color: #e6e6e6;
 }
 
@@ -223,9 +229,21 @@ dialog > form {
 	align-items: center;
 	justify-content: space-between;
 }
-dialog > form > button {
+dialog > p {
+	text-align: center;
+	margin-top: calc(15px + 10px);
+}
+.btnDlg {
 	width: calc(50% - 10px);
 	margin: 0;
+}
+a.btnDlg {
+	text-decoration: none;
+	text-align: center;
+	width: calc(50% - 20px);
+	min-height: 30px;
+	height: fit-content;
+	line-height: calc(200% + 2 * 1px);
 }
 
 
@@ -352,7 +370,9 @@ dialog > form > button {
 	input,
 	#secCookie > button,
 	form button,
-	form > select {
+	form > select,
+	.btnDlg {
+		color: #ffffff;
 		border: 1px solid #3d3d3d !important;
 	}
 	#infosCmpt > input::placeholder {
@@ -366,13 +386,16 @@ dialog > form > button {
 	}
 
 		/* Bouton de copie */
-	button {
+	button,
+	.btnDlg {
 		background-color: #191919;
 	}
-	button:hover {
+	button:hover,
+	.btnDlg:hover {
 		background-color: #222222;
 	}
-	button:active {
+	button:active,
+	.btnDlg:active {
 		background-color: #2f2f2f;
 	}
 	#secCopie > div .bulle,

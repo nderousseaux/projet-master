@@ -18,6 +18,17 @@
 <body>
 <header>
 	<?php include "assets/logo.php"?>
+	<section title="Retourner en haut de la page">
+		<p title=''>-</p>
+		<div id="ddCmpt" class="dropdown" title=''>
+			<button class="dropbtn">⇩</button>
+			<div id="selectCmpt" class="dropdownContent ddHeader">
+				<a href='.'>Accueil</a>
+				<a href="gestionCmpt.php">Gestion du compte</a>
+				<a href="backend/deconnexion.php">Déconnexion</a>
+			</div>
+		</div>
+	</section>
 </header>
 <div id="corps">
 	<section id="infosCmpt" class="containerSecVerti">
@@ -40,6 +51,14 @@
 			<button type="button" id="enreg">Créer</button>
 		</form>
 	</section>
+	<dialog id="confirmation">
+		<h1>Confirmation de création de compte</h1>
+		<p>Le compte a bien été créé !</p>
+		<form method="dialog">
+			<a class="btnDlg" href="creationCmpt.php">Créer un autre compte</a>
+			<a class="btnDlg" href='.'>Retour à l'accueil</a>
+		</form>
+	</dialog>
 </div>
 <?php include "assets/footer.php"?>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
@@ -57,6 +76,7 @@
 		e.preventDefault();
 		creationCmpt();
 	});
+
 
 	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page

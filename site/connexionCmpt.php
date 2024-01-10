@@ -1,3 +1,11 @@
+<?php
+	// Vérifie si l'utilisateur est déjà connecté
+	session_start();
+
+	if (isset($_SESSION["idUser"])) {
+		echo "<script>location.href='.';</script>";
+	}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

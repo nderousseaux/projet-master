@@ -158,7 +158,7 @@ function creationCmpt() {
 		recupDonnees(champPost, "creationUtilisateur.php")
 		.then(donnees => {
 			if (donnees[0] === 0) {
-				afficherMsgErreur(donnees[1]);
+				afficherDialogConfirm(donnees[1]);
 			}
 			else if (donnees[0] === 1) {
 				afficherMsgErreur(donnees[1], true);
@@ -329,6 +329,21 @@ function enregistrerMdp(idUtilisateur) {
 }
 
 /**
+ * Affiche le mot de passe dans la boîte de dialogue de confirmation
+ *
+ * @param {string} mdp - mot de passe généré
+ */
+function afficherDialogConfirm(mdp) {
+	const msgMdp = document.createElement("p");
+	msgMdp.textContent = "Mot de passe généré : " + mdp;
+
+	const dialog = document.getElementById("confirmation");
+	dialog.querySelector("p").insertAdjacentElement("afterend", msgMdp);
+
+	dialog.showModal();
+}
+
+/**
  * Affiche un message d'erreur dans le formulaire
  *
  * @param {string} message - message d'erreur à afficher
@@ -344,7 +359,7 @@ function afficherMsgErreur(message, creaUtili = false) {
 	const msgErreur = document.createElement("p");
 	msgErreur.textContent = message;
 	msgErreur.id = "msgErr";
-	container.prepend(msgErreur);
+	container.insertAdjacentElement("beforebegin", msgErreur);
 
 	// Ajoute la classe erreur aux champs du formulaire
 	document.getElementById("courriel").classList.add("erreur");

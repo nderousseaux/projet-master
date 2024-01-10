@@ -27,5 +27,5 @@ sudo pip install pysftp
 sudo pip install CoAPthon
 
 CoAPthon3=Coap/CoApthon3
-python3 setup.py $CoAPthon3/sdist
-sudo pip install $CoAPthon3/dist/CoAPthon3-1.0.1+fb.202312141023.tar.gz -r requirements.txt
+python3 $CoAPthon3/setup.py $CoAPthon3/sdist
+sudo pip install $CoAPthon3/dist/CoAPthon3-1.0.1+fb.202312141023.tar.gz -r $CoAPthon3/requirements.txt

@@ -11,7 +11,7 @@ advertise {
 
 server {
   enabled          = true
-  bootstrap_expect = 2
+  bootstrap_expect = 5
 }
 
 client {

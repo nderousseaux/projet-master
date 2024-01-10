@@ -1,4 +1,5 @@
 job "web" {
+  datacenters = ["dc1"]
 
   group "web" {
     count = 2
@@ -16,12 +17,7 @@ job "web" {
         image = "registry.app.unistra.fr/fseel/projet-master-23-24/web"
         ports = ["web"]
       }
-
-      env {
-        PORT    = "${NOMAD_PORT_web}"
-        NODE_IP = "${NOMAD_IP_web}"
-      }
-
+      
 			service {
 				name = "web"
 				port = "web"
@@ -49,4 +45,3 @@ job "web" {
     }
 	}
 }
-

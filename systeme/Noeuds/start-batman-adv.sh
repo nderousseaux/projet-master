@@ -20,3 +20,5 @@ sudo dhclient wlan0
 sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 sudo ifconfig bat0 192.168.199.1/24
+
+bash ../Coap/coap_client.sh

@@ -33,8 +33,8 @@ class Mesures {
         static constexpr int HUM_PTR_DEVID = 0x0;
         static constexpr int HUM_PTR_CFG = 0x0;
         static constexpr int HUM_PTR_VALUE = 0x1;
-        static constexpr int HUM_THRESHOLD_HIGH = 0x0;
-        static constexpr int HUM_THRESHOLD_LOW = 0x0;
+        static constexpr int HUM_THRESHOLD_HIGH = 520;
+        static constexpr int HUM_THRESHOLD_LOW = 400;
 
 	/* Constructeur et destructeur */
 	public:

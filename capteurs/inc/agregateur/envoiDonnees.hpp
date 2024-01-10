@@ -19,7 +19,7 @@ class EnvoiDonnees {
 	/* Variable */
 	private:
 		inline static std::string DOSSIER_DISTANT {
-			"/upload/"
+			"/home/pm2324/upload/"
 		};
 		inline static std::string CHEMIN_FICHIER_IDENTIFIANTS {
 			"./configuration/identifiantsSFTP.txt"

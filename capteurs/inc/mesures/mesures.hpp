@@ -57,7 +57,7 @@ class Mesures {
 		 *
 		 * @param borneInf la borne inférieur
 		 * @param borneSupp la borne supérieur
-		 * @param type le type de valeur à générer (0 = double | 1 = float)
+		 * @param type le type de valeur à générer (0 = float | 1 = double)
 		 * @return float/double la valeur aléatoire générée
 		 */
 		static float genValeur(float borneInf, float borneSupp, bool type);

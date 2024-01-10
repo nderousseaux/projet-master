@@ -1,23 +1,5 @@
 # Capteurs
 ## Programme
-### Docker
-#### Programme de mesures
-Construire l'image Docker :  
-`docker build --build-arg PROG_TYPE=mesures -t capteurs:latest`
-
-#### Programme d'agrégation
-Construire l'image Docker :  
-`docker build --build-arg PROG_TYPE=agregateur -t agregateur:latest`
-
-#### Utilisation
-Lancer l'image créé :  
-`docker run -it -d nomImage:latest`
-
-S'attacher au container :  
-`docker attach IdDuContainer`
-
----
-### Manuellement
 Pour simplifier la compilation, il suffit de lancer le script `./build.sh`.  
 Il est nécessaire d'indiquer un paramètre, afin de spécifier quel programme
 compiler :

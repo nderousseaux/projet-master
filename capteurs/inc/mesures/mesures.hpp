@@ -9,7 +9,7 @@ class Mesures {
 		std::string date_;
 		float temperature_;
 		float humidite_;
-		int luminosite_;
+		double luminosite_;
 
 
 	/* Constructeur et destructeur */
@@ -29,7 +29,7 @@ class Mesures {
 		inline float getHumidite(void) const {
 			return humidite_;
 		}
-		inline int getLuminosite(void) const {
+		inline double getLuminosite(void) const {
 			return luminosite_;
 		}
 
@@ -45,7 +45,7 @@ class Mesures {
 		inline void setHumidite(float humidite) {
 			this->humidite_ = humidite;
 		}
-		inline void setLuminosite(int luminosite) {
+		inline void setLuminosite(double luminosite) {
 			this->luminosite_ = luminosite;
 		}
 
@@ -53,14 +53,14 @@ class Mesures {
 	/* Méthodes */
 	public:
 		/**
-		 * @brief Génère des valeurs aléatoires entre borneInf et borneSupp
+		 * @brief Génère une valeur aléatoires entre borneInf et borneSupp
 		 *
 		 * @param borneInf la borne inférieur
 		 * @param borneSupp la borne supérieur
-		 * @return float/int la valeur aléatoire générée
+		 * @param type le type de valeur à générer (0 = double | 1 = float)
+		 * @return float/double la valeur aléatoire générée
 		 */
-		static float genValeursFloat(float borneInf, float borneSupp);
-		static int genValeursInt(int borneInf, int borneSupp);
+		static float genValeur(float borneInf, float borneSupp, bool type);
 };
 
 #endif

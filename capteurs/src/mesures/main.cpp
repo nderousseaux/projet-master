@@ -1,8 +1,47 @@
 #include "recupMesures.h"
 
+void verifArgs(std::vector<std::string> params) {
+	if (stoi(params[3]) != 0 && stoi(params[3]) != 1) {
+		std::cerr << "Simuler doit être égal à 0 ou 1" <<
+			std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	// Affiche les arguments
+	if (DEBUG) {
+		std::cout << "Id agri : " << params[0] << std::endl;
+		std::cout << "Id champ : " << params[1] << std::endl;
+		std::cout << "Id ilot : " << params[2] << std::endl;
+		std::cout << "Simuler : " << params[3] << std::endl << std::endl;
+	}
+
+	// Vérifie que les arguments sont des entiers positifs
+	if (
+		(stof(params[0]) != stoi(params[0]) || stoi(params[0]) < 0) ||
+		(stof(params[1]) != stoi(params[1]) || stoi(params[1]) < 0) ||
+		(stof(params[2]) != stoi(params[2]) || stoi(params[2]) < 0)
+	) {
+		std::cerr << "Les arguments doivent être des entiers positifs"
+			<< std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
 int main(int argc, char** argv) {
 	// Vérifie le nombre d'arguments
-	if (argc != 5) {
+	std::vector<std::string> params;
+
+	// Récupère les arguments dans un fichier
+	if (argc == 1) {
+		params = StockageDonnees::recupereParams(FICHIER_PARAMS);
+	}
+	// Récupère les arguments dans la ligne de commande
+	else if (argc == 5) {
+		for (int i = 1; i < argc; i++)
+			params.push_back(argv[i]);
+	}
+	// Nombre d'arguments incorrect
+	else {
 		std::cerr << "Usage: " <<
 			argv[0] <<
 			" <id agri> <id champ> <id ilot> <simuler>" <<
@@ -10,50 +49,24 @@ int main(int argc, char** argv) {
 
 		return EXIT_FAILURE;
 	}
-	else {
-		// Vérifie que le dernier argument est un booléen
-		if (atoi(argv[4]) != 0 && atoi(argv[4]) != 1) {
-			std::cerr << "Simuler doit être égal à 0 ou 1" <<
-				std::endl;
-			std::cerr << "Usage: " << argv[0] <<
-				" <id agri> <id champ> <id ilot> <simuler>" << std::endl;
-			return EXIT_FAILURE;
-		}
 
-		// Affiche les arguments
-		if (DEBUG) {
-			std::cout << "Id agri : " << argv[1] << std::endl;
-			std::cout << "Id champ : " << argv[2] << std::endl;
-			std::cout << "Id ilot : " << argv[3] << std::endl;
-			std::cout << "Simuler : " << argv[4] << std::endl << std::endl;
-		}
-
-		// Vérifie que les arguments sont des entiers positifs
-		if (
-			(atof(argv[1]) != atoi(argv[1]) || atoi(argv[1]) < 0) ||
-			(atof(argv[2]) != atoi(argv[2]) || atoi(argv[2]) < 0) ||
-			(atof(argv[3]) != atoi(argv[3]) || atoi(argv[3]) < 0)
-		) {
-			std::cerr << "Les arguments doivent être des entiers positifs"
-				<< std::endl;
-			return EXIT_FAILURE;
-		}
-	}
+	// Vérifie les arguments
+	verifArgs(params);
 
 	// Stocke les informations du champ
 	InfosChamp infosChamp;
-	infosChamp.setInfosChamp(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
+	infosChamp.setInfosChamp(stoi(params[0]), stoi(params[1]), stoi(params[2]));
 
 	// Génère ou récupère des mesures
 	Mesures mesures;
-	float temp = 0, humi = 0;
-	int lumi = 0;
+	float temp = NAN, humi = NAN;
+	double lumi = NAN;
 
 		// Génère des valeurs factices
-	if (atoi(argv[4]) == 1) {
-		temp = Mesures::genValeursFloat(-20.0, 40.0);
-		humi = Mesures::genValeursFloat(0.0, 150.0);
-		lumi = Mesures::genValeursInt(0, 120000);
+	if (stoi(params[3]) == 1) {
+		temp = Mesures::genValeur(-20.0, 40.0, 1);
+		humi = Mesures::genValeur(0.0, 150.0, 1);
+		lumi = Mesures::genValeur(0, 120000, 0);
 	}
 		// Récupère les valeurs des capteurs
 	else {

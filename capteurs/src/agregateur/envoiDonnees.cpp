@@ -2,30 +2,6 @@
 
 /* Public */
 
-std::vector<std::string> EnvoiDonnees::recupereIdentifiants(
-	const std::string cheminFichier
-) {
-	std::vector<std::string> retour;
-	std::ifstream fichier(cheminFichier);
-
-	// Vérifie que le fichier existe
-	if (!fichier) {
-		throw std::runtime_error("Le fichier \"" + cheminFichier + "\" " +
-			"n'existe pas");
-	}
-
-	// Récupère les identifiants
-	if (fichier.is_open()) {
-		std::string ligne;
-		while (std::getline(fichier, ligne)) {
-			retour.push_back(ligne);
-		}
-		fichier.close();
-	}
-
-	return retour;
-}
-
 void EnvoiDonnees::afficheMsgErrLibssh2(
 	LIBSSH2_SESSION* session,
 	const std::string& msgErreur
@@ -59,21 +35,21 @@ int EnvoiDonnees::envoiFichierSFTP(std::string cheminFichier) {
 	std::string cheminDistantServ = EnvoiDonnees::DOSSIER_DISTANT + nomFichier;
 
 	// Récupère les identifiants
-	std::vector<std::string> contenu = recupereIdentifiants(
+	std::vector<std::string> params = StockageDonnees::recupereParams(
 		EnvoiDonnees::CHEMIN_FICHIER_IDENTIFIANTS);
 
 	/*
 	 * Vérifie que le fichier n'est pas mal formé
 	 * (4 lignes : IP, port, identifiant et mot de passe)
 	 */
-	if (contenu.size() != 4) {
+	if (params.size() != 4) {
 		std::cerr << "Le fichier d'identifiants est mal formé" << std::endl;
 		return -1;
 	}
-	std::string ip = contenu[0];
-	const int port = std::stoi(contenu[1]);
-	std::string identifiant = contenu[2];
-	std::string mdp = contenu[3];
+	std::string ip = params[0];
+	const int port = std::stoi(params[1]);
+	std::string identifiant = params[2];
+	std::string mdp = params[3];
 
 	// Initialise la session
 	int err = libssh2_init(0);

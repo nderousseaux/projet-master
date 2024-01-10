@@ -22,7 +22,7 @@ class EnvoiDonnees {
 			"/upload/"
 		};
 		inline static std::string CHEMIN_FICHIER_IDENTIFIANTS {
-			"./identifiantsSFTP.txt"
+			"./configuration/identifiantsSFTP.txt"
 		};
 
 
@@ -34,17 +34,6 @@ class EnvoiDonnees {
 
 	/* Méthodes */
 	public:
-		/**
-		 * @brief Récupère l'identifiant, le mot de passe et l'adresse IP du
-		 * 		  serveur SFTP
-		 *
-		 * @param cheminFichier du fichier contenant les informations
-		 * @return std::vector<std::string> tableau contenant les informations
-		 */
-		static std::vector<std::string> recupereIdentifiants(
-			const std::string cheminFichier
-		);
-
 		/**
 		 * @brief Affiche un message d'erreur renvoyé par libssh2
 		 *

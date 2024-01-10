@@ -2,6 +2,34 @@
 
 /* Public */
 
+std::vector<std::string> StockageDonnees::recupereParams(
+	const std::string cheminFichier
+) {
+	// Ouvre le fichier
+	std::ifstream fichierParams(cheminFichier);
+	std::string ligne;
+	std::vector<std::string> tableauRetour;
+
+	// Si le fichier est ouvert
+	if (fichierParams) {
+		// Parcours le fichier
+		while (getline(fichierParams, ligne)) {
+			// Si la ligne est un commentaire
+			if (ligne[0] == '#') {
+				continue;
+			}
+
+			tableauRetour.push_back(ligne);
+		}
+	}
+	else {
+		std::cerr << "Impossible d'ouvrir le fichier " << cheminFichier <<
+			std::endl;
+	}
+
+	return tableauRetour;
+}
+
 int StockageDonnees::ecrireDonneesFichier(
 	const std::string& cheminFichierMesures,
 	InfosChamp infosChamp,

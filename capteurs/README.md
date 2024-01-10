@@ -39,7 +39,11 @@ compiler :
 #### Programme de mesures
 Une fois compilé, un fichier `mesures` est créé dans le dossier `bin` et
 peut être lancé avec les arguments suivants : `<id agri>` `<id champ>`
-`<id ilot>`.
+`<id ilot>` `<simuler>`.
+Il peut également être lancé sans arguments, grâce au fichier `arguments.txt`,
+se trouvant le dossier `capteurs/configuration'.
+Un fichier est déjà donné, où il suffit de modifier les champs ne commencants
+pas par `#`.
 
 Une constante, nommée `DEBUG`, se trouvant dans le fichier 'inc/main.h', permet
 d'afficher des informations supplémentaires dans la sortie standard.
@@ -63,12 +67,7 @@ Il agrégera les mesures des bases de données présentes dans le dossier
 
 Le programme se charge d'envoyer le fichier sur le serveur SFTP.  
 Pour cela, un fichier stockant les identifiants SFTP est nécessaire.
-Il doit se trouver dans le dossier `capteurs` et se nommer
+Il doit se trouver dans le dossier `capteurs/configuration` et se nommer
 `identifiantsSFTP.txt`.  
-Il doit comporter les champs suivants, dans l'ordre :  
-```
-IP du serveur
-Port
-Nom d'utilisateur
-Mot de passe
-```
+Un fichier est déjà donné, où il suffit de modifier les champs ne commencants
+pas par `#`.

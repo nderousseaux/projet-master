@@ -33,6 +33,16 @@ class StockageDonnees {
 	/* Méthodes */
 	public:
 		/**
+		 * @brief Récupère les paramètres dans un fichier
+		 *
+		 * @param cheminFichier du fichier contenant les informations
+		 * @return std::vector<std::string> tableau contenant les informations
+		 */
+		static std::vector<std::string> recupereParams(
+			const std::string cheminFichier
+		);
+
+		/**
 		 * @brief Ecrit les données des différentes mesures dans un fichier
 		 * 
 		 * @param cheminFichierMesures où écrire les données

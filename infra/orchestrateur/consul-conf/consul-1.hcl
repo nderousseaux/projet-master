@@ -1,6 +1,6 @@
 datacenter = "dc1"
 data_dir = "/opt/consul"
-bootstrap_expect = 2
+bootstrap_expect = 5
 
 node_name = "nc1"
 
@@ -12,6 +12,6 @@ server = true
 
 client_addr = "0.0.0.0"
 
-retry_join = ["192.168.56.6"]
+retry_join = ["10.3.0.2", "10.3.0.3", "10.3.0.4", "10.3.0.5"]
 
-bind_addr = "192.168.56.5"
+bind_addr = "10.3.0.1"

@@ -1,12 +1,12 @@
 datacenter = "dc1"
-name = "nc1"
+name = "nc4"
 data_dir  = "/opt/nomad/data"
 bind_addr = "0.0.0.0"
 
 advertise {
-  http = "{{ GetInterfaceIP `enp0s3` }}"
-  rpc = "{{ GetInterfaceIP `enp0s3` }}"
-  serf = "{{ GetInterfaceIP `enp0s3` }}"
+  http = "10.3.0.4"
+  rpc = "10.3.0.4"
+  serf = "10.3.0.4"
 }
 
 server {
@@ -16,8 +16,8 @@ server {
 
 client {
   enabled = true
-  servers = ["192.168.56.5, 192.168.56.6"]
-  network_interface = "enp0s3"
+  servers = ["10.3.0.1", "10.3.0.2", "10.3.0.3", "10.3.0.4", "10.3.0.5"]
+  network_interface = "vens4"
 }
 # Authentification docker
 plugin "docker" {

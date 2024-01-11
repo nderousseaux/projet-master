@@ -14,7 +14,7 @@ def add_test_above_second_exit_0(file_path):
 
             # Ajouter la ligne "test" juste avant la deuxième occurrence de "exit 0"
             if exit_0_count == 1:
-                modified_lines.append("/home/pi/start-batman-adv.sh &\n")
+                modified_lines.append("~/start-batman-adv.sh &\n")
 
             # Ajouter la ligne originale
             modified_lines.append(line)

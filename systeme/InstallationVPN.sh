@@ -1,8 +1,14 @@
 # Installation des programmes requis
-sudo apt update
-sudo apt install openvpn
+yes | sudo apt update
+yes | sudo apt-get install wireguard wireguard-tools
 
 # Configuration VPN
-sudo mkdir /etc/openvpn/easy-rsa
-sudo cp -r /user/share/easy-rsa/* /etc/openvpn/easy-rsa
-cd /etc/openvpn/easy-rsa
+# Copie fichier & ajout mode exec
+sudo cp ./VPN/wg0.conf /etc/wireguard
+sudo chmod +x ./VPN/scriptAddClient.sh
+# Génération de clés
+sudo -i
+cd /etc/wireguard
+unmask 077
+wg genkey | tee server.key | wg pubkey > server.pub
+

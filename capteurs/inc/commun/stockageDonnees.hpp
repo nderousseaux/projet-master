@@ -14,7 +14,7 @@ class StockageDonnees {
 	/* Variable */
 	public:
 		inline static std::string DOSSIER_STOCKAGE {
-			"/home/pi/stockage/"
+			getenv("HOME") + std::string("/stockage/")
 		};
 		inline static std::string CHEMIN_FICHIER_MESURES {
 			DOSSIER_STOCKAGE + "mesures_"

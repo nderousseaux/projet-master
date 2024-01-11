@@ -2,7 +2,7 @@ job "web" {
   datacenters = ["dc1"]
 
   group "web" {
-    count = 2
+    count = 5
 
     network {
       port "web" {
@@ -20,6 +20,7 @@ job "web" {
       
 			service {
 				name = "web"
+				tags = ["urlprefix-/"]
 				port = "web"
 
 				check {

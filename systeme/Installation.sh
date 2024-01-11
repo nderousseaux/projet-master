@@ -29,5 +29,6 @@ mkdir /capteurs/stockage/
 sudo pip install CoAPthon
 
 CoAPthon3=Coap/CoAPthon3
+git clone git@github.com:Tanganelli/CoAPthon3.git $CoAPthon3
 python3 $CoAPthon3/setup.py $CoAPthon3/sdist
 sudo pip install $CoAPthon3/dist/CoAPthon3-1.0.1+fb.202312141023.tar.gz -r $CoAPthon3/requirements.txt

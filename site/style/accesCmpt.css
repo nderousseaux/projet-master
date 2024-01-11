@@ -13,6 +13,7 @@ form > button {
 }
 #msgErr {
 	grid-column: span 2;
+	margin-top: 0;
 	text-align: center;
 	color: #d30000;
 }

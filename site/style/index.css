@@ -557,11 +557,11 @@ header > section:last-child .dropbtn {
 	border: 1px solid #cecece;
 	border-radius: 5px;
 }
-#export button:hover {
+#export > button:hover {
 	cursor: pointer;
 	background-color: #f6f6f6;
 }
-#export button:active {
+#export > button:active {
 	background-color: #e6e6e6;
 }
 

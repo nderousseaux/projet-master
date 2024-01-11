@@ -64,9 +64,9 @@ int main(int argc, char** argv) {
 
 		// Génère des valeurs factices
 	if (stoi(params[3]) == 1) {
-		temp = Mesures::genValeur(-20.0, 40.0, 1);
-		humi = Mesures::genValeur(0.0, 150.0, 1);
-		lumi = Mesures::genValeur(0, 120000, 0);
+		temp = Mesures::genValeur(-20.0, 40.0, 0);
+		humi = Mesures::genValeur(0.0, 150.0, 0);
+		lumi = Mesures::genValeur(0, 120000, 1);
 	}
 		// Récupère les valeurs des capteurs
 	else {

@@ -21,7 +21,13 @@
 		<div id="ddCmpt" class="dropdown" title=''>
 			<button class="dropbtn">⇩</button>
 			<div id="selectCmpt" class="dropdownContent ddHeader">
-				<a href=".">Accueil</a>
+				<a href='.'>Accueil</a>
+				<?php
+					if ($role === "admin") {
+						echo '<a href="creationCmpt.php">Ajouter un ' .
+							'utilisateur</a>' . PHP_EOL;
+					}
+				?>
 				<a href="backend/deconnexion.php">Déconnexion</a>
 			</div>
 		</div>
@@ -95,8 +101,8 @@
 	<dialog id="quitter">
 		<h1>Supprimer le compte ?</h1>
 		<form method="dialog">
-			<button value="annuler">Annuler</button>
-			<button value="confirmer">Confirmer</button>
+			<button class="btnDlg" value="annuler">Annuler</button>
+			<button class="btnDlg" value="confirmer">Confirmer</button>
 		</form>
 	</dialog>
 </div>

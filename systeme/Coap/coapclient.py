@@ -3,8 +3,8 @@ import getopt
 import socket
 import sys
 
-from coapthon.client.helperclient import HelperClient
-from coapthon.utils import parse_uri
+from Ressources_serveur.coapthon.client.helperclient import HelperClient
+from Ressources_serveur.coapthon.utils import parse_uri
 
 __author__ = 'Giacomo Tanganelli'
 

@@ -1,29 +1,4 @@
-# Coap
+[![Build Status](https://travis-ci.org/Tanganelli/CoAPthon3.svg?branch=master)](https://travis-ci.org/Tanganelli/CoAPthon3)
 
-[Coapthon](https://github.com/Tanganelli/CoAPthon)
-
-## Installation 
-
-```bash
-# TODO Lister les commandes à taper pour installer Coapthon3
-sudo apt install pip
-sudo pip install CoAPthon
-git clone git@github.com:Tanganelli/CoAPthon3.git
-cd CoAPthon3
-python3 setup.py sdist
-sudo pip install dist/CoAPthon3-1.0.1+fb.202312141023.tar.gz -r requirements.txt
-```
-
-## Serveur 
-
-```bash
-python3 oui_coapserveur.py -i 127.0.0.1 -p 5683
-```
-
-## Client 
-
-```bash
-python3 coapclient.py -o GET -p coap://127.0.0.1:5683/basic
-
-python3 coapclient.py -o POST -p coap://127.0.0.1:5683/basic -f test.txt
-```
+# CoAPthon3
+CoAPthon3 is a porting to python3 of my CoAPthon library. CoAPthon3 is a python3 library to the CoAP protocol compliant with the RFC. Branch is available for the Twisted framework.

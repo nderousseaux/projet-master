@@ -3,7 +3,7 @@
 # Donne les droits d'execution d'Installation.sh
 chmod +x ../Installation.sh
 
-#yes | ../Installation.sh
+yes | ../Installation.sh
 
 sudo systemctl stop NetworkManager
 sudo systemctl disable NetworkManager
@@ -23,14 +23,10 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-<<<<<<< HEAD
 # Texte à ajouter
 #line_to_add="/home/pi/start-batman-adv.sh \&"
 #sudo sed -i "\|^\"exit 0\"|! s|exit 0|$line_to_add \nexit 0|" "$fichier"
 sudo python3 rclocalwrite.py
-=======
-python3 ../rclocalwrite.py
->>>>>>> coap
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)

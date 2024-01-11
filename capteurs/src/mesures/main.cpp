@@ -2,7 +2,7 @@
 
 void verifArgs(std::vector<std::string> params) {
 	if (stoi(params[3]) != 0 && stoi(params[3]) != 1) {
-		std::cerr << "Simuler doit être égal à 0 ou 1" <<
+		std::cerr << "Simuler doit être égal à 0 (désactiver) ou 1 (activer)" <<
 			std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 	else {
 		std::cerr << "Usage: " <<
 			argv[0] <<
-			" <id agri> <id champ> <id ilot> <simuler>" <<
+			" <id agri> <id champ> <id ilot> <simuler [0|1]>" <<
 			std::endl;
 
 		return EXIT_FAILURE;

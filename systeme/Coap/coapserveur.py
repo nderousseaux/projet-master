@@ -2,7 +2,7 @@
 
 import getopt
 import sys
-from Ressources_serveur.coapthon.server.coap import CoAP
+from coapthon.server.coap import CoAP
 
 from Ressources_serveur.ressources import Basic
 

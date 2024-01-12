@@ -101,7 +101,7 @@ $replicaSetName = "rs0";
 // uri de connnexion
 use MongoDB\Driver\Manager;
 //$uri = "mongodb://$connectionString/?replicaSet=$replicaSetName";
-$uri = "mongodb://localhost:30001";
+$uri = getenv('MONGODB_URL');
 
 // Créer le client
 try {

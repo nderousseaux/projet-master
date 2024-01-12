@@ -5,7 +5,7 @@
 use MongoDB\Driver\Manager;
 
 // Chemin de connexion vers la base de données
-$uri = "mongodb://localhost:30001";
+$uri = getenv('MONGODB_URL');
 
 // Vérification des paramètres d'appel
 if (!(isset($_POST["idUtilisateur"])) || !(isset($_POST["numChamp"]))) {

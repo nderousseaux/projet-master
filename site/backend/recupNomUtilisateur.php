@@ -12,7 +12,7 @@ if (!(isset($manager)) && !(isset($_POST["idUtilisateur"]))) {
 $notload = false;
 // Création connexion bdd si inexistante
 if (!isset($manager)) {
-	$uri = "mongodb://localhost:30001";
+	$uri = getenv('MONGODB_URL');
 	$manager = new MongoDB\Driver\Manager($uri);
 	$notload = true;
 }

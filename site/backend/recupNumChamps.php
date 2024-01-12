@@ -17,7 +17,7 @@ if (!(is_numeric($_POST["idUtilisateur"]))) {
 }
 
 // Connexion à MongoDB
-$uri = "mongodb://localhost:30001";
+$uri = getenv('MONGODB_URL');
 
 // Créé le client
 $client = new MongoDB\Driver\Manager($uri);

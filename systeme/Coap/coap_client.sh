@@ -4,7 +4,7 @@ INTERFACE=lo
 PORT=5683
 IP=127.0.0.1
 
-folder_to_watch="/capteurs/stockage"
+folder_to_watch="~/stockage"
 COUNT=0
 
 #!/bin/bash

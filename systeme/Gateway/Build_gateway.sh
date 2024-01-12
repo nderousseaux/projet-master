@@ -10,8 +10,8 @@ sudo systemctl disable NetworkManager
 
 
 #Configuration noeud
-sudo cp start-batman-adv.sh ~/start-batman-adv.sh
-sudo chmod +x ~/start-batman-adv.sh
+cp start-batman-adv.sh /home/$SUDO_USER/start-batman-adv.sh
+chmod +x /home/$SUDO_USER/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 
@@ -23,7 +23,7 @@ if [ ! -f "$fichier" ]; then
     exit 1
 fi
 
-sudo python3 ../rclocalwrite.py
+python3 ../rclocalwrite.py
 
 #Configuration Gateway
 ## Configuration du serveur DHCP (interface bat0)

@@ -1,17 +1,26 @@
-# Config
+# README
 
-[IEEE 802.11s](https://en.wikipedia.org/wiki/IEEE_802.11s)
 
-## Flasher l'image
+## Préparer la RPI
+### Equipement requis
+* RPI3 (alimentation avec)
+* Carte micro SD (de préférence >= 32go)
+* Câble HDMI (micro HDMI <--> HDMI)
+* Clavier
+* Ecran 
+* Câble Ethernet
+
+Noté que le clavier et l'écran sont seulement utilisé en cas de dernier recours si la connection ssh ne semble pas s'établir et qu'il faut intervenir manuellement.
+
+### Flash de carte SD
+Tout d'abord il sera nécessaire d'initliaser une image pour la rasberry pi. Dans le cadre de ce projet nous avons opté pour `RASPBERRY PI OS (LEGAGY, 64-BITS) LITE`. Pour installer l'image nous recommandons d'utiliser l'utilitaire de RPI.
 
 ```bash
 sudo apt install rpi-imager
 ```
+L'installation que nous faisons se fait en ssh. Il est donc utile de configurer les paramètres nécessaire avant de flasher la carte SD.
 
-## Logs
-
-hostname : pi  
-Mot de passe : tprli
+Une fois l'installation faite nous pouvons passer à la suite.
 
 ## Interface wifi ad hoc
 
@@ -94,3 +103,7 @@ sudo iw dev wlan0 ibss join call-code-mesh 2462
 
 ## Connexion à l'infra
 `sshpass -p '$PWD' sftp $USER@$IP`
+
+## Source
+* Création d'un réseau mesh: [Tutoriel](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/PIMESH.md#setup-batman-adv)
+* Norme des cannaux en Europe: [Wiki](https://en.wikipedia.org/wiki/List_of_WLAN_channels)

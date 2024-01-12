@@ -1,7 +1,15 @@
 import fileinput
+import os
 
 def add_test_above_second_exit_0(file_path):
     exit_0_count = 0
+
+    # Récupère le nom de l'utilisateur pour le répertoire  ~/
+    user = ""
+    if os.geteuid() == 0:
+        user = os.getenv('SUDO_USER')
+    else:
+        user = os.getlogin()
 
     # Liste pour stocker les lignes modifiées
     modified_lines = []
@@ -14,7 +22,7 @@ def add_test_above_second_exit_0(file_path):
 
             # Ajouter la ligne "test" juste avant la deuxième occurrence de "exit 0"
             if exit_0_count == 1:
-                modified_lines.append("~/start-batman-adv.sh &\n")
+                modified_lines.append("/home/"+user+"/start-batman-adv.sh &\n")
 
             # Ajouter la ligne originale
             modified_lines.append(line)

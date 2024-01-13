@@ -6,7 +6,7 @@
 
 session_start();
 
-if ($_SESSION["idUser"] === null) { // non connecté
+if (!isset($_SESSION["idUser"])) { // non connecté
     echo "<script>location.href='../connexionCmpt.php';</script>";
     die();
 }

@@ -518,9 +518,11 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
  *
  * @returns {promise} - résolue quand les utilisateurs sont affichés
  */
-function afficherUtilisateurs() {
+function afficherUtilisateurs() { //TODO add idUtilisateur (idAgri) as param
 	return new Promise((resolve) => {
 		let champPost = new FormData();
+		let idUtilisateur = 0; // remove
+		champPost.append("idUtilisateur", idUtilisateur); 
 
 		recupDonnees(champPost, "recupUtilisateurs.php")
 		.then(donnees => {

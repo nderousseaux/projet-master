@@ -1,10 +1,12 @@
 <?php
-
-// TODO à compléter pour les autres updates d'infos
-// et rédiriger vers index.php (dans js) quand chgt mdp tmp
+/**
+ * Met à jour les données d'un utulisateur en fonction des champs présents dans 
+ * $_POST. Utilisé pour le changement du mot de passe temporaire à la 1ere 
+ * connection et dans le formulaire de gestion de compte.
+ */
 
 // Vérifie que toutes les infos sont présentes
-if (!(isset($_POST["idUser"]) && isset($_POST["mdp"]))) {
+if (!(isset($_POST["idUtilisateur"]))) {
 	$erreur = array("Erreur", "Infos manquantes dans la requête");
 	echo json_encode($erreur);
 	exit();
@@ -34,24 +36,44 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-$idUser = filter_input(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
+$idUser = filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING);
+
+// préparer la mise à jour
+$update = [];
+
+if (isset($_POST["mdp"])) {
+    $update['mdp'] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+}
+if (isset($_POST["courriel"])) {
+    $update['mail'] = $_POST['courriel'];
+}
+
+$fields = ['role', 'nom', 'prenom'];
+foreach ($fields as $field) {
+    if (isset($_POST[$field])) {
+        $update[$field] = $_POST[$field];
+    }
+}
 
 // Creer le filtre
 $filter = ['idUser' => $idUser];
 
-$newMdp = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+if (!empty($update)) {
+    // Opération de maj
+    $bulk = new MongoDB\Driver\BulkWrite;
+    $bulk->update(
+        $filter,
+        ['$set' => $update],
+        ['multi' => false, 'upsert' => false]
+    );
 
-// operation de mise à jour
-$update = ['$set' => ['mdp' => $newMdp]];
-
-$bulk = new MongoDB\Driver\BulkWrite;
-$bulk->update($filter, $update);
-
-// Executer l'operation
-try {
-    $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
-    echo "Update successful";
-} catch (MongoDB\Driver\Exception\Exception $e) {
-    echo "Update failed: ", $e->getMessage();
+    // Executer l'operation
+    try {
+        $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
+        echo json_encode("Mise à jour effectuée");
+    } catch (MongoDB\Driver\Exception\Exception $e) {
+        echo json_encode("Mise à jour échouée: ".$e->getMessage());
+    }
+} else {
+    echo json_encode("Pas de mise à jour à faire");
 }
-

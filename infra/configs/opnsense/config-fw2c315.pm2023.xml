@@ -201,13 +201,8 @@
     </item>
   </sysctl>
   <system>
-    <use_mfs_tmp/>
-    <use_mfs_var/>
-    <serialspeed>115200</serialspeed>
-    <primaryconsole>serial</primaryconsole>
-    <secondaryconsole>video</secondaryconsole>
     <optimization>normal</optimization>
-    <hostname>fw1iaas</hostname>
+    <hostname>fw2c315</hostname>
     <domain>pm2023</domain>
     <dnsallowoverride>1</dnsallowoverride>
     <group>
@@ -273,77 +268,46 @@
       <type/>
       <subscription/>
     </firmware>
+    <dnsserver>13.79.255.62</dnsserver>
     <language>en_US</language>
-    <dnsserver>9.9.9.9</dnsserver>
+    <prefer_ipv4>1</prefer_ipv4>
+    <dnsallowoverride_exclude/>
+    <dns1gw>none</dns1gw>
+    <dns2gw>none</dns2gw>
+    <dns3gw>none</dns3gw>
+    <dns4gw>none</dns4gw>
+    <dns5gw>none</dns5gw>
+    <dns6gw>none</dns6gw>
+    <dns7gw>none</dns7gw>
+    <dns8gw>none</dns8gw>
     <scrubnodf>enabled</scrubnodf>
+    <authserver/>
+    <primaryconsole/>
+    <secondaryconsole/>
+    <serialspeed/>
+    <serialusb/>
   </system>
   <interfaces>
     <wan>
-      <if>vtnet0</if>
+      <if>vmx0</if>
       <descr/>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockpriv>1</blockpriv>
       <blockbogons>1</blockbogons>
-      <ipaddr>dhcp</ipaddr>
-      <dhcphostname/>
-      <alias-address/>
-      <alias-subnet>32</alias-subnet>
-      <dhcprejectfrom/>
-      <adv_dhcp_pt_timeout/>
-      <adv_dhcp_pt_retry/>
-      <adv_dhcp_pt_select_timeout/>
-      <adv_dhcp_pt_reboot/>
-      <adv_dhcp_pt_backoff_cutoff/>
-      <adv_dhcp_pt_initial_interval/>
-      <adv_dhcp_pt_values>SavedCfg</adv_dhcp_pt_values>
-      <adv_dhcp_send_options/>
-      <adv_dhcp_request_options/>
-      <adv_dhcp_required_options/>
-      <adv_dhcp_option_modifiers/>
-      <adv_dhcp_config_advanced/>
-      <adv_dhcp_config_file_override/>
-      <adv_dhcp_config_file_override_path/>
-      <ipaddrv6>dhcp6</ipaddrv6>
-      <dhcp6-ia-pd-len>0</dhcp6-ia-pd-len>
-      <adv_dhcp6_interface_statement_send_options/>
-      <adv_dhcp6_interface_statement_request_options/>
-      <adv_dhcp6_interface_statement_information_only_enable/>
-      <adv_dhcp6_interface_statement_script/>
-      <adv_dhcp6_id_assoc_statement_address_enable/>
-      <adv_dhcp6_id_assoc_statement_address/>
-      <adv_dhcp6_id_assoc_statement_address_id/>
-      <adv_dhcp6_id_assoc_statement_address_pltime/>
-      <adv_dhcp6_id_assoc_statement_address_vltime/>
-      <adv_dhcp6_id_assoc_statement_prefix_enable/>
-      <adv_dhcp6_id_assoc_statement_prefix/>
-      <adv_dhcp6_id_assoc_statement_prefix_id/>
-      <adv_dhcp6_id_assoc_statement_prefix_pltime/>
-      <adv_dhcp6_id_assoc_statement_prefix_vltime/>
-      <adv_dhcp6_prefix_interface_statement_sla_len/>
-      <adv_dhcp6_authentication_statement_authname/>
-      <adv_dhcp6_authentication_statement_protocol/>
-      <adv_dhcp6_authentication_statement_algorithm/>
-      <adv_dhcp6_authentication_statement_rdm/>
-      <adv_dhcp6_key_info_statement_keyname/>
-      <adv_dhcp6_key_info_statement_realm/>
-      <adv_dhcp6_key_info_statement_keyid/>
-      <adv_dhcp6_key_info_statement_secret/>
-      <adv_dhcp6_key_info_statement_expire/>
-      <adv_dhcp6_config_advanced/>
-      <adv_dhcp6_config_file_override/>
-      <adv_dhcp6_config_file_override_path/>
+      <ipaddr>130.79.255.57</ipaddr>
+      <subnet>27</subnet>
+      <gateway>WAN_GW</gateway>
     </wan>
     <lan>
-      <if>vtnet6</if>
+      <if>vmx2</if>
       <descr>vxlan13_ADMIN</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
-      <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.252.255.253</ipaddr>
+      <ipaddr>10.252.255.250</ipaddr>
       <subnet>16</subnet>
     </lan>
     <lo0>
@@ -359,73 +323,74 @@
       <virtual>1</virtual>
     </lo0>
     <opt1>
-      <if>vtnet4</if>
+      <if>vmx6</if>
       <descr>vxlan10_Switches</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.254.255.253</ipaddr>
+      <ipaddr>10.254.255.250</ipaddr>
       <subnet>16</subnet>
     </opt1>
     <opt2>
-      <if>vtnet8</if>
+      <if>vmx4</if>
       <descr>vxlan11_FWSync</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>192.168.254.253</ipaddr>
+      <ipaddr>192.168.255.250</ipaddr>
       <subnet>24</subnet>
     </opt2>
     <opt3>
-      <if>vtnet2</if>
+      <if>vmx3</if>
       <descr>vxlan3_Hypervisors_Routers</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.2.255.253</ipaddr>
+      <ipaddr>10.2.255.250</ipaddr>
       <subnet>16</subnet>
     </opt3>
     <opt4>
-      <descr>vxlan14_</descr>
-      <if>vtnet7</if>
+      <descr>vxlan14</descr>
+      <if>vmx8</if>
+      <lock>1</lock>
     </opt4>
     <opt5>
-      <if>vtnet1</if>
+      <if>vmx5</if>
       <descr>vxlan2_Client_VPN</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.1.255.253</ipaddr>
+      <ipaddr>10.1.255.250</ipaddr>
       <subnet>16</subnet>
     </opt5>
     <opt6>
-      <if>vtnet3</if>
+      <if>vmx1</if>
       <descr>vxlan4_Orchestrators</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.3.255.253</ipaddr>
+      <ipaddr>10.3.255.250</ipaddr>
       <subnet>16</subnet>
     </opt6>
     <opt7>
-      <if>vtnet5</if>
+      <if>vmx7</if>
       <descr>vxlan12_Monitoring</descr>
       <enable>1</enable>
       <lock>1</lock>
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.253.255.253</ipaddr>
+      <ipaddr>10.253.255.250</ipaddr>
       <subnet>16</subnet>
     </opt7>
     <internal>
@@ -462,21 +427,6 @@
         <to>10.252.255.245</to>
       </range>
     </lan>
-    <opt6>
-      <gateway>10.3.255.254</gateway>
-      <ddnsdomainalgorithm>hmac-md5</ddnsdomainalgorithm>
-      <numberoptions>
-        <item/>
-      </numberoptions>
-      <interface_mtu>1400</interface_mtu>
-      <range>
-        <from>10.3.200.1</from>
-        <to>10.3.200.254</to>
-      </range>
-      <winsserver/>
-      <dnsserver>10.3.255.254</dnsserver>
-      <ntpserver/>
-    </opt6>
   </dhcpd>
   <snmpd>
     <syslocation/>
@@ -791,119 +741,11 @@
     <column_count>2</column_count>
   </widgets>
   <revision>
-    <username>root@10.252.0.2</username>
-    <time>1704710789.383</time>
-    <description>/services_dhcp.php made changes</description>
+    <username>root@10.252.255.200</username>
+    <description>/api/interfaces/vip_settings/addItem/ made changes</description>
+    <time>1705075025.3189</time>
   </revision>
   <OPNsense>
-    <captiveportal version="1.0.1">
-      <zones/>
-      <templates/>
-    </captiveportal>
-    <cron version="1.0.4">
-      <jobs/>
-    </cron>
-    <Firewall>
-      <Lvtemplate version="0.0.1">
-        <templates/>
-      </Lvtemplate>
-      <Category version="1.0.0">
-        <categories>
-          <category uuid="38179e4b-45bf-4704-86a6-564b80a39ee9">
-            <name>FWSync</name>
-            <auto>1</auto>
-            <color/>
-          </category>
-          <category uuid="3a863de8-26cf-416a-8bd7-bdd5cf379571">
-            <name>ADMIN</name>
-            <auto>1</auto>
-            <color/>
-          </category>
-          <category uuid="10078347-9e99-453f-8001-f5b3a100bf29">
-            <name>WAN</name>
-            <auto>1</auto>
-            <color/>
-          </category>
-          <category uuid="1b7961ee-d53b-4010-851e-1d8a1e7b8475">
-            <name>WG_ADMIN</name>
-            <auto>1</auto>
-            <color/>
-          </category>
-          <category uuid="afb21edb-6a85-45a4-83a9-ec1550b64d89">
-            <name>internal</name>
-            <auto>1</auto>
-            <color/>
-          </category>
-        </categories>
-      </Category>
-      <Alias version="1.0.1">
-        <geoip>
-          <url/>
-        </geoip>
-        <aliases/>
-      </Alias>
-    </Firewall>
-    <Netflow version="1.0.1">
-      <capture>
-        <interfaces/>
-        <egress_only/>
-        <version>v9</version>
-        <targets/>
-      </capture>
-      <collect>
-        <enable>0</enable>
-      </collect>
-      <activeTimeout>1800</activeTimeout>
-      <inactiveTimeout>15</inactiveTimeout>
-    </Netflow>
-    <IDS version="1.0.9">
-      <rules/>
-      <policies/>
-      <userDefinedRules/>
-      <files/>
-      <fileTags/>
-      <general>
-        <enabled>0</enabled>
-        <ips>0</ips>
-        <promisc>0</promisc>
-        <interfaces>wan</interfaces>
-        <homenet>192.168.0.0/16,10.0.0.0/8,172.16.0.0/12</homenet>
-        <defaultPacketSize/>
-        <UpdateCron/>
-        <AlertLogrotate>W0D23</AlertLogrotate>
-        <AlertSaveLogs>4</AlertSaveLogs>
-        <MPMAlgo/>
-        <detect>
-          <Profile/>
-          <toclient_groups/>
-          <toserver_groups/>
-        </detect>
-        <syslog>0</syslog>
-        <syslog_eve>0</syslog_eve>
-        <LogPayload>0</LogPayload>
-        <verbosity/>
-      </general>
-    </IDS>
-    <Swanctl version="1.0.0">
-      <Connections/>
-      <locals/>
-      <remotes/>
-      <children/>
-      <Pools/>
-      <VTIs/>
-      <SPDs/>
-    </Swanctl>
-    <IPsec version="1.0.1">
-      <general>
-        <enabled/>
-      </general>
-      <keyPairs/>
-      <preSharedKeys/>
-    </IPsec>
-    <Interfaces>
-      <vxlans version="1.0.1"/>
-      <loopbacks version="1.0.0"/>
-    </Interfaces>
     <monit version="1.0.12">
       <general>
         <enabled>0</enabled>
@@ -1088,14 +930,120 @@
         <path/>
       </test>
     </monit>
-    <OpenVPNExport version="0.0.1">
-      <servers/>
-    </OpenVPNExport>
+    <Firewall>
+      <Category version="1.0.0">
+        <categories>
+          <category uuid="38179e4b-45bf-4704-86a6-564b80a39ee9">
+            <name>FWSync</name>
+            <auto>1</auto>
+            <color/>
+          </category>
+          <category uuid="3a863de8-26cf-416a-8bd7-bdd5cf379571">
+            <name>ADMIN</name>
+            <auto>1</auto>
+            <color/>
+          </category>
+          <category uuid="10078347-9e99-453f-8001-f5b3a100bf29">
+            <name>WAN</name>
+            <auto>1</auto>
+            <color/>
+          </category>
+          <category uuid="1b7961ee-d53b-4010-851e-1d8a1e7b8475">
+            <name>WG_ADMIN</name>
+            <auto>1</auto>
+            <color/>
+          </category>
+          <category uuid="afb21edb-6a85-45a4-83a9-ec1550b64d89">
+            <name>internal</name>
+            <auto>1</auto>
+            <color/>
+          </category>
+        </categories>
+      </Category>
+      <Alias version="1.0.1">
+        <geoip>
+          <url/>
+        </geoip>
+        <aliases/>
+      </Alias>
+      <Lvtemplate version="0.0.1">
+        <templates/>
+      </Lvtemplate>
+    </Firewall>
     <OpenVPN version="1.0.0">
       <Overwrites/>
       <Instances/>
       <StaticKeys/>
     </OpenVPN>
+    <OpenVPNExport version="0.0.1">
+      <servers/>
+    </OpenVPNExport>
+    <captiveportal version="1.0.1">
+      <zones/>
+      <templates/>
+    </captiveportal>
+    <Interfaces>
+      <vxlans version="1.0.1"/>
+      <loopbacks version="1.0.0"/>
+    </Interfaces>
+    <cron version="1.0.4">
+      <jobs/>
+    </cron>
+    <Swanctl version="1.0.0">
+      <Connections/>
+      <locals/>
+      <remotes/>
+      <children/>
+      <Pools/>
+      <VTIs/>
+      <SPDs/>
+    </Swanctl>
+    <IPsec version="1.0.1">
+      <general>
+        <enabled/>
+      </general>
+      <keyPairs/>
+      <preSharedKeys/>
+    </IPsec>
+    <TrafficShaper version="1.0.3">
+      <pipes/>
+      <queues/>
+      <rules/>
+    </TrafficShaper>
+    <Syslog version="1.0.1">
+      <general>
+        <enabled>1</enabled>
+      </general>
+      <destinations/>
+    </Syslog>
+    <IDS version="1.0.9">
+      <rules/>
+      <policies/>
+      <userDefinedRules/>
+      <files/>
+      <fileTags/>
+      <general>
+        <enabled>0</enabled>
+        <ips>0</ips>
+        <promisc>0</promisc>
+        <interfaces>wan</interfaces>
+        <homenet>192.168.0.0/16,10.0.0.0/8,172.16.0.0/12</homenet>
+        <defaultPacketSize/>
+        <UpdateCron/>
+        <AlertLogrotate>W0D23</AlertLogrotate>
+        <AlertSaveLogs>4</AlertSaveLogs>
+        <MPMAlgo/>
+        <detect>
+          <Profile/>
+          <toclient_groups/>
+          <toserver_groups/>
+        </detect>
+        <syslog>0</syslog>
+        <syslog_eve>0</syslog_eve>
+        <LogPayload>0</LogPayload>
+        <verbosity/>
+      </general>
+    </IDS>
     <proxy version="1.0.6">
       <general>
         <enabled>0</enabled>
@@ -1212,17 +1160,6 @@
         <template/>
       </error_pages>
     </proxy>
-    <Syslog version="1.0.1">
-      <general>
-        <enabled>1</enabled>
-      </general>
-      <destinations/>
-    </Syslog>
-    <TrafficShaper version="1.0.3">
-      <pipes/>
-      <queues/>
-      <rules/>
-    </TrafficShaper>
     <unboundplus version="1.0.8">
       <general>
         <enabled>1</enabled>
@@ -1392,6 +1329,19 @@
         </servers>
       </server>
     </wireguard>
+    <Netflow version="1.0.1">
+      <capture>
+        <interfaces/>
+        <egress_only/>
+        <version>v9</version>
+        <targets/>
+      </capture>
+      <collect>
+        <enable>0</enable>
+      </collect>
+      <activeTimeout>1800</activeTimeout>
+      <inactiveTimeout>15</inactiveTimeout>
+    </Netflow>
   </OPNsense>
   <ifgroups version="1.0.0">
     <ifgroupentry uuid="1c0206a6-8f03-4109-b4aa-17203c09a42d">
@@ -1414,7 +1364,7 @@
       <password>jesus13</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_vlan_admin</descr>
     </vip>
     <vip uuid="8607a811-ee6b-4469-a1f2-c65a396f695c">
@@ -1428,7 +1378,7 @@
       <password>jesus10</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_vlan_switches</descr>
     </vip>
     <vip uuid="ab42b3a2-2b41-4eaf-a5c2-acda9438f51d">
@@ -1442,7 +1392,7 @@
       <password>jesus3</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_vlan_hypervisors_routers</descr>
     </vip>
     <vip uuid="fa49879d-7f9e-45d9-a64f-0e47b564d078">
@@ -1456,7 +1406,7 @@
       <password>jesus2</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_client_vpn</descr>
     </vip>
     <vip uuid="835044db-c9bb-4aff-8ca5-01fa85855910">
@@ -1470,7 +1420,7 @@
       <password>jesus4</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_orchestrators</descr>
     </vip>
     <vip uuid="149e7c2c-1d4d-4c41-b639-5c4a2f3e70ce">
@@ -1484,8 +1434,22 @@
       <password>jesus12</password>
       <vhid>1</vhid>
       <advbase>1</advbase>
-      <advskew>0</advskew>
+      <advskew>11</advskew>
       <descr>carp fw_monitoring</descr>
+    </vip>
+    <vip uuid="b1cd079f-9aca-43a9-ab07-35ecad9b303c">
+      <interface>wan</interface>
+      <mode>carp</mode>
+      <subnet>130.79.255.59</subnet>
+      <subnet_bits>27</subnet_bits>
+      <gateway/>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesuswanc315</password>
+      <vhid>2</vhid>
+      <advbase>1</advbase>
+      <advskew>1</advskew>
+      <descr>wan c315</descr>
     </vip>
   </virtualip>
   <vlans version="1.0.0">
@@ -1494,7 +1458,6 @@
   <laggs version="1.0.0">
     <lagg/>
   </laggs>
-  <openvpn/>
   <staticroutes version="1.0.0">
     <route/>
   </staticroutes>
@@ -1521,42 +1484,33 @@
     <crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUhORENDQlJ5Z0F3SUJBZ0lVYkdqcnN2MHlIT2lTOGlKQUVMMWc3NmVZTGVjd0RRWUpLb1pJaHZjTkFRRUwKQlFBd2dZa3hIVEFiQmdOVkJBTU1GRTlRVG5ObGJuTmxMbXh2WTJGc1pHOXRZV2x1TVFzd0NRWURWUVFHRXdKTwpUREVWTUJNR0ExVUVDQXdNV25WcFpDMUliMnhzWVc1a01SVXdFd1lEVlFRSERBeE5hV1JrWld4b1lYSnVhWE14CkxUQXJCZ05WQkFvTUpFOVFUbk5sYm5ObElITmxiR1l0YzJsbmJtVmtJSGRsWWlCalpYSjBhV1pwWTJGMFpUQWUKRncweU5EQXhNREV3TlRFME16WmFGdzB5TlRBeU1ERXdOVEUwTXpaYU1JR0pNUjB3R3dZRFZRUUREQlJQVUU1egpaVzV6WlM1c2IyTmhiR1J2YldGcGJqRUxNQWtHQTFVRUJoTUNUa3d4RlRBVEJnTlZCQWdNREZwMWFXUXRTRzlzCmJHRnVaREVWTUJNR0ExVUVCd3dNVFdsa1pHVnNhR0Z5Ym1sek1TMHdLd1lEVlFRS0RDUlBVRTV6Wlc1elpTQnoKWld4bUxYTnBaMjVsWkNCM1pXSWdZMlZ5ZEdsbWFXTmhkR1V3Z2dJaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQwpEd0F3Z2dJS0FvSUNBUURsRTFPK2RIZFZBeUF4c2RRL3dHQ1NDTUJlOVJDbkpWdDM0aVZjQ1VmMDlsRDhJRlREClVjbG1VekdaajRhQU9zb3FDWXB3dmErUURDSmZFWlV3WlJ6cmRkdTJvV2M2ZXJYajJvRWltMFJldUUzTk9XZE0Ka1BwK1pRaklqQmVmNkFpRWRremQzU1VOV1JzV0NHdFNsYnplMmI4TDVrOFdReFRYRGFIeTlTMmZ0RytaRjFBVApQbmpIWWlVWmRGZ1VGaW5VSFFZc2cyY1VUa2wvcXRjNnVFdlpGQm9kQUxtK1QzbU1YNE1tMlN1ODE0YXQyS09OCkYwOWJ3Qk1DY2g4SUZwbDdDem1ha2F1ZmYvMW9tMFgzWmJJeTNXN1ZSVVFKQlhXTWVMcCtUTFB5T0dpWm9WRkEKMjNOMmpLd1NXd2MwbERHRmoyUkNMc3cyK1JhKzF4UzBVZDh1SXBadmk5dE40aVpmbk45ajNvYVJ4NUwyRlFreQprTTRMWm9NOUdqbmdRR3ZqbkZyZ0F0OTR2OHVsMURvYVRDNVRwcTNHSmkxWnJ5L3BzY0VyemRJMERNYnA3eklnCnNMRUlMREhJbTdBT1FWZjNTd0laSy9EUUFJcUtiSEJHckMxd0NBU2hJQUdjeTlUSGh0UmVrTlVNOGc3N0pISU8KQVVGTDdlWmkwTUxXUTJtU1JIRzQwcVM0OHpMY0RMM25EOHlBcW1xRU05NVFKNU1JZ0hRYXVpNHlzMDVTN0dpVQpDT25BbE40ZnVrckNjeWN5enVYWjl3SnpYUW1jaDhQeU5kZmwwNWJnQmMrTG9yb2NjTytsWXN3ZkxkRTU4b1VQCll1a2hRamRPb1RaeUZWU1E3WVhocDlPWGl6QXpaNEF1QnlzbmtqWDlIWHBObE1pQlpCbmozWGZSMXdJREFRQUIKbzRJQmtEQ0NBWXd3Q1FZRFZSMFRCQUl3QURBUkJnbGdoa2dCaHZoQ0FRRUVCQU1DQmtBd05BWUpZSVpJQVliNApRZ0VOQkNjV0pVOVFUbk5sYm5ObElFZGxibVZ5WVhSbFpDQlRaWEoyWlhJZ1EyVnlkR2xtYVdOaGRHVXdIUVlEClZSME9CQllFRlBJVi9vbW5ZWWNYZkdvQ1BoTXpxenV1WGVuOE1JSEpCZ05WSFNNRWdjRXdnYjZBRlBJVi9vbW4KWVljWGZHb0NQaE16cXp1dVhlbjhvWUdQcElHTU1JR0pNUjB3R3dZRFZRUUREQlJQVUU1elpXNXpaUzVzYjJOaApiR1J2YldGcGJqRUxNQWtHQTFVRUJoTUNUa3d4RlRBVEJnTlZCQWdNREZwMWFXUXRTRzlzYkdGdVpERVZNQk1HCkExVUVCd3dNVFdsa1pHVnNhR0Z5Ym1sek1TMHdLd1lEVlFRS0RDUlBVRTV6Wlc1elpTQnpaV3htTFhOcFoyNWwKWkNCM1pXSWdZMlZ5ZEdsbWFXTmhkR1dDRkd4bzY3TDlNaHpva3ZJaVFCQzlZTytubUMzbk1CMEdBMVVkSlFRVwpNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUZCUWdDQWpBTEJnTlZIUThFQkFNQ0JhQXdId1lEVlIwUkJCZ3dGb0lVClQxQk9jMlZ1YzJVdWJHOWpZV3hrYjIxaGFXNHdEUVlKS29aSWh2Y05BUUVMQlFBRGdnSUJBRzBQb1V3OURLTHgKMHlWNk9JZ0pNNnpjSUpjVmNrUXcvVWFJcXdVWklCZ0F2QkpYWmdJNEp2NXdRK2ZMVURUeVR6RmFjUlcrSTRYSQpteS9FV0dDLzhGSXhaUjVXdzNGejFzanBaKzdYcTdicks5NHI4MzU1bmNKVkw0aEZER0ZqalZvd1ZqZm10MDF3Ci9ZZVFTN1pQK2NlZUc2NFFQS213OGhPeDgrYXBWMER6Um9mbGhvTTdid3ZrSFlURzRUQlpQUk9hWnVNUGhudzkKNHFSdXhFcGpoSlRVY25XNTJhZTFKT3Y3QlhlZ3M0eEJabVpRSUg1SVlqTmNDRmhZRkRnOVlFeFNOSzF4S0trQQpQM29TVUIvUGR5UTVFNFYzS21LTGJ1cUk2b3drTTBlYXB3b1d6TjEyUytuVFU5bHlOeUVJR2ZVNFI4ZnplZG9SClJ4aWQ2ckhEYjNZSk1sUTQvVUVNSFdCa09HUU1MMkJXNGwwVHQrNlIvMEJ5TzlzeWEvaWpHNzBEbzhjMXFvQmMKb1FHNmhTd3htN3VNWHc2d3BBOW95RVFaOEFyQ1dMMEw5eXUxNXFaNG5ZTkZQOVlWU0F0VzhhckZWUFpOTDc0dQpPSE90ME5pNUVneWF1SXRzU1pvQlhhUXlGZGM5MjFsdm5FemNIUWVCVTFVYnl4ZXQyeHBTVzVEOTNjSDFCbks5CnE0NDZUc1FTWkJFV3Z3bm5tOW4xbTBhVWN3MjlNRmF3bmMzM2YybkdxbjhYaDFVYm9RMnlYbTk4OGJhcXVEKzYKZzIydm9BQi8vRm5sNVJrVmo2cW50bFNxbkdkeUxCVjVBYjM3MEZRVkZLMFpMWjM0M1pwZjZIMG1DcXNoYnAwcwpaTGVjeE9iYlNUUE01Zm5hWWliS0JiR2ZRRGpCazNyMwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==</crt>
     <prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUpSQUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQ1M0d2dna3FBZ0VBQW9JQ0FRRGxFMU8rZEhkVkF5QXgKc2RRL3dHQ1NDTUJlOVJDbkpWdDM0aVZjQ1VmMDlsRDhJRlREVWNsbVV6R1pqNGFBT3NvcUNZcHd2YStRRENKZgpFWlV3WlJ6cmRkdTJvV2M2ZXJYajJvRWltMFJldUUzTk9XZE1rUHArWlFqSWpCZWY2QWlFZGt6ZDNTVU5XUnNXCkNHdFNsYnplMmI4TDVrOFdReFRYRGFIeTlTMmZ0RytaRjFBVFBuakhZaVVaZEZnVUZpblVIUVlzZzJjVVRrbC8KcXRjNnVFdlpGQm9kQUxtK1QzbU1YNE1tMlN1ODE0YXQyS09ORjA5YndCTUNjaDhJRnBsN0N6bWFrYXVmZi8xbwptMFgzWmJJeTNXN1ZSVVFKQlhXTWVMcCtUTFB5T0dpWm9WRkEyM04yakt3U1d3YzBsREdGajJSQ0xzdzIrUmErCjF4UzBVZDh1SXBadmk5dE40aVpmbk45ajNvYVJ4NUwyRlFreWtNNExab005R2puZ1FHdmpuRnJnQXQ5NHY4dWwKMURvYVRDNVRwcTNHSmkxWnJ5L3BzY0VyemRJMERNYnA3eklnc0xFSUxESEltN0FPUVZmM1N3SVpLL0RRQUlxSwpiSEJHckMxd0NBU2hJQUdjeTlUSGh0UmVrTlVNOGc3N0pISU9BVUZMN2VaaTBNTFdRMm1TUkhHNDBxUzQ4ekxjCkRMM25EOHlBcW1xRU05NVFKNU1JZ0hRYXVpNHlzMDVTN0dpVUNPbkFsTjRmdWtyQ2N5Y3l6dVhaOXdKelhRbWMKaDhQeU5kZmwwNWJnQmMrTG9yb2NjTytsWXN3ZkxkRTU4b1VQWXVraFFqZE9vVFp5RlZTUTdZWGhwOU9YaXpBegpaNEF1QnlzbmtqWDlIWHBObE1pQlpCbmozWGZSMXdJREFRQUJBb0lDQUNYWjdMT0NzUmtsL0JMYURIVkFSM1M1CjUzZUpUT2doZnh5dkRIZEp2VThYeUVmdzI3Q3VlZlhqZDBXbGRwY0huOUlVWTRDL2h4dnBOV0M2R2dtMkczSTQKdGtaV0l5V0JrejZFSTJSaGZZbWRNSlhoajFVU2U2R1k5anVWRW01RXUrdVBWS0l3WVdmME9rcUl0NXNjek9tUgoxMFNUR0t4WUIwQ0ZxeVhuSjFQRlQ4OWZEOGN1UW16SHBkT3Y2c0hlNjZoMTUwaEJxaTJyeGU5SGZtcmdldi95CmwySUZkYXVobkRiNnJVUWxERm9XenRVNC84VlhmYkJ1YTNXeS83ZXBiRkR0aU9ZbWZkSk1Kc1k3S2ZONEpWck0KUmYwTmhmRnJxb0c4alN4RFpsUjJ4Nm5qQXZjUmkrR2gydWpwaTZZL2VuTlVQei9FVmRBYmxvdVFKSWFySkpJOQo3ZTQ4VklhOUkrcDl2NkZFOGQzZDN1TE5oZGRwU0s0WlVGSGNXM2dDUnRsd2pnaHN1WWNsa2NZOUxVNU1jUkFLCksveHFxN2doNnRPRkZOVWFZMTRpcjgyWDQ5aFlBMUVDSjloeW5SbXZSSnByNVM5cU1vdGhwaXFkQmlUQ2diTDcKU2hNWWV5SDhFbVVoRmpQVDhxeEJpbEF0eTJaMk9xUTk5UjRILzJaRUpodndzdnd4SGl6ZFlOUytZbVpDOHZ4cQpNbktzZ1JQS0tRREN4WU5VWDBvVDJQc0h6TElVN1M5MjB6eTdSNERjdHg0QVpnNUdwOWYzWTQ2MVdXZXpMOWFWCjdpM0dUdDdtK3dLaUpRWThHSmtrY2VUT1Jnc0VYT2g5U2g4Y0xWNldRVXFaYWluaFZVb2pVekpPNDgzMExlNlgKb3R6ZzdVRy9pNnhNLzgxVTBHZXBBb0lCQVFEMzAzQTJNeXRWaGhubUwxTmh3MkxJbnBLOVF4Wm9MRnVvUnpmRQpWRFVkNXNyMFZFOC9rc1BiajlaYjFtQWF2Q3d0SXI1eWo3K09od05vaUwzbFlhb00rRm1WK2UrRCtNcE9kZGJOCjZaaUFaMHEyVzIrazdZR1dENFpFMnJkalRaek1ua29jK3BpUHUwMHRPejFFV0hJU2JyemhoNlpuckd2MEt4bWkKYmZkUUhDaFFGUURXVXU5T3JBTGx3bUZTbjhFdTQ1Q3dLalBpRENrMlBKWWlpZGgvRElBUy9zclFTQWMza0xUNApEOXZpRXo0Si8rcnZrZ2VIRW5aczB1YnlmcU1ZV2ZjdUxsNDVZYU9NNjdWVWxsMTljVGF0cWszQ2hhaThKbUx2Cms5dGdrT0pOaCtINitNTFhkYld1Zk5qenE0dEpZTG5FNTdhV0g2WCtMNURPMEtWYkFvSUJBUURzb1pEenhLckYKclpjcGdXWHU1T3d4NGF3M1RQU1Uvd2hlMWhSL0hpOEJpNDZLWksxOTBuZE9jM2JNQkF0SSs2aHpSeDhYQlFKUgprb2FMbUFhcWQ2cUExakZxcDliZlZHS0ZYdFhIZjJQeG9kZGhudjdWL3ZGZENqajJYdnJDNnY3VEt5N1ZmYTN4CmIwbUZnNHh1eHVDenBFVElsbUdhcEpXaThKaEhTUkYwNDZVNW9Uc0xhcnAvOW1kUnlxU092Vkt2bGc5MVZoQUwKUWpNQldlbDkxZngzcDI2a3Y5RExocGw1T29Qc1lBTXdta2xkaEtOakhQVGZhTHppZ25vOWJRZCtsU3BjaXhlcQpnQWdOWHNjenpVam8rQW1CaXVTT292TERPNGpZMThqbk55c0cyejJaMGdhTGRoWEFQb2Y1Vk5uSWJxYittRDlkCmVIZ1g0R05DaHFJMUFvSUJBUURJNTg3N0VXWmE4ZGpESTdDYis3SjBZeUVnYjJlVjBnZ0lGcHdkL0FvSGtKY04KbGQrYzhSVDRSTllKSTNSTG1DclQrR3VlSWV5djFjSXNsMVlpdzVjQTVzQnhkZW4yK2RTLzRJWGY3alJrTzloMApseEdlQ2JEWS93TGhoTkhRbmhXMFI4cGJUY2dxRlRTT3E0eVNnSVVSYmxhUEd0SUxEOXVBV1FSeUNtWEl1dHJ2CmVPZHgyRkFLWGlZSEx4cUl5ZHZwY0RCV3NBL1plL1JZOUtyZG14UTRndUM5QlhOVGdHRGhhZDFia0RlNFFkTTAKZGhSMlhOTGZiRmMzQjQ2VUhaZUlZVDZpWUpLZ1FBZy9jTUpTcllkaTcwbmRaY2VlSDQ3WDRPS3B5QnE3WVJrawpzemkrcGJZR3gzVWUzRFZnN0x1QkkvblZwK2I4TXZIMWE0Z2dNVU1yQW9JQkFRQ0x6OEpYWllJSkhsSE1JanBaCjlrUmdESmkyYSsrdkFTaXU4QXBZT1R0SXpHNUI4czVYSXoxK3l0WU1JTytTQmE4M3ZYUHZJL1NFd2ZCaEZrZ0oKL0g1dmRSN3BoNVY3aXQ1VE12OVl5am9CRU1Deld6L3lySmxyZ1ppNmFNLzh6dUFWWU5SaEs4clVkZzZZcG1zWgpJTVN2SDRYTWhwM1F3eUh1amYxTFVTN1JRNWZoL3hObDRYK2tEN0JvTVRVZGFWc3JoNXhHbGIwUkNlSWRFRVRYCkp0SHUyS3lWQndpVTJFaGh5bU1jREhhV0J2TUdJRkp4UXpDanQ3eXlrS2t0RmZoeG9DelJWUlY4bGYwcitTMzEKdTNzeXV5clNzWC90anZXa3lNNUlZT2JCUm1WVHZjSWQybXduaG5PL2pMTEdiSTNvMFFnMk1UcHZQYmluVXRzUworWDFwQW9JQkFRRFZiK3ZGcnI2MzlFajB5UzlKZWp3QnlYWGcxNWRGWGswZWtqcUNYWWxxMTlibjVkU1hlcVNyCmh0OXJ3ZnpqLzRjeG10QXFEV0daMW9MY2hRdENZSGpxaW9Uc1VvSDFxR2czcWlsaDVveUQ0UXZoY0RTYTU5QkYKczRRRzR6YWFKMjRqNU5iWG8zdnZ0Q1NNK0VwUVJwUDlaU2MwSzFYTmprNnRPSExoQ0ZXWGl6bkp5Y1U0NUtsTgplSVVFdlRvQjRkRnZGRUNRR0Z4VjVLcHpVd1JsaklnZktkb1JNMVZZM1JTZWZIaURUcTRENElLZ0hHb1Z5RUZVClJjenZYTUJmeUU3ZjhjaWZOSnVuLzB0TS80M29QeXU3dk1LNnpMalVTYUE0cUZXRmtnZFRobEwrWTcwZ0dpZEgKK045U1RjV3pMcEhDZGE0TnFxdU83WUk4b09oQzVGT1EKLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQo=</prv>
   </cert>
+  <gateways>
+    <gateway_item>
+      <interface>wan</interface>
+      <gateway>130.79.255.62</gateway>
+      <name>WAN_GW</name>
+      <priority>255</priority>
+      <weight>1</weight>
+      <ipprotocol>inet</ipprotocol>
+      <descr>Interface WAN Gateway</descr>
+      <monitor_disable>1</monitor_disable>
+      <defaultgw>1</defaultgw>
+      <fargw>1</fargw>
+    </gateway_item>
+  </gateways>
   <hasync>
     <pfsyncenabled>on</pfsyncenabled>
-    <synchronizealiases>on</synchronizealiases>
-    <synchronizeauthservers>on</synchronizeauthservers>
-    <synchronizecerts>on</synchronizecerts>
-    <synchronizedhcpd>on</synchronizedhcpd>
-    <synchronizenat>on</synchronizenat>
-    <synchronizerules>on</synchronizerules>
-    <synchronizeschedules>on</synchronizeschedules>
-    <synchronizeusers>on</synchronizeusers>
-    <synchronizewidgets>on</synchronizewidgets>
-    <synchronizedhcrelay>on</synchronizedhcrelay>
-    <synchronizedhcpdv6>on</synchronizedhcpdv6>
-    <synchronizedhcrelay6>on</synchronizedhcrelay6>
-    <synchronizentpd>on</synchronizentpd>
-    <synchronizesyslog>on</synchronizesyslog>
-    <synchronizecron>on</synchronizecron>
-    <synchronizesysctl>on</synchronizesysctl>
-    <synchronizewebgui>on</synchronizewebgui>
-    <synchronizednsforwarder>on</synchronizednsforwarder>
-    <synchronizeshaper>on</synchronizeshaper>
-    <synchronizecaptiveportal>on</synchronizecaptiveportal>
-    <synchronizeipsec>on</synchronizeipsec>
-    <synchronizemonit>on</synchronizemonit>
-    <synchronizessh>on</synchronizessh>
-    <synchronizeopenvpn>on</synchronizeopenvpn>
-    <synchronizeifgroups>on</synchronizeifgroups>
-    <synchronizecategories>on</synchronizecategories>
-    <synchronizelvtemplate>on</synchronizelvtemplate>
-    <synchronizesquid>on</synchronizesquid>
-    <synchronizesuricata>on</synchronizesuricata>
-    <synchronizednsresolver>on</synchronizednsresolver>
-    <synchronizewireguard>on</synchronizewireguard>
     <pfsyncinterface>opt2</pfsyncinterface>
-    <synchronizetoip>192.168.254.252</synchronizetoip>
-    <username>fwsync</username>
-    <password>jesus11</password>
+    <synchronizetoip/>
+    <username/>
+    <password/>
   </hasync>
+  <ipsec/>
+  <dnsmasq/>
+  <crl/>
+  <dhcrelay/>
+  <dhcrelay6/>
+  <schedules/>
+  <aliases/>
+  <unbound/>
 </opnsense>

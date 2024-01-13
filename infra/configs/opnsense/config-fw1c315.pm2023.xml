@@ -282,6 +282,10 @@
     <dns8gw>none</dns8gw>
     <scrubnodf>enabled</scrubnodf>
     <authserver/>
+    <primaryconsole/>
+    <secondaryconsole/>
+    <serialspeed/>
+    <serialusb/>
   </system>
   <interfaces>
     <wan>
@@ -292,7 +296,7 @@
       <spoofmac/>
       <blockpriv>1</blockpriv>
       <blockbogons>1</blockbogons>
-      <ipaddr>130.79.255.59</ipaddr>
+      <ipaddr>130.79.255.58</ipaddr>
       <subnet>27</subnet>
       <gateway>WAN_GW</gateway>
     </wan>
@@ -303,7 +307,7 @@
       <lock>1</lock>
       <spoofmac/>
       <mtu>1400</mtu>
-      <ipaddr>10.252.255.252</ipaddr>
+      <ipaddr>10.252.255.251</ipaddr>
       <subnet>16</subnet>
     </lan>
     <lo0>
@@ -326,7 +330,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.254.255.252</ipaddr>
+      <ipaddr>10.254.255.251</ipaddr>
       <subnet>16</subnet>
     </opt1>
     <opt2>
@@ -337,7 +341,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>192.168.254.252</ipaddr>
+      <ipaddr>192.168.255.251</ipaddr>
       <subnet>24</subnet>
     </opt2>
     <opt3>
@@ -348,7 +352,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.2.255.252</ipaddr>
+      <ipaddr>10.2.255.251</ipaddr>
       <subnet>16</subnet>
     </opt3>
     <opt4>
@@ -364,7 +368,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.1.255.252</ipaddr>
+      <ipaddr>10.1.255.251</ipaddr>
       <subnet>16</subnet>
     </opt5>
     <opt6>
@@ -375,7 +379,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.3.255.252</ipaddr>
+      <ipaddr>10.3.255.251</ipaddr>
       <subnet>16</subnet>
     </opt6>
     <opt7>
@@ -386,7 +390,7 @@
       <spoofmac/>
       <blockbogons>1</blockbogons>
       <mtu>1400</mtu>
-      <ipaddr>10.253.255.252</ipaddr>
+      <ipaddr>10.253.255.251</ipaddr>
       <subnet>16</subnet>
     </opt7>
     <internal>
@@ -686,9 +690,6 @@
       <rule/>
     </scrub>
   </filter>
-  <rrd>
-    <enable/>
-  </rrd>
   <load_balancer>
     <monitor_type>
       <name>ICMP</name>
@@ -740,9 +741,9 @@
     <column_count>2</column_count>
   </widgets>
   <revision>
-    <username>(root)@192.168.254.253</username>
-    <time>1704708556.845</time>
-    <description>Merged widgets,system,cert,ca,crl,dhcrelay,dhcpdv6,dhcrelay6,ntpd,OPNsense,sysctl,ifgroups,filter,schedules,aliases,unbound,ipsec,dnsmasq,openvpn,nat,dhcpd config sections from XMLRPC client.</description>
+    <username>root@10.252.255.200</username>
+    <description>/api/interfaces/vip_settings/setItem/310d7f00-7afa-441f-8a53-f5a02800e313 made changes</description>
+    <time>1705075054.1911</time>
   </revision>
   <OPNsense>
     <monit version="1.0.12">
@@ -986,7 +987,21 @@
       <loopbacks version="1.0.0"/>
     </Interfaces>
     <cron version="1.0.4">
-      <jobs/>
+      <jobs>
+        <job uuid="98fd1ff9-e7a4-4d96-832f-0e8954d85c7c">
+          <origin>cron</origin>
+          <enabled>1</enabled>
+          <minutes>0</minutes>
+          <hours>0</hours>
+          <days>*</days>
+          <months>*</months>
+          <weekdays>*</weekdays>
+          <who>root</who>
+          <command>system ha_reconfigure_backup</command>
+          <parameters/>
+          <description>push conf to backup</description>
+        </job>
+      </jobs>
     </cron>
     <Swanctl version="1.0.0">
       <Connections/>
@@ -1159,19 +1174,6 @@
         <template/>
       </error_pages>
     </proxy>
-    <Netflow version="1.0.1">
-      <capture>
-        <interfaces/>
-        <egress_only/>
-        <version>v9</version>
-        <targets/>
-      </capture>
-      <collect>
-        <enable>0</enable>
-      </collect>
-      <activeTimeout>1800</activeTimeout>
-      <inactiveTimeout>15</inactiveTimeout>
-    </Netflow>
     <unboundplus version="1.0.8">
       <general>
         <enabled>1</enabled>
@@ -1341,6 +1343,19 @@
         </servers>
       </server>
     </wireguard>
+    <Netflow version="1.0.1">
+      <capture>
+        <interfaces/>
+        <egress_only/>
+        <version>v9</version>
+        <targets/>
+      </capture>
+      <collect>
+        <enable>0</enable>
+      </collect>
+      <activeTimeout>1800</activeTimeout>
+      <inactiveTimeout>15</inactiveTimeout>
+    </Netflow>
   </OPNsense>
   <ifgroups version="1.0.0">
     <ifgroupentry uuid="1c0206a6-8f03-4109-b4aa-17203c09a42d">
@@ -1351,13 +1366,109 @@
       <descr/>
     </ifgroupentry>
   </ifgroups>
-  <openvpn/>
+  <virtualip version="1.0.0">
+    <vip uuid="842ca2d0-5b6d-4c02-9e05-d3dee98512c0">
+      <interface>lan</interface>
+      <mode>carp</mode>
+      <subnet>10.252.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus13</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_vlan_admin</descr>
+    </vip>
+    <vip uuid="8607a811-ee6b-4469-a1f2-c65a396f695c">
+      <interface>opt1</interface>
+      <mode>carp</mode>
+      <subnet>10.254.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus10</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_vlan_switches</descr>
+    </vip>
+    <vip uuid="ab42b3a2-2b41-4eaf-a5c2-acda9438f51d">
+      <interface>opt3</interface>
+      <mode>carp</mode>
+      <subnet>10.2.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus3</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_vlan_hypervisors_routers</descr>
+    </vip>
+    <vip uuid="fa49879d-7f9e-45d9-a64f-0e47b564d078">
+      <interface>opt5</interface>
+      <mode>carp</mode>
+      <subnet>10.1.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus2</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_client_vpn</descr>
+    </vip>
+    <vip uuid="835044db-c9bb-4aff-8ca5-01fa85855910">
+      <interface>opt6</interface>
+      <mode>carp</mode>
+      <subnet>10.3.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus4</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_orchestrators</descr>
+    </vip>
+    <vip uuid="149e7c2c-1d4d-4c41-b639-5c4a2f3e70ce">
+      <interface>opt7</interface>
+      <mode>carp</mode>
+      <subnet>10.253.255.254</subnet>
+      <subnet_bits>16</subnet_bits>
+      <gateway>192.168.254.253</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesus12</password>
+      <vhid>1</vhid>
+      <advbase>1</advbase>
+      <advskew>10</advskew>
+      <descr>carp fw_monitoring</descr>
+    </vip>
+    <vip uuid="310d7f00-7afa-441f-8a53-f5a02800e313">
+      <interface>wan</interface>
+      <mode>carp</mode>
+      <subnet>130.79.255.59</subnet>
+      <subnet_bits>27</subnet_bits>
+      <gateway>192.168.255.251</gateway>
+      <noexpand>0</noexpand>
+      <nobind>0</nobind>
+      <password>jesuswanc315</password>
+      <vhid>2</vhid>
+      <advbase>1</advbase>
+      <advskew>0</advskew>
+      <descr>WANC315</descr>
+    </vip>
+  </virtualip>
   <vlans version="1.0.0">
     <vlan/>
   </vlans>
-  <virtualip version="1.0.0">
-    <vip/>
-  </virtualip>
   <laggs version="1.0.0">
     <lagg/>
   </laggs>
@@ -1403,10 +1514,41 @@
   </gateways>
   <hasync>
     <pfsyncenabled>on</pfsyncenabled>
+    <synchronizealiases>on</synchronizealiases>
+    <synchronizeauthservers>on</synchronizeauthservers>
+    <synchronizecerts>on</synchronizecerts>
+    <synchronizedhcpd>on</synchronizedhcpd>
+    <synchronizenat>on</synchronizenat>
+    <synchronizerules>on</synchronizerules>
+    <synchronizeschedules>on</synchronizeschedules>
+    <synchronizeusers>on</synchronizeusers>
+    <synchronizewidgets>on</synchronizewidgets>
+    <synchronizedhcrelay>on</synchronizedhcrelay>
+    <synchronizedhcpdv6>on</synchronizedhcpdv6>
+    <synchronizedhcrelay6>on</synchronizedhcrelay6>
+    <synchronizentpd>on</synchronizentpd>
+    <synchronizesyslog>on</synchronizesyslog>
+    <synchronizecron>on</synchronizecron>
+    <synchronizesysctl>on</synchronizesysctl>
+    <synchronizewebgui>on</synchronizewebgui>
+    <synchronizednsforwarder>on</synchronizednsforwarder>
+    <synchronizeshaper>on</synchronizeshaper>
+    <synchronizecaptiveportal>on</synchronizecaptiveportal>
+    <synchronizeipsec>on</synchronizeipsec>
+    <synchronizemonit>on</synchronizemonit>
+    <synchronizessh>on</synchronizessh>
+    <synchronizeopenvpn>on</synchronizeopenvpn>
+    <synchronizeifgroups>on</synchronizeifgroups>
+    <synchronizecategories>on</synchronizecategories>
+    <synchronizelvtemplate>on</synchronizelvtemplate>
+    <synchronizesquid>on</synchronizesquid>
+    <synchronizesuricata>on</synchronizesuricata>
+    <synchronizednsresolver>on</synchronizednsresolver>
+    <synchronizewireguard>on</synchronizewireguard>
     <pfsyncinterface>opt2</pfsyncinterface>
-    <synchronizetoip/>
-    <username/>
-    <password/>
+    <synchronizetoip>192.168.255.250</synchronizetoip>
+    <username>fwsync</username>
+    <password>jesus11</password>
   </hasync>
   <ipsec/>
   <dnsmasq/>

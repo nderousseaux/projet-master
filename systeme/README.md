@@ -37,9 +37,12 @@ Vous pouvez insérer les cartes SD et démarrer les RPI.
 ## Installation et mise en place réseau mesh
 ### Installation à l'aide des scripts
 * Gateway: une fois la la RPI connecté. Déplacer y les fichiers "systeme" et "capteur" (à l'aide de SFTP, clé USB,...). Une fois récupérer placé vous dans le répertoire `~/systeme/Gateway/` puis exécuter la commande `sudo ./Build_gateway.sh`. N'oubliez pas le `sudo` sans quoi l'installation échouera. **Attention** une fois la manipulation faite vous ne pourrez plus vous y connecter en wifi.
+
 * Noeuds: une fois la la RPI connecté. Déplacer y les fichiers "systeme" et "capteur" (à l'aide de SFTP, clé USB,...). Une fois récupérer placé vous dans le répertoire `~/systeme/Noeuds/` puis exécuter la commande `sudo ./Build_node.sh`. N'oubliez pas le `sudo` sans quoi l'installation échouera. **Attention** une fois la manipulation faite vous ne pourrez plus vous y connecter en wifi.
+
 ### Installation manuel
 Voir `Gateway/README.md` et `Noeuds/README.md` pour installer manuellement le gateway et les noeuds.
+
 #### Installation des paquets nécessaire
 Vous pouvez executer `Installation.sh` pour installer les paquets ou bien installer manuellement toutes les commandes si trouvant.
 

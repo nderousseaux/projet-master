@@ -43,15 +43,9 @@ class Mesures {
 		inline std::string getDate(void) const {
 			return date_;
 		}
-		inline float getTemperature(void) const {
-			return temperature_;
-		}
-		inline float getHumidite(void) const {
-			return humidite_;
-		}
-		inline double getLuminosite(void) const {
-			return luminosite_;
-		}
+		float getTemperature(void);
+		float getHumidite(void);
+		double getLuminosite(void);
 
 
 	/* Setters */

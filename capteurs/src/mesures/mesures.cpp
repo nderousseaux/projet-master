@@ -16,6 +16,21 @@ float Mesures::genValeur(float borneInf, float borneSupp, bool type) {
 	return valeur;
 }
 
+float Mesures::getHumidite() {
+    updateHumidite();
+    return humidite_;
+}
+
+double Mesures::getLuminosite() {
+    updateLuminosite();
+    return luminosite_;
+}
+
+float Mesures::getTemperature() {
+    updateTemperature();
+    return temperature_;
+}
+
 void Mesures::updateHumidite() {
     int fd = open(I2C_DEV.c_str(), O_RDWR);
 

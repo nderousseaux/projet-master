@@ -10,8 +10,8 @@ sudo systemctl disable NetworkManager
 
 
 #Configuration noeud
-cp start-batman-adv.sh /home/$USER/start-batman-adv.sh
-chmod +x /home/$USER/start-batman-adv.sh
+cp start-batman-adv.sh /home/$SUDO_USER/start-batman-adv.sh
+chmod +x /home/$SUDO_USER/start-batman-adv.sh
 echo 'batman-adv' | sudo tee --append /etc/modules
 echo 'denyinterfaces wlan0' | sudo tee --append /etc/dhcpcd.conf
 

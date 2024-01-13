@@ -8,17 +8,15 @@ sudo batctl gw_mode client
 
 # Mise en place de wlan0
 sudo ifconfig wlan0 down
+sudo rfkill unblock wifi; sudo rfkill unblock all
 
 sudo iwconfig wlan0 mode ad-hoc
 sudo iwconfig wlan0 essid call-code-mesh
-sudo iwconfig wlan0 channel 1 frequency 2462
-# ou sudo iw dev wlan0 set freq 2462
-
-sudo dhclient wlan0 
+sudo iwconfig wlan0 channel 1
 
 # Activates batman-adv interfaces
 sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
-sudo ifconfig bat0 192.168.199.1/24
 
-bash ../Coap/coap_client.sh
+sudo dhclient wlan0 
+bash ~/projet-master-23-24/systeme/Coap/coap_client.sh

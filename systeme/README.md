@@ -1,5 +1,8 @@
 # README
 
+## Introduction au réseau mesh avec des RPI
+Le réseau mesh pour lequel nous avons opté utilise le protocole de routage batman-adv. Ce protocole de routage permet d'avoir un Gateway et plusieurs Noeuds, la limite de noeuds étant défini par la configuration DHCP du Gateway. 
+Pour interconnecter les RPI nous configuration le mode wifi à ad-hoc. Celui-ci permet de connecté des wifi entre eux, même si deux wifi ne sont pas à porté ils peuvent passé par l'intermédiaire d'une troisième RPI, celle-ci à porté des deux permières RPI.
 
 ## Préparer la RPI
 ### Equipement requis
@@ -19,67 +22,29 @@ Tout d'abord il sera nécessaire d'initliaser une image pour la rasberry pi. Dan
 sudo apt install rpi-imager
 ```
 L'installation que nous faisons se fait en ssh. Il est donc utile de configurer les paramètres nécessaire avant de flasher la carte SD.
-
 Une fois l'installation faite nous pouvons passer à la suite.
 
-## Interface wifi ad hoc
+### Mise en place réseau mesh
+* Les Noeuds ont seulement besoin d'être branché au secteur pour pouvoir s'allumer. Cependant lors de l'installation vous pouvez utilisez la manière que vous préférez pour pouvoir vous y connecter. Une fois l'installation fini il ne sera plus nécessaire d'avoir un accès "classique" au réseau puisqu'on passera par le réseau mesh pour s'y connecter.
+* Le gateway à besoin d'utiliser deux interfaces réseaux. Il faudra qu'il soit branché au secteur au réseau public par câble ethernet et le wifi sera utilisé pour se connecter au réseau mesh.
 
-"/etc/network/interfaces.d/wlan0"  
-On peut remplacer le channel par un numéro de channel [ici](https://en.wikipedia.org/wiki/List_of_WLAN_channels)
-Ici nous sommes sur le channel 1 (Europe)
+Vous pouvez insérer les cartes SD et démarrer les RPI.
 
-**Attention** : Une fois l'interface modifiée, la RPI n'a plus de Wi-Fi. 
 
-## Mise en place du noeud
 
-- [Documentation](https://github.com/binnes/WiFiMeshRaspberryPi/blob/master/part1/PIMESH.md#setup-batman-adv)
-- [Description](Noeuds/README.md)
 
-## Mise en place du gateway
 
-[Tuto](Gateway/README.md)
+## Installation et mise en place réseau mesh
+### Installation à l'aide des scripts
+* Gateway: une fois la la RPI connecté. Déplacer y les fichiers "systeme" et "capteur" (à l'aide de SFTP, clé USB,...). Une fois récupérer placé vous dans le répertoire `~/systeme/Gateway/` puis exécuter la commande `sudo ./Build_gateway.sh`. N'oubliez pas le `sudo` sans quoi l'installation échouera. **Attention** une fois la manipulation faite vous ne pourrez plus vous y connecter en wifi.
+* Noeuds: une fois la la RPI connecté. Déplacer y les fichiers "systeme" et "capteur" (à l'aide de SFTP, clé USB,...). Une fois récupérer placé vous dans le répertoire `~/systeme/Noeuds/` puis exécuter la commande `sudo ./Build_node.sh`. N'oubliez pas le `sudo` sans quoi l'installation échouera. **Attention** une fois la manipulation faite vous ne pourrez plus vous y connecter en wifi.
+### Installation manuel
+Voir `Gateway/README.md` et `Noeuds/README.md` pour installer manuellement le gateway et les noeuds.
+#### Installation des paquets nécessaire
+Vous pouvez executer `Installation.sh` pour installer les paquets ou bien installer manuellement toutes les commandes si trouvant.
 
-## Paquets à Installer dans la RPI _(installation.sh)_
-
-Lancer : 
-```bash
-yes | ./Installation.sh
-```
-
-```bash
-sudo apt update
-sudo apt upgrade
-
-# Pour faire fonctionner le script test :
-sudo apt install cmake
-sudo apt install libssh2-1-dev
-sudo apt-get install libsqlite3-dev
-
-# Pour le réseau mesh :
-sudo apt-get install -y batctl
-
-# Seulement pour le Gateway :
-sudo apt-get install -y dnsmasq
-
-# Pour connecter et tester le traffic
-sudo apt install npm
-sudo npm install -g --unsafe-perm node-red
-# sudo npm -g install npm (La derniere version n'est pas supporté par la RPI)
-sudo npm -g install node-pre-gyp
-sudo npm -g install node-gyp
-```
-
-## Remarque
-
-```bash
-# Sur la RPI avec l'alim blanche ne pas faire :
-sudo apt update 
-sudo apt upgrade
-# Sinon la RPI une fois éteinte, ne s'allume plus.
-```
 
 ## Commande utile
-
 ```bash
 # Vérifie l'état de l'interface bat0
 # devrait retourné le nom de l'interface et active
@@ -94,13 +59,14 @@ iw list | grep -A 10 "Supported interface modes"
 ifconfig
 # Vérfifier l'interface wifi
 iwconfig
-
-# Forcer le mode "ad-hoc" aussi nommé "ibss"
-sudo iw dev wlan0 set type ibss
-# Forcer le ESSID
-sudo iw dev wlan0 ibss join call-code-mesh 2462
 ```
 
+## Aide
+### Documentation
+* Gateway: ./Gateway/README.md
+* Noeuds: ./Noeuds/README.md
+### Interfaces et réseau
+* interface wifi: `/etc/network/interfaces.d/wlan0`
 ## Connexion à l'infra
 `sshpass -p '$PWD' sftp $USER@$IP`
 

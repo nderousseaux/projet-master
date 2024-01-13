@@ -1,10 +1,10 @@
 # Site
 ## Docker
-Construire l'image Docker :  
-`docker build -t site:latest`
+Construire et lancer l'image crée :  
+`./run-site.sh`
 
-Lancer l'image créé :  
-`docker run -it -p 8080:80 -d site:latest`
+Construire l'image Docker (optionnel):  
+`docker build -t site:latest <path>`
 
 Ouvrir un navigateur Internet et accéder à l'adresse :  
 `localhost:8080`

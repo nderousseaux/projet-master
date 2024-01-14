@@ -40,8 +40,10 @@ function modifInputCmpt(requeteAdmin = false) {
 		// Prénom, Nom et Courriel
 	let nbrErr = verifInputCmpt();
 
-		// Mot de passe
-	nbrErr += verifInputMdp();
+		// Mot de passe (vérifie que si le champ n'est pas vide)
+	if (document.getElementById("mdp").value !== '') {
+		nbrErr += verifInputMdp();
+	}
 
 		// Rôle
 	if (requeteAdmin === true) {

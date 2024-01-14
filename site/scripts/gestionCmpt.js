@@ -112,8 +112,12 @@ function modifInputCmpt(requeteAdmin = false) {
 function majValInputCmpt(champPost) {
 	champPost.forEach((value, key) => {
 		// Remplace les valeurs par celles enregistrées dans la base
+			// Identifiant utilisateur
+		if (key === "idUtilisateur") {
+			document.getElementById("idUtili").value = value;
+		}
 			// Rôle
-		if (key === "role") {
+		else if (key === "role") {
 			const optionSelect = document.getElementById(
 				"selectionne"
 			);

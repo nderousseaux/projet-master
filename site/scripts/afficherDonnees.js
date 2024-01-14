@@ -461,6 +461,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
 	.then(donnees => {
+		const idUtilisateurInput = document.getElementById("idUtili");
 		const prenomInput = document.getElementById("prenom");
 		const nomInput = document.getElementById("nom");
 		const courrielInput = document.getElementById("courriel");
@@ -475,38 +476,39 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 			roleSelect = document.getElementById("role");
 		}
 
-		prenomInput.value = donnees[0];
-		prenomInput.placeholder = donnees[0];
-		nomInput.value = donnees[1];
-		nomInput.placeholder = donnees[1];
-		courrielInput.value = donnees[2];
-		courrielInput.placeholder = donnees[2];
+		idUtilisateurInput.value = donnees[0];
+		prenomInput.value = donnees[1];
+		prenomInput.placeholder = donnees[1];
+		nomInput.value = donnees[2];
+		nomInput.placeholder = donnees[2];
+		courrielInput.value = donnees[3];
+		courrielInput.placeholder = donnees[3];
 		mdp.value = '';
 		mdp.placeholder = "******";
-		couleur1.value = donnees[3];
-		couleur1.placeholder = donnees[3];
-		couleur2.value = donnees[4];
-		couleur2.placeholder = donnees[4];
+		couleur1.value = donnees[4];
+		couleur1.placeholder = donnees[4];
+		couleur2.value = donnees[5];
+		couleur2.placeholder = donnees[5];
 
 		if (requeteAdmin) {
 			// Vérifie que le rôle est valide
 			let option;
-			if (donnees[5] === "admin" || donnees[5] === "standard") {
-				roleSelect.value = donnees[5];
+			if (donnees[6] === "admin" || donnees[6] === "standard") {
+				roleSelect.value = donnees[6];
 				option = document.querySelector("#role > option[value=" +
-					donnees[5] +"]");
+					donnees[6] +"]");
 			}
 			// Sinon, par défaut met le rôle à "standard"
 			else {
 				roleSelect.value = "standard";
 				option = document.querySelector("#role > option[value=" +
 					"standard]");
-				console.error("Rôle invalide : " + donnees[5]);
+				console.error("Rôle invalide : " + donnees[6]);
 			}
 			option.id = "selectionne";
 		}
 
-		icone.innerHTML = donnees[0][0] + ". " + donnees[1][0] + '.';
+		icone.innerHTML = donnees[1][0] + ". " + donnees[2][0] + '.';
 	})
 	.catch(err => {
 		console.error(err);

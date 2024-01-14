@@ -5,6 +5,9 @@
  * connection et dans le formulaire de gestion de compte.
  */
 
+define("OK", 0);
+define("ERROR", 1);
+
 // Vérifie que toutes les infos sont présentes
 if (!(isset($_POST["idUtilisateur"]))) {
 	$erreur = array("Erreur", "Infos manquantes dans la requête");
@@ -70,10 +73,9 @@ if (!empty($update)) {
     // Executer l'operation
     try {
         $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
-        echo json_encode("Mise à jour effectuée");
+        echo json_encode(OK);
     } catch (MongoDB\Driver\Exception\Exception $e) {
-        echo json_encode("Mise à jour échouée: ".$e->getMessage());
+        //echo json_encode("Mise à jour échouée: ".$e->getMessage());
+        echo json_encode(ERROR);
     }
-} else {
-    echo json_encode("Pas de mise à jour à faire");
 }

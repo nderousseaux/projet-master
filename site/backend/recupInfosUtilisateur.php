@@ -30,7 +30,6 @@ try {
 $idUser = intval($_POST["idUtilisateur"]);
 
 // Défini le filtre
-// $filtre = ["idUser" => $idUser];
 $filtre = ["idUser" => $idUser];
 
 // Créé la requête

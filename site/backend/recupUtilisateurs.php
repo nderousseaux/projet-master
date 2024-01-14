@@ -25,7 +25,12 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-$filter = ['idAgri' => intval($_POST["idUtilisateur"])];
+// récupère l'idAgri de l'utilisateur pour n'afficher que les utilisateurs
+// de ce même agriculteur
+session_start();
+$idAgri = $_SESSION["idAgri"];
+
+$filter = ['idAgri' => intval($idAgri)];
 $options = [
     'projection' => ['idUser' => 1, 'nom' => 1, 'prenom' => 1, '_id' => 0],
 ];
@@ -46,13 +51,3 @@ try {
 
 // renvoie la liste
 echo json_encode($users);
-
-// $fichierDonneesUtilisateurs = "json/utilisateurs.json";
-// if (file_exists($fichierDonneesUtilisateurs)) {
-// 	echo file_get_contents($fichierDonneesUtilisateurs);
-// }
-// else {
-// 	$erreur = array("Erreur", "Le fichier n'existe pas");
-// 	echo json_encode($erreur);
-// 	exit();
-// }

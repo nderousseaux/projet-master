@@ -506,7 +506,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 			option.id = "selectionne";
 		}
 
-		icone.innerHTML = prenom[0] + ". " + nom[0] + '.';
+		icone.innerHTML = donnees[0][0] + ". " + donnees[1][0] + '.';
 	})
 	.catch(err => {
 		console.error(err);

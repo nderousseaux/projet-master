@@ -40,7 +40,7 @@ try {
 $idUser = intval(filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING));
 
 // Défini le filtre
-$filtre = ["idUser" => $idUser];
+$filter = ["idUser" => $idUser];
 
 $bulk = new MongoDB\Driver\BulkWrite;
 $bulk->delete($filter);

@@ -40,12 +40,12 @@ $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 $result = [];
 foreach ($cursor as $infosUser) {
     // ordre à conserver
+    array_push($result, $infosUser->idUser);
     array_push($result, $infosUser->prenom);
     array_push($result, $infosUser->nom);
     array_push($result, $infosUser->mail);
     array_push($result, "white"); // couleur1
     array_push($result, "yellow"); // couleur2
-    array_push($result, $infosUser->idUser);
 
     if ($requeteAdmin == true)
         array_push($result, $infosUser->role);

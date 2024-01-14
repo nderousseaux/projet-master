@@ -2,8 +2,7 @@ version: "3.8"
 
 networks:
   mongo-net:
-    name: mongo-net
-    driver: bridge
+    external: true
 
 services:
   mongo1:
@@ -19,9 +18,3 @@ services:
       - 30001:30001
     networks:
       - mongo-net
-
-    # healthcheck: # non fonctionnel
-    #   test: test $$(echo "rs.status().ok" | mongosh --port 30001 --quiet) -eq 1
-    #   interval: 10s
-    #   start_period: 30s
-

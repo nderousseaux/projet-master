@@ -516,12 +516,12 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 /**
  * Affiche tous les utilisateurs dans le menu déroulant
  *
+ * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {promise} - résolue quand les utilisateurs sont affichés
  */
-function afficherUtilisateurs() { //TODO add idUtilisateur (idAgri) as param
+function afficherUtilisateurs(idUtilisateur) {
 	return new Promise((resolve) => {
 		let champPost = new FormData();
-		let idUtilisateur = 0; // remove
 		champPost.append("idUtilisateur", idUtilisateur); 
 
 		recupDonnees(champPost, "recupUtilisateurs.php")

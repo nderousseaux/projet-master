@@ -22,6 +22,7 @@ sudo apt update
 
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 
+sudo apt install keepalived
 ```
 
 ## Configuration de consul
@@ -49,11 +50,21 @@ sudo cp consul.service /etc/systemd/system/consul.service
 sudo systemctl daemon-reload
 ```
 
+## Configuration de keepalived
+
+Keepalived configuration is in this folder. Copy it to `/etc/keepalived/keepalived.conf` and reload keepalived.
+
+```bash
+sudo cp keepalived.conf /etc/keepalived/keepalived.conf
+sudo systemctl enable keepalived
+```
+
 ## Démarrage des services
 
 ```bash
 sudo systemctl start consul
 sudo systemctl start nomad
+sudo systemctl start keepalived
 ```
 
 ## Login on docker

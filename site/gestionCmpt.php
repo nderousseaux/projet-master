@@ -116,7 +116,7 @@
 <script src="scripts/entete.js"></script>
 <script>
 	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]);
+		echo json_encode($_SESSION["idUser"]);
 	?>;
 
 	/*** Gestion des données ***/
@@ -160,8 +160,15 @@
 	containerInput.placeholder = idUtilisateur;
 
 		// Affiche le nom de l'utilisateur dans le header
-	const nom = document.getElementById("nom").value;
-	const prenom = document.getElementById("prenom").value;
+	// écarté car affiche - - (s'exécute avant que cases remplies avec noms ?)
+	//const nom = document.getElementById("nom").value;
+	//const prenom = document.getElementById("prenom").value;
+	const nom = <?php
+		echo json_encode($_SESSION["nom"]);
+	?>;
+	const prenom = <?php
+		echo json_encode($_SESSION["prenom"]);
+	?>;
 	afficherNomUtilisateur(nom + ' ' + prenom, idUtilisateur);
 
 

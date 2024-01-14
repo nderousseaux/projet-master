@@ -26,8 +26,8 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-//$idUser = filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING);
-$idUser = intval($_POST["idUtilisateur"]);
+$idUser = intval(filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING));
+$requeteAdmin = boolval(filter_input(INPUT_POST, 'requeteAdmin', FILTER_SANITIZE_STRING));
 
 // Défini le filtre
 $filtre = ["idUser" => $idUser];
@@ -45,8 +45,9 @@ foreach ($cursor as $infosUser) {
     array_push($result, $infosUser->mail);
     array_push($result, "white"); // couleur1
     array_push($result, "yellow"); // couleur2
+    array_push($result, $infosUser->idUser);
 
-    if (boolval($_POST['requeteAdmin']) == true)
+    if ($requeteAdmin == true)
         array_push($result, $infosUser->role);
 }
 

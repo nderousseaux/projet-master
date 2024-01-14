@@ -1,6 +1,6 @@
 <?php
 /**
- * Met à jour les données d'un utulisateur en fonction des champs présents dans 
+ * Met à jour les données d'un utilisateur en fonction des champs présents dans 
  * $_POST. Utilisé pour le changement du mot de passe temporaire à la 1ere 
  * connection et dans le formulaire de gestion de compte.
  */
@@ -36,7 +36,7 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-$idUser = filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING);
+$idUser = intval(filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING));
 
 // préparer la mise à jour
 $update = [];

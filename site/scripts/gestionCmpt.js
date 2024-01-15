@@ -132,8 +132,8 @@ function majValInputCmpt(requeteAdmin, champPost) {
 		else if (key === "nom" || key === "prenom") {
 			const nomUtilisateur = document.querySelector("header > " +
 				"section:last-child > p").innerHTML.split("#");
-			idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
-			idUtiliForm = document.getElementById("idUtili").placeholder;
+			const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
+			const idUtiliForm = document.getElementById("idUtili").placeholder;
 
 			const nom = document.querySelector(
 				"form > input[name=nom]").value;
@@ -457,17 +457,14 @@ function afficherMsgInfoModifCmpt(message, type) {
  */
 function supprCmpt(idUtilisateur) {
 	const champPost = new FormData();
-	const idUtiliForm = document.getElementById("idUtili").value;
+	const idUtiliForm = document.getElementById("idUtili").placeholder;
 	champPost.append("idUtilisateur", idUtiliForm);
 
 	recupDonnees(champPost, "supprCmpt.php")
 	.then(retour => {
-		/*
-		 * Si l'utilisateur supprime son propre compte, il est redirigé vers
-		 * la page de connexion
-		 */
-		if (retour === 0 && idUtilisateur === idUtiliForm) {
-			window.location.href = "connexionCmpt.php";
+		// Si l'utilisateur supprime son propre compte, il est déconnecté
+		if (retour === 0 && idUtilisateur.toString() === idUtiliForm) {
+			window.location.href = "backend/deconnexion.php";
 		}
 		else if (retour === 1) {
 			console.erreur("Erreur lors de la suppression du compte");

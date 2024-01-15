@@ -149,7 +149,7 @@
 	});
 	dialogConfirmer.addEventListener("click", e => {
 		if (e.target.value === "confirmer") {
-			supprCmpt();
+			supprCmpt(idUtilisateur);
 		}
 	});
 

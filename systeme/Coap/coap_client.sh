@@ -17,7 +17,5 @@ if [ "$(ls -A $folder_to_watch)" ]; then
         sudo python3 coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file"
         sudo rm $file 
         fi 
-    done 
-    # Ajoutez une pause (sleep) si nécessaire avant la prochaine itération
-    sleep 30  # Pause de 5 secondes avant de répéter la boucle
+    done
 fi

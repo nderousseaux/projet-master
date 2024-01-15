@@ -43,7 +43,7 @@ try {
 
     // copie des users dans une liste
     foreach ($cursor as $user) {
-		array_push($users, [$user->idUser, $user->prenom, $user->nom]);
+		array_push($users, [$user->idUser, $user->nom, $user->prenom]);
     }
 } catch (MongoDB\Driver\Exception\Exception $e) {
     echo "Query failed: " . $e->getMessage();

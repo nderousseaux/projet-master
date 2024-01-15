@@ -58,8 +58,6 @@ function modifInputCmpt(requeteAdmin = false) {
 		// Récupère les données du formulaire
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
-		champPost.append("idUtilisateur",
-			document.getElementById("idUtili").value);
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
@@ -92,9 +90,12 @@ function modifInputCmpt(requeteAdmin = false) {
 
 		// N'envoi les données que si au moins un champ a été modifié
 		if (champPost.entries().next().done === false) {
+			champPost.append("idUtilisateur",
+				document.getElementById("idUtili").placeholder);
+
 			recupDonnees(champPost, "modifCmpt.php")
 			.then(_ => {
-				majValInputCmpt(champPost);
+				majValInputCmpt(requeteAdmin, champPost);
 			})
 			.catch(err => {
 				console.error(err);
@@ -106,16 +107,48 @@ function modifInputCmpt(requeteAdmin = false) {
 /**
  * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
  * dans la base de données
- *
+ * 
+ * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * 								   vérifie le rôle sélectionné dans ce cas
  * @param {formData} champPost - données du formulaire changées
  */
-function majValInputCmpt(champPost) {
+function majValInputCmpt(requeteAdmin, champPost) {
+	console.log(requeteAdmin)
 	champPost.forEach((value, key) => {
 		// Remplace les valeurs par celles enregistrées dans la base
 			// Identifiant utilisateur
 		if (key === "idUtilisateur") {
-			document.getElementById("idUtili").value = value;
+			return;
 		}
+
+		else if (key === "nom" || key === "prenom") {
+			console.log(key);
+			const nomUtilisateur = document.querySelector("header > " +
+				"section:last-child > p").innerHTML.split("#");
+			idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
+			idUtiliForm = document.getElementById("idUtili").placeholder;
+
+			const nom = document.querySelector(
+				"form > input[name=nom]").value;
+			const prenom = document.querySelector(
+				"form > input[name=prenom]").value;
+			
+			// Si l'utilisateur modifie son propre compte, change le header
+			if (idUtiliPage === idUtiliForm) {
+				document.querySelector("header > section:last-child > p")
+					.innerHTML = nom + ' ' + prenom + " #" + idUtiliForm;
+			}
+
+			// Si l'utilisateur est un admin, change dans le selecteur
+			if (requeteAdmin === true) {
+				const slctUtili = document.querySelector("#selectUtilisateur");
+				const button = slctUtili.querySelector("button[value=\'" +
+					idUtiliForm + "\']");
+				button.innerHTML = nom + ' ' + prenom;
+			}
+		}
+
+
 			// Rôle
 		else if (key === "role") {
 			const optionSelect = document.getElementById(

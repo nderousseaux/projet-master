@@ -61,12 +61,21 @@
 	</dialog>
 </div>
 <?php include "assets/footer.php"?>
+<script type="text/javascript" src="scripts/afficherDonnees.js"></script>
 <script type="text/javascript" src="scripts/recupDonnees.js"></script>
 <script type="text/javascript" src="scripts/verificationsInput.js"></script>
 <script type="text/javascript" src="scripts/gestionCmpt.js"></script>
 <script src="scripts/entete.js"></script>
 <script>
 	/*** Gestion des données ***/
+		// Récupérer l'ID utilisateur
+	const idUtilisateur = <?php
+		echo json_encode($_SESSION["idAgri"]); //idUser ?
+	?>;
+
+		// Récupère le nom et prénom de l'utilisateur
+	afficherNomUtilisateur(idUtilisateur);
+
 		// Gère les champs du formulaire et l'envoi des données
 	document.getElementById("enreg").addEventListener("click", e => {
 		e.preventDefault();

@@ -115,11 +115,15 @@
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
+	/*** Gestion des données ***/
+		// Récupérer l'ID utilisateur
 	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idUser"]);
+		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
 
-	/*** Gestion des données ***/
+		// Récupère le nom et prénom de l'utilisateur
+	afficherNomUtilisateur(idUtilisateur);
+
 		// Récupère les données de l'utilisateur et rempli le formulaire avec
 	afficherDonneesUtilisateur(idUtilisateur<?php
 		if ($role === "admin") echo ", true";?>);
@@ -131,11 +135,11 @@
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
 		e.preventDefault();
-		modifInputCmpt();
+		modifInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
 		e.preventDefault();
-		modifInputCmpt();
+		modifInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 
 		// Gère la suppression du compte
@@ -154,22 +158,6 @@
 
 		// Gère le selecteur de rôle
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
-
-		// Récupére l'id de l'utilisateur
-	const containerInput = document.getElementById("idUtili");
-	containerInput.placeholder = idUtilisateur;
-
-		// Affiche le nom de l'utilisateur dans le header
-	// écarté car affiche - - (s'exécute avant que cases remplies avec noms ?)
-	//const nom = document.getElementById("nom").value;
-	//const prenom = document.getElementById("prenom").value;
-	const nom = <?php
-		echo json_encode($_SESSION["nom"]);
-	?>;
-	const prenom = <?php
-		echo json_encode($_SESSION["prenom"]);
-	?>;
-	afficherNomUtilisateur(nom + ' ' + prenom, idUtilisateur);
 
 
 	/** Changements du DOM **/

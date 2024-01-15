@@ -35,9 +35,19 @@ function afficherChamps(idUtilisateur) {
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
-function afficherNomUtilisateur(nomUtilisateur, idUtilisateur) {
-	const container = document.querySelector("header > section:last-child > p");
-	container.textContent = nomUtilisateur + " #" + idUtilisateur;
+function afficherNomUtilisateur(idUtilisateur) {
+	let champPost = new FormData();
+	champPost.append("idUtilisateur", idUtilisateur);
+
+	recupDonnees(champPost, "recupNomUtilisateur.php")
+	.then(donnees => {
+		const container = document.querySelector("header > " +
+			"section:last-child > p");
+		container.textContent = donnees + " #" + idUtilisateur;
+	})
+	.catch(err => {
+		console.error(err);
+	});
 }
 
 /**
@@ -432,7 +442,6 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 
 		recupDonnees(champPost, "recupDonneesAgri.php")
 		.then(donnees => {
-			afficherNomUtilisateur(donnees[0], idUtilisateur);
 			afficherInfosChamp(donnees[1]);
 			afficherMoyennes(donnees[2]);
 			afficherMesuresChamp(donnees[3]);
@@ -476,7 +485,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 			roleSelect = document.getElementById("role");
 		}
 
-		idUtilisateurInput.value = donnees[0];
+		idUtilisateurInput.placeholder = donnees[0];
 		prenomInput.value = donnees[1];
 		prenomInput.placeholder = donnees[1];
 		nomInput.value = donnees[2];

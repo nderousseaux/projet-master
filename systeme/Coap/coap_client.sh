@@ -2,7 +2,7 @@
 
 INTERFACE=lo
 PORT=5683
-IP=127.0.0.1
+IP=10.0.1.1
 
 folder_to_watch="~/stockage"
 COUNT=0

@@ -23,6 +23,7 @@ sudo apt-get install sshpass
 sudo apt install python3
 sudo apt install python3-pip
 sudo pip install pysftp
+sudo apt-get install cron
 
 # Pour le fonctionnement de Coapthon
 mkdir ~/stockage/

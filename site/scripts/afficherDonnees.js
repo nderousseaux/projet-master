@@ -10,10 +10,10 @@ function afficherChamps(idUtilisateur) {
 
 	return new Promise((resolve, reject) => {
 		recupDonnees(champPost, "recupNumChamps.php")
-		.then(donnees => {
+		.then(retour => {
 			const container = document.getElementById("selectChamp");
 
-			for (let i = 1; i <= donnees; i++) {
+			for (let i = 1; i <= retour; i++) {
 				const champ = document.createElement("button");
 				champ.setAttribute("value", i);
 				champ.textContent = "Champ " + i;
@@ -40,10 +40,10 @@ function afficherNomUtilisateur(idUtilisateur) {
 	champPost.append("idUtilisateur", idUtilisateur);
 
 	recupDonnees(champPost, "recupNomUtilisateur.php")
-	.then(donnees => {
+	.then(retour => {
 		const container = document.querySelector("header > " +
 			"section:last-child > p");
-		container.textContent = donnees + " #" + idUtilisateur;
+		container.textContent = retour + " #" + idUtilisateur;
 	})
 	.catch(err => {
 		console.error(err);
@@ -134,15 +134,18 @@ function afficherMesuresChamp(donnees) {
 		if (element === "C0") {
 			cellule.textContent = "OK";
 		}
+
 		else if (element === "C1") {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Capteur défectueux";
 		}
+
 		// Raspberry Pi défectueux
 		else if (element === "C2") {
 			cellule.classList.add("errMesure");
 			cellule.textContent = "⚠️ Raspberry Pi défectueux";
 		}
+
 		// Il s'agit d'un autre type de cellule
 		else {
 			cellule.textContent = element;
@@ -217,18 +220,18 @@ function afficherMeteo(idUtilisateur) {
 	champPost.append("duree", duree);
 
 	recupDonnees(champPost, "recupMeteo.php")
-	.then(donnees => {
-		if (donnees[0] != "Erreur") {
+	.then(retour => {
+		if (retour[0] != "Erreur") {
 			// Supprimer les données déjà affichées
 			viderTableau("donneesMeteo");
 
 			// Adapter l'affichage en fonction de la durée
 			let dureeDonnees;
 			if (duree === "jour") {
-				dureeDonnees = donnees.days[0].hours;
+				dureeDonnees = retour.days[0].hours;
 			}
 			else if (duree === "semaine") {
-				dureeDonnees = donnees.days;
+				dureeDonnees = retour.days;
 			}
 
 			dureeDonnees.forEach(mesures => {
@@ -302,7 +305,7 @@ function afficherMeteo(idUtilisateur) {
 			});
 		}
 		else {
-			console.error("Récupération données météo : " + donnees[1] + " > " +
+			console.error("Récupération données météo : " + retour[1] + " > " +
 				"\"" + duree + "\"");
 		}
 	})
@@ -441,11 +444,11 @@ function helperAffichageDonneesChamp(idUtilisateur) {
 		champPost.append("numChamp", numChamp);
 
 		recupDonnees(champPost, "recupDonneesAgri.php")
-		.then(donnees => {
-			afficherInfosChamp(donnees[1]);
-			afficherMoyennes(donnees[2]);
-			afficherMesuresChamp(donnees[3]);
-			afficherIlots(donnees[4]);
+		.then(retour => {
+			afficherInfosChamp(retour[1]);
+			afficherMoyennes(retour[2]);
+			afficherMesuresChamp(retour[3]);
+			afficherIlots(retour[4]);
 
 			resolve();
 		})
@@ -469,7 +472,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 	champPost.append("requeteAdmin", requeteAdmin);
 
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
-	.then(donnees => {
+	.then(retour => {
 		const idUtilisateurInput = document.getElementById("idUtili");
 		const prenomInput = document.getElementById("prenom");
 		const nomInput = document.getElementById("nom");
@@ -485,39 +488,39 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 			roleSelect = document.getElementById("role");
 		}
 
-		idUtilisateurInput.placeholder = donnees[0];
-		prenomInput.value = donnees[1];
-		prenomInput.placeholder = donnees[1];
-		nomInput.value = donnees[2];
-		nomInput.placeholder = donnees[2];
-		courrielInput.value = donnees[3];
-		courrielInput.placeholder = donnees[3];
+		idUtilisateurInput.placeholder = retour[0];
+		prenomInput.value = retour[1];
+		prenomInput.placeholder = retour[1];
+		nomInput.value = retour[2];
+		nomInput.placeholder = retour[2];
+		courrielInput.value = retour[3];
+		courrielInput.placeholder = retour[3];
 		mdp.value = '';
 		mdp.placeholder = "******";
-		couleur1.value = donnees[4];
-		couleur1.placeholder = donnees[4];
-		couleur2.value = donnees[5];
-		couleur2.placeholder = donnees[5];
+		couleur1.value = retour[4];
+		couleur1.placeholder = retour[4];
+		couleur2.value = retour[5];
+		couleur2.placeholder = retour[5];
 
 		if (requeteAdmin) {
 			// Vérifie que le rôle est valide
 			let option;
-			if (donnees[6] === "admin" || donnees[6] === "standard") {
-				roleSelect.value = donnees[6];
+			if (retour[6] === "admin" || retour[6] === "standard") {
+				roleSelect.value = retour[6];
 				option = document.querySelector("#role > option[value=" +
-					donnees[6] +"]");
+					retour[6] +"]");
 			}
 			// Sinon, par défaut met le rôle à "standard"
 			else {
 				roleSelect.value = "standard";
 				option = document.querySelector("#role > option[value=" +
 					"standard]");
-				console.error("Rôle invalide : " + donnees[6]);
+				console.error("Rôle invalide : " + retour[6]);
 			}
 			option.id = "selectionne";
 		}
 
-		icone.innerHTML = donnees[1][0] + ". " + donnees[2][0] + '.';
+		icone.innerHTML = retour[1][0] + ". " + retour[2][0] + '.';
 	})
 	.catch(err => {
 		console.error(err);
@@ -536,13 +539,13 @@ function afficherUtilisateurs(idUtilisateur) {
 		champPost.append("idUtilisateur", idUtilisateur); 
 
 		recupDonnees(champPost, "recupUtilisateurs.php")
-		.then(donnees => {
+		.then(retour => {
 			const container = document.getElementById("selectUtilisateur");
 
-			for (let i = 0; i < donnees.length; i++) {
+			for (let i = 0; i < retour.length; i++) {
 				const utilisateur = document.createElement("button");
-				utilisateur.setAttribute("value", donnees[i][0]);
-				utilisateur.textContent = donnees[i][1] + ' ' + donnees[i][2];
+				utilisateur.setAttribute("value", retour[i][0]);
+				utilisateur.textContent = retour[i][1] + ' ' + retour[i][2];
 
 				container.appendChild(utilisateur);
 			};

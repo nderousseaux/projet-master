@@ -94,8 +94,16 @@ function modifInputCmpt(requeteAdmin = false) {
 				document.getElementById("idUtili").placeholder);
 
 			recupDonnees(champPost, "modifCmpt.php")
-			.then(_ => {
-				majValInputCmpt(requeteAdmin, champPost);
+			.then(retour => {
+				if (retour === 0) {
+					afficherMsgInfoModifCmpt("Modifications enregistrées",
+						true);
+					majValInputCmpt(requeteAdmin, champPost);
+				}
+				else {
+					afficherMsgInfoModifCmpt("Erreur lors de la modification",
+						false);
+				}
 			})
 			.catch(err => {
 				console.error(err);
@@ -113,7 +121,6 @@ function modifInputCmpt(requeteAdmin = false) {
  * @param {formData} champPost - données du formulaire changées
  */
 function majValInputCmpt(requeteAdmin, champPost) {
-	console.log(requeteAdmin)
 	champPost.forEach((value, key) => {
 		// Remplace les valeurs par celles enregistrées dans la base
 			// Identifiant utilisateur
@@ -121,8 +128,8 @@ function majValInputCmpt(requeteAdmin, champPost) {
 			return;
 		}
 
+			// Nom ou prénom
 		else if (key === "nom" || key === "prenom") {
-			console.log(key);
 			const nomUtilisateur = document.querySelector("header > " +
 				"section:last-child > p").innerHTML.split("#");
 			idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
@@ -148,7 +155,6 @@ function majValInputCmpt(requeteAdmin, champPost) {
 			}
 		}
 
-
 			// Rôle
 		else if (key === "role") {
 			const optionSelect = document.getElementById(
@@ -162,12 +168,14 @@ function majValInputCmpt(requeteAdmin, champPost) {
 				).id = "selectionne";
 			}
 		}
+
 			// Mot de passe
 		else if (key === "mdp") {
 			document.querySelector(
 				"form > input[name=" + key + "]"
 			).value = '';
 		}
+
 			// Autres champs
 		else {
 			document.querySelector(
@@ -195,12 +203,12 @@ function creationCmpt() {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
-		.then(donnees => {
-			if (donnees[0] === 0) {
-				afficherDialogConfirm(donnees[1]);
+		.then(retour => {
+			if (retour[0] === 0) {
+				afficherDialogConfirm(retour[1]);
 			}
-			else if (donnees[0] === 1) {
-				afficherMsgErreur(donnees[1], true);
+			else if (retour[0] === 1) {
+				afficherMsgErreur(retour[1], true);
 			}
 		})
 		.catch(err => {
@@ -239,18 +247,20 @@ function connexionCmpt() {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
-		.then(donnees => {
+		.then(retour => {
 			// Redirige vers la page d'accueil
-			if (donnees[0] === 0) {
+			if (retour[0] === 0) {
 				window.location.href = "index.php";
 			}
+
 			// Demande de changer mot de passe (à la première connexion)
-			else if (donnees[0] === 1) {
-				changerFormulaire(donnees[1]);
+			else if (retour[0] === 1) {
+				changerFormulaire(retour[1]);
 			}
+
 			// Erreur dans les identifiants
 			else {
-				afficherMsgErreur(donnees[1]);
+				afficherMsgErreur(retour[1]);
 			}
 		})
 		.catch(err => {
@@ -389,8 +399,9 @@ function afficherDialogConfirm(mdp) {
  */
 function afficherMsgErreur(message, creaUtili = false) {
 	// Supprime le message d'erreur précédent
-	if (document.getElementById("msgErr") !== null) {
-		document.getElementById("msgErr").remove();
+	const ancienMsg = document.getElementById("msgErr");
+	if (ancienMsg !== null) {
+		ancienMsg.remove();
 	}
 
 	// Ajoute le message d'erreur au formulaire
@@ -406,6 +417,37 @@ function afficherMsgErreur(message, creaUtili = false) {
 	if (creaUtili === false) {
 		document.getElementById("mdp").classList.add("erreur");
 	}
+}
+
+/**
+ * Affiche un message d'information dans le formulaire de modification
+ * 
+ * @param {string} message - message d'information à afficher
+ * @param {boolean} type - true si le message est une information, false si
+ * 						   c'est une erreur
+ */
+function afficherMsgInfoModifCmpt(message, type) {
+	// Supprime le message d'erreur précédent
+	const ancienMsg = document.getElementById("msgInfo");
+	if (ancienMsg !== null) {
+		ancienMsg.remove();
+	}
+
+	// Ajoute le message d'erreur au formulaire
+	const container = document.getElementById("reinit")
+	const msgInfo = document.createElement("p");
+	msgInfo.textContent = message;
+	msgInfo.id = "msgInfo";
+
+	// Sélectionne la couleur
+	if (type === true) {
+		msgInfo.classList.add("coulInfo");
+	}
+	else {
+		msgInfo.classList.add("coulErr");
+	}
+
+	container.insertAdjacentElement("beforebegin", msgInfo);
 }
 
 /**

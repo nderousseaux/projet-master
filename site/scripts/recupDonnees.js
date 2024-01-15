@@ -14,8 +14,8 @@ function recupDonnees(champPost, fichierBackend) {
 		})
 		.then(reponse => {
 			reponse.json()
-				.then(donnees => {
-					resolve(donnees);
+				.then(retour => {
+					resolve(retour);
 				})
 				.catch(err => {
 					reject(err);

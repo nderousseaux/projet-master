@@ -26,4 +26,5 @@ sudo pip install pysftp
 sudo apt-get install cron
 
 # Pour le fonctionnement de Coapthon
-mkdir ~/stockage/
+mkdir /home/$SUDO_USER/stockage/
+sudo cp -r .. /home/$SUDO_USER/systeme

@@ -18,6 +18,14 @@ client {
   enabled = true
   servers = ["10.3.0.1", "10.3.0.2", "10.3.0.3", "10.3.0.4", "10.3.0.5"]
   network_interface = "vens4"
+  host_network "internal"{
+    interface = "vens4"
+    cidr = "10.3.0.2/16"
+  }
+  host_network "public"{
+    interface = "vens4"
+    cidr = "10.3.0.6/16"
+  }
 }
 # Authentification docker
 plugin "docker" {

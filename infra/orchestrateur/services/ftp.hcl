@@ -2,11 +2,13 @@ job "sftp" {
   datacenters = ["dc1"]
 
   group "sftp" {
-    count = 2
+    count = 1
 
     network {
       port "sftp" {
         to = 22
+        static = 2222
+        host_network = "public"
       }
     }
     task "sftp" {
@@ -64,12 +66,6 @@ job "sftp" {
         cpu    = 200
         memory = 256
       }
-    }
-
-    scaling {
-      enabled = true
-      min = 2
-      max = 10
     }
 	}
 }

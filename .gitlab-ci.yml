@@ -14,7 +14,6 @@ build-job:
   services:
     - docker:20.10.7-dind
   before_script:
-    - docker info
     - echo "Loging in Docker Registry..."
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - echo "Login successfull."

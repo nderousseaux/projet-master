@@ -3,8 +3,10 @@ docker-build:
   stage: build
   services:
     - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t $CI_REGISTRY/web -f infra/Dockerfile-Web . --no-cache
+    - docker build --t $CI_REGISTRY/web -f infra/Dockerfile-Web . --no-cache
     - docker push $CI_REGISTRY/web

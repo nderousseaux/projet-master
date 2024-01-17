@@ -1,9 +1,12 @@
 <?php
 /**
- * Met à jour les données d'un utulisateur en fonction des champs présents dans 
+ * Met à jour les données d'un utilisateur en fonction des champs présents dans 
  * $_POST. Utilisé pour le changement du mot de passe temporaire à la 1ere 
  * connection et dans le formulaire de gestion de compte.
  */
+
+define("OK", 0);
+define("ERROR", 1);
 
 // Vérifie que toutes les infos sont présentes
 if (!(isset($_POST["idUtilisateur"]))) {
@@ -36,7 +39,7 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-$idUser = filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING);
+$idUser = intval(filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING));
 
 // préparer la mise à jour
 $update = [];
@@ -70,10 +73,9 @@ if (!empty($update)) {
     // Executer l'operation
     try {
         $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
-        echo json_encode("Mise à jour effectuée");
+        echo json_encode(OK);
     } catch (MongoDB\Driver\Exception\Exception $e) {
-        echo json_encode("Mise à jour échouée: ".$e->getMessage());
+        //echo json_encode("Mise à jour échouée: ".$e->getMessage());
+        echo json_encode(ERROR);
     }
-} else {
-    echo json_encode("Pas de mise à jour à faire");
 }

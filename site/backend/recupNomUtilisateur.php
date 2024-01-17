@@ -4,9 +4,9 @@
 
 // Check si la connexion à la bdd existe 
 if (!(isset($manager)) && !(isset($_POST["idUtilisateur"]))) {
-	$erreur = array("Erreur", "Paramètres manquants");
-	echo json_encode($erreur);
-	exit();
+    $erreur = array("Erreur", "Paramètres manquants");
+    echo json_encode($erreur);
+    exit();
 }
 
 // Création connexion bdd si inexistante

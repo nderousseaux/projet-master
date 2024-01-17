@@ -40,8 +40,10 @@ function modifInputCmpt(requeteAdmin = false) {
 		// Prénom, Nom et Courriel
 	let nbrErr = verifInputCmpt();
 
-		// Mot de passe
-	nbrErr += verifInputMdp();
+		// Mot de passe (vérifie que si le champ n'est pas vide)
+	if (document.getElementById("mdp").value !== '') {
+		nbrErr += verifInputMdp();
+	}
 
 		// Rôle
 	if (requeteAdmin === true) {
@@ -56,8 +58,6 @@ function modifInputCmpt(requeteAdmin = false) {
 		// Récupère les données du formulaire
 		const donneesForm = new FormData(document.querySelector("form"));
 		let champPost = new FormData();
-		champPost.append("idUtilisateur",
-			document.getElementById("idUtili").value);
 
 		// Trie les valeurs qui ont été modifiées
 		for (let [key, value] of donneesForm.entries()) {
@@ -90,9 +90,20 @@ function modifInputCmpt(requeteAdmin = false) {
 
 		// N'envoi les données que si au moins un champ a été modifié
 		if (champPost.entries().next().done === false) {
+			champPost.append("idUtilisateur",
+				document.getElementById("idUtili").placeholder);
+
 			recupDonnees(champPost, "modifCmpt.php")
-			.then(_ => {
-				majValInputCmpt(champPost);
+			.then(retour => {
+				if (retour === 0) {
+					afficherMsgInfoModifCmpt("Modifications enregistrées",
+						true);
+					majValInputCmpt(requeteAdmin, champPost);
+				}
+				else {
+					afficherMsgInfoModifCmpt("Erreur lors de la modification",
+						false);
+				}
 			})
 			.catch(err => {
 				console.error(err);
@@ -104,14 +115,48 @@ function modifInputCmpt(requeteAdmin = false) {
 /**
  * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
  * dans la base de données
- *
+ * 
+ * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * 								   vérifie le rôle sélectionné dans ce cas
  * @param {formData} champPost - données du formulaire changées
  */
-function majValInputCmpt(champPost) {
+function majValInputCmpt(requeteAdmin, champPost) {
 	champPost.forEach((value, key) => {
 		// Remplace les valeurs par celles enregistrées dans la base
+			// Identifiant utilisateur
+		if (key === "idUtilisateur") {
+			return;
+		}
+
+			// Nom ou prénom
+		else if (key === "nom" || key === "prenom") {
+			const nomUtilisateur = document.querySelector("header > " +
+				"section:last-child > p").innerHTML.split("#");
+			const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
+			const idUtiliForm = document.getElementById("idUtili").placeholder;
+
+			const nom = document.querySelector(
+				"form > input[name=nom]").value;
+			const prenom = document.querySelector(
+				"form > input[name=prenom]").value;
+			
+			// Si l'utilisateur modifie son propre compte, change le header
+			if (idUtiliPage === idUtiliForm) {
+				document.querySelector("header > section:last-child > p")
+					.innerHTML = nom + ' ' + prenom + " #" + idUtiliForm;
+			}
+
+			// Si l'utilisateur est un admin, change dans le selecteur
+			if (requeteAdmin === true) {
+				const slctUtili = document.querySelector("#selectUtilisateur");
+				const button = slctUtili.querySelector("button[value=\'" +
+					idUtiliForm + "\']");
+				button.innerHTML = nom + ' ' + prenom;
+			}
+		}
+
 			// Rôle
-		if (key === "role") {
+		else if (key === "role") {
 			const optionSelect = document.getElementById(
 				"selectionne"
 			);
@@ -123,12 +168,14 @@ function majValInputCmpt(champPost) {
 				).id = "selectionne";
 			}
 		}
+
 			// Mot de passe
 		else if (key === "mdp") {
 			document.querySelector(
 				"form > input[name=" + key + "]"
 			).value = '';
 		}
+
 			// Autres champs
 		else {
 			document.querySelector(
@@ -156,12 +203,12 @@ function creationCmpt() {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "creationUtilisateur.php")
-		.then(donnees => {
-			if (donnees[0] === 0) {
-				afficherDialogConfirm(donnees[1]);
+		.then(retour => {
+			if (retour[0] === 0) {
+				afficherDialogConfirm(retour[1]);
 			}
-			else if (donnees[0] === 1) {
-				afficherMsgErreur(donnees[1], true);
+			else if (retour[0] === 1) {
+				afficherMsgErreur(retour[1], true);
 			}
 		})
 		.catch(err => {
@@ -200,18 +247,20 @@ function connexionCmpt() {
 		const champPost = new FormData(document.querySelector("form"));
 
 		recupDonnees(champPost, "connexionUtilisateur.php")
-		.then(donnees => {
+		.then(retour => {
 			// Redirige vers la page d'accueil
-			if (donnees[0] === 0) {
+			if (retour[0] === 0) {
 				window.location.href = "index.php";
 			}
+
 			// Demande de changer mot de passe (à la première connexion)
-			else if (donnees[0] === 1) {
-				changerFormulaire(donnees[1]);
+			else if (retour[0] === 1) {
+				changerFormulaire(retour[1]);
 			}
+
 			// Erreur dans les identifiants
 			else {
-				afficherMsgErreur(donnees[1]);
+				afficherMsgErreur(retour[1]);
 			}
 		})
 		.catch(err => {
@@ -350,8 +399,9 @@ function afficherDialogConfirm(mdp) {
  */
 function afficherMsgErreur(message, creaUtili = false) {
 	// Supprime le message d'erreur précédent
-	if (document.getElementById("msgErr") !== null) {
-		document.getElementById("msgErr").remove();
+	const ancienMsg = document.getElementById("msgErr");
+	if (ancienMsg !== null) {
+		ancienMsg.remove();
 	}
 
 	// Ajoute le message d'erreur au formulaire
@@ -370,23 +420,51 @@ function afficherMsgErreur(message, creaUtili = false) {
 }
 
 /**
+ * Affiche un message d'information dans le formulaire de modification
+ * 
+ * @param {string} message - message d'information à afficher
+ * @param {boolean} type - true si le message est une information, false si
+ * 						   c'est une erreur
+ */
+function afficherMsgInfoModifCmpt(message, type) {
+	// Supprime le message d'erreur précédent
+	const ancienMsg = document.getElementById("msgInfo");
+	if (ancienMsg !== null) {
+		ancienMsg.remove();
+	}
+
+	// Ajoute le message d'erreur au formulaire
+	const container = document.getElementById("reinit")
+	const msgInfo = document.createElement("p");
+	msgInfo.textContent = message;
+	msgInfo.id = "msgInfo";
+
+	// Sélectionne la couleur
+	if (type === true) {
+		msgInfo.classList.add("coulInfo");
+	}
+	else {
+		msgInfo.classList.add("coulErr");
+	}
+
+	container.insertAdjacentElement("beforebegin", msgInfo);
+}
+
+/**
  * Supprime le compte de l'utilisateur
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  */
 function supprCmpt(idUtilisateur) {
 	const champPost = new FormData();
-	const idUtiliForm = document.getElementById("idUtili").value;
+	const idUtiliForm = document.getElementById("idUtili").placeholder;
 	champPost.append("idUtilisateur", idUtiliForm);
 
 	recupDonnees(champPost, "supprCmpt.php")
 	.then(retour => {
-		/*
-		 * Si l'utilisateur supprime son propre compte, il est redirigé vers
-		 * la page de connexion
-		 */
-		if (retour === 0 && idUtilisateur === idUtiliForm) {
-			window.location.href = "connexionCmpt.php";
+		// Si l'utilisateur supprime son propre compte, il est déconnecté
+		if (retour === 0 && idUtilisateur.toString() === idUtiliForm) {
+			window.location.href = "backend/deconnexion.php";
 		}
 		else if (retour === 1) {
 			console.erreur("Erreur lors de la suppression du compte");

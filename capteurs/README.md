@@ -49,7 +49,12 @@ Exemple :
 #### Programme d'agrégation
 Une fois compilé, un fichier `agregateur` est créé dans le dossier `bin` et
 peut être lancé.
-Il agrégera les mesures des bases de données présentes dans le dossier
+
+> **Remarque**  
+Il est nécessaire d'installer le module `libssh2` pour pouvoir compiler le
+programme d'agrégation (notamment la fonction d'envoi en SFTP).
+
+Il agrégera les mesures des fichiers de stockage présents dans le dossier
 `~/stockage`, dans un nouveau fichier nommés
 `agrege_nombreAleatoire_horodatage.txt` (afin de le rendre unique).
 

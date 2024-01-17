@@ -246,6 +246,21 @@ a.btnDlg {
 	line-height: calc(200% + 2 * 1px);
 }
 
+/* Message d'information */
+#msgInfo,
+#msgErr {
+	grid-column: span 2;
+	margin: 30px 0 0 0;
+	text-align: center;
+}
+.coulErr,
+#msgErr {
+	color: #d30000;
+}
+.coulInfo {
+	color: #15b32f;
+}
+
 
 /* Version tablette et mobile */
 @media screen and (max-width: 950px) {
@@ -350,6 +365,11 @@ a.btnDlg {
 	/* Boîtes de dialogue */
 	dialog {
 		width: 80vw;
+	}
+
+	/* Message d'information */
+	#msgInfo {
+		margin-top: 10px;
 	}
 }
 

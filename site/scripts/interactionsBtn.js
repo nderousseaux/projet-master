@@ -58,6 +58,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	if (idContainer === "selectChamp") {
 		afficherChampSelectionne(idContainer, idAttr);
 	}
+
 	// Titre de l'ilot
 	else if (
 		idContainer === "selectIlot" ||
@@ -65,6 +66,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	) {
 		afficherIlotSelectionne(idContainer, idAttr);
 	}
+
 	// Titre du type de mesure
 	else if (
 		idContainer === "selectType" ||
@@ -72,6 +74,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	) {
 		afficherMesureSelectionnee(idContainer, idAttr);
 	}
+
 	// Titre durée mesure export
 	else if (idContainer === "selectDureeExport") {
 		afficherDureeSelectionnee(idContainer, idAttr);
@@ -229,8 +232,8 @@ function exportCSV(idUtilisateur) {
 	champPost.append("ilot", valIlot);
 
 	recupDonnees(champPost, "recupExport.php")
-	.then(donnees => {
-		lancerTelechargement("export.csv", convertirEnCSV(donnees));
+	.then(retour => {
+		lancerTelechargement("export.csv", convertirEnCSV(retour));
 	})
 	.catch(err => {
 		console.error(err);

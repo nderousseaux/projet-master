@@ -236,10 +236,13 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Affichage des données ***/
-		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
+		// Récupérer l'ID utilisateur
 	const idUtilisateur = <?php
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
+
+		// Récupère le nom et prénom de l'utilisateur
+	afficherNomUtilisateur(idUtilisateur);
 
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)

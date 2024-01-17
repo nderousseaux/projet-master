@@ -12,10 +12,7 @@ form > button {
 	grid-column: span 2;
 }
 #msgErr {
-	grid-column: span 2;
-	margin-top: 0;
-	text-align: center;
-	color: #d30000;
+	margin: 0 0 20px 0;
 }
 
 	/* Bannière cookie */
@@ -29,6 +26,7 @@ form > button {
 	width: 100vw;
 	padding: 20px 0;
 	background-color: #ffffff;
+	border-radius: 10px 10px 0 0;
 	box-shadow: 0 15px 20px 15px #cecece;
 	z-index: 100;
 }

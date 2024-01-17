@@ -9,24 +9,23 @@ if (!(isset($manager)) && !(isset($_POST["idUtilisateur"]))) {
 	exit();
 }
 
-$notload = false;
 // Création connexion bdd si inexistante
 if (!isset($manager)) {
+	// Chemin de connexion vers la base de données
 	$uri = getenv('MONGODB_URL');
 	$manager = new MongoDB\Driver\Manager($uri);
-	$notload = true;
 }
 
 // Création de la pipeline pour récupérer le nom d'agriculteur
 $pipelineagri = [
 	['$match' => [
-		'idAgri' => intval($_POST["idUtilisateur"]),
+		'idUser' => intval($_POST["idUtilisateur"]),
 	]],
 ];
 
 // Création de la commande pour chaque collection
 $commandagri = new MongoDB\Driver\Command([
-    "aggregate" => "agriculteur",
+    "aggregate" => "compte",
     "pipeline" => $pipelineagri,
     "cursor" => new stdClass(),
 ]);
@@ -36,8 +35,7 @@ $cursor = $manager->executeCommand('data', $commandagri);
 
 // Traite les données
 foreach ($cursor as $element) {
-	$resultat = $element->nomAgri;
+	$resultat = strtoupper($element->nom) . " " . $element->prenom;
 }
-
 // Renvoi le nom d'utilisateur
-echo ($notload ? json_encode($resultat) : $resultat);
+echo json_encode($resultat);

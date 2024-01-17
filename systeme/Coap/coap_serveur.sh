@@ -3,9 +3,11 @@
 #Parametre de la communication coap
 INTERFACE=lo
 PORT=5683
-IP=10.0.1.1
+IP=127.0.0.1
 
-MYFOLDER=~/stockage
+MYFOLDER=/home/$SUDO_USER/test/mesure_
+
+echo $MYFOLDER
 
 #Lancement du serveur coap en arriere plan
 sudo python3 coap_serveur.py -i $IP -p $PORT -f $MYFOLDER

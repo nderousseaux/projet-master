@@ -1,12 +1,24 @@
 #!/bin/bash 
 
+# Vérifier si un argument est fourni
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <argument>"
+    exit 1
+fi
+
+# Récupérer l'argument
+arg_USER=$1
+
+# Afficher l'argument
+echo "L'argument fourni est : $arg_USER"
+
 INTERFACE=lo
 PORT=5683
-IP=10.0.1.1
+IP=127.0.0.1
 
-folder_to_watch="~/stockage"
+folder_to_watch=/home/$arg_USER/stockage
+Folder=/home/$arg_USER/systeme/Coap
 COUNT=0
-
 
 if [ "$(ls -A $folder_to_watch)" ]; then
     # Itérer sur chaque fichier dans le dossier
@@ -14,8 +26,9 @@ if [ "$(ls -A $folder_to_watch)" ]; then
         if [ -f "$file" ]; then
         echo "$file"
         # Le dossier n'est pas vide, exécutez la commande
-        sudo python3 coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file"
-        sudo rm $file 
+        python3 $Folder/coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file"
+        #sudo rm $file 
         fi 
-    done
+    done 
+    # Ajoutez une pause (sleep) si nécessaire avant la prochaine itération
 fi

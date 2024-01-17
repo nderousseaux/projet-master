@@ -8,4 +8,4 @@ IP=10.0.1.1
 MYFOLDER=~/stockage
 
 #Lancement du serveur coap en arriere plan
-sudo python3 coap_serveur.py -i $IP -p $PORT -f $LOCAL_FILE
+sudo python3 coap_serveur.py -i $IP -p $PORT -f $MYFOLDER

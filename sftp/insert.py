@@ -10,6 +10,13 @@ import sys
 import os
 import glob
 
+import dotenv
+
+dotenv.load_dotenv("/mongo.env")
+
+# From mongo.env file
+MONGO_URL = os.getenv("MONGODB_URL")
+
 def parse_line(line):
     parts = line.strip().split(';')
     date_str = parts[0]
@@ -51,7 +58,7 @@ if(len(sys.argv) == 1):
     exit(-1)
 
 client = pymongo.MongoClient(
-        "mongodb://mongo1:30001/",
+        MONGO_URL,
     replicaset="rs0",
     serverSelectionTimeoutMS=5000
 )

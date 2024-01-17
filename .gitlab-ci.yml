@@ -1,25 +1,8 @@
-stages:  
-  - build
-
-variables:
-  DOCKER_HOST: tcp://docker:2376
-  DOCKER_TLS_CERTDIR: "/certs"
-  DOCKER_TLS_VERIFY: 1
-  DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
-
-
-build-job:      
-  stage: build
-  image: docker:20.10.7
-  services:
-    - docker:20.10.7-dind
-  before_script:
-    - echo "Loging in Docker Registry..."
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - echo "Login successfull."
-  script:
-    - docker build -f infra/Dockerfile-Web -t $CI_REGISTRY/web . --no-cache
-    - echo "Build complete."
-    - echo "Pushing Images"
-    - docker push $CI_REGISTRY/web
-    - echo "Push Done!"
+build image:
+    image: docker:20.10.10
+    services:
+        - docker:20.10.10-dind  
+    script:
+        - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin --
+        - docker build -t $CI_REGISTRY_IMAGE/web -f infra/Dockerfile-Web . --no-cache
+        - docker push $CI_REGISTRY_IMAGE/web

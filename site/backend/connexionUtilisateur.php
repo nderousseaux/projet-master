@@ -48,7 +48,7 @@ $requete = new MongoDB\Driver\Query($filtre);
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
 if ($cursor->isDead()) { // mail non existant
-    echo json_encode([CONN_FAILED, "identifiants erronés"]);
+    echo json_encode([CONN_FAILED, "Identifiants erronés"]);
     exit();
 }
 
@@ -84,6 +84,6 @@ if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
     
 
 } else {    // mauvais mdp
-    echo json_encode([CONN_FAILED, "identifiants erronés"]);
+    echo json_encode([CONN_FAILED, "Identifiants erronés"]);
     exit();
 }

@@ -105,7 +105,7 @@ function afficherIlotSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
 		.previousElementSibling;
 
-	if (document.getElementById(idAttr).value === "tous") {
+	if (document.getElementById(idAttr).value === "-1") {
 		container.textContent = "Tous les ilots";
 		return;
 	}

@@ -1,4 +1,4 @@
-/* Section infos compte */
+	/* Section infos compte */
 #secCmpt {
 	flex-direction: column;
 	background-color: #ffffff !important;
@@ -17,6 +17,7 @@ form > button {
 
 	/* Bannière cookie */
 #secCookie {
+	display: none !important;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -44,8 +45,8 @@ form > button {
 @media screen and (max-width: 950px) {
 	/* Corps */
 	#corps {
-		top: calc(72px + 20px);
-		min-height: calc(100vh - 85px - 20px);
+		top: calc(72px + 2 * 10px);
+		min-height: calc(100vh - (72px + 2 * 10px) - 85px);
 	}
 
 	/* Section création compte */
@@ -61,7 +62,19 @@ form > button {
 
 	/* Footer */
 	footer {
+		margin-top: calc(72px + 2 * 10px);
+	}
+
+	/* Bannière cookie */
+	#secCookie > button {
+		width: 70%;
 		margin-top: 20px;
+	}
+	#secCookie > h1 {
+		font-size: 18px;
+	}
+	#secCookie > p {
+		font-size: 15px;
 	}
 }
 

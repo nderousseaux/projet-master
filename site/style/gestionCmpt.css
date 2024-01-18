@@ -1,12 +1,12 @@
-/* Section infos compte/image de profil */
+	/* Section infos compte/image de profil */
 #secCmpt {
 	background-color: unset !important;
 	box-shadow: none !important;
 	justify-content: space-between;
-	margin-bottom: calc(72px + 36px);
+	margin-bottom: 36px;
 }
 
-	/* Dropdown utilisateurs */
+		/* Dropdown utilisateurs */
 #ddUtilisateur {
 	width: 80%;
 	margin-bottom: 30px;
@@ -21,7 +21,7 @@
 	left: 0;
 }
 
-	/* Infos du compte */
+		/* Infos du compte */
 #infosCmpt {
 	display: flex;
 	flex-direction: column;
@@ -32,7 +32,6 @@
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 }
-
 #infosCmpt > form {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -76,7 +75,7 @@ input:disabled::placeholder {
 	color: #848484;
 }
 
-	/* Boutons */
+			/* Boutons */
 button,
 input,
 .bulle,
@@ -99,7 +98,7 @@ button:active,
 	background-color: #e6e6e6;
 }
 
-	/* Bouton de copie */
+			/* Bouton de copie */
 #infosCmpt > form > div {
 	display: flex;
 	width: calc(100% + 2 * 4px + 1px);
@@ -147,26 +146,26 @@ button:active,
 	opacity: 1;
 }
 
-	/* Section mot de passe */
+			/* Section mot de passe */
 #secMdp .bulle {
 	width: 280px;
 	margin-left: calc(280px / -2);
 }
 
-	/* Selecteurs de couleur */
+			/* Selecteurs de couleur */
 .selectCouleur {
 	cursor: pointer;
 	width: calc(100% + 2 * 4px + 1px);
 }
 
-	/* Bouton d'enregistrement */
+			/* Bouton d'enregistrement */
 form > button {
 	width: 70%;
 	margin: auto;
 	margin-top: 30px;
 }
 
-	/* Bouton de suppression */
+			/* Bouton de suppression */
 #suppr {
 	grid-column: span 2;
 	background-color: #ff8181;
@@ -178,7 +177,7 @@ form > button {
 	background-color: #ff6b6b;
 }
 
-	/* Image de profil */
+		/* Image de profil */
 #icone {
 	display: flex;
 	justify-content: center;
@@ -197,11 +196,6 @@ form > button {
 	height: calc(100% - 40px);
 	aspect-ratio: 1/1;
 	border-radius: 10px;
-}
-
-/* Footer */
-footer {
-	margin-top: 0;
 }
 
 /* Boîtes de dialogue */
@@ -273,8 +267,8 @@ a.btnDlg {
 
 	/* Corps */
 	#corps {
-		top: calc(72px + 40px + 20px);
-		min-height: calc(100vh - 72px + 40px + 20px);
+		top: calc(72px + 40px + 2 * 10px);
+		min-height: calc(100vh - (72px + 40px + 2 * 10px));
 	}
 
 	/* Section infos compte/image de profil */
@@ -297,7 +291,7 @@ a.btnDlg {
 
 		/* Infos du compte */
 	#infosCmpt {
-		width: calc(95% - 20px) !important;
+		width: calc(95% - 40px) !important;
 	}
 	input {
 		width: calc(100% - 10px) !important;
@@ -359,7 +353,7 @@ a.btnDlg {
 
 	/* Footer */
 	footer {
-		margin-top: 65px;
+		margin-top: calc(72px + 40px + 2 * 10px);
 	}
 
 	/* Boîtes de dialogue */

@@ -8,6 +8,7 @@
 	<?php include "assets/head.php"; echo PHP_EOL;?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 </head>
 <body tabindex='0'>
 <header>

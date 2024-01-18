@@ -12,6 +12,7 @@
 	<?php include "assets/head.php"?>
 	<title>Création de compte</title>
 	<meta name="description" content="Création de compte"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 </head>

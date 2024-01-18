@@ -12,6 +12,7 @@
 	<?php include "assets/head.php"?>
 	<title>Connexion au compte</title>
 	<meta name="description" content="Connexion au compte"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 </head>

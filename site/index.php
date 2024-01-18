@@ -269,6 +269,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			// Active les boutons des ilots
 			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
 				contIdButtons[3][2]);
+			activerBouton(contIdButtons[7][0], contIdButtons[7][1],
+				contIdButtons[7][2]);
 
 			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
 			helperAfficherGraph();
@@ -295,8 +297,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	});
 
 		// Bouton pour exporter les données
-	document.getElementById("btnExport").addEventListener("click",
-	e => {
+	document.getElementById("btnExport").addEventListener("click", _ => {
 		exportCSV(idUtilisateur);
 	});
 
@@ -310,13 +311,12 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 		// Gère les changements de thème pour le graphique
 	window.matchMedia("(prefers-color-scheme: light)")
-	.addEventListener("change",	() => {
+	.addEventListener("change",	_ => {
 		helperActualisationStyleGraph();
 	});
 
 		// Gère les changements de taille d'écran pour le graphique
-	window.matchMedia("(max-width: 769px)").addEventListener("change",
-	() => {
+	window.matchMedia("(max-width: 769px)").addEventListener("change", _ => {
 		helperActualisationStyleGraph();
 	});
 </script>

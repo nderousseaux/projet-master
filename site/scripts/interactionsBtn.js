@@ -161,6 +161,8 @@ function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
 				// Active les boutons des ilots
 				activerBouton(contIdButtons[3][0], contIdButtons[3][1],
 					contIdButtons[3][2]);
+				activerBouton(contIdButtons[7][0], contIdButtons[7][1],
+					contIdButtons[7][2]);
 
 				// Mets à jour le graphique
 				helperAfficherGraph();

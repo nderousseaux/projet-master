@@ -29,11 +29,6 @@ int EnvoiDonnees::initialisationSocket(const int& port, const char* ip) {
 }
 
 int EnvoiDonnees::envoiFichierSFTP(std::string cheminFichier) {
-	// Récupère le nom du fichier
-	std::string nomFichier = cheminFichier.substr(
-		cheminFichier.find_last_of('/') + 1);
-	std::string cheminDistantServ = EnvoiDonnees::DOSSIER_DISTANT + nomFichier;
-
 	// Récupère les identifiants
 	std::vector<std::string> params = StockageDonnees::recupereParams(
 		EnvoiDonnees::CHEMIN_FICHIER_IDENTIFIANTS);
@@ -50,6 +45,11 @@ int EnvoiDonnees::envoiFichierSFTP(std::string cheminFichier) {
 	const int port = std::stoi(params[1]);
 	std::string identifiant = params[2];
 	std::string mdp = params[3];
+
+	// Récupère le nom du fichier
+	std::string nomFichier = cheminFichier.substr(
+		cheminFichier.find_last_of('/') + 1);
+	std::string cheminDistantServ = EnvoiDonnees::DOSSIER_DISTANT + nomFichier;
 
 	// Initialise la session
 	int err = libssh2_init(0);

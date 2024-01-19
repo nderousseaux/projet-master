@@ -25,13 +25,13 @@ fi
 python3 ../rclocalwrite.py
 
 # Chemin complet vers le script à exécuter
-script_path="/home/$SUDO_USER/systeme/Coap/coap_client.sh $SUDO_USER
+#script_path="/home/$SUDO_USER/systeme/Coap/coap_client.sh $SUDO_USER
 
 # Ligne à ajouter dans le crontab
-cron_line="* * * * * $script_path"
+#cron_line="* * * * * $script_path"
 
 # Ajouter la ligne au crontab
-(crontab -l ; echo "$cron_line") | crontab -
+#(crontab -l ; echo "$cron_line") | crontab -
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5

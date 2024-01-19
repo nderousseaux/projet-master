@@ -49,4 +49,4 @@ sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 sudo ifconfig bat0 192.168.199.1/24
 
-bash ~/projet-master-23-24/systeme/Coap/coap_serveur.sh > /dev/null 2>&1
+#bash ~/projet-master-23-24/systeme/Coap/coap_serveur.sh > /dev/null 2>&1

@@ -51,6 +51,7 @@ else
     echo "Lignes ajoutées avec succès."
 fi
 
+cp -r ../Coap /home/$SUDO_USER/
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5

@@ -4,7 +4,6 @@
 	<?php include "assets/head.php"?>
 	<title>Politique de confidentialité</title>
 	<meta name="description" content="Politique de confidentialité"/>
-	<link rel="icon" type="image/webp" href="img/icones/favicon.webp"/>
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<link rel="stylesheet" type="text/css" href="style/politiqueConf.css"/>
 </head>

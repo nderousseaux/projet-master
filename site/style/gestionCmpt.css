@@ -118,7 +118,8 @@ button:active,
 #secMdp .bulle {
 	visibility: hidden;
 	position: absolute;
-	background-color: #76cda6;
+	color: #ffffff;
+	background-color: #4ab384;
 	text-align: center;
 	width: 140px;
 	padding: 5px;
@@ -128,6 +129,7 @@ button:active,
 	left: 50%;
 	margin-left: calc((140px / -2));
 	opacity: 0;
+	box-shadow: 0 0px 10px 0px #808080;
 	transition: opacity 0.3s ease-in-out;
 }
 #secCopie > div .bulle::after,
@@ -138,7 +140,7 @@ button:active,
 	left: 50%;
 	margin-left: -5px;
 	border: solid 5px;
-	border-color: #7fc7a7 transparent transparent transparent;
+	border-color: #4ab384 transparent transparent transparent;
 }
 #secCopie > div:hover .bulle,
 #secMdp:hover .bulle {
@@ -414,11 +416,12 @@ a.btnDlg {
 	}
 	#secCopie > div .bulle,
 	#secMdp .bulle {
-		background-color: #2f694a;
+		background-color: #00905b;
+		box-shadow: 0 0px 10px 0px #080808;
 	}
 	#secCopie > div .bulle::after,
 	#secMdp .bulle::after {
-		border-color: #2f694a transparent transparent transparent;
+		border-color: #00905b transparent transparent transparent;
 	}
 
 		/* Bouton de suppression */

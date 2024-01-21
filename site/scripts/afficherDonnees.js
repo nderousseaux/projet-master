@@ -486,17 +486,18 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 		let roleSelect;
 		if (requeteAdmin) {
 			roleSelect = document.getElementById("role");
-		}
 
-		// Si l'administrateur est sur sa propre page, désactive le selecteur
-		const nomUtilisateur = document.querySelector("header > " +
+			// Si l'admin est sur sa propre page, désactive le selecteur
+			const nomUtilisateur = document.querySelector("header > " +
 			"section:last-child > p").innerHTML.split("#");
-		const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
-		if (retour[0].toString() === idUtiliPage) {
-			roleSelect.disabled = true;
-		}
-		else {
-			roleSelect.disabled = false;
+			const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
+
+			if (retour[0].toString() === idUtiliPage) {
+				roleSelect.disabled = true;
+			}
+			else {
+				roleSelect.disabled = false;
+			}
 		}
 
 		idUtilisateurInput.placeholder = retour[0];

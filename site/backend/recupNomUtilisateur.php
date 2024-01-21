@@ -35,7 +35,7 @@ $cursor = $manager->executeCommand('data', $commandagri);
 
 // Traite les données
 foreach ($cursor as $element) {
-	$resultat = strtoupper($element->nom) . " " . $element->prenom;
+	$resultat = $element->nom . ' ' . $element->prenom;
 }
 // Renvoi le nom d'utilisateur
 echo json_encode($resultat);

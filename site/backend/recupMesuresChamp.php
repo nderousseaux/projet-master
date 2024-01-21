@@ -213,7 +213,7 @@ for ($i = 0; $i < $counttemp; $i++) {
 	$res[] = $i;
 	$res[] = $dates[$i]->format("Y-m-d H:i");
 	$res[] = ($state[$i] == "KO3" ? "C2" : 
-		(($state[$i] == "KO2" || $state[$i] == "KO") ? "C1" : "CO"));
+		(($state[$i] == "KO2" || $state[$i] == "KO") ? "C1" : "C0"));
 	$res[] = round(floatval($temps[$i]),1);
 	$res[] = round(floatval($humis[$i]),1);
 	$res[] = round(floatval($lumis[$i]),1);

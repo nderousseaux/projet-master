@@ -3,11 +3,20 @@ $page = $_SERVER["REQUEST_URI"];
 $href = '';
 $onClick = '';
 
-if ($page !== "/gestionCmpt.php") {
+// Si on est sur la page d'accueil ou de connexion, on scroll vers le haut
+if (
+	$page === "/index.php" ||
+	$page === '/' ||
+	$page === "/connexionCmpt.php"
+) {
 	$onClick = " onClick='window.scrollTo(0, 0);'";
+	$title = "Retourner en haut de la page";
 }
+
+// Sinon on renvoie vers l'accueil
 else {
 	$href = " href='.'";
+	$title = "Retourner à l'accueil";
 }
 ?>
 <a<?php echo $href?>>
@@ -21,7 +30,7 @@ else {
 			<source srcset="img/logo/logoAlsagricultureSombre.webp"
 				media="(prefers-color-scheme: dark)"/>
 			<img<?php echo $onClick . PHP_EOL?>
-				title="Retourner en haut de la page"
+				title="<?php echo $title?>"
 				src="img/logo/logoAlsagricultureClair.webp"
 				alt="Logo Als'agriculture"/>
 		</picture>

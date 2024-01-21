@@ -205,7 +205,7 @@ function creationCmpt() {
 		recupDonnees(champPost, "creationUtilisateur.php")
 		.then(retour => {
 			if (retour[0] === 0) {
-				afficherDialogConfirm(retour[1]);
+				afficherDialogConfirm();
 			}
 			else if (retour[0] === 1) {
 				afficherMsgErreur(retour[1], true);
@@ -378,17 +378,10 @@ function enregistrerMdp(idUtilisateur) {
 }
 
 /**
- * Affiche le mot de passe dans la boîte de dialogue de confirmation
- *
- * @param {string} mdp - mot de passe généré
+ * Affiche la boîte de dialogue de confirmation de changement de mot de passe
  */
-function afficherDialogConfirm(mdp) {
-	const msgMdp = document.createElement("p");
-	msgMdp.textContent = "Mot de passe généré : " + mdp;
-
+function afficherDialogConfirm() {
 	const dialog = document.getElementById("confirmation");
-	dialog.querySelector("p").insertAdjacentElement("afterend", msgMdp);
-
 	dialog.showModal();
 }
 

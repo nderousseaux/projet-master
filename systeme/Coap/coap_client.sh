@@ -14,19 +14,19 @@ echo "L'argument fourni est : $arg_USER"
 
 INTERFACE=lo
 PORT=5683
-IP=127.0.0.1
+IP=192.168.199.1
 
-folder_to_watch=/home/$arg_USER/stockage
-Folder=/home/$arg_USER/systeme/Coap
+COAP_FOLDER_to_watch=/home/$arg_USER/stockage
+COAP_FOLDER=/home/$arg_USER/Coap
 COUNT=0
 
-if [ "$(ls -A $folder_to_watch)" ]; then
+if [ "$(ls -A $COAP_FOLDER_to_watch)" ]; then
     # Itérer sur chaque fichier dans le dossier
-    for file in "$folder_to_watch"/*; do
+    for file in "$COAP_FOLDER_to_watch"/*; do
         if [ -f "$file" ]; then
         echo "$file"
         # Le dossier n'est pas vide, exécutez la commande
-        python3 $Folder/coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file"
+        python3 $COAP_FOLDER/coapclient.py -o POST -p "coap://$IP:$PORT/basic" -f "$file" >> /home/$arg_USER/log_client.txt
         #sudo rm $file 
         fi 
     done 

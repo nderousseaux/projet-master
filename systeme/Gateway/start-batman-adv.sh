@@ -67,3 +67,5 @@ sudo iptables -A INPUT -i bat0 -j ACCEPT
 sudo iptables -A OUTPUT -i bat0 -j ACCEPT
 
 # =======================================
+
+bash /home/$SUDO_USER/Coap/coap_serveur.sh &

@@ -8,7 +8,7 @@ while true; do
 	c=$((c+1))
 	result=$(find upload/ -type f -mmin -2)
 	if [ -n "$result" ]; then
-		cp $result data/donnees.txt
+		mv $result data/donnees.txt
 		python3 insert.py data/donnees.txt
 	fi
 	sleep 5

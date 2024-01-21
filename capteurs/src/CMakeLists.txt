@@ -35,7 +35,7 @@ if(PROG_TYPE STREQUAL "mesures" OR PROG_TYPE STREQUAL "all")
 		PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}/src/main1
 	)
-	target_link_libraries(${PROGRAMME1_NOM} sqlite3 ssh2)
+	target_link_libraries(${PROGRAMME1_NOM} ssh2)
 endif()
 
 if(PROG_TYPE STREQUAL "agregateur" OR PROG_TYPE STREQUAL "all")
@@ -45,7 +45,7 @@ if(PROG_TYPE STREQUAL "agregateur" OR PROG_TYPE STREQUAL "all")
 		PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}/src/main2
 	)
-	target_link_libraries(${PROGRAMME2_NOM} sqlite3 ssh2)
+	target_link_libraries(${PROGRAMME2_NOM} ssh2)
 endif()
 
 if(

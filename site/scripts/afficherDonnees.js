@@ -174,7 +174,7 @@ function afficherIlots(nbrIlots) {
 		// Ajoute le bouton "Tous les ilots" dans le dropdown de l'export
 		if (container.id === "selectIlotExport") {
 			const ilot = document.createElement("button");
-			ilot.setAttribute("value", "tous");
+			ilot.setAttribute("value", -1);
 			ilot.textContent = "Tous";
 
 			container.appendChild(ilot);

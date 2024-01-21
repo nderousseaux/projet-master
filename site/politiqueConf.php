@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<meta name="robots" content="noindex, nofollow"/>
-	<meta name="color-scheme" content="light dark"/>
-	<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)"/>
-	<meta name="theme-color" content="#080809" media="(prefers-color-scheme: dark)"/>
-	<link rel="icon" type="image/webp" href="img/favicon.webp"/>
-	<link rel="stylesheet" type="text/css" href="style/index.css"/>
-	<link rel="stylesheet" type="text/css" href="style/politiqueConf.css"/>
+	<?php include "assets/head.php"?>
 	<title>Politique de confidentialité</title>
 	<meta name="description" content="Politique de confidentialité"/>
+	<link rel="icon" type="image/webp" href="img/icones/favicon.webp"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
+	<link rel="stylesheet" type="text/css" href="style/politiqueConf.css"/>
 </head>
 <body>
 <header>

@@ -8,6 +8,7 @@
 	<?php include "assets/head.php"; echo PHP_EOL;?>
 	<title>Gestion champs</title>
 	<meta name="description" content="Gestion de champs"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 </head>
 <body tabindex='0'>
 <header>
@@ -236,10 +237,13 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Affichage des données ***/
-		// Récupérer l'ID utilisateur (à gérer par l'équipe gestion de compte)
+		// Récupérer l'ID utilisateur
 	const idUtilisateur = <?php
 		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
+
+		// Récupère le nom et prénom de l'utilisateur
+	afficherNomUtilisateur(idUtilisateur);
 
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)
@@ -266,6 +270,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			// Active les boutons des ilots
 			activerBouton(contIdButtons[3][0], contIdButtons[3][1],
 				contIdButtons[3][2]);
+			activerBouton(contIdButtons[7][0], contIdButtons[7][1],
+				contIdButtons[7][2]);
 
 			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
 			helperAfficherGraph();
@@ -292,8 +298,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	});
 
 		// Bouton pour exporter les données
-	document.getElementById("btnExport").addEventListener("click",
-	e => {
+	document.getElementById("btnExport").addEventListener("click", _ => {
 		exportCSV(idUtilisateur);
 	});
 
@@ -307,13 +312,12 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 		// Gère les changements de thème pour le graphique
 	window.matchMedia("(prefers-color-scheme: light)")
-	.addEventListener("change",	() => {
+	.addEventListener("change",	_ => {
 		helperActualisationStyleGraph();
 	});
 
 		// Gère les changements de taille d'écran pour le graphique
-	window.matchMedia("(max-width: 769px)").addEventListener("change",
-	() => {
+	window.matchMedia("(max-width: 769px)").addEventListener("change", _ => {
 		helperActualisationStyleGraph();
 	});
 </script>

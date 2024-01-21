@@ -1,12 +1,13 @@
 datacenter = "dc1"
-name = "nc1"
 data_dir  = "/opt/nomad/data"
+name = "nc1"
+
 bind_addr = "0.0.0.0"
 
 advertise {
-  http = "10.3.0.1"
-  rpc = "10.3.0.1"
-  serf = "10.3.0.1"
+  http = "{{ GetInterfaceIP `vxlan100` }}"
+  rpc = "{{ GetInterfaceIP `vxlan100` }}"
+  serf = "{{ GetInterfaceIP `vxlan100` }}"
 }
 
 server {
@@ -16,8 +17,16 @@ server {
 
 client {
   enabled = true
-  servers = ["10.3.0.1", "10.3.0.2", "10.3.0.3", "10.3.0.4", "10.3.0.5"]
   network_interface = "vens4"
+
+  host_network "internal"{
+    interface = "vens4"
+    cidr = "10.3.0.1/16"
+  }
+  host_network "public"{
+    interface = "vens4"
+    cidr = "10.3.0.6/16"
+  }
 }
 # Authentification docker
 plugin "docker" {
@@ -25,5 +34,16 @@ plugin "docker" {
     auth {
       config = "/root/.docker/config.json"
     }
+    volumes {
+      enabled = true
+    }
   }
+}
+
+telemetry {
+  collection_interval = "1s"
+  disable_hostname = true
+  prometheus_metrics = true
+  publish_allocation_metrics = true
+  publish_node_metrics = true
 }

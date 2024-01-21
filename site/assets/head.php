@@ -4,5 +4,4 @@
 	<meta name="color-scheme" content="light dark"/>
 	<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)"/>
 	<meta name="theme-color" content="#080809" media="(prefers-color-scheme: dark)"/>
-	<link rel="icon" type="image/webp" href="img/favicon.webp"/>
-	<link rel="stylesheet" type="text/css" href="style/index.css"/>
+	<link rel="icon" type="image/webp" href="img/icones/favicon.webp"/>

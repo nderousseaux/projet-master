@@ -10,6 +10,14 @@ DIR="$(dirname "${0}")"
 docker build -t site:latest $DIR
 
 # run le conteneur
+## pour utiliser le volume au lieu d'une copie des fichiers (pour le dev)
+## >>> il faut commenter la ligne "COPY . /var/www/html" dans le Dockerfile
+# docker run --rm -p 8080:80 -d --name site_web \
+# 	-e MONGODB_URL=mongodb://mongo1:30001 \
+# 	--network=mongo-net \
+# 	-v ./:/var/www/html \
+# 	site:latest
+
 docker run --rm -p 8080:80 -d --name site_web \
 	-e MONGODB_URL=mongodb://mongo1:30001 \
 	--network=mongo-net \

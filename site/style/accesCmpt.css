@@ -1,4 +1,4 @@
-/* Section infos compte */
+	/* Section infos compte */
 #secCmpt {
 	flex-direction: column;
 	background-color: #ffffff !important;
@@ -12,14 +12,12 @@ form > button {
 	grid-column: span 2;
 }
 #msgErr {
-	grid-column: span 2;
-	margin-top: 0;
-	text-align: center;
-	color: #d30000;
+	margin: 0 0 20px 0;
 }
 
 	/* Bannière cookie */
 #secCookie {
+	display: none !important;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,6 +27,7 @@ form > button {
 	width: 100vw;
 	padding: 20px 0;
 	background-color: #ffffff;
+	border-radius: 10px 10px 0 0;
 	box-shadow: 0 15px 20px 15px #cecece;
 	z-index: 100;
 }
@@ -46,8 +45,8 @@ form > button {
 @media screen and (max-width: 950px) {
 	/* Corps */
 	#corps {
-		top: calc(72px + 20px);
-		min-height: calc(100vh - 85px - 20px);
+		top: calc(72px + 2 * 10px);
+		min-height: calc(100vh - (72px + 2 * 10px) - 85px);
 	}
 
 	/* Section création compte */
@@ -63,7 +62,19 @@ form > button {
 
 	/* Footer */
 	footer {
+		margin-top: calc(72px + 2 * 10px);
+	}
+
+	/* Bannière cookie */
+	#secCookie > button {
+		width: 70%;
 		margin-top: 20px;
+	}
+	#secCookie > h1 {
+		font-size: 18px;
+	}
+	#secCookie > p {
+		font-size: 15px;
 	}
 }
 

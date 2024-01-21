@@ -1,9 +1,12 @@
 FROM ubuntu:20.04
 
 COPY requirements.txt requirements.txt
-COPY copy-into-db.py copy-into-db.py
+COPY start.sh start.sh
+COPY insert.py insert.py
 
 RUN apt-get update && apt install -y python3 pip
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+RUN mkdir data
+
+CMD ["sh", "start.sh"]

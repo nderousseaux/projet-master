@@ -58,6 +58,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	if (idContainer === "selectChamp") {
 		afficherChampSelectionne(idContainer, idAttr);
 	}
+
 	// Titre de l'ilot
 	else if (
 		idContainer === "selectIlot" ||
@@ -65,6 +66,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	) {
 		afficherIlotSelectionne(idContainer, idAttr);
 	}
+
 	// Titre du type de mesure
 	else if (
 		idContainer === "selectType" ||
@@ -72,6 +74,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 	) {
 		afficherMesureSelectionnee(idContainer, idAttr);
 	}
+
 	// Titre durée mesure export
 	else if (idContainer === "selectDureeExport") {
 		afficherDureeSelectionnee(idContainer, idAttr);
@@ -102,7 +105,7 @@ function afficherIlotSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
 		.previousElementSibling;
 
-	if (document.getElementById(idAttr).value === "tous") {
+	if (document.getElementById(idAttr).value === "-1") {
 		container.textContent = "Tous les ilots";
 		return;
 	}
@@ -158,6 +161,8 @@ function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
 				// Active les boutons des ilots
 				activerBouton(contIdButtons[3][0], contIdButtons[3][1],
 					contIdButtons[3][2]);
+				activerBouton(contIdButtons[7][0], contIdButtons[7][1],
+					contIdButtons[7][2]);
 
 				// Mets à jour le graphique
 				helperAfficherGraph();
@@ -229,8 +234,8 @@ function exportCSV(idUtilisateur) {
 	champPost.append("ilot", valIlot);
 
 	recupDonnees(champPost, "recupExport.php")
-	.then(donnees => {
-		lancerTelechargement("export.csv", convertirEnCSV(donnees));
+	.then(retour => {
+		lancerTelechargement("export.csv", convertirEnCSV(retour));
 	})
 	.catch(err => {
 		console.error(err);

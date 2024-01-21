@@ -12,7 +12,7 @@ dropdownUtilisateur.addEventListener("click", _ => {
 
 /*** Affichage des données ***/
 	// Affiche les utilisateurs de la coopérative agricole
-afficherUtilisateurs()
+afficherUtilisateurs(idUtilisateur)
 .then(_ => {
 	activerBouton("selectUtilisateur", "utilisateurSlct", true);
 });

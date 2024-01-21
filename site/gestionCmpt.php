@@ -8,6 +8,7 @@
 	<?php include "assets/head.php"?>
 	<title>Gestion du compte</title>
 	<meta name="description" content="Gestion du compte"/>
+	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -115,11 +116,15 @@
 	src="scripts/interactionsBtn.js"></script>'?>
 <script src="scripts/entete.js"></script>
 <script>
+	/*** Gestion des données ***/
+		// Récupérer l'ID utilisateur
 	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]);
+		echo json_encode($_SESSION["idAgri"]); //idUser ?
 	?>;
 
-	/*** Gestion des données ***/
+		// Récupère le nom et prénom de l'utilisateur
+	afficherNomUtilisateur(idUtilisateur);
+
 		// Récupère les données de l'utilisateur et rempli le formulaire avec
 	afficherDonneesUtilisateur(idUtilisateur<?php
 		if ($role === "admin") echo ", true";?>);
@@ -131,11 +136,11 @@
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
 		e.preventDefault();
-		modifInputCmpt();
+		modifInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 	document.querySelector("form").addEventListener("submit", e => {
 		e.preventDefault();
-		modifInputCmpt();
+		modifInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 
 		// Gère la suppression du compte
@@ -145,7 +150,7 @@
 	});
 	dialogConfirmer.addEventListener("click", e => {
 		if (e.target.value === "confirmer") {
-			supprCmpt();
+			supprCmpt(idUtilisateur);
 		}
 	});
 
@@ -154,15 +159,6 @@
 
 		// Gère le selecteur de rôle
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
-
-		// Récupére l'id de l'utilisateur
-	const containerInput = document.getElementById("idUtili");
-	containerInput.placeholder = idUtilisateur;
-
-		// Affiche le nom de l'utilisateur dans le header
-	const nom = document.getElementById("nom").value;
-	const prenom = document.getElementById("prenom").value;
-	afficherNomUtilisateur(nom + ' ' + prenom, idUtilisateur);
 
 
 	/** Changements du DOM **/

@@ -71,7 +71,7 @@ p {
 	display: block;
 	width: 100%;
 	border: none;
-	padding: 12px;
+	padding: 12px 24px 12px 12px;
 	border-radius: 10px;
 	background-color: unset;
 	text-decoration: none;
@@ -260,7 +260,7 @@ header > section:last-child .dropbtn {
 	align-items: center;
 	position: relative;
 	top: 72px;
-	min-height: calc(100vh - 85px);
+	min-height: calc(100vh - 72px - 85px);
 }
 #corps > section {
 	display: flex;
@@ -271,6 +271,9 @@ header > section:last-child .dropbtn {
 	border-radius: 10px;
 	box-shadow: 0 15px 20px -15px #cecece;
 	z-index: 10;
+}
+#corps > section:last-child {
+	margin-bottom: 36px;
 }
 
 	/* Container verticaux */
@@ -574,7 +577,7 @@ footer {
 	width: 100vw;
 	height: 85px;
 	z-index: 1;
-	margin-top: calc(72px + 36px);
+	margin-top: 72px;
 	background-color: rgba(255, 255, 255, 0.7);
 	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
@@ -698,11 +701,13 @@ footer > a:active,
 	/* Corps */
 	#corps {
 		top: calc(72px + 40px + 20px);
-		min-height: calc(100vh - 85px + 40px + (20px * 2));
+		min-height: calc(100vh - (72px + 40px + 20px));
 	}
 	#corps > section {
-		width: 95%;
 		margin-top: 20px;
+	}
+	#corps > section:last-child {
+		margin-bottom: 20px;
 	}
 
 		/* Container verticaux */
@@ -792,7 +797,7 @@ footer > a:active,
 
 	/* Footer */
 	footer {
-		margin-top: calc(85px + (40px * 2));
+		margin-top: calc(72px + 40px + 20px);
 	}
 	footer > p {
 		font-size: 15px;

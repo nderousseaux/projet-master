@@ -3,12 +3,11 @@
  * Supprime l'utilisateur correspondant à l'ID
  */
 
-
 define('OK', 0);
 define('ERROR', 1);
 
 // Vérifie que toutes les infos sont présentes
-if (!(isset($_POST["idUser"]))) {
+if (!(isset($_POST["idUtilisateur"]))) {
 	$erreur = array("Erreur", "Infos manquantes dans la requête");
 	echo json_encode($erreur);
 	exit();
@@ -38,13 +37,12 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
+$idUser = intval(filter_input(INPUT_POST, 'idUtilisateur', FILTER_SANITIZE_STRING));
 
 // Défini le filtre
-$filtre = [
-	"idUser" => $_POST["idUser"]
-];
-$bulk = new MongoDB\Driver\BulkWrite;
+$filter = ["idUser" => $idUser];
 
+$bulk = new MongoDB\Driver\BulkWrite;
 $bulk->delete($filter);
 $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
 

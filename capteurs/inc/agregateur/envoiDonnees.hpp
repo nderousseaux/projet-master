@@ -2,7 +2,6 @@
 #define ENVOI_DONNEES_HPP
 
 #include "infosChamp.hpp"
-#include "mesures.hpp"
 #include "stockageDonnees.hpp"
 
 #include <arpa/inet.h>
@@ -18,10 +17,10 @@
 class EnvoiDonnees {
 	/* Variable */
 	private:
-		inline static std::string DOSSIER_DISTANT {
-			"/home/pm2324/upload/"
+		const inline static std::string DOSSIER_DISTANT {
+			"/upload/"
 		};
-		inline static std::string CHEMIN_FICHIER_IDENTIFIANTS {
+		const inline static std::string CHEMIN_FICHIER_IDENTIFIANTS {
 			"./configuration/identifiantsSFTP.txt"
 		};
 

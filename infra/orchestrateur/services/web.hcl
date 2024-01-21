@@ -6,7 +6,7 @@ job "web" {
 
     network {
       port "web" {
-        to = 80
+        to = 443
       }
     }
 
@@ -26,16 +26,17 @@ job "web" {
       
 			service {
 				name = "web"
-				tags = ["urlprefix-/"]
+				tags = ["urlprefix-/ proto=https tlsskipverify=true"]
 				port = "web"
 
 				check {
-					name     = "alive"
-					type     = "http"
-					protocol = "http"
-					path     = "/"
+					name = "check-https"
+					type = "http"
+					protocol = "https"
+					path = "/"
 					interval = "10s"
-					timeout  = "2s"
+					timeout = "2s"
+					tls_skip_verify = true
 				}
 			}
 

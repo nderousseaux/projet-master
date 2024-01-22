@@ -231,16 +231,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		activerBouton(element[0], element[1], element[2]);
 	});
 
-		// Retours des paramètres du graphique
-	let typeMesuresStr, unite;
-	let rangeMin, rangeMinMob, rangeMax, ordMin, ordMax;
-
 
 	/*** Affichage des données ***/
 		// Récupérer l'ID utilisateur
-	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
-	?>;
+	const idUtilisateur = <?php echo json_encode($_SESSION["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);
@@ -281,18 +275,18 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Interaction des boutons ***/
 		// Bouton pour changer la temporalité de la météo
-	let dropdownDuree = document.getElementById("ddDuree");
+	const dropdownDuree = document.getElementById("ddDuree");
 	dropdownDuree.addEventListener("click", _ => {
 		const valChamp = document.getElementById("dureeSlct").value;
 		afficherMeteo(idUtilisateur);
 	});
 
 		// Bouton pour changer la sélection du graphique (type de données/ilot)
-	let dropdownTypeGraph = document.getElementById("ddType");
+	const dropdownTypeGraph = document.getElementById("ddType");
 	dropdownTypeGraph.addEventListener("click", _ => {
 		helperAfficherGraph(idUtilisateur);
 	});
-	let dropdownIlotGraph = document.getElementById("ddIlot");
+	const dropdownIlotGraph = document.getElementById("ddIlot");
 	dropdownIlotGraph.addEventListener("click", _ => {
 		helperAfficherGraph(idUtilisateur);
 	});

@@ -153,7 +153,7 @@ try {
 
 
 // Récupérer IdAgri de l'utilisateur actuel pour ajouter nouveau user au même agri
-session_start();
+//session_start();
 
 $mail = $_POST["courriel"];
 $mdp = generate_password();

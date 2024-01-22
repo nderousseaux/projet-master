@@ -1,7 +1,7 @@
 <?php
 	// Vérifie si l'utilisateur est déjà connecté
-	session_save_path("/alloc");
-	session_start();
+	// session_save_path("/alloc");
+	// session_start();
 
 	if (isset($_COOKIE["idUser"])) {
 		echo "<script>location.href='.';</script>";

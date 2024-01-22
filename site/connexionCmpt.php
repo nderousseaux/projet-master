@@ -1,5 +1,6 @@
 <?php
 	// Vérifie si l'utilisateur est déjà connecté
+	session_save_path("/alloc");
 	session_start();
 
 	if (isset($_SESSION["idUser"])) {

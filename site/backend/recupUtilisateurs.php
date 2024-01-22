@@ -27,6 +27,7 @@ try {
 
 // récupère l'idAgri de l'utilisateur pour n'afficher que les utilisateurs
 // de ce même agriculteur
+session_save_path("/alloc");
 session_start();
 $idAgri = $_SESSION["idAgri"];
 

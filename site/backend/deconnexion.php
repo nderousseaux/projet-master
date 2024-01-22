@@ -3,6 +3,7 @@
  * Pour déconnecter un utilisateur en détruisant la session associée.
  */
 
+session_save_path("/alloc");
 session_start();
 
 session_unset();

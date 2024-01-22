@@ -10,6 +10,7 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 # Copie les fichiers sources dans le dossier /var/www/html
 COPY . /var/www/html
 COPY php.ini /usr/local/etc/php/php.ini
+ADD ../.env /
 
 EXPOSE 80
 CMD ["apache2-foreground"]

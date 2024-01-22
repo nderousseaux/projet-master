@@ -67,14 +67,14 @@ function notify($nom, $prenom, $dst_mail, $mdp) {
     $mail = new PHPMailer();
 
     // récupération des identifiants du serveur de mail
-    $env = parse_ini_file('.env');
+    $env = parse_ini_file('/.env');
     $smtpId = $env["SMTP_ID"];
     $smtpPw = $env["SMTP_PW"];
     file_put_contents("/var/www/html/mail_co", $smtpId." ".$smtpPw);
 
     try {
         //Server settings
-        $mail->SMTPDebug = 2;                   //Enable verbose debug output
+        $mail->SMTPDebug  = 2;                  //Enable verbose debug output
         $mail->isSMTP();                        //Send using SMTP
         $mail->Host       = 'smtp.orange.fr';   //Set the SMTP server to send through
         $mail->SMTPAuth   = true;               //Enable SMTP authentication

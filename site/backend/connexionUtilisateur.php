@@ -64,7 +64,12 @@ foreach ($cursor as $infosUser) {
 }
 
 if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
+    //$data = [$idUser, $idAgri, ]
+    //setcookie('session', json_encode($info), time()+3600);
+
+
     // demarre une session avec les infos du user
+    session_save_path("/alloc");
     session_start();
     $_SESSION["idUser"] = $idUser;
     $_SESSION["idAgri"] = $idAgri;

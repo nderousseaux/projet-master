@@ -8,7 +8,7 @@
  */
 function recupDonnees(champPost, fichierBackend) {
 	return new Promise((resolve, reject) => {
-		fetch("/backend/" + fichierBackend, {
+		fetch("/com/backend/" + fichierBackend, {
 			method: "POST",
 			body: champPost
 		})

@@ -220,7 +220,7 @@ function connexionCmpt() {
 	let nbrErr = verifInputCourriel();
 
 		// Mot de passe (vérifie uniquement que le champ n'est pas vide)
-	let mdpInput = document.getElementById("mdp");
+	const mdpInput = document.getElementById("mdp");
 	if (mdpInput.value === '') {
 		mdpInput.classList.add("erreur");
 		nbrErr++;
@@ -265,21 +265,38 @@ function connexionCmpt() {
 
 /**
  * Réinitialise les valeurs des inputs du formulaire
+ *
+ * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * 								   vérifie le rôle sélectionné dans ce cas
  */
-function reinitInputCmpt() {
+function reinitInputCmpt(requeteAdmin = false) {
 	// Récupère tous les éléments du formulaire
 	const inputsForm = document.querySelectorAll("form input");
 
 	// Remplace les valeurs des inputs par les placeholders (sauf pour le mdp)
 	inputsForm.forEach(input => {
-		if (input.id !== "mdp") {
+		// Ne réinitialise pas l'identifiant de l'utilisateur
+		if (input.id === "idUtili") {
+			return;
+		}
+
+		// Réinitialise les autres champs
+		else if (input.id !== "mdp") {
 			const placeholder = input.placeholder;
 			input.value = placeholder;
 		}
+
+		// S'il s'agit du mot de passe, le vide
 		else {
 			input.value = '';
 		}
 	});
+
+	// Réinitialise le selecteur de rôle
+	if (requeteAdmin === true) {
+		const selecteur = document.getElementById("role");
+		selecteur.value = document.getElementById("selectionne").value;
+	}
 }
 
 /**
@@ -299,7 +316,7 @@ function copierPressePapier() {
  * Réinitialise le contenu affiché sur le bouton de copie
  */
 function reinitBouton() {
-	let containerBouton = document.getElementById("texteBouton");
+	const containerBouton = document.getElementById("texteBouton");
 	containerBouton.innerHTML = "Copier dans le presse-papier";
 }
 

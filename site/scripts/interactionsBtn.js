@@ -177,6 +177,7 @@ function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
  * @returns {string} - les données converties en CSV
  */
 function convertirEnCSV(donnees) {
+	// Créé une chaîne vide
 	let csv = '';
 
 	// Ajoute les titres des colonnes
@@ -184,7 +185,7 @@ function convertirEnCSV(donnees) {
 
 	// Ajoute les données
 	donnees.forEach(donnee => {
-		csv += donnee.join(";") + "\n";
+		csv += donnee.join(';') + "\n";
 	});
 
 	return csv;

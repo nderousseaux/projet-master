@@ -130,7 +130,7 @@
 		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {
 		e.preventDefault();
-		reinitInputCmpt();
+		reinitInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
 		e.preventDefault();

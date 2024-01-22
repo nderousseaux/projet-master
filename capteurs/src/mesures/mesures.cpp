@@ -16,37 +16,39 @@ float Mesures::genValeur(float borneInf, float borneSupp, bool type) {
 	return valeur;
 }
 
-void Mesures::updateHumidite() {
+float Mesures::updateHumidite() {
 	int fd = open(I2C_DEV.c_str(), O_RDWR);
 
 	if (fd < 0)
-		return;
+		return std::nanf("");
 	if (ioctl(fd, I2C_SLAVE, HUMIDITE_ADDR) < 0)
-		return;
+		return std::nanf("");
 
 	//requete de lecture
 	if (write(fd, HUMIDITE_REGISTRES, 2) != 2)
-		return;
+		return std::nanf("");
 
 	char buffer[2];
 	if (read(fd, buffer, 2) != 2)
-		return;
+		return std::nanf("");
 
 	int humidite_absolue = (buffer[1] + (buffer[0] << 8));
 
 	if (humidite_absolue < HUMIDITE_LOW_THRESHOLD)
-		humidite_ = 0.0f;
+		return 0.0f;
 	else
-		humidite_ = 100 * ((float)humidite_absolue - HUMIDITE_LOW_THRESHOLD) /
+		return 100 * ((float)humidite_absolue - HUMIDITE_LOW_THRESHOLD) /
 			(HUMIDITE_HIGH_THRESHOLD - HUMIDITE_LOW_THRESHOLD);
 }
 
-void Mesures::updateTemperature() {
+float Mesures::updateTemperature() {
+    return 0.0f;
 }
 
-void Mesures::updateLuminosite() {
+double Mesures::updateLuminosite() {
 
 	const char* script = "src/mesures/lux.py";
+    double res = 0;
 
 	std::string cmd = "python3 " + std::string(script);
 
@@ -64,31 +66,31 @@ void Mesures::updateLuminosite() {
 		int value;
 		std::istringstream(res) >> value;
 
-		luminosite_ = value;
+		res = value;
 
 	} catch (const std::exception& e) {}
 
-	return;
+	return res;
 
 //////////////
 	int fd = open(I2C_DEV.c_str(), O_RDWR);
 
 	if (fd < 0)
-		return;
+		return std::nan("");
 	if (ioctl(fd, I2C_SLAVE, LUMINOSITE_ADDR) < 0)
-		return;
+		return std::nan("");
 
 	//Configuration du capteur
 	if (write(fd, "\0\0\0", 3) != 3)
-		return;
+		return std::nan("");
 
 	//requete de lecture
 	if (write(fd, LUMINOSITE_REGISTRES, 2) != 2)
-		return;
+		return std::nan("");
 
 	char buffer[2];
 	if (read(fd, buffer, 2) != 2)
-		return;
+		return std::nan("");
 
-	luminosite_ = (buffer[1] + (buffer[0] << 8));
+	return buffer[1] + (buffer[0] << 8);
 }

@@ -16,12 +16,20 @@ job "web" {
         force_pull = true
         image = "registry.app.unistra.fr/fseel/projet-master-23-24/web"
         ports = ["web"]
+	volumes = [ "backend:/var/www/html/backend/api" ]
       }
 
       template {
 	data = "MONGODB_URL=\"mongodb://{{ $services := service \"mongo\" }}{{ range $index, $service := $services }}{{ .Address }}:{{ .Port }}{{ if ne (add $index 1) (len $services) }},{{ end }}{{ end }}\""
 	destination = "/var/mongo.env"
 	env = true
+      }
+
+      template {
+        data = <<EOF
+{{ env "meta.cleAPI" }}
+EOF
+	destination = "backend/cleAPI.txt"
       }
       
 			service {

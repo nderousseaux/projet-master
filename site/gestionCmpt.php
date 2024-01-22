@@ -117,7 +117,7 @@
 <script src="scripts/entete.js"></script>
 <script>
 	/*** Gestion des données ***/
-		// Récupérer l'ID utilisateur
+		// Récupérer l'identifiant utilisateur
 	const idUtilisateur = <?php echo json_encode($_SESSION["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur

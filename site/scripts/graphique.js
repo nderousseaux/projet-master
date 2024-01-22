@@ -1,7 +1,7 @@
 /**
  * Paramètre le graphique, récupère les données et affiche l'ensemble
  *
- * @param {int} idUtilisateur - ID de l'utilisateur
+ * @param {int} idUtilisateur - Id de l'utilisateur
  * @param {int} numChamp - Numéro du champ
  * @param {int} numIlot - Numéro de l'ilot
  * @param {string} typeMesures - Type de mesures à récupérer
@@ -251,7 +251,7 @@ function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
 /**
  * Affiche le graphique et renvoie les données nécessaires à son actualisation
  *
- * @param {int} idUtilisateur - ID de l'utilisateur
+ * @param {int} idUtilisateur - Id de l'utilisateur
  * @returns {promise} - Les paramètres du graphique
  */
 function helperRecupParamsGraph(idUtilisateur) {
@@ -274,7 +274,7 @@ function helperRecupParamsGraph(idUtilisateur) {
  * Lance l'affichage du graphique et enregistre les données nécessaires à son
  * actualisation, lorsque le graphique a été affiché
  *
- * @param {int} idUtilisateur - ID de l'utilisateur
+ * @param {int} idUtilisateur - Id de l'utilisateur
  */
 function helperAfficherGraph(idUtilisateur) {
 	helperRecupParamsGraph(idUtilisateur)

@@ -32,7 +32,7 @@ function chgmtCouleurIcone() {
  * envoie les données au backend si elles sont correctes, pour la modification
  * des informations d'un compte
  *
- * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
  */
 function modifInputCmpt(requeteAdmin = false) {
@@ -116,9 +116,9 @@ function modifInputCmpt(requeteAdmin = false) {
  * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
  * dans la base de données
  *
- * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
- * @param {formData} champPost - données du formulaire changées
+ * @param {formData} champPost - Données du formulaire changées
  */
 function majValInputCmpt(requeteAdmin, champPost) {
 	champPost.forEach((value, key) => {
@@ -266,7 +266,7 @@ function connexionCmpt() {
 /**
  * Réinitialise les valeurs des inputs du formulaire
  *
- * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
  */
 function reinitInputCmpt(requeteAdmin = false) {
@@ -398,7 +398,7 @@ function afficherDialogConfirm() {
 /**
  * Affiche un message d'erreur dans le formulaire
  *
- * @param {string} message - message d'erreur à afficher
+ * @param {string} message - Message d'erreur à afficher
  */
 function afficherMsgErreur(message, creaUtili = false) {
 	// Supprime le message d'erreur précédent
@@ -425,8 +425,8 @@ function afficherMsgErreur(message, creaUtili = false) {
 /**
  * Affiche un message d'information dans le formulaire de modification
  *
- * @param {string} message - message d'information à afficher
- * @param {boolean} type - true si le message est une information, false si
+ * @param {string} message - Message d'information à afficher
+ * @param {boolean} type - Si true le message est une information, false si
  * 						   c'est une erreur
  */
 function afficherMsgInfoModifCmpt(message, type) {

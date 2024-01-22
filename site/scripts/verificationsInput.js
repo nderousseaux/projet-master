@@ -79,8 +79,9 @@ function verifSelectRole() {
 /**
  * Vérifie le champ du courriel dans le formulaire, lorsqu'un événement se
  * produit
- * Le courriel doit contenir au moins 1 caractère avant le @, 1 caractère entre
- * le '@' et le '.', 1 caractère après le '.'
+ * Le courriel doit contenir au moins 1 caractère avant le '@', 1 caractère
+ * entre le '@' et le '.' puis 1 caractère après le '.'
+ * Par exemple : "adresse@courriel.fr"
  *
  * @returns {int} - le nombre de champs incorrects
  */
@@ -155,6 +156,7 @@ function verifInputMdp() {
  * événement se produit
  * Le format de la couleur doit commencer par '#' et être suivi de 6 caractères
  * hexadécimaux
+ * Par exemple : "#7fc7a7"
  *
  * @returns {int} - le nombre de champs incorrects
  */

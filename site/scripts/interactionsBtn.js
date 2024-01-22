@@ -1,10 +1,10 @@
 /**
  * Activer les boutons contenus dans les dropdown
- * Si un bouton est sélectionné, il est marqué d'un ID unique, permettant de
- * récupérer sa valeur
+ * Si un bouton est sélectionné, il est marqué d'un identifiant unique,
+ * permettant de récupérer sa valeur
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID à attribuer au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id à attribuer au bouton sélectionné
  * @param {bool} activerPreselect - Si true, sélectionne le premier bouton
  */
 function activerBouton(idContainer, idAttr, activerPreselect) {
@@ -51,8 +51,8 @@ function activerBouton(idContainer, idAttr, activerPreselect) {
 /**
  * Modifie le texte adjacent au dropdown pour afficher la valeur sélectionnée
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID attribué au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id attribué au bouton sélectionné
  */
 function afficherTitreDropdown(idContainer, idAttr) {
 	// Titre du champ
@@ -85,8 +85,8 @@ function afficherTitreDropdown(idContainer, idAttr) {
 /**
  * Affiche le nom du champ sélectionné dans le header
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID attribué au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id attribué au bouton sélectionné
  */
 function afficherChampSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
@@ -98,8 +98,8 @@ function afficherChampSelectionne(idContainer, idAttr) {
  * Affiche le numéro de l'ilot sélectionné dans les options du graphique et
  * de l'export de données
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID attribué au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id attribué au bouton sélectionné
  */
 function afficherIlotSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
@@ -117,8 +117,8 @@ function afficherIlotSelectionne(idContainer, idAttr) {
  * Affiche le type de mesure sélectionné dans les options du graphique et
  * de l'export de données
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID attribué au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id attribué au bouton sélectionné
  */
 function afficherMesureSelectionnee(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
@@ -130,8 +130,8 @@ function afficherMesureSelectionnee(idContainer, idAttr) {
  * Affiche la durée de mesure sélectionnée dans les options de l'export de
  * données
  *
- * @param {string} idContainer - ID du container du dropdown
- * @param {string} idAttr - ID attribué au bouton sélectionné
+ * @param {string} idContainer - Id du container du dropdown
+ * @param {string} idAttr - Id attribué au bouton sélectionné
  */
 function afficherDureeSelectionnee(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
@@ -146,8 +146,8 @@ function afficherDureeSelectionnee(idContainer, idAttr) {
  * Lance également la mise à jour du graphique pour le nouvel ilot sélectionné
  * par défaut
  *
- * @param {int} idUtilisateur - ID de l'utilisateur
- * @param {array} contIdButtons - ID des containers des boutons
+ * @param {int} idUtilisateur - Id de l'utilisateur
+ * @param {array} contIdButtons - Id des containers des boutons
  */
 function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
 	const dropdownContent = document.getElementById(contIdButtons[0][0]);
@@ -172,10 +172,10 @@ function activerBoutonChgmtChamp(idUtilisateur, contIdButtons) {
 }
 
 /**
- * Converti les données passées en paramètre en CSV
+ * Converti les données passées en paramètre en CSV, séparées par des ';'
  *
- * @param {array} donnees - à convertir
- * @returns {string} - les données converties en CSV
+ * @param {array} donnees - À formater en CSV
+ * @returns {string} - Les données formatées
  */
 function convertirEnCSV(donnees) {
 	// Créé une chaîne vide
@@ -195,8 +195,8 @@ function convertirEnCSV(donnees) {
 /**
  * Lance le téléchargement d'un fichier, avec les données passées en paramètre
  *
- * @param {string} nomFichier - à télécharger
- * @param {string} donnees - à placer dans le fichier
+ * @param {string} nomFichier - À télécharger
+ * @param {string} donnees - À placer dans le fichier
  */
 function lancerTelechargement(nomFichier, donnees) {
 	// Créé un lien de téléchargement, avec les données à télécharger
@@ -219,7 +219,7 @@ function lancerTelechargement(nomFichier, donnees) {
 /**
  * Exporte les données de l'utilisateur au format CSV
  *
- * @param {int} idUtilisateur - ID de l'utilisateur
+ * @param {int} idUtilisateur - Id de l'utilisateur
  */
 function exportCSV(idUtilisateur) {
 	const valChamp = document.getElementById("champSlct").value;

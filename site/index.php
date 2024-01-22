@@ -212,8 +212,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 	/*** Variables et constantes ***/
 		/*
-		 * Tableau de tableau contenant les ID des containers des dropdowns et
-		 * les ID des boutons à ajouter quand ils sont sélectionnés
+		 * Tableau de tableau contenant les identifiants des containers des
+		 * dropdowns et les identifiants des boutons à ajouter quand ils sont
+		 * sélectionnés
 		*/
 	const contIdButtons = [
 		["selectChamp", "champSlct", true],
@@ -233,7 +234,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 	/*** Affichage des données ***/
-		// Récupérer l'ID utilisateur
+		// Récupérer l'identifiant utilisateur
 	const idUtilisateur = <?php echo json_encode($_SESSION["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur

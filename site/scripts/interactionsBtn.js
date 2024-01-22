@@ -1,6 +1,7 @@
 /**
- * Activer les boutons d'un dropdown. Si un bouton est sélectionné, il est
- * marqué d'un ID unique, permettant de récupérer sa valeur facilement.
+ * Activer les boutons contenus dans les dropdown
+ * Si un bouton est sélectionné, il est marqué d'un ID unique, permettant de
+ * récupérer sa valeur
  *
  * @param {string} idContainer - ID du container du dropdown
  * @param {string} idAttr - ID à attribuer au bouton sélectionné
@@ -141,9 +142,9 @@ function afficherDureeSelectionnee(idContainer, idAttr) {
 
 /**
  * Active la gestion de la mise à jour des ilots disponibles en fonction du
- * champ sélectionné.
+ * champ sélectionné
  * Lance également la mise à jour du graphique pour le nouvel ilot sélectionné
- * par défaut.
+ * par défaut
  *
  * @param {int} idUtilisateur - ID de l'utilisateur
  * @param {array} contIdButtons - ID des containers des boutons

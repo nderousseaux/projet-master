@@ -159,7 +159,7 @@
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
 
-	/** Changements du DOM **/
+	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page
 	activerDefilementHautPage();
 

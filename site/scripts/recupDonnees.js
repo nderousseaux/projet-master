@@ -1,9 +1,9 @@
 /**
- * Récupère des données dans le back, en fonction du champPost, en
- * accédant à un fichier spécifié, dans le backend
+ * Récupère des données dans le backend, en envoyant en POST des données et en
+ * accédant à un fichier spécifique dans le backend
  *
- * @param {formData} champPost - Champ à envoyer au back
- * @param {string} urlBackend - URL du backend
+ * @param {formData} champPost - à envoyer au backend
+ * @param {string} fichierBackend - fichier à appeler dans le backend
  * @returns {promise} - Promesse contenant les données récupérées
  */
 function recupDonnees(champPost, fichierBackend) {

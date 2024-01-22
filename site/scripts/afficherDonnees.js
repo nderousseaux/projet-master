@@ -191,7 +191,7 @@ function afficherIlots(nbrIlots) {
 }
 
 /**
- * Affiche les données météo, récupérées dans le back
+ * Affiche les données météo, récupérées dans le backend
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
  * @returns {bool} - false si la durée est invalide

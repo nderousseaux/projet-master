@@ -153,7 +153,8 @@ function verifInputMdp() {
 /**
  * Vérifie les champs du formulaire de modification d'un compte, lorsqu'un
  * événement se produit
- * Le format de la couleur doit être # suivi de 6 caractères hexadécimaux
+ * Le format de la couleur doit commencer par '#' et être suivi de 6 caractères
+ * hexadécimaux
  *
  * @returns {int} - le nombre de champs incorrects
  */

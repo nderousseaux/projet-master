@@ -64,17 +64,30 @@ foreach ($cursor as $infosUser) {
 }
 
 if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
-    $data = [];
-    $data["idUser"] = $idUser;
-    $data["idAgri"] = $idAgri;
-    $data["role"] = $role;
-    $data["nom"] = $nom;
-    $data["prenom"] = $prenom;
-    $data["mail"] = $mail;
-    //setcookie('session', json_encode($data), 0); //time()+7200 or 0
-    setcookie('idUser', $idUser, 0);
-    setcookie('idAgri', $idAgri, 0);
-    setcookie('role', $role, 0);
+    setcookie('idUser', $idUser, [
+        'expires' => 0,
+        'path' => '/',
+        //'domain' => '.localhost',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    setcookie('idAgri', $idAgri, [
+        'expires' => 0,
+        'path' => '/',
+        //'domain' => '.localhost',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    setcookie('role', $role, [
+        'expires' => 0,
+        'path' => '/',
+        //'domain' => '.localhost',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
 
     // demarre une session avec les infos du user
     //session_save_path("/alloc");

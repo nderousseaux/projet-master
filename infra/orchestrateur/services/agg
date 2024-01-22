@@ -1,0 +1,26 @@
+job "agg" {
+	datacenters = ["dc1"]
+
+	group "agg" {
+		count = 1
+
+		task "agg" {
+			driver = "docker"
+			config {
+				force_pull = true
+				image = "registry.app.unistra.fr/fseel/projet-master-23-24/agg"
+			}
+
+			template {
+				data = "MONGODB_URL=\"mongodb://{{ $services := service \"mongo\" }}{{ range $index, $service := $services }}{{ .Address }}:{{ .Port }}{{ if ne (add $index 1) (len $services) }},{{ end }}{{ end }}\""
+				destination = "/var/mongo.env"
+				env = true
+			}
+			
+			resources {
+				cpu = 200
+				memory = 256
+			}
+		}
+	}
+}

@@ -16,7 +16,9 @@ function calculateAndInsertAverage() {
     # var conn = new Mongo('mongodb://localhost:30001/data');
     # ajouter --port 30001 après mongosh
     local result=$(mongosh "$MONGODB_URL" --quiet --eval "
-    	use data;
+    var conn = new Mongo('$MONGODB_URL');
+        var db = conn.getDB('data');
+
         var aggregateResult = db.getCollection('${collectionName}').aggregate([
             {
                 \$match: {
@@ -82,18 +84,24 @@ function calculateAndInsertAverage() {
 # On récupère les combinaison via distinct de la table lumi
 currentDate=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 agris=$(mongosh "$MONGODB_URL" --quiet --eval "
-    use data;
+var conn = new Mongo('$MONGODB_URL');
+        var db = conn.getDB('data');
+
     db.lumi.distinct('idAgri', { idAgri: { \$exists: true } })")
 
 for idAgri in $(echo "${agris}" | jq -c '.[]'); do
     champs=$(mongosh "$MONGODB_URL" --quiet --eval "
-    use data;
+    var conn = new Mongo('$MONGODB_URL');
+        var db = conn.getDB('data');
+
     db.lumi.distinct('idChamps', { idAgri: ${idAgri}, idChamps: { \$exists: true } })
     ")
 
     for idChamp in $(echo "${champs}" | jq -c '.[]'); do
         ilots=$(mongosh "$MONGODB_URL" --quiet --eval "
-	use data;
+	var conn = new Mongo('$MONGODB_URL');
+        var db = conn.getDB('data');
+
         db.lumi.distinct('idIlot', { idAgri: ${idAgri}, idChamps: ${idChamp}, idIlot: { \$exists: true } })
         ")
 

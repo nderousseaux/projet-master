@@ -64,7 +64,7 @@ void Mesures::updateLuminosite() {
 		int value;
 		std::istringstream(res) >> value;
 
-		humidite_ = value;
+		luminosite_ = value;
 
 	} catch (const std::exception& e) {}
 

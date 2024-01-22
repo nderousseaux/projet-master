@@ -1,4 +1,4 @@
-# Ce programme lit tous les fichiers dans le dossier donné en agument (relatif ou absolu)
+# Ce programme lit tous les fichiers dans le dossier donné en argument (relatif ou absolu)
 # et ajoute les entrees qui s'y trouvent dans la BdD Mongo.
 # Ces entrees sont de la forme (1 par ligne):
 #   date idAgri idChamps idIlot temperature humidite luminosite
@@ -22,8 +22,8 @@ def parse_line(line):
     date_str = parts[0]
     date_time = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')
     id_agri, id_champ, id_ilot = map(int, parts[1:4])
-    temp, humi= map(float, parts[4:6])
-    lumi = int(parts[6])
+    temp, humi= map(str, parts[4:6])
+    lumi = parts[6]
 
     temp_entry = {
         'date': date_time,
@@ -49,7 +49,7 @@ def parse_line(line):
         'lumi': lumi,
     }
 
-    return temp_entry, humi_entry, lumi_entry
+    return [temp_entry, humi_entry, lumi_entry]
 
 
 
@@ -71,9 +71,15 @@ pattern = os.path.join(folder_path, '*')
 for file_path in glob.glob(pattern):
     with open(file_path, 'r') as file:
         for line in file:
-            temp, humi, lumi = parse_line(line)
-            db['temp'].insert_one(temp)
-            db['humi'].insert_one(humi)
-            db['lumi'].insert_one(lumi)
+            new_entry = parse_line(line)
+            if new_entry[0]["temp"] != "NaN":
+                new_entry[0]["temp"] = float(new_entry[0]["temp"])
+                db['temp'].insert_one(new_entry[0])
+            if new_entry[1]["humi"] != "NaN":
+                new_entry[1]["humi"] = float(new_entry[1]["humi"])
+                db['humi'].insert_one(new_entry[1])
+            if new_entry[2]["lumi"] != "NaN":
+                new_entry[2]["lumi"] = int(new_entry[2]["lumi"])
+                db['lumi'].insert_one(new_entry[2])
 
 client.close()

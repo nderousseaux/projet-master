@@ -1,7 +1,17 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/src/PHPMailer.php';
+require '../PHPMailer-master/src/SMTP.php';
+
 define('OK', 0);
 define('ERROR', 1);
+
+define('LIEN', "localhost:8080");   // adresse du site pour test local
+//define('LIEN', ""); // vraie adresse
 
 /**
  * Genere une chaine de caractere aleatoire
@@ -44,23 +54,54 @@ function generate_password() {
         $password .= random_str(1, $type);
     }
 
-    // melange les caracteres
+    // melange les caracteres avant de retourner la chaine
     return str_shuffle($password);
 }
 
 
 // envoie un email pour informer l'utilisateur de la création d'un compte à son nom
 // et lui fournir son mot de passe initial
-// /!\ utilise le paquet sendmail
-function notify($nom, $prenom, $mail, $mdp) {
-    $to      = $mail;
-    $subject = 'Compte ajouté';
-    $message = "Bonjour $prenom $nom,\nVoici votre mot de passe temporaire: $mdp\n";
-    $headers = array(
-        'From' => 'account-notify@agri-net.com'
-    );
+function notify($nom, $prenom, $dst_mail, $mdp) {
+    $lien = LIEN;
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer();
 
-    mail($to, $subject, $message, $headers);
+    // récupération des identifiants du serveur de mail
+    $env = parse_ini_file('.env');
+    $smtpId = $env["SMTP_ID"];
+    $smtpPw = $env["SMTP_PW"];
+    file_put_contents("/var/www/html/mail_co", $smtpId." ".$smtpPw);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 2;                   //Enable verbose debug output
+        $mail->isSMTP();                        //Send using SMTP
+        $mail->Host       = 'smtp.orange.fr';   //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;               //Enable SMTP authentication
+        $mail->Username   = $smtpId;            //SMTP username
+        $mail->Password   = $smtpPw;            //SMTP password
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port       = 465;                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom($smtpId, 'Notification Alsagrinet');
+        $mail->addAddress($dst_mail, "$prenom $nom");       //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                //Set email format to HTML
+        $mail->Subject = 'Nouveau Compte Alsagrinet';
+        $mail->Body    = "Bonjour $prenom $nom, <br/>Voici votre mot de passe temporaire: $mdp<br/>Vous pouvez vous connecter ici: $lien";
+        // pour client mail qui ne supporterait pas html
+        $mail->AltBody = "Bonjour $prenom $nom, Voici votre mot de passe temporaire: $mdp. Vous pouvez vous connecter ici: $lien";
+
+        $mail->Debugoutput = function($str, $level) {file_put_contents("/var/www/html/mail_".$level."_erreur.log", $str);};
+
+        $mail->send();
+        return OK;
+    } catch (Exception $e) {
+        file_put_contents("/var/www/html/mail_erreur.log", $mail->ErrorInfo);
+        return ERROR;
+    }
 }
 
 
@@ -81,7 +122,7 @@ function firstFreeIdUser($mongoClient, $database, $collection) {
 
 // Vérifie que toutes les infos sont présentes
 if (!(isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["role"]) && isset($_POST["courriel"]))) {
-	$erreur = array("Erreur", "Infos manquantes dans la requête");
+	$erreur = array("Erreur", "Informations manquantes dans la requête");
 	echo json_encode($erreur);
 	exit();
 }
@@ -139,7 +180,7 @@ $requete = new MongoDB\Driver\Query($filtre);
 $cursor = $mongoClient->executeQuery("$database.$collection", $requete);
 
 if (!$cursor->isDead()) { // mail deja existant
-    echo json_encode([ERROR, "Il existe déjà un utilisateur avec cette adresse courriel \"$mail\""]);
+    echo json_encode([ERROR, "Il existe déjà un utilisateur avec cette adresse courriel '$mail'"]);
     exit();
 }
 
@@ -150,10 +191,12 @@ $insert = new MongoDB\Driver\BulkWrite();
 $insert->insert($newCompte);
 
 try {
+    $err = OK;
     $result = $mongoClient->executeBulkWrite("$database.$collection", $insert, $writeConcern);
-    $mail = "florent.seel@etu.unistra.fr";
-    //notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
-    echo json_encode([OK, "$mdp"]);
+    $err = notify($_POST['nom'], $_POST['prenom'], $mail, $mdp);
+    //file_put_contents("/var/www/html/mail_erreur2.log", json_encode([OK, "$mdp"]));
+    echo json_encode([0, "$mdp"]);
 } catch (MongoDB\Driver\Exception\BulkWriteException $e) {
+    echo json_encode([ERROR, "Erreur lors de la création du compte."]);
     die("Error inserting document: " . $e->getMessage());
 }

@@ -217,6 +217,5 @@ for ($i = 0; $i < $counttemp; $i++) {
 	$res[] = round(floatval($temps[$i]),1);
 	$res[] = round(floatval($humis[$i]),1);
 	$res[] = round(floatval($lumis[$i]),1);
-	//$res[] = [$i, $fd, $code, $rest, $resh, $resl];
 }
 echo json_encode($res);

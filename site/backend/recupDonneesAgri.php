@@ -58,12 +58,6 @@ include "recupNumIlots.php";
 $data[] = ob_get_contents();
 ob_end_clean();
 
-/*
-ob_start();
-include "recupMesuresIlot.php";
-$data[] = ob_get_contents();
-ob_end_clean();
-*/
 // Retour des données pour affichage de la page principale
 echo json_encode($data);
 ?>

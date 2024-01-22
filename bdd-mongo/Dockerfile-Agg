@@ -13,4 +13,4 @@ RUN apt-get install -y mongodb
 
 RUN apt-get install -y jq --fix-missing
 
-CMD ["sleep", "1000"]
+CMD ["bash", "aggregate-data.sh"]

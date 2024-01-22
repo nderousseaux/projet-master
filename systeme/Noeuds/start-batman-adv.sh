@@ -19,4 +19,4 @@ sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 
 sudo dhclient wlan0 
-#bash ~/projet-master-23-24/systeme/Coap/coap_client.sh
+#sudo dhclient bat0

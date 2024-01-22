@@ -68,8 +68,8 @@ EOF
 
       
       resources {
-        cpu    = 200
-        memory = 256
+        cpu    = 500
+        memory = 1024
       }
     }
 
@@ -97,8 +97,8 @@ EOF
 				port = "http"
 			}
 	      resources {
-		cpu    = 200
-		memory = 256
+		cpu    = 500
+		memory = 1024
 	      }
 	}
 	    scaling {

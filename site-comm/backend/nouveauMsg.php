@@ -1,6 +1,6 @@
 <?php
 include_once "classe/BaseDeDonnees.php";
-$bdd = new BaseDeDonnees("./bdd/donnees.db");
+$bdd = new BaseDeDonnees("./donnees.db");
 
 $bdd->initialiserTable();
 

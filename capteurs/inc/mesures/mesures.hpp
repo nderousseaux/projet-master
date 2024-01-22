@@ -36,7 +36,7 @@ class Mesures {
 				0x0
 		};
 
-		const std::string I2C_DEV = "/dev/i2c-1";
+		static inline std::string I2C_DEV = "/dev/i2c-1";
 
 	/* Constructeur et destructeur */
 	public:
@@ -46,16 +46,16 @@ class Mesures {
 
 	/* Getters */
 	public:
-		inline std::string getDate(void) const {
+		[[nodiscard]] inline std::string getDate(void) const {
 			return date_;
 		}
-		inline float getTemperature(void) const {
+		[[nodiscard]] inline float getTemperature(void) const {
 			return temperature_;
 		}
-		inline float getHumidite(void) const {
+		[[nodiscard]] inline float getHumidite(void) const {
 			return humidite_;
 		}
-		inline double getLuminosite(void) const {
+		[[nodiscard]] inline double getLuminosite(void) const {
 			return luminosite_;
 		}
 
@@ -78,9 +78,27 @@ class Mesures {
 
 	/* Méthodes */
 	public:
-		void updateHumidite(void);
-		void updateLuminosite(void);
-		void updateTemperature(void);
+
+        /**
+         * @brief lit l'humidite du capteur
+         *
+         * @return la valeur lu par le capteur
+         */
+		static float updateHumidite(void);
+
+        /**
+         * @brief lit la luminosité du capteur
+         *
+         * @return la valeur lu par le capteur
+         */
+		static double updateLuminosite(void);
+
+        /**
+         * @brief lit la temperature du capteur
+         *
+         * @return la valeur lu par le capteur
+         */
+		static float updateTemperature(void);
 
 		/**
 		 * @brief Génère une valeur aléatoires entre borneInf et borneSupp

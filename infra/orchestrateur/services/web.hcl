@@ -16,7 +16,7 @@ job "web" {
         force_pull = true
         image = "registry.app.unistra.fr/fseel/projet-master-23-24/web"
         ports = ["web"]
-	volumes = [ "backend:/var/www/html/backend/api" ]
+	volumes = [ "backend:/var/www/html/backend/api", "tmp:/tmp" ]
       }
 
       template {
@@ -28,6 +28,11 @@ job "web" {
       template {
         data = "{{ env \"meta.cleAPI\" }}"
 	destination = "backend/cleAPI.txt"
+      }
+
+      template {
+      	data = "SMTP_ID=\"{{ env \"meta.SMTP_ID\" }}\"\nSMTP_PW=\"{{ env \"meta.SMTP_PW\" }}\""
+	destination = "tmp/.env"
       }
       
 			service {

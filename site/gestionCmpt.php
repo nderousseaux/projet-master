@@ -119,7 +119,7 @@
 	/*** Gestion des données ***/
 		// Récupérer l'ID utilisateur
 	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
+		echo json_encode($_SESSION["idAgri"]);
 	?>;
 
 		// Récupère le nom et prénom de l'utilisateur

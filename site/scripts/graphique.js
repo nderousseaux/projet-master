@@ -1,13 +1,14 @@
 /**
  * Paramètre le graphique, récupère les données et affiche l'ensemble
  *
+ * @param {int} idUtilisateur - ID de l'utilisateur
  * @param {int} numChamp - Numéro du champ
  * @param {int} numIlot - Numéro de l'ilot
  * @param {string} typeMesures - Type de mesures à récupérer
  * @returns {Promise} - Un tableau contenant les paramètres du graphique
  * 						et le type de mesures
  */
-function afficherGraphique(numChamp, numIlot, typeMesures) {
+function afficherGraphique(idUtilisateur, numChamp, numIlot, typeMesures) {
 	let typeMesuresStr, unite, degrade, margeMesure;
 	if (typeMesures === "humi") {
 		[typeMesuresStr, unite, degrade, min, max, margeMesure] =
@@ -37,6 +38,7 @@ function afficherGraphique(numChamp, numIlot, typeMesures) {
 	// Récupère les données et affiche le graphique
 	return new Promise((resolve, reject) => {
 		let champPost = new FormData();
+		champPost.append("idUtilisateur", idUtilisateur);
 		champPost.append("numChamp", numChamp);
 		champPost.append("numIlot", numIlot);
 		champPost.append("typeMesures", typeMesures);
@@ -249,15 +251,16 @@ function confLayout(rangeMin, rangeMinMob, rangeMax, ordMin, ordMax, unite) {
 /**
  * Affiche le graphique et renvoie les données nécessaires à son actualisation
  *
+ * @param {int} idUtilisateur - ID de l'utilisateur
  * @returns {promise} - Les paramètres du graphique
  */
-function helperRecupParamsGraph() {
+function helperRecupParamsGraph(idUtilisateur) {
 	const valChamp = document.getElementById("champSlct").value;
 	const valIlot = document.getElementById("ilotSlct").value;
 	const valType = document.getElementById("typeSlct").value;
 
 	return new Promise((resolve, reject) => {
-		afficherGraphique(parseFloat(valChamp), valIlot, valType)
+		afficherGraphique(idUtilisateur, valChamp, valIlot, valType)
 		.then(retour => {
 			resolve(retour);
 		})
@@ -270,9 +273,11 @@ function helperRecupParamsGraph() {
 /**
  * Lance l'affichage du graphique et enregistre les données nécessaires à son
  * actualisation, lorsque le graphique a été affiché
+ *
+ * @param {int} idUtilisateur - ID de l'utilisateur
  */
-function helperAfficherGraph() {
-	helperRecupParamsGraph()
+function helperAfficherGraph(idUtilisateur) {
+	helperRecupParamsGraph(idUtilisateur)
 	.then(retour => {
 		[typeMesuresStr, unite] = retour[0];
 		[rangeMin, rangeMinMob, rangeMax, ordMin, ordMax] = retour[1];

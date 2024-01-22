@@ -274,7 +274,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 				contIdButtons[7][2]);
 
 			// Affiche le graphique (nécessite de connaitre l'ilot sélectionné)
-			helperAfficherGraph();
+			helperAfficherGraph(idUtilisateur);
 		});
 	});
 
@@ -290,11 +290,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		// Bouton pour changer la sélection du graphique (type de données/ilot)
 	let dropdownTypeGraph = document.getElementById("ddType");
 	dropdownTypeGraph.addEventListener("click", _ => {
-		helperAfficherGraph();
+		helperAfficherGraph(idUtilisateur);
 	});
 	let dropdownIlotGraph = document.getElementById("ddIlot");
 	dropdownIlotGraph.addEventListener("click", _ => {
-		helperAfficherGraph();
+		helperAfficherGraph(idUtilisateur);
 	});
 
 		// Bouton pour exporter les données

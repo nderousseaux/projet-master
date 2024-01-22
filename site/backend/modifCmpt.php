@@ -46,6 +46,7 @@ $update = [];
 
 if (isset($_POST["mdp"])) {
     $update['mdp'] = password_hash($_POST["mdp"], PASSWORD_DEFAULT);
+    $update['mdp_temp'] = false;
 }
 if (isset($_POST["courriel"])) {
     $update['mail'] = $_POST['courriel'];

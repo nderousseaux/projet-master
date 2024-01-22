@@ -8,6 +8,7 @@ if (!(isset($manager))) {
 	echo json_encode($erreur);
 	exit();
 }
+
 // Création de la pipeline pour récupérer le nom d'agriculteur
 $pipelineilot = [
 	['$match' => [
@@ -26,9 +27,10 @@ $commandilot = new MongoDB\Driver\Command([
 $cursor = $manager->executeCommand('data', $commandilot);
 
 $ilots = [];
+$num = $_POST["numChamp"];
 // Traite les données
 foreach ($cursor as $element) {
-	$ilots = $element->champs->ilots;
+	$ilots = $element->champs->ilots[$num];
 }
 
-echo json_encode(count($ilots));
+echo json_encode($ilots);

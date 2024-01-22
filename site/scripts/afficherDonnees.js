@@ -53,7 +53,7 @@ function afficherNomUtilisateur(idUtilisateur) {
 /**
  * Affiche les infos du champ sélectionné
  *
- * @param {array} donnees - Contient les infos du champ :
+ * @param {array} donnees - Contient les informations du champ :
  * 							-> état du champ (0, 1, 2 ou 3),
  * 							-> nombre de capteurs actifs,
  * 							-> nombre de capteurs total,
@@ -471,6 +471,11 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 	champPost.append("idUtilisateur", idUtilisateur);
 	champPost.append("requeteAdmin", requeteAdmin);
 
+	// Supprime le message d'information s'il existe
+	if (document.getElementById("msgInfo")) {
+		document.getElementById("msgInfo").remove();
+	}
+
 	recupDonnees(champPost, "recupInfosUtilisateur.php")
 	.then(retour => {
 		const idUtilisateurInput = document.getElementById("idUtili");
@@ -533,6 +538,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 		}
 
 		icone.innerHTML = retour[1][0] + ". " + retour[2][0] + '.';
+		chgmtCouleurIcone();
 	})
 	.catch(err => {
 		console.error(err);

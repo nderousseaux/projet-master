@@ -14,10 +14,6 @@ class BaseDeDonnees {
 	 */
 	public function __construct($chemin) {
 		try {
-			if (!file_exists(dirname($chemin))) {
-				mkdir(dirname($chemin), 0777, true);
-			}
-
 			$this->pdo = new PDO("sqlite:$chemin");
 		}
 		catch (PDOException $exception) {

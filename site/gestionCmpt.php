@@ -118,7 +118,7 @@
 <script>
 	/*** Gestion des données ***/
 		// Récupérer l'identifiant utilisateur
-	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idUser"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);

@@ -236,9 +236,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	/*** Affichage des données ***/
 		// Récupérer l'identifiant utilisateur
 	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
+	const idUser = <?php echo json_encode($_COOKIE["idUser"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
-	afficherNomUtilisateur(idUtilisateur);
+	afficherNomUtilisateur(idUser);
 
 		// Affiche les champs de l'utilisateur
 	afficherChamps(idUtilisateur)

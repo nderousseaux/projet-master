@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style/index.css"/>
 	<link rel="stylesheet" type="text/css" href="style/politiqueConf.css"/>
 </head>
-<body>
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">

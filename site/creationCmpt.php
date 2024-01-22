@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 </head>
-<body>
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">

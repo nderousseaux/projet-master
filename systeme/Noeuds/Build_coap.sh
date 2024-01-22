@@ -1,6 +1,8 @@
 #!/bin/bash
 
+mkdir /home/$SUDO_USER/stockage
 cp -r ../Coap /home/$SUDO_USER/
+
 
 touch /home/$SUDO_USER/log_erreur.txt
 touch /home/$SUDO_USER/log_client.txt

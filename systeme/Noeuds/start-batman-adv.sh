@@ -19,4 +19,4 @@ sudo ifconfig wlan0 up
 sudo ifconfig bat0 up
 
 sudo dhclient wlan0 
-#sudo dhclient bat0
+sudo dhclient bat0

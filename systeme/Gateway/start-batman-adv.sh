@@ -68,4 +68,4 @@ sudo iptables -A OUTPUT -i bat0 -j ACCEPT
 
 # =======================================
 
-bash /home/$SUDO_USER/Coap/coap_serveur.sh &
+/home/pi/Coap/coap_serveur.sh pi > /dev/null 2>&1 &

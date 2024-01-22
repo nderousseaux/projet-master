@@ -1,6 +1,13 @@
 job "agg" {
 	datacenters = ["dc1"]
 
+	type = "batch"
+
+	periodic {
+		cron             = "0 * * * *"
+		prohibit_overlap = true
+	}
+
 	group "agg" {
 		count = 1
 

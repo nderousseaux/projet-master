@@ -489,7 +489,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 
 			// Si l'admin est sur sa propre page, désactive le selecteur
 			const nomUtilisateur = document.querySelector("header > " +
-			"section:last-child > p").innerHTML.split("#");
+				"section:last-child > p").innerHTML.split('#');
 			const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
 
 			if (retour[0].toString() === idUtiliPage) {

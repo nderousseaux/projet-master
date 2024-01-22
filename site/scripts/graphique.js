@@ -55,7 +55,7 @@ function afficherGraphique(idUtilisateur, numChamp, numIlot, typeMesures) {
 			// Détermine le zoom (intervalle) minimum du graphique
 			const rangeMin = abscisse[0];
 			const rangeMinMob = abscisse[abscisse.length - (7 * 24) - 1];
-			const rangeMax = abscisse[abscisse.length - 1]
+			const rangeMax = abscisse[abscisse.length - 1];
 
 			// Configure les données
 			const data = [{

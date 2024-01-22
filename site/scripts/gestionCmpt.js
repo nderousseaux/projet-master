@@ -8,7 +8,7 @@ function chgmtCouleurIcone() {
 	const couleur2 = document.getElementById("couleur2");
 
 	if (verifCouleur() !== 0) {
-		console.erreur("Le format des couleurs est incorrect")
+		console.erreur("Le format des couleurs est incorrect");
 		return;
 	}
 
@@ -63,8 +63,8 @@ function modifInputCmpt(requeteAdmin = false) {
 		for (let [key, value] of donneesForm.entries()) {
 			// Vérifie si le rôle a été modifié
 			if (key === "role") {
-				const optionSelect =
-					document.getElementById("selectionne").value;
+				const optionSelect = document.getElementById("selectionne")
+					.value;
 
 				if (value !== optionSelect) {
 					champPost.append(key, value);
@@ -115,7 +115,7 @@ function modifInputCmpt(requeteAdmin = false) {
 /**
  * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
  * dans la base de données
- * 
+ *
  * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
  * @param {formData} champPost - données du formulaire changées
@@ -139,7 +139,7 @@ function majValInputCmpt(requeteAdmin, champPost) {
 				"form > input[name=nom]").value;
 			const prenom = document.querySelector(
 				"form > input[name=prenom]").value;
-			
+
 			// Si l'utilisateur modifie son propre compte, change le header
 			if (idUtiliPage === idUtiliForm) {
 				document.querySelector("header > section:last-child > p")
@@ -157,30 +157,24 @@ function majValInputCmpt(requeteAdmin, champPost) {
 
 			// Rôle
 		else if (key === "role") {
-			const optionSelect = document.getElementById(
-				"selectionne"
-			);
+			const optionSelect = document.getElementById("selectionne");
 			optionSelect.removeAttribute("id");
 
 			if (value !== optionSelect) {
-				document.querySelector(
-					"#role > option[value=" + value +"]"
-				).id = "selectionne";
+				document.querySelector("#role > option[value=" + value +"]")
+					.id = "selectionne";
 			}
 		}
 
 			// Mot de passe
 		else if (key === "mdp") {
-			document.querySelector(
-				"form > input[name=" + key + "]"
-			).value = '';
+			document.querySelector("form > input[name=" + key + "]").value = '';
 		}
 
 			// Autres champs
 		else {
-			document.querySelector(
-				"form > input[name=" + key + "]"
-			).placeholder = value;
+			document.querySelector("form > input[name=" + key + "]")
+				.placeholder = value;
 		}
 	});
 }
@@ -344,11 +338,10 @@ function changerFormulaire(idUtilisateur) {
 	titre.textContent = "Définir un nouveau mot de passe";
 
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
-	document.getElementById("enregMdp").addEventListener("click",
-	e => {
+	document.getElementById("enregMdp").addEventListener("click", _ => {
 		enregistrerMdp(idUtilisateur);
 	});
-	document.querySelector("form").addEventListener("submit", e => {
+	document.querySelector("form").addEventListener("submit", _ => {
 		enregistrerMdp(idUtilisateur);
 	});
 }
@@ -414,7 +407,7 @@ function afficherMsgErreur(message, creaUtili = false) {
 
 /**
  * Affiche un message d'information dans le formulaire de modification
- * 
+ *
  * @param {string} message - message d'information à afficher
  * @param {boolean} type - true si le message est une information, false si
  * 						   c'est une erreur

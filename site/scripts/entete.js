@@ -4,11 +4,11 @@
  */
 function activerDefilementHautPage() {
 	// Sur le header
-	defielementSurElement(document.querySelector("header"))
+	defielementSurElement(document.querySelector("header"));
 
 	// Sur les sections du header
 	document.querySelectorAll("header > section").forEach(element => {
-		defielementSurElement(element)
+		defielementSurElement(element);
 	});
 }
 
@@ -53,18 +53,18 @@ function activerHeaderReduit() {
 function retracterScroll() {
 	if (document.documentElement.scrollTop > distanceScroll) {
 		// Header
-		document.querySelector("header").classList
-			.add("miseEchelleHeader");
+		document.querySelector("header").classList.add("miseEchelleHeader");
 
 		// Box centrale
 		document.querySelector("header > a > picture > img").classList
 			.add("masqueLogo");
 
 		// Sections
-		document.querySelectorAll("header > section")
-			.forEach(function(section) {
+		document.querySelectorAll("header > section").forEach(
+			function(section) {
 				section.classList.add("miseEchelleSection");
-			});
+			}
+		);
 	}
 	else {
 		// Header
@@ -76,9 +76,10 @@ function retracterScroll() {
 			.remove("masqueLogo");
 
 		// Sections
-		document.querySelectorAll("header > section")
-			.forEach(function(section) {
+		document.querySelectorAll("header > section").forEach(
+			function(section) {
 				section.classList.remove("miseEchelleSection");
-			});
+			}
+		);
 	}
 }

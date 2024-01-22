@@ -305,8 +305,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	activerHeaderReduit();
 
 		// Gère les changements de thème pour le graphique
-	window.matchMedia("(prefers-color-scheme: light)")
-	.addEventListener("change",	_ => {
+	window.matchMedia("(prefers-color-scheme: light)").addEventListener(
+	"change", _ => {
 		helperActualisationStyleGraph();
 	});
 

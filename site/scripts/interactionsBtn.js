@@ -90,8 +90,7 @@ function afficherTitreDropdown(idContainer, idAttr) {
 function afficherChampSelectionne(idContainer, idAttr) {
 	const container = document.getElementById(idContainer).parentNode
 		.previousElementSibling;
-	container.textContent = "Champ " +
-		document.getElementById(idAttr).value;
+	container.textContent = "Champ " + document.getElementById(idAttr).value;
 }
 
 /**
@@ -222,7 +221,7 @@ function lancerTelechargement(nomFichier, donnees) {
  */
 function exportCSV(idUtilisateur) {
 	const valChamp = document.getElementById("champSlct").value;
-	const valType = document.getElementById("typeExportSlct").value
+	const valType = document.getElementById("typeExportSlct").value;
 	const valDuree = document.getElementById("dureeExportSlct").value;
 	const valIlot = document.getElementById("ilotExportSlct").value;
 

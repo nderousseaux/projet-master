@@ -10,6 +10,12 @@ class CouleursGraph {
 		this.fillColor = fillColor;
 	}
 
+	/**
+	 * Récupère les couleurs du graphique
+	 *
+	 * @returns {array} - Un tableau contenant les couleurs du graphique
+	 *					  (background, grid, font, line, fill)
+	 */
 	getCouleursTableau() {
 		return Array(
 			this.bgColor, this.gridColor,
@@ -18,12 +24,24 @@ class CouleursGraph {
 		);
 	}
 
+	/**
+	 * Récupère les couleurs des données du graphique
+	 * 
+	 * @returns {array} - Un tableau contenant les couleurs des données du
+	 * 					  graphique (line, fill)
+	 */
 	getCouleursData() {
 		return Array(
 			this.lineColor, this.fillColor
 		);
 	}
 
+	/**
+	 * Récupère les couleurs du layout du graphique
+	 * 
+	 * @returns {array} - Un tableau contenant les couleurs du layout du
+	 * 					  graphique (background, grid, font)
+	 */
 	getCouleursLayout() {
 		return Array(
 			this.bgColor, this.gridColor, this.color
@@ -31,6 +49,9 @@ class CouleursGraph {
 	}
 }
 
+/**
+ * Classe pour les couleurs claires du graphique
+ */
 class CouleursClaires extends CouleursGraph {
 	constructor() {
 		super(
@@ -41,6 +62,9 @@ class CouleursClaires extends CouleursGraph {
 	}
 }
 
+/**
+ * Classe pour les couleurs sombres du graphique
+ */
 class CouleursSombres extends CouleursGraph {
 	constructor() {
 		super(
@@ -50,7 +74,6 @@ class CouleursSombres extends CouleursGraph {
 		);
 	}
 }
-
 
 /**
  * Classe pour les couleurs des données
@@ -81,6 +104,9 @@ class CouleursDonnees {
 	}
 }
 
+/**
+ * Classe pour les couleurs des données de température
+ */
 class CouleursDonneesTemp extends CouleursDonnees {
 	constructor() {
 		super(
@@ -90,6 +116,9 @@ class CouleursDonneesTemp extends CouleursDonnees {
 	}
 }
 
+/**
+ * Classe pour les couleurs des données d'humidité
+ */
 class CouleursDonneesHum extends CouleursDonnees {
 	constructor() {
 		super(
@@ -99,6 +128,9 @@ class CouleursDonneesHum extends CouleursDonnees {
 	}
 }
 
+/**
+ * Classe pour les couleurs des données de luminosité
+ */
 class CouleursDonneesLumi extends CouleursDonnees {
 	constructor() {
 		super(

@@ -372,6 +372,7 @@ header > div:last-child > h2 {
 	padding: 10px;
 	border: none;
 	border-radius: 5px;
+	color: #000000;
 	background-color: #ffffff;
 	font-size: 15px;
 }

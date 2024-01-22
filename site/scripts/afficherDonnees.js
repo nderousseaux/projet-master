@@ -548,7 +548,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 function afficherUtilisateurs(idUtilisateur) {
 	return new Promise((resolve) => {
 		let champPost = new FormData();
-		champPost.append("idUtilisateur", idUtilisateur); 
+		champPost.append("idUtilisateur", idUtilisateur);
 
 		recupDonnees(champPost, "recupUtilisateurs.php")
 		.then(retour => {

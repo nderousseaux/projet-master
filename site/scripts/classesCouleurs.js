@@ -26,7 +26,7 @@ class CouleursGraph {
 
 	/**
 	 * Récupère les couleurs des données du graphique
-	 * 
+	 *
 	 * @returns {array} - Un tableau contenant les couleurs des données du
 	 * 					  graphique (line, fill)
 	 */
@@ -38,7 +38,7 @@ class CouleursGraph {
 
 	/**
 	 * Récupère les couleurs du layout du graphique
-	 * 
+	 *
 	 * @returns {array} - Un tableau contenant les couleurs du layout du
 	 * 					  graphique (background, grid, font)
 	 */

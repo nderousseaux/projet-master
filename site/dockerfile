@@ -8,7 +8,7 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 #RUN apt update && apt install sendmail -y
 
 # Copie les fichiers sources dans le dossier /var/www/html
-COPY . /var/www/html
+# COPY . /var/www/html
 COPY php.ini /usr/local/etc/php/php.ini
 
 EXPOSE 80

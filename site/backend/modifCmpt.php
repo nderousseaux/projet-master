@@ -52,7 +52,7 @@ if (isset($_POST["courriel"])) {
     $update['mail'] = $_POST['courriel'];
 }
 
-$fields = ['role', 'nom', 'prenom'];
+$fields = ['role', 'nom', 'prenom', 'couleur1', 'couleur2'];
 foreach ($fields as $field) {
     if (isset($_POST[$field])) {
         $update[$field] = $_POST[$field];

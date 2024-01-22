@@ -70,7 +70,7 @@ function notify($nom, $prenom, $dst_mail, $mdp) {
     $env = parse_ini_file('/tmp/.env');
     $smtpId = $env["SMTP_ID"];
     $smtpPw = $env["SMTP_PW"];
-    file_put_contents("/var/www/html/mail_erreur2.log", $smtpId." ".$smtpPw);
+    file_put_contents("/var/www/html/mail_erreur2.log", $smtpId." ".$smtpPw); //TODO: remove
 
     try {
         //Server settings
@@ -159,13 +159,15 @@ $mail = $_POST["courriel"];
 $mdp = generate_password();
 $newCompte = [
     "idUser"    => firstFreeIdUser($mongoClient, $database, $collection),
-    "idAgri"    => $_COOKIE["idAgri"],
+    "idAgri"    => intval($_COOKIE["idAgri"]),
     "role"      => $_POST['role'],
     "nom"       => $_POST['nom'],
     "prenom"    => $_POST['prenom'],
     "mail"      => $mail,
     "mdp"       => password_hash($mdp, PASSWORD_DEFAULT),
     "mdp_temp"  => true,
+    "couleur1"  => "#ffffff",
+    "couleur2"  => "#000000"
 ];
 
 // vérifier qu'il n'y a pas déjà un compte pour cette @ mail

@@ -71,6 +71,9 @@ int main(int argc, char** argv) {
 		// Récupère les valeurs des capteurs
 	else {
 		// >> Récupère ici les valeurs des capteurs
+		temp = Mesures::updateTemperature();
+		humi = Mesures::updateHumidite();
+		lumi = Mesures::updateLuminosite();
 	}
 
 	// Stocke les valeurs générées

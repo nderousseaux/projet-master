@@ -2,7 +2,7 @@
  * Affiche les champs de l'utilisateur
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- * @returns {promise} - résolue quand les champs sont affichés
+ * @returns {promise} - Résolue quand les champs sont affichés
  */
 function afficherChamps(idUtilisateur) {
 	let champPost = new FormData();
@@ -53,7 +53,7 @@ function afficherNomUtilisateur(idUtilisateur) {
 /**
  * Affiche les infos du champ sélectionné
  *
- * @param {array} donnees - contient les infos du champ :
+ * @param {array} donnees - Contient les infos du champ :
  * 							-> état du champ (0, 1, 2 ou 3),
  * 							-> nombre de capteurs actifs,
  * 							-> nombre de capteurs total,
@@ -101,7 +101,7 @@ function afficherInfosChamp(donnees) {
  * Affiche les moyennes de température, d'humidité et de luminosité pour le
  * champ indiqué
  *
- * @param {array} donnees - contient les moyennes de température, d'humidité et
+ * @param {array} donnees - Contient les moyennes de température, d'humidité et
  * 							de luminosité pour le champ indiqué
  */
 function afficherMoyennes(donnees) {
@@ -120,7 +120,7 @@ function afficherMoyennes(donnees) {
 /**
  * Affiche toutes les mesures pour un champ indiqué
  *
- * @param {array} donnees - contient toutes les mesures pour le champ indiqué
+ * @param {array} donnees - Contient toutes les mesures pour le champ indiqué
  */
 function afficherMesuresChamp(donnees) {
 	viderTableau("donneesTableau");
@@ -191,10 +191,10 @@ function afficherIlots(nbrIlots) {
 }
 
 /**
- * Affiche les données météo, récupérées dans le back
+ * Affiche les données météo, récupérées dans le backend
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- * @returns {bool} - false si la durée est invalide
+ * @returns {bool} - Si la durée est invalide, retourne false
  */
 function afficherMeteo(idUtilisateur) {
 	const duree = document.getElementById("dureeSlct").value;
@@ -317,7 +317,7 @@ function afficherMeteo(idUtilisateur) {
 /**
  * Supprime toutes les données d'un tableau, sauf la ligne de titre
  *
- * @param {string} idTableau - id du tableau
+ * @param {string} idTableau - Id du tableau
  */
 function viderTableau(idTableau) {
 	const container = document.getElementById(idTableau);
@@ -328,8 +328,8 @@ function viderTableau(idTableau) {
 /**
  * Créé une cellule et y ajoute le texte passé en paramètre
  *
- * @param {string} texte - à afficher dans la cellule
- * @returns {div} - la cellule créée
+ * @param {string} texte - À afficher dans la cellule
+ * @returns {div} - La cellule créée
  */
 function ajoutCellule(texte) {
 	const cellule = document.createElement("div");
@@ -342,9 +342,9 @@ function ajoutCellule(texte) {
  * Traduit les valeurs de précipitations en français, et ajoute l'indication
  * visuelle dans la cellule
  *
- * @param {object} objPrecip - objet contenant les valeurs de précipitations
- * @param {div} cellule - où afficher les précipitations
- * @returns {div} - la cellule modifiée
+ * @param {object} objPrecip - Objet contenant les valeurs de précipitations
+ * @param {div} cellule - Où afficher les précipitations
+ * @returns {div} - La cellule modifiée
  */
 function cellulePrecip(objPrecip, cellule) {
 	const precipEnVersFr = [
@@ -373,9 +373,9 @@ function cellulePrecip(objPrecip, cellule) {
 /**
  * Ajoute un indicateur visuel de la direction du vent
  *
- * @param {float} dirVent - en degrés
- * @param {div} cellule - où afficher les précipitations
- * @returns {div} - la cellule modifiée
+ * @param {float} dirVent - En degrés
+ * @param {div} cellule - Où afficher les précipitations
+ * @returns {div} - La cellule modifiée
  */
 function celluleDirVent(dirVent, cellule) {
 	if (dirVent >= 0 && dirVent <= 45) {
@@ -410,9 +410,9 @@ function celluleDirVent(dirVent, cellule) {
  * Ajoute un indicateur visuel en fonction de la température, en cas de risque
  * de gel ou de canicule
  *
- * @param {float} temp - en °C
- * @param {div} cellule - où afficher les précipitations
- * @returns {div} - la cellule modifiée
+ * @param {float} temp - En °C
+ * @param {div} cellule - Où afficher les précipitations
+ * @returns {div} - La cellule modifiée
  */
 function celluleTemp(temp, cellule) {
 	const gel = 0.0;
@@ -433,7 +433,7 @@ function celluleTemp(temp, cellule) {
  * les mesures et les ilots disponibles
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- * @returns {promise} - résolue quand les données sont affichées
+ * @returns {promise} - Résolue quand les données sont affichées
  */
 function helperAffichageDonneesChamp(idUtilisateur) {
 	return new Promise((resolve) => {
@@ -462,7 +462,7 @@ function helperAffichageDonneesChamp(idUtilisateur) {
  * Affiche les infos de l'utilisateur dans le formulaire
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- * @param {bool} requeteAdmin - true si la requête est faite par un admin
+ * @param {bool} requeteAdmin - Si true, la requête est faite par un admin,
  * 								dans ce cas, renvoi le rôle de l'utilisateur en
  * 								dernier dans la réponse
  */
@@ -489,7 +489,7 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
 
 			// Si l'admin est sur sa propre page, désactive le selecteur
 			const nomUtilisateur = document.querySelector("header > " +
-			"section:last-child > p").innerHTML.split("#");
+				"section:last-child > p").innerHTML.split('#');
 			const idUtiliPage = nomUtilisateur[nomUtilisateur.length - 1];
 
 			if (retour[0].toString() === idUtiliPage) {
@@ -543,12 +543,12 @@ function afficherDonneesUtilisateur(idUtilisateur, requeteAdmin = false) {
  * Affiche tous les utilisateurs dans le menu déroulant
  *
  * @param {int} idUtilisateur - Numéro identifiant l'utilisateur
- * @returns {promise} - résolue quand les utilisateurs sont affichés
+ * @returns {promise} - Résolue quand les utilisateurs sont affichés
  */
 function afficherUtilisateurs(idUtilisateur) {
 	return new Promise((resolve) => {
 		let champPost = new FormData();
-		champPost.append("idUtilisateur", idUtilisateur); 
+		champPost.append("idUtilisateur", idUtilisateur);
 
 		recupDonnees(champPost, "recupUtilisateurs.php")
 		.then(retour => {

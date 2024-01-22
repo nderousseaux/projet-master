@@ -1,5 +1,5 @@
 # Site
-## Docker
+## Lancement du site
 Construire et lancer l'image crée :  
 `./run-site.sh`
 
@@ -11,12 +11,3 @@ Ouvrir un navigateur Internet et accéder à l'adresse :
 
 S'attacher au container :  
 `docker attach IdDuContainer`
-
-## Manuellement
-Afin de faire fonctionner le backend, il est nécessaire de lancer PHP, depuis
-le dossier `site/`.
-
-Pour cela, il faut lancer la commande :  
-`php -S localhost:8080`
-
-Puis, depuis un navigateur Internet, ouvrir `localhost:8080`.

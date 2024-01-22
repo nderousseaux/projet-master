@@ -1,8 +1,9 @@
 <?php
 	// Vérifie si l'utilisateur est déjà connecté
-	session_start();
+	// session_save_path("/alloc");
+	// session_start();
 
-	if (isset($_SESSION["idUser"])) {
+	if (isset($_COOKIE["idUser"])) {
 		echo "<script>location.href='.';</script>";
 	}
 ?>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 </head>
-<body>
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 </header>

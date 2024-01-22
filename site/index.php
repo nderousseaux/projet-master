@@ -1,6 +1,6 @@
 <?php
 	include "backend/checkConnexion.php";
-	$role = $_SESSION["role"]; // "admin" ou "standard"
+	$role = $_COOKIE["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -212,8 +212,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 	/*** Variables et constantes ***/
 		/*
-		 * Tableau de tableau contenant les ID des containers des dropdowns et
-		 * les ID des boutons à ajouter quand ils sont sélectionnés
+		 * Tableau de tableau contenant les identifiants des containers des
+		 * dropdowns et les identifiants des boutons à ajouter quand ils sont
+		 * sélectionnés
 		*/
 	const contIdButtons = [
 		["selectChamp", "champSlct", true],
@@ -231,16 +232,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		activerBouton(element[0], element[1], element[2]);
 	});
 
-		// Retours des paramètres du graphique
-	let typeMesuresStr, unite;
-	let rangeMin, rangeMinMob, rangeMax, ordMin, ordMax;
-
 
 	/*** Affichage des données ***/
-		// Récupérer l'ID utilisateur
-	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
-	?>;
+		// Récupérer l'identifiant utilisateur
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);
@@ -281,18 +276,18 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	/*** Interaction des boutons ***/
 		// Bouton pour changer la temporalité de la météo
-	let dropdownDuree = document.getElementById("ddDuree");
+	const dropdownDuree = document.getElementById("ddDuree");
 	dropdownDuree.addEventListener("click", _ => {
 		const valChamp = document.getElementById("dureeSlct").value;
 		afficherMeteo(idUtilisateur);
 	});
 
 		// Bouton pour changer la sélection du graphique (type de données/ilot)
-	let dropdownTypeGraph = document.getElementById("ddType");
+	const dropdownTypeGraph = document.getElementById("ddType");
 	dropdownTypeGraph.addEventListener("click", _ => {
 		helperAfficherGraph(idUtilisateur);
 	});
-	let dropdownIlotGraph = document.getElementById("ddIlot");
+	const dropdownIlotGraph = document.getElementById("ddIlot");
 	dropdownIlotGraph.addEventListener("click", _ => {
 		helperAfficherGraph(idUtilisateur);
 	});
@@ -311,8 +306,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	activerHeaderReduit();
 
 		// Gère les changements de thème pour le graphique
-	window.matchMedia("(prefers-color-scheme: light)")
-	.addEventListener("change",	_ => {
+	window.matchMedia("(prefers-color-scheme: light)").addEventListener(
+	"change", _ => {
 		helperActualisationStyleGraph();
 	});
 

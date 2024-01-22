@@ -33,12 +33,12 @@ function verifInputCmpt() {
 
 	/* Vérification des champs */
 		// Prénom
-	let prenomInput = document.getElementById("prenom");
+	const prenomInput = document.getElementById("prenom");
 	inputPreVerif(prenomInput);
 	prenomInput.addEventListener("input", inputPostVerif);
 
 		// Nom
-	let nomInput = document.getElementById("nom");
+	const nomInput = document.getElementById("nom");
 	inputPreVerif(nomInput);
 	nomInput.addEventListener("input", inputPostVerif);
 
@@ -57,7 +57,7 @@ function verifInputCmpt() {
 function verifSelectRole() {
 	let nbrErr = 0;
 
-	let roleInput = document.getElementById("role");
+	const roleInput = document.getElementById("role");
 	if (roleInput.value !== "admin" && roleInput.value !== "standard") {
 		roleInput.classList.add("erreur");
 		nbrErr++;
@@ -79,8 +79,9 @@ function verifSelectRole() {
 /**
  * Vérifie le champ du courriel dans le formulaire, lorsqu'un événement se
  * produit
- * Le courriel doit contenir au moins 1 caractère avant le @, 1 caractère entre
- * le '@' et le '.', 1 caractère après le '.'
+ * Le courriel doit contenir au moins 1 caractère avant le '@', 1 caractère
+ * entre le '@' et le '.' puis 1 caractère après le '.'
+ * Par exemple : "adresse@courriel.fr"
  *
  * @returns {int} - le nombre de champs incorrects
  */
@@ -92,7 +93,7 @@ function verifInputCourriel() {
 
 	/* Fonction de vérification des champs */
 		// Au chargement de la page
-	let courrielInput = document.getElementById("courriel");
+	const courrielInput = document.getElementById("courriel");
 	if (courrielInput.value.match(regexCourriel) === null) {
 		courrielInput.classList.add("erreur");
 		nbrErr++;
@@ -129,7 +130,7 @@ function verifInputMdp() {
 
 	/* Fonction de vérification des champs */
 		// Au chargement de la page
-	let mdpInput = document.getElementById("mdp");
+	const mdpInput = document.getElementById("mdp");
 	if (mdpInput.value.match(regexMdp) === null) {
 		mdpInput.classList.add("erreur");
 		nbrErr++;
@@ -153,7 +154,9 @@ function verifInputMdp() {
 /**
  * Vérifie les champs du formulaire de modification d'un compte, lorsqu'un
  * événement se produit
- * Le format de la couleur doit être # suivi de 6 caractères hexadécimaux
+ * Le format de la couleur doit commencer par '#' et être suivi de 6 caractères
+ * hexadécimaux
+ * Par exemple : "#7fc7a7"
  *
  * @returns {int} - le nombre de champs incorrects
  */
@@ -186,12 +189,12 @@ function verifCouleur() {
 
 	/* Vérification des champs */
 		// Couleur 1
-	let couleur1Input = document.getElementById("couleur1");
+	const couleur1Input = document.getElementById("couleur1");
 	inputPreVerif(couleur1Input);
 	couleur1Input.addEventListener("input", inputPostVerif);
 
 		// Couleur 2
-	let couleur2Input = document.getElementById("couleur2");
+	const couleur2Input = document.getElementById("couleur2");
 	inputPreVerif(couleur2Input);
 	couleur2Input.addEventListener("input", inputPostVerif);
 

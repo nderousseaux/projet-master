@@ -2,7 +2,7 @@
 	include "backend/checkConnexion.php";
 
 	// Vérifie que l'utilisateur est bien un administrateur
-	if ($_SESSION["role"] !== "admin") {
+	if ($_COOKIE["role"] !== "admin") {
 		header("Location: .");
 	}
 ?>
@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="style/accesCmpt.css"/>
 	<link rel="stylesheet" type="text/css" href="style/gestionCmpt.css"/>
 </head>
-<body>
+<body tabindex='0'>
 <header>
 	<?php include "assets/logo.php"?>
 	<section title="Retourner en haut de la page">
@@ -69,10 +69,8 @@
 <script src="scripts/entete.js"></script>
 <script>
 	/*** Gestion des données ***/
-		// Récupérer l'ID utilisateur
-	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]); //idUser ?
-	?>;
+		// Récupérer l'identifiant utilisateur
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);

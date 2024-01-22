@@ -8,7 +8,7 @@ function chgmtCouleurIcone() {
 	const couleur2 = document.getElementById("couleur2");
 
 	if (verifCouleur() !== 0) {
-		console.erreur("Le format des couleurs est incorrect")
+		console.erreur("Le format des couleurs est incorrect");
 		return;
 	}
 
@@ -32,7 +32,7 @@ function chgmtCouleurIcone() {
  * envoie les données au backend si elles sont correctes, pour la modification
  * des informations d'un compte
  *
- * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
  */
 function modifInputCmpt(requeteAdmin = false) {
@@ -63,8 +63,8 @@ function modifInputCmpt(requeteAdmin = false) {
 		for (let [key, value] of donneesForm.entries()) {
 			// Vérifie si le rôle a été modifié
 			if (key === "role") {
-				const optionSelect =
-					document.getElementById("selectionne").value;
+				const optionSelect = document.getElementById("selectionne")
+					.value;
 
 				if (value !== optionSelect) {
 					champPost.append(key, value);
@@ -115,10 +115,10 @@ function modifInputCmpt(requeteAdmin = false) {
 /**
  * Met à jour les valeurs des inputs du formulaire avec les valeurs enregistrées
  * dans la base de données
- * 
- * @param {boolean} requeteAdmin - true si la requête est faite par un admin,
+ *
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
  * 								   vérifie le rôle sélectionné dans ce cas
- * @param {formData} champPost - données du formulaire changées
+ * @param {formData} champPost - Données du formulaire changées
  */
 function majValInputCmpt(requeteAdmin, champPost) {
 	champPost.forEach((value, key) => {
@@ -139,7 +139,7 @@ function majValInputCmpt(requeteAdmin, champPost) {
 				"form > input[name=nom]").value;
 			const prenom = document.querySelector(
 				"form > input[name=prenom]").value;
-			
+
 			// Si l'utilisateur modifie son propre compte, change le header
 			if (idUtiliPage === idUtiliForm) {
 				document.querySelector("header > section:last-child > p")
@@ -157,30 +157,24 @@ function majValInputCmpt(requeteAdmin, champPost) {
 
 			// Rôle
 		else if (key === "role") {
-			const optionSelect = document.getElementById(
-				"selectionne"
-			);
+			const optionSelect = document.getElementById("selectionne");
 			optionSelect.removeAttribute("id");
 
 			if (value !== optionSelect) {
-				document.querySelector(
-					"#role > option[value=" + value +"]"
-				).id = "selectionne";
+				document.querySelector("#role > option[value=" + value +"]")
+					.id = "selectionne";
 			}
 		}
 
 			// Mot de passe
 		else if (key === "mdp") {
-			document.querySelector(
-				"form > input[name=" + key + "]"
-			).value = '';
+			document.querySelector("form > input[name=" + key + "]").value = '';
 		}
 
 			// Autres champs
 		else {
-			document.querySelector(
-				"form > input[name=" + key + "]"
-			).placeholder = value;
+			document.querySelector("form > input[name=" + key + "]")
+				.placeholder = value;
 		}
 	});
 }
@@ -226,7 +220,7 @@ function connexionCmpt() {
 	let nbrErr = verifInputCourriel();
 
 		// Mot de passe (vérifie uniquement que le champ n'est pas vide)
-	let mdpInput = document.getElementById("mdp");
+	const mdpInput = document.getElementById("mdp");
 	if (mdpInput.value === '') {
 		mdpInput.classList.add("erreur");
 		nbrErr++;
@@ -271,21 +265,38 @@ function connexionCmpt() {
 
 /**
  * Réinitialise les valeurs des inputs du formulaire
+ *
+ * @param {boolean} requeteAdmin - Si true la requête est faite par un admin,
+ * 								   vérifie le rôle sélectionné dans ce cas
  */
-function reinitInputCmpt() {
+function reinitInputCmpt(requeteAdmin = false) {
 	// Récupère tous les éléments du formulaire
 	const inputsForm = document.querySelectorAll("form input");
 
 	// Remplace les valeurs des inputs par les placeholders (sauf pour le mdp)
 	inputsForm.forEach(input => {
-		if (input.id !== "mdp") {
+		// Ne réinitialise pas l'identifiant de l'utilisateur
+		if (input.id === "idUtili") {
+			return;
+		}
+
+		// Réinitialise les autres champs
+		else if (input.id !== "mdp") {
 			const placeholder = input.placeholder;
 			input.value = placeholder;
 		}
+
+		// S'il s'agit du mot de passe, le vide
 		else {
 			input.value = '';
 		}
 	});
+
+	// Réinitialise le selecteur de rôle
+	if (requeteAdmin === true) {
+		const selecteur = document.getElementById("role");
+		selecteur.value = document.getElementById("selectionne").value;
+	}
 }
 
 /**
@@ -305,7 +316,7 @@ function copierPressePapier() {
  * Réinitialise le contenu affiché sur le bouton de copie
  */
 function reinitBouton() {
-	let containerBouton = document.getElementById("texteBouton");
+	const containerBouton = document.getElementById("texteBouton");
 	containerBouton.innerHTML = "Copier dans le presse-papier";
 }
 
@@ -344,11 +355,10 @@ function changerFormulaire(idUtilisateur) {
 	titre.textContent = "Définir un nouveau mot de passe";
 
 	// Ajoute les événements au bouton d'enregistrement et au formulaire
-	document.getElementById("enregMdp").addEventListener("click",
-	e => {
+	document.getElementById("enregMdp").addEventListener("click", _ => {
 		enregistrerMdp(idUtilisateur);
 	});
-	document.querySelector("form").addEventListener("submit", e => {
+	document.querySelector("form").addEventListener("submit", _ => {
 		enregistrerMdp(idUtilisateur);
 	});
 }
@@ -388,7 +398,7 @@ function afficherDialogConfirm() {
 /**
  * Affiche un message d'erreur dans le formulaire
  *
- * @param {string} message - message d'erreur à afficher
+ * @param {string} message - Message d'erreur à afficher
  */
 function afficherMsgErreur(message, creaUtili = false) {
 	// Supprime le message d'erreur précédent
@@ -414,9 +424,9 @@ function afficherMsgErreur(message, creaUtili = false) {
 
 /**
  * Affiche un message d'information dans le formulaire de modification
- * 
- * @param {string} message - message d'information à afficher
- * @param {boolean} type - true si le message est une information, false si
+ *
+ * @param {string} message - Message d'information à afficher
+ * @param {boolean} type - Si true le message est une information, false si
  * 						   c'est une erreur
  */
 function afficherMsgInfoModifCmpt(message, type) {

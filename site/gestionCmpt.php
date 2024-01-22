@@ -1,6 +1,6 @@
 <?php
 	include "backend/checkConnexion.php";
-	$role = $_SESSION["role"]; // "admin" ou "standard"
+	$role = $_COOKIE["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -117,10 +117,8 @@
 <script src="scripts/entete.js"></script>
 <script>
 	/*** Gestion des données ***/
-		// Récupérer l'ID utilisateur
-	const idUtilisateur = <?php
-		echo json_encode($_SESSION["idAgri"]);
-	?>;
+		// Récupérer l'identifiant utilisateur
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);
@@ -132,7 +130,7 @@
 		// Gère les vérifications des champs du formulaire et l'envoi
 	document.getElementById("reinit").addEventListener("click",	e => {
 		e.preventDefault();
-		reinitInputCmpt();
+		reinitInputCmpt(<?php if ($role === "admin") echo "true";?>);
 	});
 	document.getElementById("enreg").addEventListener("click",	e => {
 		e.preventDefault();
@@ -161,7 +159,7 @@
 	<?php if ($role === "admin") include "assets/scriptSelecteurAdmin.php"?>
 
 
-	/** Changements du DOM **/
+	/*** Changements du DOM ***/
 		// Gère le défilement vers le haut de la page
 	activerDefilementHautPage();
 

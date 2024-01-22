@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+
+COPY aggregate-data.sh .
+
+# Install mongosh
+RUN apt-get update && apt-get install -y wget gnupg
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+RUN apt-get update && apt-get install -y mongodb-mongosh
+
+# Install mongod
+RUN apt-get install -y mongodb
+
+RUN apt-get install -y jq --fix-missing
+
+CMD ["bash", "aggregate-data.sh"]

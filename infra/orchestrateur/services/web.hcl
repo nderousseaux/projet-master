@@ -26,9 +26,7 @@ job "web" {
       }
 
       template {
-        data = <<EOF
-{{ env "meta.cleAPI" }}
-EOF
+        data = "{{ env \"meta.cleAPI\" }}"
 	destination = "backend/cleAPI.txt"
       }
       

@@ -52,6 +52,7 @@ else
 fi
 
 cp -r ../Coap /home/$SUDO_USER/
+./Build_coap
 
 echo "Le systeme va redemarrer dans 5 secondes"
 sleep 5

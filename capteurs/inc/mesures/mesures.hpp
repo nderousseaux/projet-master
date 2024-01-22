@@ -6,6 +6,10 @@
 #include <random>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <cstdlib>
+#include <sstream>
+#include <string>
+#include <iostream>
 
 class Mesures {
 	/* Variables */
@@ -73,12 +77,11 @@ class Mesures {
 
 
 	/* Méthodes */
-	private:
+	public:
 		void updateHumidite(void);
 		void updateLuminosite(void);
 		void updateTemperature(void);
 
-	public:
 		/**
 		 * @brief Génère une valeur aléatoires entre borneInf et borneSupp
 		 *

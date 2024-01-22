@@ -45,6 +45,32 @@ void Mesures::updateTemperature() {
 }
 
 void Mesures::updateLuminosite() {
+
+	const char* script = "src/mesures/lux.py";
+
+	std::string cmd = "python3 " + std::string(script);
+
+	try {
+		FILE* pipe = popen(cmd.c_str(), "r");
+		
+		char buffer[128];
+		std::string res = "";
+		while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
+			res += buffer;
+		}
+
+		pclose(pipe);
+
+		int value;
+		std::istringstream(res) >> value;
+
+		humidite_ = value;
+
+	} catch (const std::exception& e) {}
+
+	return;
+
+//////////////
 	int fd = open(I2C_DEV.c_str(), O_RDWR);
 
 	if (fd < 0)

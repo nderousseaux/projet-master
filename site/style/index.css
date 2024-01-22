@@ -40,6 +40,7 @@ p {
 	/* Boutons dropdown */
 .dropbtn {
 	background-color: #04aa6d;
+	cursor: pointer;
 	color: #ffffff;
 	font-size: 16px;
 	width: 50px;
@@ -792,7 +793,6 @@ footer > a:active,
 		/* Footer */
 	#export > button {
 		width: 50%;
-
 	}
 
 	/* Footer */

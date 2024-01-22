@@ -2,6 +2,12 @@
 include_once "classe/BaseDeDonnees.php";
 $bdd = new BaseDeDonnees("./donnees.db");
 
+// Vérifie si la base de données a été créée
+if ($bdd->error !== null) {
+	echo json_encode($bdd->error->getMessage());
+	die();
+}
+
 $bdd->initialiserTable();
 
 // Si la langue est présente, on l'utilise, sinon on utilise le français

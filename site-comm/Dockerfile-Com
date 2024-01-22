@@ -5,7 +5,7 @@ FROM debian:latest
 RUN apt-get update && apt-get upgrade -y
 
 # Installation des paquets nécessaires
-RUN apt install -y git apache2 php
+RUN apt install -y git apache2 php php-sqlite3
 
 # Suppression du contenu du dossier web
 RUN rm -rf /var/www/html/*
@@ -14,6 +14,10 @@ RUN rm -rf /var/www/html/*
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN a2enmod ssl
 RUN a2ensite default-ssl
+
+# Activation de l'extension sqlite3 et pdo_sqlite
+RUN sed -i 's/;extension=pdo_sqlite/extension=pdo_sqlite/' /etc/php/8.2/apache2/php.ini
+RUN sed -i 's/;extension=sqlite3/extension=sqlite3/' /etc/php/8.2/apache2/php.ini
 
 # Clonage du dépôt ou se trouve le site web
 RUN git clone https://user:glpat-sEbppxiL7vYxdhy7-QXg@git.unistra.fr/fseel/projet-master-23-24.git
@@ -32,6 +36,12 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -sha256 \
 RUN chmod 440 /etc/apache2/server.crt /etc/apache2/server.key
 RUN sed -i 's/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/apache2\/server.crt/' /etc/apache2/sites-available/default-ssl.conf
 RUN sed -i 's/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/apache2\/server.key/' /etc/apache2/sites-available/default-ssl.conf
+
+# Création de la base de données
+RUN touch /var/www/html/com/backend/donnees.db
+RUN chmod 777 /var/www/html/com/backend/donnees.db
+RUN chmod -R 777 /var/www/html/com/backend
+RUN chown -R :www-data /var/www/html/com/backend
 
 # Exposition du port 80 et 443
 EXPOSE 443

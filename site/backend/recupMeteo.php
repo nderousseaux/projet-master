@@ -41,7 +41,7 @@ else {
 }
 
 // Si le fichier n'existe pas, renvoi une erreur
-$fichierCleAPI = "./cleAPI.txt";
+$fichierCleAPI = "./api/cleAPI.txt";
 $cleAPI = "";
 if (file_exists($fichierCleAPI)) {
 	$cleAPI = @file_get_contents($fichierCleAPI);

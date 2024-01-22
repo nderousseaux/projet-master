@@ -71,8 +71,10 @@ if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
     $data["nom"] = $nom;
     $data["prenom"] = $prenom;
     $data["mail"] = $mail;
-    setcookie('session', json_encode($data), 0); //time()+7200 or 0
-
+    //setcookie('session', json_encode($data), 0); //time()+7200 or 0
+    setcookie('idUser', $idUser, 0);
+    setcookie('idAgri', $idAgri, 0);
+    setcookie('role', $role, 0);
 
     // demarre une session avec les infos du user
     //session_save_path("/alloc");

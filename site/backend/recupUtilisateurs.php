@@ -29,7 +29,7 @@ try {
 // de ce même agriculteur
 session_save_path("/alloc");
 session_start();
-$idAgri = $_SESSION["idAgri"];
+$idAgri = $_COOKIE["idAgri"];
 
 $filter = ['idAgri' => intval($idAgri)];
 $options = [

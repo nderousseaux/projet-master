@@ -64,19 +64,25 @@ foreach ($cursor as $infosUser) {
 }
 
 if (password_verify($_POST["mdp"], $mdp)) {   // mdp valide
-    //$data = [$idUser, $idAgri, ]
-    //setcookie('session', json_encode($info), time()+3600);
+    $data = [];
+    $data["idUser"] = $idUser;
+    $data["idAgri"] = $idAgri;
+    $data["role"] = $role;
+    $data["nom"] = $nom;
+    $data["prenom"] = $prenom;
+    $data["mail"] = $mail;
+    setcookie('session', json_encode($data), 0); //time()+7200 or 0
 
 
     // demarre une session avec les infos du user
-    session_save_path("/alloc");
-    session_start();
-    $_SESSION["idUser"] = $idUser;
-    $_SESSION["idAgri"] = $idAgri;
-    $_SESSION["role"]   = $role;
-    $_SESSION["nom"]    = $nom;
-    $_SESSION["prenom"] = $prenom;
-    $_SESSION["mail"]   = $mail;
+    //session_save_path("/alloc");
+    // session_start();
+    // $_SESSION["idUser"] = $idUser;
+    // $_SESSION["idAgri"] = $idAgri;
+    // $_SESSION["role"]   = $role;
+    // $_SESSION["nom"]    = $nom;
+    // $_SESSION["prenom"] = $prenom;
+    // $_SESSION["mail"]   = $mail;
 
     if ($mdp_temp == true) {    // nouveau compte
         echo json_encode([TMP_PWD, $idUser]); // preciser str a renvoyer

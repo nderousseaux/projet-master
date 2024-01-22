@@ -1,6 +1,6 @@
 <?php
 	include "backend/checkConnexion.php";
-	$role = $_SESSION["role"]; // "admin" ou "standard"
+	$role = $_COOKIE["role"]; // "admin" ou "standard"
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -118,7 +118,7 @@
 <script>
 	/*** Gestion des données ***/
 		// Récupérer l'identifiant utilisateur
-	const idUtilisateur = <?php echo json_encode($_SESSION["idAgri"]);?>;
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);

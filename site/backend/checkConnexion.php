@@ -4,10 +4,15 @@
  * de connexion si ce n'est pas le cas.
  */
 
-session_save_path("/alloc");
-session_start();
+// session_save_path("/alloc");
+// session_start();
 
-if (!isset($_SESSION["idUser"])) { // non connecté
+// if (!isset($_SESSION["idUser"])) { // non connecté
+//     echo "<script>location.href='../connexionCmpt.php';</script>";
+//     die();
+// }
+
+if (!isset($_COOKIE["idUser"])) { // non connecté
     echo "<script>location.href='../connexionCmpt.php';</script>";
     die();
 }

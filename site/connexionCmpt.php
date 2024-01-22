@@ -3,7 +3,7 @@
 	session_save_path("/alloc");
 	session_start();
 
-	if (isset($_SESSION["idUser"])) {
+	if (isset($_COOKIE["idUser"])) {
 		echo "<script>location.href='.';</script>";
 	}
 ?>

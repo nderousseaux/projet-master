@@ -2,7 +2,7 @@
 	include "backend/checkConnexion.php";
 
 	// Vérifie que l'utilisateur est bien un administrateur
-	if ($_SESSION["role"] !== "admin") {
+	if ($_COOKIE["role"] !== "admin") {
 		header("Location: .");
 	}
 ?>
@@ -70,7 +70,7 @@
 <script>
 	/*** Gestion des données ***/
 		// Récupérer l'ID utilisateur
-	const idUtilisateur = <?php echo json_encode($_SESSION["idAgri"]);?>;
+	const idUtilisateur = <?php echo json_encode($_COOKIE["idAgri"]);?>;
 
 		// Récupère le nom et prénom de l'utilisateur
 	afficherNomUtilisateur(idUtilisateur);

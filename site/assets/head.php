@@ -4,4 +4,5 @@
 	<meta name="color-scheme" content="light dark"/>
 	<meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)"/>
 	<meta name="theme-color" content="#080809" media="(prefers-color-scheme: dark)"/>
+	<link rel="manifest" href="alsagriculture.webmanifest"/>
 	<link rel="icon" type="image/webp" href="img/icones/favicon.webp"/>

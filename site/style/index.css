@@ -827,17 +827,20 @@ footer > a:active,
 		background-color: rgba(57, 57, 57, 0.7);
 	}
 	.dropdownContent button,
-	.dropdownContent a {
+	.dropdownContent a,
+	#export > button {
 		color: #ffffff;
 	}
 	.dropdownContent button:hover,
-	.dropdownContent a:hover {
+	.dropdownContent a:hover,
+	#export > button:hover {
 		background-color: rgba(80, 80, 80, 0.5);
 		color: #ffffff !important;
 	}
 	.dropdownContent button:active,
 	.dropdownContent a:active,
-	.dropdownContent .selected {
+	.dropdownContent .selected,
+	#export > button:active {
 		background-color: rgba(111, 111, 111, 0.5);
 	}
 

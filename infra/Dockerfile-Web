@@ -49,6 +49,12 @@ RUN chmod 440 /etc/apache2/server.crt /etc/apache2/server.key
 RUN sed -i 's/\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem/\/etc\/apache2\/server.crt/' /etc/apache2/sites-available/default-ssl.conf
 RUN sed -i 's/\/etc\/ssl\/private\/ssl-cert-snakeoil.key/\/etc\/apache2\/server.key/' /etc/apache2/sites-available/default-ssl.conf
 
+# Custom page 404 sur le virtualhost 443
+RUN sed -i 's/<\/VirtualHost>/\tErrorDocument 404 \/erreur404.html\n<\/VirtualHost>/' /etc/apache2/sites-available/default-ssl.conf
+
+# Cacher le contenu de cleAPI.txt
+RUN echo "<Files cleAPI.txt>\n\tOrder allow,deny\n\tDeny from all\n</Files>" >> /etc/apache2/sites-available/default-ssl.conf
+
 # Exposition du port 80 et 443
 EXPOSE 443
 

@@ -44,7 +44,7 @@ foreach ($cursor as $infosUser) {
     array_push($result, $infosUser->prenom);
     array_push($result, $infosUser->nom);
     array_push($result, $infosUser->mail);
-    array_push($result, $infosUser->couleur1 ?? "#ffffff");
+    array_push($result, $infosUser->couleur1 ?? "#000000");
     array_push($result, $infosUser->couleur2 ?? "#00ffaa");
 
     if ($requeteAdmin == true)

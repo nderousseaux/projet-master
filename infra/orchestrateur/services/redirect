@@ -1,0 +1,29 @@
+job "redirect" {
+  datacenters = ["dc1"]
+  type = "system"
+
+  group "redirect" {
+
+    network {
+      port "redirect" {
+        to = 80
+        static = 9997
+      }
+    }
+
+    task "redirect" {
+      driver = "docker"
+      config {
+        image = "registry.app.unistra.fr/fseel/projet-master-23-24/nginx"
+        ports = ["redirect"]
+      }
+
+      resources {
+        cpu    = 200
+        memory = 256
+      }
+    }
+
+	}
+}
+

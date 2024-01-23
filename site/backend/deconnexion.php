@@ -3,14 +3,15 @@
  * Pour déconnecter un utilisateur en détruisant la session associée.
  */
 
-// session_save_path("/alloc");
-// session_start();
-
-// session_unset();
-// session_destroy();
 if (isset($_COOKIE['idUser'])) {
-    unset($_COOKIE['idUser']); 
-    setcookie('idUser', '', -1, '/'); 
+    unset($_COOKIE['idUser']);
+    setcookie('idUser', '', [
+        'expires' => -1,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
 }
 
 // redirection vers la page de connexion

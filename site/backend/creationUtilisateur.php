@@ -128,20 +128,12 @@ if (!(isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["role"]) &
 }
 
 // Infos de connexion à la BDD
-$hosts = [
-    "mongo1:30001",
-    "mongo2:30002",
-    "mongo3:30003"
-];
-$connectionString = implode(",", $hosts);
-
 $database       = "data";
 $collection     = "compte";
 $replicaSetName = "rs0";
 
 // uri de connnexion
 use MongoDB\Driver\Manager;
-//$uri = "mongodb://$connectionString/?replicaSet=$replicaSetName";
 $uri = getenv('MONGODB_URL');
 
 // Créer le client
@@ -151,9 +143,6 @@ try {
     die("Failed to connect to MongoDB: " . $e->getMessage());
 }
 
-
-// Récupérer IdAgri de l'utilisateur actuel pour ajouter nouveau user au même agri
-//session_start();
 
 $mail = $_POST["courriel"];
 $mdp = generate_password();

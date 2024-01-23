@@ -16,20 +16,12 @@ if (!(isset($_POST["idUtilisateur"]))) {
 }
 
 // Infos de connexion à la BDD
-$hosts = [
-    "mongo1:30001",
-    "mongo2:30002",
-    "mongo3:30003"
-];
-$connectionString = implode(",", $hosts);
-
 $database       = "data";
 $collection     = "compte";
 $replicaSetName = "rs0";
 
 // uri de connnexion
 use MongoDB\Driver\Manager;
-//$uri = "mongodb://$connectionString/?replicaSet=$replicaSetName";
 $uri = getenv('MONGODB_URL');
 
 // Créer le client
@@ -76,7 +68,6 @@ if (!empty($update)) {
         $result = $mongoClient->executeBulkWrite("$database.$collection", $bulk);
         echo json_encode(OK);
     } catch (MongoDB\Driver\Exception\Exception $e) {
-        //echo json_encode("Mise à jour échouée: ".$e->getMessage());
         echo json_encode(ERROR);
     }
 }

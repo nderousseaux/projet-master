@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" modified="2023-10-21T12:59:35.113Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15" etag="F-luxVFhc7X1fiV3n0n7" version="22.0.6" type="google" pages="3">
+  <diagram name="Vue dessus (Capot ouvert)" id="7YZLE4ZBcksGeEbfaQYB">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#849CB3;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="620" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--3" value="Boitier&lt;br&gt;(Vue du dessus,&lt;br&gt;capot ouvert)" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--12" value="" style="curved=1;endArrow=none;html=1;rounded=0;endFill=0;exitX=0.808;exitY=0;exitDx=0;exitDy=0;strokeColor=#B20000;fillColor=#e51400;strokeWidth=2;exitPerimeter=0;" edge="1" parent="1" source="GeYaM2doYyhK2UWj2Wl--4" target="GeYaM2doYyhK2UWj2Wl--2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="290" as="sourcePoint" />
+            <mxPoint x="520" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="610" y="340" />
+              <mxPoint x="670" y="320" />
+              <mxPoint x="660" y="270" />
+              <mxPoint x="660" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--13" value="Capteur luminosité" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="50" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--15" value="Trou capteur&lt;br&gt;humidité sol" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#DBDBDB;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="320" y="290" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--2" value="Raspberry Pi 4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="190" y="110" width="380" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--4" value="Batterie" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="110" y="380" width="600" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--14" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;endFill=0;strokeColor=#B20000;fillColor=#e51400;strokeWidth=2;entryX=0.195;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="GeYaM2doYyhK2UWj2Wl--13" target="GeYaM2doYyhK2UWj2Wl--2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="320" as="sourcePoint" />
+            <mxPoint x="490" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="490" y="70" />
+              <mxPoint x="510" y="140" />
+              <mxPoint x="390" y="150" />
+              <mxPoint x="290" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--16" value="Capteur&lt;br&gt;température" style="rounded=0;whiteSpace=wrap;html=1;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="85" y="165" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--17" value="" style="curved=1;endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.073;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fillColor=#e51400;strokeColor=#B20000;strokeWidth=2;endFill=0;" edge="1" parent="1" source="GeYaM2doYyhK2UWj2Wl--16" target="GeYaM2doYyhK2UWj2Wl--2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="290" as="sourcePoint" />
+            <mxPoint x="230" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="180" />
+              <mxPoint x="240" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GeYaM2doYyhK2UWj2Wl--18" value="" style="curved=1;endArrow=none;html=1;rounded=0;fillColor=#e51400;strokeColor=#B20000;strokeWidth=2;exitX=0.153;exitY=0.005;exitDx=0;exitDy=0;exitPerimeter=0;endFill=0;" edge="1" parent="1" source="GeYaM2doYyhK2UWj2Wl--2" target="GeYaM2doYyhK2UWj2Wl--15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="340" as="sourcePoint" />
+            <mxPoint x="430" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="230" />
+              <mxPoint x="380" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Vue dessus (capot fermé)" id="RKaQPCWqnTOA_X_z9Cgp">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="6J8jQLH18q7H43Mv6fgO-0" />
+        <mxCell id="6J8jQLH18q7H43Mv6fgO-1" parent="6J8jQLH18q7H43Mv6fgO-0" />
+        <mxCell id="6J8jQLH18q7H43Mv6fgO-2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#849CB3;fontColor=#ffffff;strokeColor=#314354;" parent="6J8jQLH18q7H43Mv6fgO-1" vertex="1">
+          <mxGeometry x="100" y="40" width="620" height="570" as="geometry" />
+        </mxCell>
+        <mxCell id="6J8jQLH18q7H43Mv6fgO-5" value="Trou capteur de luminosité" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DBDBDB;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="6J8jQLH18q7H43Mv6fgO-1">
+          <mxGeometry x="240" y="50" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lUSwLVfyvsHot6IUKxkO-0" value="Identifiant de l&#39;ensemble de capteurs" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="6J8jQLH18q7H43Mv6fgO-1">
+          <mxGeometry x="265" y="210" width="290" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="ibGRTOOiLzDv2dFRYpBS-0" value="Boitier&lt;br&gt;(Vue du dessus,&lt;br&gt;capot fermé)" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="6J8jQLH18q7H43Mv6fgO-1">
+          <mxGeometry x="100" y="40" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fG3WYiz9GLXHcp4ow7hu" name="Vue latérale">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QLUbPCZzPvHS4t5YkdzD-1" value="Sonde&lt;br&gt;humidité du sol" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rotation=90;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;direction=east;" vertex="1" parent="1">
+          <mxGeometry x="290" y="366.13" width="187.5" height="47.25" as="geometry" />
+        </mxCell>
+        <mxCell id="R6w3wCWfb2Awr9lkt-Ki-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#849CB3;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
+          <mxGeometry x="120" y="160" width="570" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="QLUbPCZzPvHS4t5YkdzD-2" value="Trou capteur température" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DBDBDB;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="220" y="200" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="H3kYJvDYqA1T8mnHDF58-1" value="Boitier&lt;br&gt;(Vue latérale)" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="120" y="160" width="90" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
